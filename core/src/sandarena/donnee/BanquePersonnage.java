@@ -19,13 +19,13 @@ public class BanquePersonnage extends Banque {
      * Initialise tous les personnages du jeu
      */
     public static void init() {
-        banque.add(new EntreePersonnage("Barbare des Sables",
+        banque.add(new DonneePersonnage("Barbare des Sables",
                 "Ces hommes vivaient dans le desert avant que les Arènes ne s'y établissent, certains racontent qu'ils sont nés sur ces terres attiré par la soif de combats",
                 "Image/Personnage/BarbareDesSables.png",
                 15, 4, 5, 2, 2, Affinite.FORCE));
     }
 
-    public static class EntreePersonnage extends Entree {
+    public static class DonneePersonnage extends Entree {
 
         public int vie;
         public int vitesse;
@@ -34,7 +34,7 @@ public class BanquePersonnage extends Banque {
         public int agilite;
         public int affinite;
 
-        public EntreePersonnage(String nom, String description, String chemin, int vie, int vitesse, int force, int magie, int agilite, int affinite) {
+        public DonneePersonnage(String nom, String description, String chemin, int vie, int vitesse, int force, int magie, int agilite, int affinite) {
             super(nom, description, chemin);
             this.vie = vie;
             this.vitesse = vitesse;

@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sandarena.Resolution;
 import sandarena.gui.ScreenPartie;
 import sandarena.joueur.Joueur;
+import sandarena.partie.compcase.JoueurIG;
+import sandarena.partie.compcase.PersonnageIG;
 
 /**
  * Stock toutes les donnees relatives à une instance de partie
@@ -15,9 +17,10 @@ public class Partie {
     private int dimMax;
     private Case[][] plateau;
     private ScreenPartie container;
-    private Joueur joueur1;
-    private Joueur joueur2;
-    
+    private JoueurIG joueur1;
+    private JoueurIG joueur2;
+    private PersonnageIG personnageActif;
+
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
      * tard de donne de la carte ainsi que des deux joueurs
@@ -26,41 +29,55 @@ public class Partie {
      * @param joueur1
      * @param joueur2
      */
-    public Partie(ScreenPartie container,Joueur joueur1,Joueur joueur2) {
+    public Partie(ScreenPartie container, Joueur joueur1, Joueur joueur2) {
         this.container = container;
-        this.joueur1=joueur1;
-        this.joueur2=joueur2;
+        this.joueur1 = new JoueurIG(joueur1);
+        this.joueur2 = new JoueurIG(joueur2);
         //Changera lorsqu'on saura a partir de quoit creer la partie
         int coteTmp = 25;
         plateau = new Case[coteTmp][coteTmp];
-        for (int x=0; x<coteTmp; x++) {
-            for (int y=0; y<coteTmp; y++ ) {
-                plateau[x][y]=new Case(x,y);
+        for (int x = 0; x < coteTmp; x++) {
+            for (int y = 0; y < coteTmp; y++) {
+                plateau[x][y] = new Case(x, y);
             }
         }
         dimMax = coteTmp * Resolution.heightCase;
         lancement();
     }
-    
-    private void lancement(){
+
+    private void lancement() {
         /* Placement des unitées
-        */
-        plateau[0][0].setPresence(joueur1.getPersonnagesIG().get(0));
-        plateau[24][0].setPresence(joueur2.getPersonnagesIG().get(0));
-        while(!victoire()){
-            tour();
+         */
+        getPlateau()[0][0].setPresence(getJoueur1().getPersonnages().get(0));
+        getPlateau()[24][0].setPresence(getJoueur2().getPersonnages().get(0));
+        tour();
+    }
+
+    private boolean victoire() {
+        return false;
+    }
+
+    private void tour() {
+        for (PersonnageIG perso : joueur1.getPersonnages()) {
+            perso.setAAgi(false);
+        }
+        for (PersonnageIG perso : joueur2.getPersonnages()) {
+            perso.setAAgi(false);
+        }
+        phase(getJoueur1());
+        phase(getJoueur2());
+    }
+
+    private void phase(JoueurIG joueur) {
+        selection(joueur.getPersonnages().get(0));
+    }
+
+    private void selection(PersonnageIG perso) {
+        if (!perso.isAAgi()) {
+            this.setPersonnageActif(perso);
         }
     }
 
-    private boolean victoire(){
-        return true;
-    }
-    
-    private void tour(){
-        //J1 joue
-        //J2 joue
-    }
-    
     public void render(SpriteBatch batch) {
         for (Case[] tabC : getPlateau()) {
             for (Case c : tabC) {
@@ -107,19 +124,20 @@ public class Partie {
         this.container = container;
     }
 
-    public Joueur getJoueur1() {
+    public JoueurIG getJoueur1() {
         return joueur1;
     }
 
-    public void setJoueur1(Joueur joueur1) {
-        this.joueur1 = joueur1;
-    }
-
-    public Joueur getJoueur2() {
+    public JoueurIG getJoueur2() {
         return joueur2;
     }
 
-    public void setJoueur2(Joueur joueur2) {
-        this.joueur2 = joueur2;
+    public PersonnageIG getPersonnageActif() {
+        return personnageActif;
+    }
+
+    public void setPersonnageActif(PersonnageIG personnageActif) {
+        this.personnageActif = personnageActif;
+        AlgorithmePathfinding.calculCaseAccessible(personnageActif, plateau);
     }
 }

@@ -40,8 +40,6 @@ public class ScreenPartie implements Screen {
         joueur2 = new Joueur();
         joueur1.getPersonnages().add(new Personnage("Barbare des Sables"));
         joueur2.getPersonnages().add(new Personnage("Barbare des Sables"));
-        joueur1.setEnJeu(joueur1.getPersonnages());
-        joueur2.setEnJeu(joueur2.getPersonnages());
     }
 
     @Override

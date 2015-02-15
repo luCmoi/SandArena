@@ -17,6 +17,7 @@ public class Case {
     private Rectangle position;
     private Sol sol;
     private PersonnageIG presence;
+    private boolean accessible;
 
     public Case(int x, int y) {
         placeX = x;
@@ -24,6 +25,7 @@ public class Case {
         position = new Rectangle(x * Resolution.widthCase, y * Resolution.heightCase, Resolution.widthCase, Resolution.heightCase);
         this.sol = new Sol("Sable", this);
         this.presence = null;
+        this.accessible=false;
     }
 
     public void render(SpriteBatch batch) {
@@ -81,5 +83,13 @@ public class Case {
     public void setPresence(PersonnageIG presence) {
         this.presence = presence;
         this.presence.setContainer(this);
+    }
+
+    public boolean isAccessible() {
+        return accessible;
+    }
+
+    public void setAccessible(boolean accessible) {
+        this.accessible = accessible;
     }
 }

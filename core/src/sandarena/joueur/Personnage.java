@@ -11,24 +11,26 @@ import sandarena.donnee.BanquePersonnage.*;
  */
 public class Personnage {
 
-    public String nom;
-    public EntreePersonnage info;
-    public EntreeCompetence[] competences = new EntreeCompetence[4];
+    private String nom;
+    public DonneePersonnage commun;
+    private EntreeCompetence[] competences = new EntreeCompetence[4];
 
     /**
      * Création d'un nouveau personnage tirer avec un nom et une comptence
      * @param nom
      */
     public Personnage(String nom) {
-        this.info = (EntreePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, nom);
+        this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, nom);
         this.nom = BanquePersonnage.getNom(nom);
-        this.competences[0] = BanqueCompetence.getCompetence(info.affinite);
+        
+        //Ligne qui changera les compétence n'étant pas init au pifometre
+        this.competences[0] = BanqueCompetence.getCompetence(commun.affinite);
     }
 
     public void dispose() {
-        info.decremente();
-        this.info = null;
-        for (EntreeCompetence c : competences) {
+        commun.decremente();
+        this.commun = null;
+        for (EntreeCompetence c : getCompetences()) {
             if (c != null) {
                 c.decremente();
                 c = null;
@@ -36,5 +38,13 @@ public class Personnage {
         }
         competences = null;
         nom = null;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public EntreeCompetence[] getCompetences() {
+        return competences;
     }
 }
