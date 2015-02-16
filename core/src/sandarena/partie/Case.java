@@ -18,18 +18,28 @@ public class Case {
     private Sol sol;
     private PersonnageIG presence;
     private boolean accessible;
+    private Case predecesseur;
+    private boolean chemin;
 
-    public Case(int x, int y) {
+    public Case(int x, int y){
         placeX = x;
         placeY = y;
         position = new Rectangle(x * Resolution.widthCase, y * Resolution.heightCase, Resolution.widthCase, Resolution.heightCase);
         this.sol = new Sol("Sable", this);
         this.presence = null;
-        this.accessible=false;
+        this.accessible = false;
+        this.predecesseur = null;
+        this.chemin = false;
+    }
+
+    public boolean isTraversable() {
+        return (this.presence == null);
     }
 
     public void render(SpriteBatch batch) {
-        getSol().render(batch);
+        if (!accessible) {
+            getSol().render(batch);
+        }
         if (presence != null) {
             getPresence().render(batch);
         }
@@ -91,5 +101,21 @@ public class Case {
 
     public void setAccessible(boolean accessible) {
         this.accessible = accessible;
+    }
+
+    public Case getPredecesseur() {
+        return predecesseur;
+    }
+
+    public void setPredecesseur(Case predecesseur) {
+        this.predecesseur = predecesseur;
+    }
+
+    public boolean isChemin() {
+        return chemin;
+    }
+
+    public void setChemin(boolean chemin) {
+        this.chemin = chemin;
     }
 }

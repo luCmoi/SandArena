@@ -45,11 +45,14 @@ public class Partie {
         lancement();
     }
 
+    public void cliquer(){
+    }
+    
     private void lancement() {
         /* Placement des unitées
          */
-        getPlateau()[0][0].setPresence(getJoueur1().getPersonnages().get(0));
-        getPlateau()[24][0].setPresence(getJoueur2().getPersonnages().get(0));
+        getPlateau()[5][5].setPresence(getJoueur1().getPersonnages().get(0));
+        getPlateau()[7][5].setPresence(getJoueur2().getPersonnages().get(0));
         tour();
     }
 

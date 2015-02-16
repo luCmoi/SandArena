@@ -70,6 +70,7 @@ public class ScreenPartieListener implements InputProcessor {
     public boolean touchDown(int x, int y, int pointer, int button) {
         anciennePositionX=x;
         anciennePositionY=y;
+        
         return false;
     }
 
