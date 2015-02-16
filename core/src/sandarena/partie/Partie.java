@@ -1,6 +1,7 @@
 package sandarena.partie;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import sandarena.Resolution;
 import sandarena.gui.ScreenPartie;
 import sandarena.joueur.Joueur;
@@ -39,6 +40,7 @@ public class Partie {
         for (int x = 0; x < coteTmp; x++) {
             for (int y = 0; y < coteTmp; y++) {
                 plateau[x][y] = new Case(x, y);
+                this.container.addActor(plateau[x][y]);
             }
         }
         dimMax = coteTmp * Resolution.heightCase;
