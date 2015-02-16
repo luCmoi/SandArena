@@ -49,7 +49,7 @@ import java.util.ArrayList;
  */
 
 
-public class Largeur {
+public class TestCaseAccessible {
     static class Sommet {
         public ArrayDeque<Sommet> file = new ArrayDeque<Sommet>();
         private int i,j;
