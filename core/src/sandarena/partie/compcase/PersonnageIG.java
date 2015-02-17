@@ -1,5 +1,6 @@
 package sandarena.partie.compcase;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sandarena.donnee.BanqueCompetence.EntreeCompetence;
 import sandarena.joueur.Personnage;
@@ -44,8 +45,8 @@ public class PersonnageIG {
         this.setContainer(null);
     }
 
-    public void render(SpriteBatch batch) {
-        batch.draw(getDonnee().commun.image, getContainer().getPosition().x, getContainer().getPosition().y, getContainer().getPosition().width, getContainer().getPosition().height);
+    public void render(Batch batch) {
+        batch.draw(getDonnee().commun.image, getContainer().getX(), getContainer().getY(), getContainer().getWidth(), getContainer().getHeight());
     }
 
     public void setContainer(Case container) {

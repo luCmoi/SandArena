@@ -1,9 +1,12 @@
 package sandarena.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import sandarena.Resolution;
 import sandarena.SandArena;
 import sandarena.joueur.Joueur;
@@ -17,15 +20,14 @@ import sandarena.partie.Partie;
  */
 public class ScreenPartie implements Screen {
 
-    private SpriteBatch batch;
+    private Batch batch;
     private SandArena conteneur;
     private Camera camera;
     private Partie partie;
-    private int widthTailleTotale;
-    private int heightTailleTotale;
     private int differenceBas;
     private int xHautGauche;
     private int yHautGauche;
+    private StageInterface interfaceS;
     //Temporaire
     private Joueur joueur1;
     private Joueur joueur2;
@@ -34,7 +36,6 @@ public class ScreenPartie implements Screen {
         this.conteneur = conteneur;
         this.batch = conteneur.getBatch();
         this.differenceBas = Resolution.height / 4;
-        Gdx.input.setInputProcessor(new ScreenPartieListener(this));
         //Temporaire
         joueur1 = new Joueur();
         joueur2 = new Joueur();
@@ -44,16 +45,17 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void render(float f) {
-        getCamera().updateExt();
-        xHautGauche = (int) (getCamera().position.x - Resolution.width / 2);
-        yHautGauche = (int) (partie.getDimMax() - Resolution.height - (getCamera().position.y - Resolution.height / 2));
+        //getCamera().updateExt();
+        //xHautGauche = (int) (getCamera().position.x - Resolution.width / 2);
+        //yHautGauche = (int) (partie.getDimMax() - Resolution.height - (getCamera().position.y - Resolution.height / 2));
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        getCamera().update();
-        getBatch().begin();
-        this.partie.render(batch);
-        getBatch().setProjectionMatrix(getCamera().combined);
-        getBatch().end();
+        //getCamera().update();
+        //getBatch().begin();
+        //this.partie.render(batch);
+        this.partie.draw();
+        //getBatch().setProjectionMatrix(getCamera().combined);
+        //getBatch().end();
     }
 
     @Override
@@ -63,12 +65,13 @@ public class ScreenPartie implements Screen {
     @Override
     public void show() {
         setBatch(new SpriteBatch());
-        setCamera(new Camera(this));
-        this.partie = new Partie(this, joueur1, joueur2);
-        widthTailleTotale = partie.getPlateau().length * Resolution.widthCase;
-        heightTailleTotale = partie.getPlateau()[0].length * Resolution.heightCase;
-        xHautGauche = (int) (getCamera().position.x - Resolution.width / 2);
-        yHautGauche = (int) (partie.getDimMax() - Resolution.height - (getCamera().position.y - Resolution.height / 2));
+        //setCamera(new Camera(this));
+        this.partie = new Partie(this, joueur1, joueur2,new ExtendViewport (Resolution.width, Resolution.height - this.differenceBas,Resolution.width, Resolution.height - this.differenceBas),batch);
+        this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width,this.differenceBas,Resolution.width,this.differenceBas),batch);
+        Gdx.input.setInputProcessor(new InputMultiplexer(this.partie,this.interfaceS));
+        //
+        //xHautGauche = (int) (getCamera().position.x - Resolution.width / 2);
+        //yHautGauche = (int) (partie.getDimMax() - Resolution.height - (getCamera().position.y - Resolution.height / 2));
     }
 
     @Override
@@ -93,7 +96,7 @@ public class ScreenPartie implements Screen {
         conteneur = null;
     }
 
-    public SpriteBatch getBatch() {
+    public Batch getBatch() {
         return batch;
     }
 
@@ -125,11 +128,4 @@ public class ScreenPartie implements Screen {
         this.differenceBas = differenceBas;
     }
 
-    public int getWidthTailleTotale() {
-        return widthTailleTotale;
-    }
-
-    public int getHeightTailleTotale() {
-        return heightTailleTotale;
-    }
 }

@@ -2,6 +2,7 @@ package sandarena.gui;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import sandarena.Resolution;
+import sandarena.partie.Partie;
 
 /**
  * Camera du ScreenPartie qui permet de parcourir le terrain de jeu
@@ -13,11 +14,11 @@ public class Camera extends OrthographicCamera {
     private boolean deplacementDroit = false;
     private boolean deplacementHaut = false;
     private boolean deplacementBas = false;
-    private ScreenPartie partie;
+    private Partie partie;
 
-    public Camera(ScreenPartie partie) {
+    public Camera(Partie partie) {
         super();
-        this.setToOrtho(false, Resolution.width, Resolution.height - partie.getDifferenceBas());
+        this.setToOrtho(false, Resolution.width, Resolution.height - partie.getContainer().getDifferenceBas());
         this.position.set(Resolution.width / 2, Resolution.height / 2, 0);
         this.partie = partie;
     }
@@ -43,10 +44,10 @@ public class Camera extends OrthographicCamera {
             }
         }
         if (deplacementBas) {
-            if (position.y > Resolution.height / 2 - partie.getDifferenceBas()) {
+            if (position.y > Resolution.height / 2 - partie.getContainer().getDifferenceBas()) {
                 translate(0, -(int) (8 * Resolution.ratioHeight), 0);
-                if (position.y < Resolution.height / 2 - partie.getDifferenceBas()) {
-                    position.y = Resolution.height / 2 - partie.getDifferenceBas();
+                if (position.y < Resolution.height / 2 - partie.getContainer().getDifferenceBas()) {
+                    position.y = Resolution.height / 2 - partie.getContainer().getDifferenceBas();
                 }
             }
         }
@@ -103,7 +104,11 @@ public class Camera extends OrthographicCamera {
      * @param x2
      * @param y2 
      */
-    public void dragged(int x1, int y1, int x2, int y2) {
+    public void dragged(float xf1, float yf1, float xf2, float yf2) {
+        int x1 = (int)xf1;
+        int x2 = (int)xf2;
+        int y1 = (int)yf1;
+        int y2 = (int)yf2;
         this.translate(x1 - x2, -(y1 - y2));
         if (position.x < Resolution.width / 2) {
             position.x = Resolution.width / 2;
@@ -111,8 +116,8 @@ public class Camera extends OrthographicCamera {
         if (position.x > partie.getWidthTailleTotale() - Resolution.width / 2) {
             position.x = partie.getWidthTailleTotale() - Resolution.width / 2;
         }
-        if (position.y < Resolution.height / 2 - partie.getDifferenceBas()) {
-            position.y = Resolution.height / 2 - partie.getDifferenceBas();
+        if (position.y < Resolution.height / 2 - partie.getContainer().getDifferenceBas()) {
+            position.y = Resolution.height / 2 - partie.getContainer().getDifferenceBas();
         }
         if (position.y > partie.getHeightTailleTotale() - Resolution.height / 2) {
             position.y = partie.getHeightTailleTotale() - Resolution.height / 2;

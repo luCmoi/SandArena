@@ -1,7 +1,10 @@
 package sandarena.partie;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import sandarena.Resolution;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.compcase.Sol;
@@ -10,7 +13,7 @@ import sandarena.partie.compcase.Sol;
  *
  * @author Guillaume
  */
-public class Case {
+public class Case extends Actor {
 
     private int placeX;
     private int placeY;
@@ -21,10 +24,12 @@ public class Case {
     private Case predecesseur;
     private boolean chemin;
 
-    public Case(int x, int y){
+    public Case(int x, int y) {
         placeX = x;
         placeY = y;
-        position = new Rectangle(x * Resolution.widthCase, y * Resolution.heightCase, Resolution.widthCase, Resolution.heightCase);
+        //position = new Rectangle(x * Resolution.widthCase, y * Resolution.heightCase, Resolution.widthCase, Resolution.heightCase);
+        this.setTouchable(Touchable.enabled);
+        this.setBounds(x * Resolution.widthCase, y * Resolution.heightCase, Resolution.widthCase, Resolution.heightCase);
         this.sol = new Sol("Sable", this);
         this.presence = null;
         this.accessible = false;
@@ -36,7 +41,16 @@ public class Case {
         return (this.presence == null);
     }
 
-    public void render(SpriteBatch batch) {
+    /*public void render(SpriteBatch batch) {
+     if (!accessible) {
+     getSol().render(batch);
+     }
+     if (presence != null) {
+     getPresence().render(batch);
+     }
+     }*/
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
         if (!accessible) {
             getSol().render(batch);
         }

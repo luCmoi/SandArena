@@ -1,26 +1,27 @@
 package sandarena.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import sandarena.partie.Partie;
 
 /**
  * Listener du ScreenPartie
  * @author Guillaume
  */
-public class ScreenPartieListener implements InputProcessor {
+public class ScreenPartieListener extends InputListener {
 
-    private ScreenPartie partie;
-    private int anciennePositionX;
-    private int anciennePositionY;
+    private Partie partie;
+    private float anciennePositionX;
+    private float anciennePositionY;
 
-    public ScreenPartieListener(ScreenPartie container) {
+    public ScreenPartieListener(Partie container) {
         super();
         this.partie = container;
     }
 
     @Override
-    public boolean keyDown(int i) {
+    public boolean keyDown(InputEvent event, int i) {
         switch (i) {
             case Input.Keys.LEFT:
                 getPartie().getCamera().setDeplacementGauche(true);
@@ -39,35 +40,35 @@ public class ScreenPartieListener implements InputProcessor {
     }
 
     @Override
-    public boolean keyUp(int i) {
+    public boolean keyUp(InputEvent event, int i) {
         switch (i) {
             case Input.Keys.LEFT:
                 getPartie().getCamera().setDeplacementGauche(false);
-                mouseMoved(Gdx.input.getX(), Gdx.input.getY());
+                //mouseMoved(Gdx.input.getX(), Gdx.input.getY());
                 break;
             case Input.Keys.RIGHT:
                 getPartie().getCamera().setDeplacementDroit(false);
-                mouseMoved(Gdx.input.getX(), Gdx.input.getY());
+                //mouseMoved(Gdx.input.getX(), Gdx.input.getY());
                 break;
             case Input.Keys.DOWN:
                 getPartie().getCamera().setDeplacementBas(false);
-                mouseMoved(Gdx.input.getX(), Gdx.input.getY());
+                //mouseMoved(Gdx.input.getX(), Gdx.input.getY());
                 break;
             case Input.Keys.UP:
                 getPartie().getCamera().setDeplacementHaut(false);
-                mouseMoved(Gdx.input.getX(), Gdx.input.getY());
+                //mouseMoved(Gdx.input.getX(), Gdx.input.getY());
                 break;
         }
         return false;
     }
 
     @Override
-    public boolean keyTyped(char c) {
+    public boolean keyTyped(InputEvent event, char c) {
         return false;
     }
 
     @Override
-    public boolean touchDown(int x, int y, int pointer, int button) {
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         anciennePositionX=x;
         anciennePositionY=y;
         
@@ -75,33 +76,31 @@ public class ScreenPartieListener implements InputProcessor {
     }
 
     @Override
-    public boolean touchUp(int x, int y, int pointer, int button) {
-        return false;
+    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
     }
 
     @Override
-    public boolean touchDragged(int i, int i1, int i2) {
+    public void touchDragged(InputEvent event, float i, float i1, int i2) {
         this.partie.getCamera().dragged(anciennePositionX,anciennePositionY,i, i1);
         anciennePositionX=i;
         anciennePositionY=i1;
+    }
+
+    @Override
+    public boolean mouseMoved(InputEvent event, float x, float y) {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(int x, int y) {
+    public boolean scrolled(InputEvent event, float x, float y, int amount) {
         return false;
     }
 
-    @Override
-    public boolean scrolled(int i) {
-        return false;
-    }
-
-    public ScreenPartie getPartie() {
+    public Partie getPartie() {
         return partie;
     }
 
-    public void setPartie(ScreenPartie partie) {
+    public void setPartie(Partie partie) {
         this.partie = partie;
     }
     
