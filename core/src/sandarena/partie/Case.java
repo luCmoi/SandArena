@@ -14,6 +14,7 @@ import sandarena.partie.compcase.Sol;
  */
 public class Case extends Actor {
 
+    private Partie container;
     private int placeX;
     private int placeY;
     private Rectangle position;
@@ -23,10 +24,9 @@ public class Case extends Actor {
     private Case predecesseur;
     private boolean chemin;
 
-    public Case(int x, int y) {
+    public Case(int x, int y, Partie container) {
         placeX = x;
         placeY = y;
-        //position = new Rectangle(x * Resolution.widthCase, y * Resolution.heightCase, Resolution.widthCase, Resolution.heightCase);
         this.setTouchable(Touchable.enabled);
         this.setBounds(x * Resolution.widthCase, y * Resolution.heightCase, Resolution.widthCase, Resolution.heightCase);
         this.sol = new Sol("Sable", this);
@@ -34,6 +34,7 @@ public class Case extends Actor {
         this.accessible = false;
         this.predecesseur = null;
         this.chemin = false;
+        this.container=container;
        this.addListener(new CaseListener(this));
     }
 
@@ -41,17 +42,9 @@ public class Case extends Actor {
         return (this.presence == null);
     }
 
-    /*public void render(SpriteBatch batch) {
-     if (!accessible) {
-     getSol().render(batch);
-     }
-     if (presence != null) {
-     getPresence().render(batch);
-     }
-     }*/
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (!accessible) {
+        if (!accessible || chemin) {
             getSol().render(batch);
         }
         if (presence != null) {
@@ -131,5 +124,11 @@ public class Case extends Actor {
 
     public void setChemin(boolean chemin) {
         this.chemin = chemin;
+    }
+
+    void clique() {
+        if (isAccessible()){
+            container.selectChemin(this);
+        }
     }
 }

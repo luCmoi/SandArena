@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import java.util.ArrayList;
 import sandarena.Resolution;
 import sandarena.gui.Camera;
 import sandarena.gui.ScreenPartie;
@@ -28,6 +29,7 @@ public class Partie extends Stage {
     private PersonnageIG personnageActif;
     private Group groupeCase;
     private Camera camera;
+    private ArrayList<Case> chemin;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
@@ -52,7 +54,7 @@ public class Partie extends Stage {
         this.groupeCase = new Group();
         for (int x = 0; x < coteTmp; x++) {
             for (int y = 0; y < coteTmp; y++) {
-                plateau[x][y] = new Case(x, y);
+                plateau[x][y] = new Case(x, y,this);
                 this.groupeCase.addActor(plateau[x][y]);
             }
         }
@@ -60,6 +62,7 @@ public class Partie extends Stage {
         widthTailleTotale = this.plateau.length * Resolution.widthCase;
         heightTailleTotale = this.plateau[0].length * Resolution.heightCase;
         this.addCaptureListener(new ScreenPartieListener(this));
+        chemin = new ArrayList<Case>();
         lancement();
     }
     
@@ -170,5 +173,23 @@ public class Partie extends Stage {
 
     public int getHeightTailleTotale() {
         return heightTailleTotale;
+    }
+
+    public void selectChemin(Case caseC) {
+        videChemin();
+        caseC.setChemin(true);
+        chemin.add(caseC);
+        while(caseC.getPredecesseur()!= personnageActif.getContainer()){
+            caseC=caseC.getPredecesseur();
+            caseC.setChemin(true);
+            chemin.add(caseC);
+        }
+    }
+    
+    public void videChemin(){
+        for(Case c : chemin){
+            c.setChemin(false);
+        }
+        chemin.clear();
     }
 }

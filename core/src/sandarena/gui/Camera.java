@@ -18,7 +18,10 @@ public class Camera extends OrthographicCamera {
 
     public Camera(Partie partie) {
         super();
-        this.setToOrtho(false, Resolution.width, Resolution.height - partie.getContainer().getDifferenceBas());
+        //L'un ou l'autre probleme premier axe Y tremble deuxime manque 1 case en bas
+        //Les inputs chope deux cases en dessous...
+        this.setToOrtho(false);
+        //this.setToOrtho(false, Resolution.width, Resolution.height - partie.getContainer().getDifferenceBas());
         this.position.set(Resolution.width / 2, Resolution.height / 2, 0);
         this.partie = partie;
     }
