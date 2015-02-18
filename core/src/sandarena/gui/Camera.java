@@ -44,10 +44,10 @@ public class Camera extends OrthographicCamera {
             }
         }
         if (deplacementBas) {
-            if (position.y > Resolution.height / 2 - partie.getContainer().getDifferenceBas()) {
+            if (position.y > Resolution.height / 2) {
                 translate(0, -(int) (8 * Resolution.ratioHeight), 0);
-                if (position.y < Resolution.height / 2 - partie.getContainer().getDifferenceBas()) {
-                    position.y = Resolution.height / 2 - partie.getContainer().getDifferenceBas();
+                if (position.y < Resolution.height / 2) {
+                    position.y = Resolution.height / 2;
                 }
             }
         }
@@ -104,20 +104,18 @@ public class Camera extends OrthographicCamera {
      * @param x2
      * @param y2 
      */
-    public void dragged(float xf1, float yf1, float xf2, float yf2) {
-        int x1 = (int)xf1;
-        int x2 = (int)xf2;
-        int y1 = (int)yf1;
-        int y2 = (int)yf2;
-        this.translate(x1 - x2, -(y1 - y2));
+    public synchronized void dragged(float x1, float y1, float x2, float y2) {
+        int depX = (int)(x1-x2);
+        int depY = (int)(y1-y2);
+        this.translate(depX, depY);
         if (position.x < Resolution.width / 2) {
             position.x = Resolution.width / 2;
         }
         if (position.x > partie.getWidthTailleTotale() - Resolution.width / 2) {
             position.x = partie.getWidthTailleTotale() - Resolution.width / 2;
         }
-        if (position.y < Resolution.height / 2 - partie.getContainer().getDifferenceBas()) {
-            position.y = Resolution.height / 2 - partie.getContainer().getDifferenceBas();
+        if (position.y < Resolution.height / 2) {
+            position.y = Resolution.height / 2;
         }
         if (position.y > partie.getHeightTailleTotale() - Resolution.height / 2) {
             position.y = partie.getHeightTailleTotale() - Resolution.height / 2;

@@ -1,7 +1,6 @@
 package sandarena.partie;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -35,6 +34,7 @@ public class Case extends Actor {
         this.accessible = false;
         this.predecesseur = null;
         this.chemin = false;
+       this.addListener(new CaseListener(this));
     }
 
     public boolean isTraversable() {

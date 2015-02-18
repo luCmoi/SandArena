@@ -71,8 +71,7 @@ public class ScreenPartieListener extends InputListener {
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         anciennePositionX=x;
         anciennePositionY=y;
-        
-        return false;
+        return true;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class ScreenPartieListener extends InputListener {
     }
 
     @Override
-    public void touchDragged(InputEvent event, float i, float i1, int i2) {
+    public synchronized void touchDragged(InputEvent event, float i, float i1, int i2) {
         this.partie.getCamera().dragged(anciennePositionX,anciennePositionY,i, i1);
         anciennePositionX=i;
         anciennePositionY=i1;

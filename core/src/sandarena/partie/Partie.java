@@ -19,8 +19,8 @@ import sandarena.partie.compcase.PersonnageIG;
  */
 public class Partie extends Stage {
 
-    private int widthTailleTotale;
-    private int heightTailleTotale;
+    private final int widthTailleTotale;
+    private final int heightTailleTotale;
     private Case[][] plateau;
     private ScreenPartie container;
     private JoueurIG joueur1;
@@ -57,10 +57,16 @@ public class Partie extends Stage {
             }
         }
         this.addActor(groupeCase);
-        widthTailleTotale = getPlateau().length * Resolution.widthCase;
-        heightTailleTotale = getPlateau()[0].length * Resolution.heightCase;
-        this.addListener(new ScreenPartieListener(this));
+        widthTailleTotale = this.plateau.length * Resolution.widthCase;
+        heightTailleTotale = this.plateau[0].length * Resolution.heightCase;
+        this.addCaptureListener(new ScreenPartieListener(this));
         lancement();
+    }
+    
+    @Override
+    public void draw () {
+        ((Camera)getViewport().getCamera()).updateExt();
+        super.draw();
     }
 
     private void lancement() {
@@ -95,26 +101,29 @@ public class Partie extends Stage {
             this.setPersonnageActif(perso);
         }
     }
-
-    /*public void render(SpriteBatch batch) {
-     for (Case[] tabC : getPlateau()) {
-     for (Case c : tabC) {
-     c.render(batch);
-     }
-     }
-     }*/
     /**
      * Appelle la supression du plateau de jeu avant de supprimer cet element
      *
      */
+    @Override
     public void dispose() {
+        super.dispose();
         setContainer(null);
+        groupeCase.remove();
         for (Case[] tabC : getPlateau()) {
             for (Case c : tabC) {
+                groupeCase.removeActor(c);
                 c.dispose();
             }
         }
+        groupeCase=null;
         setPlateau(null);
+        dispose();
+        camera.dispose();
+        camera=null;
+        setViewport(null);
+        joueur1=null;
+        joueur2=null;
     }
 
     public Case[][] getPlateau() {

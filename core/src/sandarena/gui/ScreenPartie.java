@@ -22,11 +22,8 @@ public class ScreenPartie implements Screen {
 
     private Batch batch;
     private SandArena conteneur;
-    private Camera camera;
     private Partie partie;
     private int differenceBas;
-    private int xHautGauche;
-    private int yHautGauche;
     private StageInterface interfaceS;
     //Temporaire
     private Joueur joueur1;
@@ -45,17 +42,10 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void render(float f) {
-        //getCamera().updateExt();
-        //xHautGauche = (int) (getCamera().position.x - Resolution.width / 2);
-        //yHautGauche = (int) (partie.getDimMax() - Resolution.height - (getCamera().position.y - Resolution.height / 2));
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //getCamera().update();
-        //getBatch().begin();
-        //this.partie.render(batch);
+        Gdx.gl.glViewport(0, differenceBas, Resolution.width, Resolution.height - differenceBas);
         this.partie.draw();
-        //getBatch().setProjectionMatrix(getCamera().combined);
-        //getBatch().end();
     }
 
     @Override
@@ -65,13 +55,9 @@ public class ScreenPartie implements Screen {
     @Override
     public void show() {
         setBatch(new SpriteBatch());
-        //setCamera(new Camera(this));
-        this.partie = new Partie(this, joueur1, joueur2,new ExtendViewport (Resolution.width, Resolution.height - this.differenceBas,Resolution.width, Resolution.height - this.differenceBas),batch);
-        this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width,this.differenceBas,Resolution.width,this.differenceBas),batch);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this.partie,this.interfaceS));
-        //
-        //xHautGauche = (int) (getCamera().position.x - Resolution.width / 2);
-        //yHautGauche = (int) (partie.getDimMax() - Resolution.height - (getCamera().position.y - Resolution.height / 2));
+        this.partie = new Partie(this, joueur1, joueur2, new ExtendViewport(Resolution.width, Resolution.height - this.differenceBas, Resolution.width, Resolution.height - this.differenceBas), batch);
+        this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas), batch);
+        Gdx.input.setInputProcessor(new InputMultiplexer(this.partie, this.interfaceS));
     }
 
     @Override
@@ -91,9 +77,9 @@ public class ScreenPartie implements Screen {
         if (getBatch() != null) {
             getBatch().dispose();
         }
-        camera.dispose();
-        camera = null;
         conteneur = null;
+        partie = null;
+        interfaceS = null;
     }
 
     public Batch getBatch() {
@@ -110,14 +96,6 @@ public class ScreenPartie implements Screen {
 
     public void setConteneur(SandArena conteneur) {
         this.conteneur = conteneur;
-    }
-
-    public Camera getCamera() {
-        return camera;
-    }
-
-    public void setCamera(Camera camera) {
-        this.camera = camera;
     }
 
     public int getDifferenceBas() {
