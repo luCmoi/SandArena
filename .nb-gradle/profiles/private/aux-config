@@ -5,21 +5,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/gui/ScreenPartie.java</file>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/gui/StageInterface.java</file>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/gui/ScreenPartieListener.java</file>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/gui/CameraStage.java</file>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/partie/AlgorithmePathfinding.java</file>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/gui/Camera.java</file>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/partie/Partie.java</file>
-        <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/core/src/sandarena/partie/Case.java</file>
-      </group>
-    </open-files>
-    <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group>
         <file>file:/C:/Users/Guillaume/Documents/GitHub/SandArena/desktop/src/sandarena/desktop/DesktopLauncher.java</file>
       </group>
     </open-files>
+    <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
   </auxiliary>
 </gradle-project-properties>
