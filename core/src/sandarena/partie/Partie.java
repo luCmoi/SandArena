@@ -46,6 +46,7 @@ public class Partie extends Stage {
         super(viewport, batch);
         this.container = container;
         this.getViewport().setCamera(new Camera(this));
+
         this.camera = (Camera)(this.getViewport().getCamera());
         this.joueur1 = new JoueurIG(joueur1);
         this.joueur2 = new JoueurIG(joueur2);

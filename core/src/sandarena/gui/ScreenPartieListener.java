@@ -22,7 +22,7 @@ public class ScreenPartieListener extends InputListener {
 
     @Override
     public boolean keyDown(InputEvent event, int i) {
-        switch (i) {
+        switch (event.getKeyCode()) {
             case Input.Keys.LEFT:
                 getPartie().getCamera().setDeplacementGauche(true);
                 break;
@@ -41,7 +41,7 @@ public class ScreenPartieListener extends InputListener {
 
     @Override
     public boolean keyUp(InputEvent event, int i) {
-        switch (i) {
+        switch (event.getKeyCode()) {
             case Input.Keys.LEFT:
                 getPartie().getCamera().setDeplacementGauche(false);
                 //mouseMoved(Gdx.input.getX(), Gdx.input.getY());

@@ -46,8 +46,8 @@ public class Resolution {
         Gdx.graphics.setDisplayMode(width, height, fullScreen);
         ratioWidth = (float) (width / 1920.0);
         ratioHeight = (float) (height / 1080.0);
-        widthCase = (int) (96 * ratioWidth);
-        heightCase = (int) (96 * ratioHeight);
+        widthCase = (int) (128 * ratioWidth);
+        heightCase = (int) (128 * ratioHeight);
     }
 
     /**
