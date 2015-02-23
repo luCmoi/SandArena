@@ -50,6 +50,7 @@ public class ScreenPartie implements Screen {
         this.partie.getViewport().update();
         Gdx.gl.glViewport(0, differenceBas, Resolution.width, Resolution.height - differenceBas);
         this.partie.draw();
+        this.interfaceS.draw();
     }
 
     @Override
