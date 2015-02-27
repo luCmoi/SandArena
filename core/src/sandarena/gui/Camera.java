@@ -31,34 +31,34 @@ public class Camera extends OrthographicCamera {
      */
     public void updateExt() {
         if (deplacementGauche) {
-            if (position.x > Resolution.width / 2) {
+            if (position.x > partie.getViewport().getWorldWidth() / 2) {
                 translate(-(int) (8 * Resolution.ratioWidth), 0, 0);
-                if (position.x < Resolution.width / 2) {
-                    position.x = Resolution.width / 2;
+                if (position.x < partie.getViewport().getWorldWidth() / 2) {
+                    position.x = partie.getViewport().getWorldWidth() / 2;
                 }
             }
         }
         if (deplacementDroit) {
-            if (position.x < partie.getWidthTailleTotale() - Resolution.width / 2) {
+            if (position.x < partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2) {
                 translate((int) (8 * Resolution.ratioWidth), 0, 0);
-                if (position.x > partie.getWidthTailleTotale() - Resolution.width / 2) {
-                    position.x = partie.getWidthTailleTotale() - Resolution.width / 2;
+                if (position.x > partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2) {
+                    position.x = partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2;
                 }
             }
         }
         if (deplacementBas) {
-            if (position.y > Resolution.height / 2) {
+            if (position.y > partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
                 translate(0, -(int) (8 * Resolution.ratioHeight), 0);
-                if (position.y < Resolution.height / 2) {
-                    position.y = Resolution.height / 2;
+                if (position.y < partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
+                    position.y = partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas();
                 }
             }
         }
         if (deplacementHaut) {
-            if (position.y < partie.getHeightTailleTotale() - Resolution.height / 2) {
+            if (position.y < partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2) {
                 translate(0, (int) (8 * Resolution.ratioHeight), 0);
-                if (position.y > partie.getHeightTailleTotale() - Resolution.height / 2) {
-                    position.y = partie.getHeightTailleTotale() - Resolution.height / 2;
+                if (position.y > partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2) {
+                    position.y = partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2;
                 }
             }
         }
@@ -111,17 +111,17 @@ public class Camera extends OrthographicCamera {
         int depX = (int)(x1-x2);
         int depY = (int)(y1-y2);
         this.translate(depX, depY);
-        if (position.x < Resolution.width / 2) {
-            position.x = Resolution.width / 2;
+        if (position.x < partie.getViewport().getWorldWidth() / 2) {
+            position.x = partie.getViewport().getWorldWidth() / 2;
         }
-        if (position.x > partie.getWidthTailleTotale() - Resolution.width / 2) {
-            position.x = partie.getWidthTailleTotale() - Resolution.width / 2;
+        if (position.x > partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2) {
+            position.x = partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2;
         }
-        if (position.y < Resolution.height / 2) {
-            position.y = Resolution.height / 2;
+        if (position.y < partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
+            position.y = partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas();
         }
-        if (position.y > partie.getHeightTailleTotale() - Resolution.height / 2) {
-            position.y = partie.getHeightTailleTotale() - Resolution.height / 2;
+        if (position.y > partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2) {
+            position.y = partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2;
         }
     }
 }

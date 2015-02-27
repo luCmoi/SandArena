@@ -81,8 +81,8 @@ public class ScreenPartieListener extends InputListener {
     @Override
     public synchronized void touchDragged(InputEvent event, float i, float i1, int i2) {
         this.partie.getCamera().dragged(anciennePositionX,anciennePositionY,i, i1);
-        anciennePositionX=i;
-        anciennePositionY=i1;
+        //anciennePositionX=i;
+        //anciennePositionY=i1;
     }
 
     @Override

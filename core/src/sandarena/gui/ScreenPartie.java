@@ -48,8 +48,8 @@ public class ScreenPartie implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.partie.getViewport().update();
-        Gdx.gl.glViewport(0, differenceBas, Resolution.width, Resolution.height - differenceBas);
         this.partie.draw();
+        Gdx.gl.glViewport(0, 0, Resolution.width, differenceBas);
         this.interfaceS.draw();
     }
 
@@ -63,9 +63,10 @@ public class ScreenPartie implements Screen {
         Group un = new Group();
         un.setBounds(0,0,Resolution.width, Resolution.height - this.differenceBas);
 
-        this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height - this.differenceBas), batch);
         this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas), batch);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this.partie, this.interfaceS));
+        this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
+        this.interfaceS.hopPartie(this.partie);
+        Gdx.input.setInputProcessor(this.partie);
     }
 
     @Override
@@ -112,6 +113,14 @@ public class ScreenPartie implements Screen {
 
     public void setDifferenceBas(int differenceBas) {
         this.differenceBas = differenceBas;
+    }
+
+    public Partie getPartie(){
+        return this.partie;
+    }
+
+    public StageInterface getStageInterface(){
+        return this.interfaceS;
     }
 
 }
