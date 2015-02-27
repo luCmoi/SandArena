@@ -2,6 +2,8 @@ package sandarena.partie;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -10,6 +12,7 @@ import sandarena.Resolution;
 import sandarena.gui.Camera;
 import sandarena.gui.ScreenPartie;
 import sandarena.gui.ScreenPartieListener;
+import sandarena.gui.StageInterface;
 import sandarena.joueur.Joueur;
 import sandarena.partie.compcase.JoueurIG;
 import sandarena.partie.compcase.PersonnageIG;
@@ -31,6 +34,8 @@ public class Partie extends Stage {
     private Group groupeCase;
     private Camera camera;
     private ArrayList<Case> chemin;
+    private StageInterface stageInterface;
+    //private static int i = 0;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
@@ -45,7 +50,9 @@ public class Partie extends Stage {
     public Partie(ScreenPartie container, Joueur joueur1, Joueur joueur2, Viewport viewport, Batch batch) {
         super(viewport, batch);
         this.container = container;
+        this.stageInterface = this.container.getStageInterface();
         this.getViewport().setCamera(new Camera(this));
+
         this.camera = (Camera)(this.getViewport().getCamera());
         this.joueur1 = new JoueurIG(joueur1);
         this.joueur2 = new JoueurIG(joueur2);
@@ -192,5 +199,22 @@ public class Partie extends Stage {
             c.setChemin(false);
         }
         chemin.clear();
+    }
+
+    @Override
+    public Actor hit(float stageX,float stageY,boolean touchable){
+        Vector2  vScreen = stageToScreenCoordinates(new Vector2(stageX,stageY));
+        //System.out.println(stageToScreenCoordinates(new Vector2(stageX,stageY)).y);
+        if(Resolution.height - vScreen.y < this.container.getDifferenceBas()){
+            //stageInterface.screenToStageCoordinates(new Vector2(vScreen.x,this.container.getDifferenceBas()-Resolution.height - vScreen.y));
+            //i++;
+            //System.out.print(i+"Here :");
+            return stageInterface.hit(vScreen.x,Resolution.height - vScreen.y,touchable);
+            //System.out.println(a);
+            //return a;
+        }
+        else {
+            return super.hit(stageX, stageY, touchable);
+        }
     }
 }

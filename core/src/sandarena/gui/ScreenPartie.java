@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
@@ -46,8 +47,10 @@ public class ScreenPartie implements Screen {
     public void render(float f) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glViewport(0, differenceBas, Resolution.width, Resolution.height - differenceBas);
+        this.partie.getViewport().update();
         this.partie.draw();
+        Gdx.gl.glViewport(0, 0, Resolution.width, differenceBas);
+        this.interfaceS.draw();
     }
 
     @Override
@@ -57,9 +60,13 @@ public class ScreenPartie implements Screen {
     @Override
     public void show() {
         setBatch(new SpriteBatch());
-        this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height - this.differenceBas), batch);
+        Group un = new Group();
+        un.setBounds(0,0,Resolution.width, Resolution.height - this.differenceBas);
+
         this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas), batch);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this.partie, this.interfaceS));
+        this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
+        this.interfaceS.hopPartie(this.partie);
+        Gdx.input.setInputProcessor(this.partie);
     }
 
     @Override
@@ -106,6 +113,14 @@ public class ScreenPartie implements Screen {
 
     public void setDifferenceBas(int differenceBas) {
         this.differenceBas = differenceBas;
+    }
+
+    public Partie getPartie(){
+        return this.partie;
+    }
+
+    public StageInterface getStageInterface(){
+        return this.interfaceS;
     }
 
 }
