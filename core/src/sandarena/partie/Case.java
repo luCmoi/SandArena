@@ -14,7 +14,7 @@ import sandarena.partie.compcase.Sol;
  */
 public class Case extends Actor {
 
-    private Partie container;
+    private final Partie container;
     private int placeX;
     private int placeY;
     private Rectangle position;
@@ -23,6 +23,7 @@ public class Case extends Actor {
     private boolean accessible;
     private Case predecesseur;
     private boolean chemin;
+    private boolean cible;
 
     public Case(int x, int y, Partie container) {
         placeX = x;
@@ -36,6 +37,7 @@ public class Case extends Actor {
         this.chemin = false;
         this.container=container;
        this.addListener(new CaseListener(this));
+       this.cible=false;
     }
 
     public boolean isTraversable() {
@@ -127,8 +129,14 @@ public class Case extends Actor {
     }
 
     void clique() {
-        if (isAccessible()){
+        if (isAccessible() && !cible){
             container.selectChemin(this);
+        } else if (cible){
+            container.deplacement();
         }
+    }
+    
+    public void setCible(boolean val){
+        this.cible = val;
     }
 }

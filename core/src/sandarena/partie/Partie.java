@@ -1,6 +1,5 @@
 package sandarena.partie;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import sandarena.Resolution;
 import sandarena.gui.Camera;
 import sandarena.gui.ScreenPartie;
-import sandarena.gui.ScreenPartieListener;
+import sandarena.gui.PartieListener;
 import sandarena.gui.StageInterface;
 import sandarena.joueur.Joueur;
 import sandarena.partie.compcase.JoueurIG;
@@ -35,7 +34,6 @@ public class Partie extends Stage {
     private Camera camera;
     private ArrayList<Case> chemin;
     private StageInterface stageInterface;
-    //private static int i = 0;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
@@ -69,7 +67,7 @@ public class Partie extends Stage {
         this.addActor(groupeCase);
         widthTailleTotale = this.plateau.length * Resolution.widthCase;
         heightTailleTotale = this.plateau[0].length * Resolution.heightCase;
-        this.addCaptureListener(new ScreenPartieListener(this));
+        this.addCaptureListener(new PartieListener(this));
         chemin = new ArrayList<Case>();
         lancement();
     }
@@ -186,6 +184,7 @@ public class Partie extends Stage {
     public void selectChemin(Case caseC) {
         videChemin();
         caseC.setChemin(true);
+        caseC.setCible(true);
         chemin.add(caseC);
         while(caseC.getPredecesseur()!= personnageActif.getContainer()){
             caseC=caseC.getPredecesseur();
@@ -195,6 +194,7 @@ public class Partie extends Stage {
     }
     
     public void videChemin(){
+        chemin.get(chemin.size()-1).setCible(false);
         for(Case c : chemin){
             c.setChemin(false);
         }
@@ -204,17 +204,15 @@ public class Partie extends Stage {
     @Override
     public Actor hit(float stageX,float stageY,boolean touchable){
         Vector2  vScreen = stageToScreenCoordinates(new Vector2(stageX,stageY));
-        //System.out.println(stageToScreenCoordinates(new Vector2(stageX,stageY)).y);
         if(Resolution.height - vScreen.y < this.container.getDifferenceBas()){
-            //stageInterface.screenToStageCoordinates(new Vector2(vScreen.x,this.container.getDifferenceBas()-Resolution.height - vScreen.y));
-            //i++;
-            //System.out.print(i+"Here :");
             return stageInterface.hit(vScreen.x,Resolution.height - vScreen.y,touchable);
-            //System.out.println(a);
-            //return a;
         }
         else {
             return super.hit(stageX, stageY, touchable);
         }
+    }
+
+    void deplacement() {
+        
     }
 }
