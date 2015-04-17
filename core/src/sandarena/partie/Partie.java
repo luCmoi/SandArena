@@ -6,7 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
 import java.util.ArrayList;
+
 import sandarena.Resolution;
 import sandarena.gui.Camera;
 import sandarena.gui.ScreenPartie;
@@ -51,7 +53,7 @@ public class Partie extends Stage {
         this.stageInterface = this.container.getStageInterface();
         this.getViewport().setCamera(new Camera(this));
 
-        this.camera = (Camera)(this.getViewport().getCamera());
+        this.camera = (Camera) (this.getViewport().getCamera());
         this.joueur1 = new JoueurIG(joueur1);
         this.joueur2 = new JoueurIG(joueur2);
         //Changera lorsqu'on saura a partir de quoit creer la partie
@@ -60,7 +62,7 @@ public class Partie extends Stage {
         this.groupeCase = new Group();
         for (int x = 0; x < coteTmp; x++) {
             for (int y = 0; y < coteTmp; y++) {
-                plateau[x][y] = new Case(x, y,this);
+                plateau[x][y] = new Case(x, y, this);
                 this.groupeCase.addActor(plateau[x][y]);
             }
         }
@@ -71,10 +73,10 @@ public class Partie extends Stage {
         chemin = new ArrayList<Case>();
         lancement();
     }
-    
+
     @Override
-    public void draw () {
-        ((Camera)getViewport().getCamera()).updateExt();
+    public void draw() {
+        ((Camera) getViewport().getCamera()).updateExt();
         super.draw();
     }
 
@@ -110,9 +112,9 @@ public class Partie extends Stage {
             this.setPersonnageActif(perso);
         }
     }
+
     /**
      * Appelle la supression du plateau de jeu avant de supprimer cet element
-     *
      */
     @Override
     public void dispose() {
@@ -125,14 +127,14 @@ public class Partie extends Stage {
                 c.dispose();
             }
         }
-        groupeCase=null;
+        groupeCase = null;
         setPlateau(null);
         dispose();
         camera.dispose();
-        camera=null;
+        camera = null;
         setViewport(null);
-        joueur1=null;
-        joueur2=null;
+        joueur1 = null;
+        joueur2 = null;
     }
 
     public Case[][] getPlateau() {
@@ -144,10 +146,10 @@ public class Partie extends Stage {
     }
 
     @Override
-    public Camera getCamera(){
+    public Camera getCamera() {
         return this.camera;
     }
-    
+
     public void setPlateau(Case[][] plateau) {
         this.plateau = plateau;
     }
@@ -186,33 +188,34 @@ public class Partie extends Stage {
         caseC.setChemin(true);
         caseC.setCible(true);
         chemin.add(caseC);
-        while(caseC.getPredecesseur()!= personnageActif.getContainer()){
-            caseC=caseC.getPredecesseur();
+        while (caseC.getPredecesseur() != personnageActif.getContainer()) {
+            caseC = caseC.getPredecesseur();
             caseC.setChemin(true);
             chemin.add(caseC);
         }
     }
-    
-    public void videChemin(){
-        chemin.get(chemin.size()-1).setCible(false);
-        for(Case c : chemin){
-            c.setChemin(false);
+
+    public void videChemin() {
+        if (chemin.size() != 0) {
+            chemin.get(chemin.size() - 1).setCible(false);
+            for (Case c : chemin) {
+                c.setChemin(false);
+            }
         }
         chemin.clear();
     }
 
     @Override
-    public Actor hit(float stageX,float stageY,boolean touchable){
-        Vector2  vScreen = stageToScreenCoordinates(new Vector2(stageX,stageY));
-        if(Resolution.height - vScreen.y < this.container.getDifferenceBas()){
-            return stageInterface.hit(vScreen.x,Resolution.height - vScreen.y,touchable);
-        }
-        else {
+    public Actor hit(float stageX, float stageY, boolean touchable) {
+        Vector2 vScreen = stageToScreenCoordinates(new Vector2(stageX, stageY));
+        if (Resolution.height - vScreen.y < this.container.getDifferenceBas()) {
+            return stageInterface.hit(vScreen.x, Resolution.height - vScreen.y, touchable);
+        } else {
             return super.hit(stageX, stageY, touchable);
         }
     }
 
     void deplacement() {
-        
+
     }
 }
