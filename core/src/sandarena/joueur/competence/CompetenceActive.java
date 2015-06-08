@@ -4,7 +4,7 @@ package sandarena.joueur.competence;
  *
  * @author Guillaume
  */
-public class CompetenceActive extends Competence{
+public abstract class CompetenceActive extends Competence{
     protected int rechargement;
     protected int utilisation;
     protected int porte;

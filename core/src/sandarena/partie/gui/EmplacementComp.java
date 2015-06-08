@@ -47,7 +47,10 @@ public class EmplacementComp extends Actor {
     }
 
     public void clique() {
-        if (competenceIG != null) {
+        if (container.getPartie().getCompetenceActive()!= null && container.getPartie().getCompetenceActive().equals(this.competenceIG)){
+            container.getPartie().setCompetenceActive(null);
+        }
+        else if (competenceIG != null) {
             if (CompetenceActive.class.isAssignableFrom(competenceIG.info.competence.getClass())) {
                 container.getPartie().setCompetenceActive(competenceIG);
             }

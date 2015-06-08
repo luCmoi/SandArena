@@ -15,7 +15,7 @@ public class JoueurIG {
     public JoueurIG(Joueur joueur) {
         this.joueur = joueur;
         for(Personnage personage : joueur.getPersonnages()){
-            personnages.add(new PersonnageIG(personage));
+            personnages.add(new PersonnageIG(personage,this));
         }
 
     }

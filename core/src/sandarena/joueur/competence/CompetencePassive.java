@@ -10,7 +10,7 @@ package sandarena.joueur.competence;
  *
  * @author Guillaume
  */
-public class CompetencePassive extends Competence{
+public abstract class CompetencePassive extends Competence{
 
     public CompetencePassive(int type) {
         super(type);

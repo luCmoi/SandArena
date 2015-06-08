@@ -14,14 +14,16 @@ import sandarena.partie.Case;
 public class PersonnageIG {
 
     private Personnage donnee;
+    private JoueurIG possesseur;
     private int vieActuelle;
     private int vitesseRestante;
     private final CompetenceIG[] competence = new CompetenceIG[4];
     private Case container;
     private boolean aAgi;
 
-    public PersonnageIG(Personnage donnee) {
+    public PersonnageIG(Personnage donnee, JoueurIG possesseur) {
         this.donnee = donnee;
+        this.possesseur = possesseur;
         this.vieActuelle = donnee.commun.vie;
         this.vitesseRestante = donnee.commun.vitesse;
         int i = 0;
@@ -87,11 +89,24 @@ public class PersonnageIG {
 
     public void setAAgi(boolean b) {
         this.aAgi = b;
+        if (b) {
+            this.container.getContainer().setCompetenceActive(null);
+            this.container.getContainer().finPerso();
+        }
     }
+
 
     public void mouvement(Case aCase) {
         this.vitesseRestante--;
         this.container.sortiePresence();
         aCase.entrePresence(this);
+    }
+
+    public JoueurIG getPossesseur() {
+        return possesseur;
+    }
+
+    public void setPossesseur(JoueurIG possesseur) {
+        this.possesseur = possesseur;
     }
 }

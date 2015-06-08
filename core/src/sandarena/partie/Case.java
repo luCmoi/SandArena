@@ -140,14 +140,14 @@ public class Case extends Actor {
     }
 
     void clique() {
-        if (container.getCompetenceActive()!= null) {
+        if (getContainer().getCompetenceActive()== null) {
             if (isAccessible() && !cible) {
-                container.selectChemin(this);
+                getContainer().selectChemin(this);
             } else if (cible) {
-                container.deplacement();
+                getContainer().deplacement();
             }
         } else {
-            container.getCompetenceActive().agit(this);
+            getContainer().getCompetenceActive().agit(this);
         }
     }
 
@@ -157,5 +157,9 @@ public class Case extends Actor {
 
     public void setCompetenceable(boolean competenceable) {
         this.competenceable = competenceable;
+    }
+
+    public Partie getContainer() {
+        return container;
     }
 }

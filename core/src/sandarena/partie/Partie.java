@@ -105,14 +105,19 @@ public class Partie extends Stage {
         phase(getJoueur2());
     }
 
+
     private void phase(JoueurIG joueur) {
-        selection(joueur.getPersonnages().get(0));
+        for (PersonnageIG perso : joueur.getPersonnages()) {
+            if (!perso.isAAgi()) {
+                this.setPersonnageActif(perso);
+                break;
+            }
+        }
     }
 
-    private void selection(PersonnageIG perso) {
-        if (!perso.isAAgi()) {
-            this.setPersonnageActif(perso);
-        }
+
+    public void finPerso() {
+        phase(personnageActif.getPossesseur());
     }
 
     /**
@@ -173,9 +178,11 @@ public class Partie extends Stage {
     }
 
     public void setPersonnageActif(PersonnageIG personnageActif) {
-        this.personnageActif = personnageActif;
-        AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
-        this.stageInterface.setPersonnageActif(personnageActif);
+        if (personnageActif != null) {
+            this.personnageActif = personnageActif;
+            AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
+            this.stageInterface.setPersonnageActif(personnageActif);
+        }
     }
 
     public int getWidthTailleTotale() {
@@ -230,6 +237,14 @@ public class Partie extends Stage {
 
     public void setCompetenceActive(CompetenceIG competenceActive) {
         this.competenceActive = competenceActive;
-        this.competenceActive.select(plateau);
+        if (this.competenceActive != null) {
+            this.competenceActive.select(plateau);
+        } else {
+            for (Case[] c : plateau) {
+                for (Case cc : c) {
+                    cc.setCompetenceable(false);
+                }
+            }
+        }
     }
 }
