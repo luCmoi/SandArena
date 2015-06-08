@@ -1,7 +1,7 @@
 package sandarena.partie.compcase;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import sandarena.donnee.BanqueCompetence.EntreeCompetence;
 import sandarena.joueur.Personnage;
 import sandarena.partie.Case;
@@ -87,5 +87,11 @@ public class PersonnageIG {
 
     public void setAAgi(boolean b) {
         this.aAgi = b;
+    }
+
+    public void mouvement(Case aCase) {
+        this.vitesseRestante--;
+        this.container.sortiePresence();
+        aCase.entrePresence(this);
     }
 }

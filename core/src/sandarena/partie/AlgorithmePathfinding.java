@@ -57,9 +57,9 @@ public class AlgorithmePathfinding {
         }
     }
 
-    public static void calculCaseAccessible(PersonnageIG personnage, Case[][] plateau) {
-        int distance = personnage.getVitesseRestante();
-        Sommet s = tabToGraph(personnage.getContainer(), plateau);
+    public static void calculCaseAccessible(int vitesseRestante,Case caseDepart, Case[][] plateau) {
+        int distance = vitesseRestante;
+        Sommet s = tabToGraph(caseDepart, plateau);
         ArrayList<Sommet> liste = s.parcourLargeur(distance);
         for (Sommet som : liste) {
             plateau[som.x][som.y].setAccessible(true);

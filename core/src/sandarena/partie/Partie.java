@@ -83,8 +83,8 @@ public class Partie extends Stage {
     private void lancement() {
         /* Placement des unitées
          */
-        getPlateau()[5][5].setPresence(getJoueur1().getPersonnages().get(0));
-        getPlateau()[7][5].setPresence(getJoueur2().getPersonnages().get(0));
+        getPlateau()[5][5].entrePresence(getJoueur1().getPersonnages().get(0));
+        getPlateau()[7][5].entrePresence(getJoueur2().getPersonnages().get(0));
         tour();
     }
 
@@ -172,7 +172,7 @@ public class Partie extends Stage {
 
     public void setPersonnageActif(PersonnageIG personnageActif) {
         this.personnageActif = personnageActif;
-        AlgorithmePathfinding.calculCaseAccessible(personnageActif, plateau);
+        AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
     }
 
     public int getWidthTailleTotale() {
@@ -196,11 +196,9 @@ public class Partie extends Stage {
     }
 
     public void videChemin() {
-        if (chemin.size() != 0) {
-            chemin.get(chemin.size() - 1).setCible(false);
-            for (Case c : chemin) {
-                c.setChemin(false);
-            }
+        for (Case c : chemin) {
+            c.setCible(false);
+            c.setChemin(false);
         }
         chemin.clear();
     }
@@ -216,6 +214,10 @@ public class Partie extends Stage {
     }
 
     void deplacement() {
-
+        for (int i = 1; i <= chemin.size(); i++) {
+            personnageActif.mouvement(chemin.get(chemin.size()-i));
+        }
+        videChemin();
+        AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(),personnageActif.getContainer(),plateau);
     }
 }

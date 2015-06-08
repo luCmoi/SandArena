@@ -99,10 +99,15 @@ public class Case extends Actor {
         return presence;
     }
 
-    public void setPresence(PersonnageIG presence) {
+    public void entrePresence(PersonnageIG presence) {
         this.presence = presence;
         this.presence.setContainer(this);
     }
+
+    public void sortiePresence(){
+        this.presence=null;
+    }
+
 
     public boolean isAccessible() {
         return accessible;
