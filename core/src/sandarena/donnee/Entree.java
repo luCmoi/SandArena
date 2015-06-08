@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 /**
  * Une entree sert de type de base a toutes les banques de données
+ *
  * @author Guillaume
  */
 public abstract class Entree {

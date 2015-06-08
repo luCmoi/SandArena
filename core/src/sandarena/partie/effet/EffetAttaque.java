@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package sandarena.effet;
+package sandarena.partie.effet;
 
 import sandarena.partie.Case;
 import sandarena.partie.compcase.PersonnageIG;

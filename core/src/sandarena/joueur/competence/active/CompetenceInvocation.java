@@ -9,13 +9,12 @@ package sandarena.joueur.competence.active;
 import sandarena.joueur.competence.CompetenceActive;
 
 /**
- *
  * @author Guillaume
  */
-public class CompetenceInvocation  extends CompetenceActive{
+public class CompetenceInvocation extends CompetenceActive {
 
-    public CompetenceInvocation(int type, int recharge, int utilisation,int porte) {
-        super(type, recharge, utilisation,porte);
+    public CompetenceInvocation(int type, int recharge, int utilisation, int porte, int portemin, int zone) {
+        super(type, recharge, utilisation, porte, portemin, zone);
     }
-    
+
 }

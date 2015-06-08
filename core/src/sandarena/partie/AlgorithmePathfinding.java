@@ -2,17 +2,19 @@ package sandarena.partie;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+
 import sandarena.partie.compcase.PersonnageIG;
 
 /**
- *
  * @author Guillaume
  */
 public class AlgorithmePathfinding {
 
+
+
     /*
-     * Parcour en largeur sur le plateau
-     */
+         * Parcour en largeur sur le plateau
+         */
     static public class Sommet {
 
         public int x;
@@ -57,13 +59,24 @@ public class AlgorithmePathfinding {
         }
     }
 
-    public static void calculCaseAccessible(int vitesseRestante,Case caseDepart, Case[][] plateau) {
+    public static void calculCaseAccessible(int vitesseRestante, Case caseDepart, Case[][] plateau) {
         int distance = vitesseRestante;
-        Sommet s = tabToGraph(caseDepart, plateau);
+        Sommet s = tabToGraph(caseDepart, plateau,true);
         ArrayList<Sommet> liste = s.parcourLargeur(distance);
         for (Sommet som : liste) {
             plateau[som.x][som.y].setAccessible(true);
             plateau[som.x][som.y].setPredecesseur(plateau[som.pere.x][som.pere.y]);
+        }
+    }
+
+    public static void calculCaseTouchable(int portemin, int porte, Case caseDepart, Case[][] plateau) {
+        int distance = porte;
+        Sommet s = tabToGraph(caseDepart, plateau, false);
+        ArrayList<Sommet> liste = s.parcourLargeur(distance);
+        for (Sommet som : liste) {
+            if (som.distance >= portemin){
+                plateau[som.x][som.y].setCompetenceable(true);
+            }
         }
     }
 
@@ -85,23 +98,25 @@ public class AlgorithmePathfinding {
         }
     }
 
-    public static Sommet tabToGraph(Case depart, Case[][] plateau) {
+    public static Sommet tabToGraph(Case depart, Case[][] plateau,  boolean accessible) {
         Graph graph = new Graph(plateau.length, plateau[0].length);
         Sommet joueur = null;
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[0].length; j++) {
-                plateau[i][j].setAccessible(false);
-                plateau[i][j].setPredecesseur(null);
+                if(accessible) {
+                    plateau[i][j].setAccessible(false);
+                    plateau[i][j].setPredecesseur(null);
+                }
                 if (plateau[i][j] == depart) {
                     joueur = graph.listeSommets[(i * plateau[0].length) + j];
                 }
                 if (i < plateau.length - 1) {
-                    if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i + 1][j].isTraversable()|| plateau[i+1][j] == depart)) {
+                    if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i + 1][j].isTraversable() || plateau[i + 1][j] == depart)) {
                         graph.addSommet(i, j, i + 1, j, plateau[0].length);
                     }
                 }
                 if (j < plateau[0].length - 1) {
-                    if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i][j + 1].isTraversable()|| plateau[i][j+1] == depart)) {
+                    if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i][j + 1].isTraversable() || plateau[i][j + 1] == depart)) {
                         graph.addSommet(i, j, i, j + 1, plateau[0].length);
                     }
                 }

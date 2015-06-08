@@ -3,22 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sandarena.partie;
+package sandarena.partie.gui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+
+import sandarena.partie.Case;
 
 /**
  * Ecoute les interactions effectuées avec une case
  *
  * @author Guillaume
  */
-public class CaseListener extends InputListener {
+public class EmplacementCompListener extends InputListener {
 
-    private Case caseEcoute;
+    private EmplacementComp emplacementEcoute;
 
-    public CaseListener(Case aThis) {
-        caseEcoute = aThis;
+    public EmplacementCompListener(EmplacementComp aThis) {
+        emplacementEcoute = aThis;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class CaseListener extends InputListener {
 
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-        caseEcoute.clique();
+        emplacementEcoute.clique();
     }
 
 }

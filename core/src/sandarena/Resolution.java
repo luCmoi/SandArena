@@ -21,6 +21,7 @@ public class Resolution {
 
     /**
      * Calcul la résolution en utilisant le fichier de réglage en mode Desktop
+     *
      * @throws java.io.FileNotFoundException
      */
     public static void calculResolution() throws FileNotFoundException, IOException {

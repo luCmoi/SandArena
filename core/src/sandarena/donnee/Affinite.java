@@ -5,6 +5,6 @@ package sandarena.donnee;
  * pour les personnages et pour leurs effets
  * @author Guillaume
  */
-class Affinite {
+public class Affinite {
     public static int FORCE = 0;
 }

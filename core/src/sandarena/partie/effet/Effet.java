@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 
-package sandarena.effet;
+package sandarena.partie.effet;
+
+import sandarena.partie.Case;
 
 /**
  *
  * @author Guillaume
  */
 public abstract class Effet {
-    
+
+    public abstract void lance(Case attaquant, Case defenseur);
 }

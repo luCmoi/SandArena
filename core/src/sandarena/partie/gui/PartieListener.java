@@ -1,4 +1,4 @@
-package sandarena.gui;
+package sandarena.partie.gui;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

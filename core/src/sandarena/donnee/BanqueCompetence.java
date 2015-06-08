@@ -23,7 +23,7 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Bourre-pif",
                 "Coup de poing puissant au visage, de préférence dans le nez.",
                 "Image/Competence/Bourre-pif.png",
-                new CompetenceAttaque(Affinite.FORCE, 0, 0, 1, Caract.FORCE, 1.2, 1),
+                new CompetenceAttaque(Affinite.FORCE, 0, 0, 1, 1, 1, Caract.FORCE, 1.2, 1),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
     }
 

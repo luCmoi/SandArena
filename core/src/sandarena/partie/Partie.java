@@ -10,10 +10,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
 
 import sandarena.Resolution;
-import sandarena.gui.Camera;
-import sandarena.gui.ScreenPartie;
-import sandarena.gui.PartieListener;
-import sandarena.gui.StageInterface;
+import sandarena.partie.compcase.CompetenceIG;
+import sandarena.partie.gui.Camera;
+import sandarena.partie.gui.ScreenPartie;
+import sandarena.partie.gui.PartieListener;
+import sandarena.partie.gui.StageInterface;
 import sandarena.joueur.Joueur;
 import sandarena.partie.compcase.JoueurIG;
 import sandarena.partie.compcase.PersonnageIG;
@@ -36,6 +37,7 @@ public class Partie extends Stage {
     private Camera camera;
     private ArrayList<Case> chemin;
     private StageInterface stageInterface;
+    private CompetenceIG competenceActive;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
@@ -173,6 +175,7 @@ public class Partie extends Stage {
     public void setPersonnageActif(PersonnageIG personnageActif) {
         this.personnageActif = personnageActif;
         AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
+        this.stageInterface.setPersonnageActif(personnageActif);
     }
 
     public int getWidthTailleTotale() {
@@ -215,9 +218,18 @@ public class Partie extends Stage {
 
     void deplacement() {
         for (int i = 1; i <= chemin.size(); i++) {
-            personnageActif.mouvement(chemin.get(chemin.size()-i));
+            personnageActif.mouvement(chemin.get(chemin.size() - i));
         }
         videChemin();
-        AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(),personnageActif.getContainer(),plateau);
+        AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
+    }
+
+    public CompetenceIG getCompetenceActive() {
+        return competenceActive;
+    }
+
+    public void setCompetenceActive(CompetenceIG competenceActive) {
+        this.competenceActive = competenceActive;
+        this.competenceActive.select(plateau);
     }
 }

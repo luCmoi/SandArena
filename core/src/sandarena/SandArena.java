@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.io.IOException;
 import sandarena.donnee.*;
-import sandarena.gui.ScreenPartie;
+import sandarena.partie.gui.ScreenPartie;
 import sandarena.joueur.Personnage;
 
 /**

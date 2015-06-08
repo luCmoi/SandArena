@@ -25,6 +25,7 @@ public class Personnage {
         
         //Ligne qui changera les compétence n'étant pas init au pifometre
         this.competences[0] = BanqueCompetence.getCompetence(commun.affinite);
+        this.competences[0].incremente();
     }
 
     public void dispose() {

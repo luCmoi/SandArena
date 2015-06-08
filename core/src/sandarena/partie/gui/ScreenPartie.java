@@ -1,6 +1,7 @@
-package sandarena.gui;
+package sandarena.partie.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -59,10 +60,9 @@ public class ScreenPartie implements Screen {
     @Override
     public void show() {
         setBatch(new SpriteBatch());
-        Group un = new Group();
-        un.setBounds(0,0,Resolution.width, Resolution.height - this.differenceBas);
         this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas), batch);
         this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
+        interfaceS.setPartie(partie);
         Gdx.input.setInputProcessor(this.partie);
     }
 

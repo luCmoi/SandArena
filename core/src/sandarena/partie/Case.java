@@ -1,15 +1,17 @@
 package sandarena.partie;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+
 import sandarena.Resolution;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.compcase.Sol;
 
 /**
- *
  * @author Guillaume
  */
 public class Case extends Actor {
@@ -24,6 +26,7 @@ public class Case extends Actor {
     private Case predecesseur;
     private boolean chemin;
     private boolean cible;
+    private boolean competenceable;
 
     public Case(int x, int y, Partie container) {
         placeX = x;
@@ -35,9 +38,9 @@ public class Case extends Actor {
         this.accessible = false;
         this.predecesseur = null;
         this.chemin = false;
-        this.container=container;
-       this.addListener(new CaseListener(this));
-       this.cible=false;
+        this.container = container;
+        this.addListener(new CaseListener(this));
+        this.cible = false;
     }
 
     public boolean isTraversable() {
@@ -51,6 +54,9 @@ public class Case extends Actor {
         }
         if (presence != null) {
             getPresence().render(batch);
+        } if (competenceable){
+            //tmp
+            batch.draw(new Texture(Gdx.files.internal("Image/Competence/Bourre-pif.png")), getX()+getWidth()/4, getY()+getHeight()/4, getWidth()/2, getHeight()/2);
         }
     }
 
@@ -104,8 +110,8 @@ public class Case extends Actor {
         this.presence.setContainer(this);
     }
 
-    public void sortiePresence(){
-        this.presence=null;
+    public void sortiePresence() {
+        this.presence = null;
     }
 
 
@@ -134,14 +140,22 @@ public class Case extends Actor {
     }
 
     void clique() {
-        if (isAccessible() && !cible){
-            container.selectChemin(this);
-        } else if (cible){
-            container.deplacement();
+        if (container.getCompetenceActive()!= null) {
+            if (isAccessible() && !cible) {
+                container.selectChemin(this);
+            } else if (cible) {
+                container.deplacement();
+            }
+        } else {
+            container.getCompetenceActive().agit(this);
         }
     }
-    
-    public void setCible(boolean val){
+
+    public void setCible(boolean val) {
         this.cible = val;
+    }
+
+    public void setCompetenceable(boolean competenceable) {
+        this.competenceable = competenceable;
     }
 }
