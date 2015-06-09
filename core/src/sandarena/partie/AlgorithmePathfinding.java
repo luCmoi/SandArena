@@ -61,7 +61,7 @@ public class AlgorithmePathfinding {
 
     public static void calculCaseAccessible(int vitesseRestante, Case caseDepart, Case[][] plateau) {
         int distance = vitesseRestante;
-        Sommet s = tabToGraph(caseDepart, plateau,true);
+        Sommet s = tabToGraph(caseDepart, plateau);
         ArrayList<Sommet> liste = s.parcourLargeur(distance);
         for (Sommet som : liste) {
             plateau[som.x][som.y].setAccessible(true);
@@ -71,7 +71,7 @@ public class AlgorithmePathfinding {
 
     public static void calculCaseTouchable(int portemin, int porte, Case caseDepart, Case[][] plateau) {
         int distance = porte;
-        Sommet s = tabToGraph(caseDepart, plateau, false);
+        Sommet s = tabToGraph2(caseDepart, plateau);
         ArrayList<Sommet> liste = s.parcourLargeur(distance);
         for (Sommet som : liste) {
             if (som.distance >= portemin){
@@ -98,15 +98,13 @@ public class AlgorithmePathfinding {
         }
     }
 
-    public static Sommet tabToGraph(Case depart, Case[][] plateau,  boolean accessible) {
+    public static Sommet tabToGraph(Case depart, Case[][] plateau ) {
         Graph graph = new Graph(plateau.length, plateau[0].length);
         Sommet joueur = null;
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[0].length; j++) {
-                if(accessible) {
                     plateau[i][j].setAccessible(false);
                     plateau[i][j].setPredecesseur(null);
-                }
                 if (plateau[i][j] == depart) {
                     joueur = graph.listeSommets[(i * plateau[0].length) + j];
                 }
@@ -119,6 +117,29 @@ public class AlgorithmePathfinding {
                     if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i][j + 1].isTraversable() || plateau[i][j + 1] == depart)) {
                         graph.addSommet(i, j, i, j + 1, plateau[0].length);
                     }
+                }
+            }
+        }
+        return joueur;
+    }
+
+    public static Sommet tabToGraph2(Case depart, Case[][] plateau ) {
+        Graph graph = new Graph(plateau.length, plateau[0].length);
+        Sommet joueur = null;
+        for (int i = 0; i < plateau.length; i++) {
+            for (int j = 0; j < plateau[0].length; j++) {
+                if (plateau[i][j] == depart) {
+                    joueur = graph.listeSommets[(i * plateau[0].length) + j];
+                }
+                if (i < plateau.length - 1) {
+                    //if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i + 1][j].isTraversable() || plateau[i + 1][j] == depart)) {
+                        graph.addSommet(i, j, i + 1, j, plateau[0].length);
+                    //}
+                }
+                if (j < plateau[0].length - 1) {
+                    //if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i][j + 1].isTraversable() || plateau[i][j + 1] == depart)) {
+                        graph.addSommet(i, j, i, j + 1, plateau[0].length);
+                    //}
                 }
             }
         }

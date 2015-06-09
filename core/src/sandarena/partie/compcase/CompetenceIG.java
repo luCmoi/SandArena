@@ -33,6 +33,7 @@ public class CompetenceIG {
 
     public void agit(Case aCase) {
         if (info.competence instanceof CompetenceAttaque){
+            new EffetAttaque((CompetenceAttaque)this.info.competence).lance(this.container.getContainer(),aCase);
         }
         this.container.setAAgi(true);
     }

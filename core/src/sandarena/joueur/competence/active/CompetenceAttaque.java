@@ -10,13 +10,11 @@ public class CompetenceAttaque extends CompetenceActive {
 
     protected int caract;
     protected double multiAttaque;
-    protected double multiDefense;
 
-    public CompetenceAttaque(int type, int recharge, int utilisation, int porte,int portemin,int zone, int caract, double multiAttaque, double multiDefense) {
+    public CompetenceAttaque(int type, int recharge, int utilisation, int porte,int portemin,int zone, int caract, double multiAttaque ) {
         super(type, recharge, utilisation, porte,portemin, zone);
         this.setCaract(caract);
         this.setMultiAttaque(multiAttaque);
-        this.setMultiDefense(multiDefense);
     }
 
     public int getCaract() {
@@ -35,11 +33,4 @@ public class CompetenceAttaque extends CompetenceActive {
         this.multiAttaque = multiAttaque;
     }
 
-    public double getMultiDefense() {
-        return multiDefense;
-    }
-
-    public void setMultiDefense(double multiDefense) {
-        this.multiDefense = multiDefense;
-    }
 }

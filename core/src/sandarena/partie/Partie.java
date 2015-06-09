@@ -102,7 +102,6 @@ public class Partie extends Stage {
             perso.setAAgi(false);
         }
         phase(getJoueur1());
-        phase(getJoueur2());
     }
 
 
@@ -110,8 +109,13 @@ public class Partie extends Stage {
         for (PersonnageIG perso : joueur.getPersonnages()) {
             if (!perso.isAAgi()) {
                 this.setPersonnageActif(perso);
-                break;
+                return;
             }
+        }
+        if (joueur.equals(getJoueur1())) {
+            phase(getJoueur2());
+        } else {
+            tour();
         }
     }
 

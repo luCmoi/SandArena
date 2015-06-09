@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.Resolution;
+import sandarena.donnee.Utili;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.compcase.Sol;
 
@@ -49,14 +50,21 @@ public class Case extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (!accessible || chemin) {
-            getSol().render(batch);
+        getSol().render(batch);
+        if (accessible) {
+            batch.draw(Utili.accessible, getX(), getY(), getWidth(), getHeight());
+        }
+        if (chemin) {
+            batch.draw(Utili.chemin, getX(), getY(), getWidth(), getHeight());
+        }
+        if (competenceable) {
+            batch.draw(Utili.competenceable, getX(), getY(), getWidth(), getHeight());
         }
         if (presence != null) {
+            if (container.getPersonnageActif().equals(presence)) {
+                batch.draw(Utili.caseActive, getX(), getY(), getWidth(), getHeight());
+            }
             getPresence().render(batch);
-        } if (competenceable){
-            //tmp
-            batch.draw(new Texture(Gdx.files.internal("Image/Competence/Bourre-pif.png")), getX()+getWidth()/4, getY()+getHeight()/4, getWidth()/2, getHeight()/2);
         }
     }
 
@@ -140,16 +148,17 @@ public class Case extends Actor {
     }
 
     void clique() {
-        if (getContainer().getCompetenceActive()== null) {
+        if (getContainer().getCompetenceActive() == null) {
             if (isAccessible() && !cible) {
                 getContainer().selectChemin(this);
             } else if (cible) {
                 getContainer().deplacement();
             }
-        } else {
+        } else if (this.competenceable) {
             getContainer().getCompetenceActive().agit(this);
         }
     }
+
 
     public void setCible(boolean val) {
         this.cible = val;
