@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * La Banque est une classe abstraite qui sert aux differentes banques de donnees
  * afin de gerer les differentes fonctions de base.
+ *
  * @author Guillaume
  */
 public abstract class Banque {
@@ -12,6 +13,7 @@ public abstract class Banque {
     /**
      * Retourne une entree a l'aide de son nom et previent l'entree qu'elle possede une instance
      * supplémentaire.
+     *
      * @param banque
      * @param nom
      * @return Entree
@@ -28,8 +30,9 @@ public abstract class Banque {
 
     /**
      * Previent l'entree qu'on lui retire une instance
+     *
      * @param banque
-     * @param nom 
+     * @param nom
      */
     public static void giveEntree(ArrayList<Entree> banque, String nom) {
         for (Entree e : banque) {

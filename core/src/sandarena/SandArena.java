@@ -2,10 +2,14 @@ package sandarena;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import java.io.IOException;
-import sandarena.donnee.*;
-import sandarena.partie.gui.ScreenPartie;
+
+import sandarena.donnee.BanqueCompetence;
+import sandarena.donnee.BanquePersonnage;
+import sandarena.donnee.BanqueSol;
 import sandarena.joueur.Personnage;
+import sandarena.partie.gui.ScreenPartie;
 
 /**
  * Class principale de l'application SandArena, un applicationAdapter

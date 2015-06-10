@@ -1,22 +1,21 @@
 package sandarena.joueur;
 
 import java.util.ArrayList;
-import sandarena.partie.compcase.PersonnageIG;
 
 public class Joueur {
     private ArrayList<Personnage> personnages = new ArrayList();
-    
-    public Joueur(){
-        
+
+    public Joueur() {
+
     }
-    
-    public void dispose(){
-        for(Personnage perso : personnages){
+
+    public void dispose() {
+        for (Personnage perso : personnages) {
             perso.dispose();
         }
         personnages.clear();
     }
-    
+
     public ArrayList<Personnage> getPersonnages() {
         return personnages;
     }

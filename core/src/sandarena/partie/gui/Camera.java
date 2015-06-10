@@ -1,11 +1,13 @@
 package sandarena.partie.gui;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+
 import sandarena.Resolution;
 import sandarena.partie.Partie;
 
 /**
  * Camera du ScreenPartie qui permet de parcourir le terrain de jeu
+ *
  * @author Guillaume
  */
 public class Camera extends OrthographicCamera {
@@ -99,14 +101,15 @@ public class Camera extends OrthographicCamera {
 
     /**
      * Action de la caméra si une opération de Dragged est réalisé sur le ScreenPartie
+     *
      * @param x1
      * @param y1
      * @param x2
-     * @param y2 
+     * @param y2
      */
     public synchronized void dragged(float x1, float y1, float x2, float y2) {
-        int depX = (int)(x1-x2);
-        int depY = (int)(y1-y2);
+        int depX = (int) (x1 - x2);
+        int depY = (int) (y1 - y2);
         this.translate(depX, depY);
         if (position.x < partie.getViewport().getWorldWidth() / 2) {
             position.x = partie.getViewport().getWorldWidth() / 2;

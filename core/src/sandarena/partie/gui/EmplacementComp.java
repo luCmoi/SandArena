@@ -1,7 +1,5 @@
 package sandarena.partie.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -49,10 +47,9 @@ public class EmplacementComp extends Actor {
     }
 
     public void clique() {
-        if (container.getPartie().getCompetenceActive()!= null && container.getPartie().getCompetenceActive().equals(this.competenceIG)){
+        if (container.getPartie().getCompetenceActive() != null && container.getPartie().getCompetenceActive().equals(this.competenceIG)) {
             container.getPartie().setCompetenceActive(null);
-        }
-        else if (competenceIG != null) {
+        } else if (competenceIG != null) {
             if (CompetenceActive.class.isAssignableFrom(competenceIG.info.competence.getClass())) {
                 container.getPartie().setCompetenceActive(competenceIG);
             }

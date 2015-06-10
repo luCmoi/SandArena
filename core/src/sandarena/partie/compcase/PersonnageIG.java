@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.ArrayList;
 
 import sandarena.donnee.BanqueCompetence.EntreeCompetence;
+import sandarena.donnee.IntegerNew;
 import sandarena.joueur.Personnage;
 import sandarena.partie.Case;
-import sandarena.partie.effet.Effet;
 import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.effet.EffetDeclencheur;
 
 /**
  * Une instance de Personnage en partie
@@ -17,16 +18,18 @@ import sandarena.partie.effet.EffetBuf;
  */
 public class PersonnageIG {
 
+    private final CompetenceIG[] competence = new CompetenceIG[4];
     private Personnage donnee;
     private JoueurIG possesseur;
     private int vieActuelle;
     private int vitesseRestante;
-    private final CompetenceIG[] competence = new CompetenceIG[4];
     private Case container;
     private boolean aAgi;
     //Buff
     private ArrayList<EffetBuf> changeDef = new ArrayList<EffetBuf>();
     private ArrayList<EffetBuf> changeAtt = new ArrayList<EffetBuf>();
+    //Declencheur
+    private ArrayList<EffetDeclencheur> declencheurs = new ArrayList<EffetDeclencheur>();
 
     public PersonnageIG(Personnage donnee, JoueurIG possesseur) {
         this.donnee = donnee;
@@ -59,10 +62,6 @@ public class PersonnageIG {
         batch.draw(getDonnee().commun.image, getContainer().getX(), getContainer().getY(), getContainer().getWidth(), getContainer().getHeight());
     }
 
-    public void setContainer(Case container) {
-        this.container = container;
-    }
-
     public Personnage getDonnee() {
         return donnee;
     }
@@ -73,7 +72,7 @@ public class PersonnageIG {
 
     public void setVieActuelle(int vieActuelle) {
         this.vieActuelle = vieActuelle;
-        if (this.vieActuelle <= 0){
+        if (this.vieActuelle <= 0) {
         }
     }
 
@@ -91,6 +90,10 @@ public class PersonnageIG {
 
     public Case getContainer() {
         return container;
+    }
+
+    public void setContainer(Case container) {
+        this.container = container;
     }
 
     public boolean isAAgi() {
@@ -118,32 +121,50 @@ public class PersonnageIG {
         return possesseur;
     }
 
-    public void setPossesseur(JoueurIG possesseur) {
-        this.possesseur = possesseur;
+    public void modifAttaque(IntegerNew val, IntegerNew type) {
+        for (EffetBuf effet : changeAtt) {
+            effet.modif(val, type);
+        }
+        val.anInt = (int) val.aDouble;
     }
 
-    public int modifAttaque(int val, int type){
-        for (EffetBuf effet : changeAtt){
-            //todo appel buf
+    public void modifDefense(IntegerNew val, IntegerNew type) {
+        for (EffetBuf effet : changeDef) {
+            effet.modif(val, type);
         }
-        return val;
-    }
-    public int modifDefense(int val, int type){
-        for (EffetBuf effet : changeDef){
-            //todo appel buf
-        }
-        return val;
     }
 
-    public void inflige(int val){
-        this.setVieActuelle(getVieActuelle()-val);
-        //todo declencheurs degat recu test
-        if (vieActuelle<=0){
+    public void inflige(int val) {
+        this.setVieActuelle(getVieActuelle() - val);
+        if (vieActuelle <= 0) {
             meurt();
         }
     }
 
-    public void meurt(){
+    public void meurt() {
         //todo mort
+    }
+
+    public void addBuf(EffetBuf effet) {
+        //todo a completer au fur et a mesure check type buff ajoute
+        switch (effet.getChangement()) {
+            case (EffetBuf.VALATTAQUE):
+            case (EffetBuf.TYPEATTAQUE):
+                changeAtt.add(effet);
+                break;
+            case (EffetBuf.VALDEFENSE):
+            case (EffetBuf.TYPEDEFENSE):
+                changeDef.add(effet);
+                break;
+
+        }
+    }
+
+    public ArrayList<EffetDeclencheur> getDeclencheurs() {
+        return declencheurs;
+    }
+
+    public void addDeclencheur(EffetDeclencheur effetDeclencheur) {
+        declencheurs.add(effetDeclencheur);
     }
 }

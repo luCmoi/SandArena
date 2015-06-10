@@ -9,7 +9,6 @@ package sandarena.partie.effet;
 import sandarena.partie.Case;
 
 /**
- *
  * @author Guillaume
  */
 public abstract class Effet {

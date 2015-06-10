@@ -1,15 +1,14 @@
 package sandarena.partie.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+
 import sandarena.Resolution;
 import sandarena.SandArena;
 import sandarena.joueur.Joueur;
@@ -112,11 +111,11 @@ public class ScreenPartie implements Screen {
         this.differenceBas = differenceBas;
     }
 
-    public Partie getPartie(){
+    public Partie getPartie() {
         return this.partie;
     }
 
-    public StageInterface getStageInterface(){
+    public StageInterface getStageInterface() {
         return this.interfaceS;
     }
 

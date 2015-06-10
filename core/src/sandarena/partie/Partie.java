@@ -10,14 +10,14 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
 
 import sandarena.Resolution;
-import sandarena.partie.compcase.CompetenceIG;
-import sandarena.partie.gui.Camera;
-import sandarena.partie.gui.ScreenPartie;
-import sandarena.partie.gui.PartieListener;
-import sandarena.partie.gui.StageInterface;
 import sandarena.joueur.Joueur;
+import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.compcase.JoueurIG;
 import sandarena.partie.compcase.PersonnageIG;
+import sandarena.partie.gui.Camera;
+import sandarena.partie.gui.PartieListener;
+import sandarena.partie.gui.ScreenPartie;
+import sandarena.partie.gui.StageInterface;
 
 /**
  * Stock toutes les donnees relatives à une instance de partie
@@ -38,6 +38,7 @@ public class Partie extends Stage {
     private ArrayList<Case> chemin;
     private StageInterface stageInterface;
     private CompetenceIG competenceActive;
+    private Case caseSelect = null;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
@@ -152,21 +153,21 @@ public class Partie extends Stage {
         return plateau;
     }
 
+    public void setPlateau(Case[][] plateau) {
+        this.plateau = plateau;
+    }
+
     public ScreenPartie getContainer() {
         return container;
+    }
+
+    public void setContainer(ScreenPartie container) {
+        this.container = container;
     }
 
     @Override
     public Camera getCamera() {
         return this.camera;
-    }
-
-    public void setPlateau(Case[][] plateau) {
-        this.plateau = plateau;
-    }
-
-    public void setContainer(ScreenPartie container) {
-        this.container = container;
     }
 
     public JoueurIG getJoueur1() {
@@ -250,5 +251,12 @@ public class Partie extends Stage {
                 }
             }
         }
+    }
+
+    public void setCaseSelect(Case caseSelect) {
+        if (this.caseSelect != null) {
+            this.caseSelect.setSelect(false);
+        }
+        this.caseSelect = caseSelect;
     }
 }

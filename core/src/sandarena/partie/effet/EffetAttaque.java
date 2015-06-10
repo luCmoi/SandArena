@@ -1,56 +1,58 @@
 package sandarena.partie.effet;
 
 import sandarena.donnee.Caract;
+import sandarena.donnee.IntegerNew;
 import sandarena.joueur.competence.active.CompetenceAttaque;
 import sandarena.partie.Case;
-import sandarena.partie.compcase.CompetenceIG;
-import sandarena.partie.compcase.PersonnageIG;
 
 /**
  * @author Guillaume
  */
 public class EffetAttaque {
-    public int type;
+    public IntegerNew type;
     public double mul = 1;
 
     public EffetAttaque(int type) {
-        this.type = type;
+        this.type = new IntegerNew(type);
     }
 
     public EffetAttaque(CompetenceAttaque comp) {
-        this.type = comp.getCaract();
+        this.type = new IntegerNew(comp.getCaract());
         this.mul = comp.getMultiAttaque();
     }
 
     public void lance(Case attaquant, Case defenseur) {
-       /*Rajouter les check de tous les effets sur la case receuveuse et celle qui envoi
-        ainsi que les check de buff de personnage qui pourront modifier leffet ou autre
-        */
         if (defenseur.getPresence() != null) {
-            int att = 0;
-            int def = 0;
-            switch (type) {
+            IntegerNew att = new IntegerNew(0);
+            IntegerNew def = new IntegerNew(0);
+            switch (type.anInt) {
                 case (Caract.FORCE):
-                    att=attaquant.getPresence().getDonnee().commun.force;
-                    def=defenseur.getPresence().getDonnee().commun.force;
+                    att.anInt = attaquant.getPresence().getDonnee().commun.force;
+                    def.anInt = defenseur.getPresence().getDonnee().commun.force;
                     break;
                 case (Caract.AGILITE):
-                    att=attaquant.getPresence().getDonnee().commun.agilite;
-                    def=defenseur.getPresence().getDonnee().commun.agilite;
+                    att.anInt = attaquant.getPresence().getDonnee().commun.agilite;
+                    def.anInt = defenseur.getPresence().getDonnee().commun.agilite;
                     break;
                 case (Caract.MAGIE):
-                    att=attaquant.getPresence().getDonnee().commun.magie;
-                    def=defenseur.getPresence().getDonnee().commun.magie;
+                    att.anInt = attaquant.getPresence().getDonnee().commun.magie;
+                    def.anInt = defenseur.getPresence().getDonnee().commun.magie;
                     break;
             }
-            att = attaquant.getPresence().modifAttaque(att,type);
-            def = defenseur.getPresence().modifDefense(def,type);
-            defenseur.getPresence().inflige(degat(att,def));
+            att.aDouble = att.anInt;
+            def.aDouble = def.anInt;
+            attaquant.getPresence().modifAttaque(att, type);
+            defenseur.getPresence().modifDefense(def, type);
+            int degat = degat(att.anInt, def.anInt);
+            for (EffetDeclencheur effet : defenseur.getPresence().getDeclencheurs()) {
+                effet.check(type.anInt, defenseur.getPresence(), attaquant.getPresence(), degat);
+            }
+            defenseur.getPresence().inflige(degat);
         }
     }
 
     public int degat(int caractA, int caractD) {
+        //todo degat infligé
         return 100;
-        //defenseur.getPresence().setVieActuelle(
     }
 }

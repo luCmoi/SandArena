@@ -8,8 +8,6 @@ package sandarena.partie.gui;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-import sandarena.partie.Case;
-
 /**
  * Ecoute les interactions effectuées avec une case
  *

@@ -3,24 +3,27 @@ package sandarena.donnee;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+
 import sandarena.joueur.competence.Competence;
 import sandarena.joueur.competence.active.CompetenceAttaque;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
-import sandarena.partie.effet.Effet;
 import sandarena.partie.effet.EffetBuf;
 import sandarena.partie.effet.EffetDeclencheur;
 
 
 /**
  * Banque de donnée qui stock les compétences
+ *
  * @author Guillaume
  */
 public class BanqueCompetence extends Banque {
     public static final int FIN = 9999;
     public static ArrayList<Entree> banque = new ArrayList<Entree>();
-    public static ArrayList<Entree> getBanque(){
+
+    public static ArrayList<Entree> getBanque() {
         return banque;
     }
+
     /**
      * Initialise toutes les compétences du jeu
      */
@@ -33,16 +36,17 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Berzerk",
                 "Plus le personnage est blessé plus sa folie est grande.",
                 "Image/Competence/Berzerk.png",
-                new CompetenceDeclencheurEffet(Affinite.FORCE, EffetDeclencheur.DEGATRECU, CompetenceDeclencheurEffet.FIN,CompetenceDeclencheurEffet.BUFF EffetBuf.VALATTAQUE, 1.10),
+                new CompetenceDeclencheurEffet(Affinite.FORCE, EffetDeclencheur.DEGATRECU, EffetDeclencheur.SOI, CompetenceDeclencheurEffet.FIN, EffetDeclencheur.BUFF, EffetBuf.VALATTAQUE, 1.10),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
     }
 
     /**
      * Retourne une compétence aléatoire de l'affinité passée en argument
+     *
      * @param affinite
-     * @return 
+     * @return
      */
-    public static EntreeCompetence getCompetence(int affinite) {
+    public static EntreeCompetence getCompetence(int affinite, Competence... dejaAcquise) {
         Collections.shuffle(banque);
         for (Entree e : banque) {
             if (((EntreeCompetence) e).affinite.contains(affinite)) {

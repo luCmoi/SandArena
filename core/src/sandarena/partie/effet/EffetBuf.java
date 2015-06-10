@@ -1,7 +1,7 @@
 package sandarena.partie.effet;
 
 
-import java.util.ArrayList;
+import sandarena.donnee.IntegerNew;
 
 public class EffetBuf {
     //type buff
@@ -9,35 +9,57 @@ public class EffetBuf {
     public static final int TYPEDEFENSE = 1;
     public static final int VALATTAQUE = 2;
     public static final int VALDEFENSE = 3;
-
-    //todo a completer petit a petit
-
+    //todo a complete fur et a mesure
 
     private int changement;
     private double multiVal;
     private int typeNouveau;
-    private int[][] declencheur;
+    private double[][] condition;
 
-    public EffetBuf(int type, double val, int... declencheurs) {
+    public EffetBuf(int type, double val, double... conditions) {
         //todo ne prend pas en compte attaque en def et def en attaque
         changement = type;
-        if (changement == TYPEATTAQUE || changement == TYPEDEFENSE) {
+        if (getChangement() == TYPEATTAQUE || getChangement() == TYPEDEFENSE) {
             typeNouveau = (int) val;
-        } else if (changement == VALATTAQUE || changement == VALDEFENSE) {
+        } else if (getChangement() == VALATTAQUE || getChangement() == VALDEFENSE) {
             multiVal = val;
         }
-        if (declencheurs != null) {
-            declencheur = new int[declencheurs.length / 2][2];
-            for (int i = 0; i < declencheurs.length; i = i + 2) {
-                declencheur[i][0] = declencheurs[i];
-                declencheur[i][1] = declencheurs[i + 1];
+        if (conditions != null) {
+            condition = new double[conditions.length / 2][2];
+            for (int i = 0; i < conditions.length; i = i + 2) {
+                condition[i][0] = conditions[i];
+                condition[i][1] = conditions[i + 1];
             }
-        }else{
-            declencheur = null;
+        } else {
+            condition = null;
         }
     }
 
-    public void modif(int val, int type){
-        //todo gerer mieu declencheur et faire l'effet
+    public static EffetBuf genereEffetBuf(Double... infos) {
+        int type = (int) (double) infos[0];
+        double val = infos[1];
+        double conditions[] = new double[infos.length - 2];
+        for (int i = 2; i < infos.length; i++) {
+            conditions[i - 2] = infos[i];
+        }
+        return new EffetBuf(type, val, conditions);
+    }
+
+    public void modif(IntegerNew val, IntegerNew type) {
+        //todo ajouter les conditions
+        switch (getChangement()) {
+            case (TYPEATTAQUE):
+            case (TYPEDEFENSE):
+                type.anInt = typeNouveau;
+                break;
+            case (VALATTAQUE):
+            case (VALDEFENSE):
+                val.aDouble = val.aDouble * multiVal;
+                break;
+        }
+    }
+
+    public int getChangement() {
+        return changement;
     }
 }

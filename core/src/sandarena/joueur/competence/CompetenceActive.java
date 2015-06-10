@@ -1,17 +1,16 @@
 package sandarena.joueur.competence;
 
 /**
- *
  * @author Guillaume
  */
-public abstract class CompetenceActive extends Competence{
+public abstract class CompetenceActive extends Competence {
     protected int rechargement;
     protected int utilisation;
     protected int porte;
     protected int portemin;
     private int zone;
-    
-    public CompetenceActive(int type, int recharge, int utilisation, int porte,int portemin,int zone){
+
+    public CompetenceActive(int type, int recharge, int utilisation, int porte, int portemin, int zone) {
         super(type);
         this.setRechargement(recharge);
         this.setUtilisation(utilisation);

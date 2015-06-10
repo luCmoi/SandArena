@@ -1,6 +1,7 @@
 package sandarena.partie.compcase;
 
 import java.util.ArrayList;
+
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 
@@ -14,8 +15,8 @@ public class JoueurIG {
 
     public JoueurIG(Joueur joueur) {
         this.joueur = joueur;
-        for(Personnage personage : joueur.getPersonnages()){
-            personnages.add(new PersonnageIG(personage,this));
+        for (Personnage personage : joueur.getPersonnages()) {
+            personnages.add(new PersonnageIG(personage, this));
         }
 
     }

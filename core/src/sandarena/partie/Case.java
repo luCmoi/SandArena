@@ -1,7 +1,5 @@
 package sandarena.partie;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -28,6 +26,7 @@ public class Case extends Actor {
     private boolean chemin;
     private boolean cible;
     private boolean competenceable;
+    private boolean select;
 
     public Case(int x, int y, Partie container) {
         placeX = x;
@@ -64,7 +63,12 @@ public class Case extends Actor {
             if (container.getPersonnageActif().equals(presence)) {
                 batch.draw(Utili.caseActive, getX(), getY(), getWidth(), getHeight());
             }
+            else if (select) {
+                batch.draw(Utili.caseSelect, getX(), getY(), getWidth(), getHeight());
+            }
             getPresence().render(batch);
+        } else if (select) {
+            batch.draw(Utili.caseSelect, getX(), getY(), getWidth(), getHeight());
         }
     }
 
@@ -148,6 +152,8 @@ public class Case extends Actor {
     }
 
     void clique() {
+        container.setCaseSelect(this);
+        this.select = true;
         if (getContainer().getCompetenceActive() == null) {
             if (isAccessible() && !cible) {
                 getContainer().selectChemin(this);
@@ -170,5 +176,9 @@ public class Case extends Actor {
 
     public Partie getContainer() {
         return container;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
     }
 }

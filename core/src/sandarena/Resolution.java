@@ -3,7 +3,15 @@ package sandarena;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Class au contenu static permettant les calculs de résolution ainsi que le
@@ -24,7 +32,7 @@ public class Resolution {
      *
      * @throws java.io.FileNotFoundException
      */
-    public static void calculResolution() throws FileNotFoundException, IOException {
+    public static void calculResolution() throws IOException {
         if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
             File fichier = Gdx.files.internal("Fichiers/option.txt").file();
             if (fichier.exists()) {

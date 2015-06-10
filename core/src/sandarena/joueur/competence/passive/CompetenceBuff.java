@@ -9,13 +9,12 @@ package sandarena.joueur.competence.passive;
 import sandarena.joueur.competence.CompetencePassive;
 
 /**
- *
  * @author Guillaume
  */
-public class CompetenceBuff  extends CompetencePassive{
+public class CompetenceBuff extends CompetencePassive {
 
     public CompetenceBuff(int type) {
         super(type);
     }
-    
+
 }

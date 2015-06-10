@@ -25,6 +25,17 @@ public class BanquePersonnage extends Banque {
                 15, 4, 5, 2, 2, Affinite.FORCE));
     }
 
+    /**
+     * Retourne un nom propre aléatoire en fonction du personnage passer en
+     * argument
+     *
+     * @param nom
+     * @return
+     */
+    public static String getNom(String nom) {
+        return "";
+    }
+
     public static class DonneePersonnage extends Entree {
 
         public int vie;
@@ -43,16 +54,5 @@ public class BanquePersonnage extends Banque {
             this.force = force;
             this.affinite = affinite;
         }
-    }
-
-    /**
-     * Retourne un nom propre aléatoire en fonction du personnage passer en
-     * argument
-     *
-     * @param nom
-     * @return
-     */
-    public static String getNom(String nom) {
-        return "";
     }
 }

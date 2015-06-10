@@ -3,10 +3,12 @@ package sandarena.partie.gui;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+
 import sandarena.partie.Partie;
 
 /**
  * Listener du ScreenPartie
+ *
  * @author Guillaume
  */
 public class PartieListener extends InputListener {
@@ -65,8 +67,8 @@ public class PartieListener extends InputListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        anciennePositionX=x;
-        anciennePositionY=y;
+        anciennePositionX = x;
+        anciennePositionY = y;
         return true;
     }
 
@@ -76,7 +78,7 @@ public class PartieListener extends InputListener {
 
     @Override
     public synchronized void touchDragged(InputEvent event, float i, float i1, int i2) {
-        this.partie.getCamera().dragged(anciennePositionX,anciennePositionY,i, i1);
+        this.partie.getCamera().dragged(anciennePositionX, anciennePositionY, i, i1);
     }
 
     @Override
@@ -96,8 +98,8 @@ public class PartieListener extends InputListener {
     public void setPartie(Partie partie) {
         this.partie = partie;
     }
-    
-    public void dispose(){
+
+    public void dispose() {
         this.partie = null;
     }
 }
