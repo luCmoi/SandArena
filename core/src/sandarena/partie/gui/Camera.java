@@ -16,6 +16,7 @@ public class Camera extends OrthographicCamera {
     private boolean deplacementDroit = false;
     private boolean deplacementHaut = false;
     private boolean deplacementBas = false;
+    public static int VITESSECAM = 8;
     private Partie partie;
 
     public Camera(Partie partie) {
@@ -31,7 +32,7 @@ public class Camera extends OrthographicCamera {
     public void updateExt() {
         if (deplacementGauche) {
             if (position.x > partie.getViewport().getWorldWidth() / 2) {
-                translate(-(int) (8 * Resolution.ratioWidth), 0, 0);
+                translate(-(int) (VITESSECAM * Resolution.ratioWidth), 0, 0);
                 if (position.x < partie.getViewport().getWorldWidth() / 2) {
                     position.x = partie.getViewport().getWorldWidth() / 2;
                 }
@@ -39,7 +40,7 @@ public class Camera extends OrthographicCamera {
         }
         if (deplacementDroit) {
             if (position.x < partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2) {
-                translate((int) (8 * Resolution.ratioWidth), 0, 0);
+                translate((int) (VITESSECAM * Resolution.ratioWidth), 0, 0);
                 if (position.x > partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2) {
                     position.x = partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2;
                 }
@@ -47,7 +48,7 @@ public class Camera extends OrthographicCamera {
         }
         if (deplacementBas) {
             if (position.y > partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
-                translate(0, -(int) (8 * Resolution.ratioHeight), 0);
+                translate(0, -(int) (VITESSECAM * Resolution.ratioHeight), 0);
                 if (position.y < partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
                     position.y = partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas();
                 }
@@ -55,7 +56,7 @@ public class Camera extends OrthographicCamera {
         }
         if (deplacementHaut) {
             if (position.y < partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2) {
-                translate(0, (int) (8 * Resolution.ratioHeight), 0);
+                translate(0, (int) (VITESSECAM * Resolution.ratioHeight), 0);
                 if (position.y > partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2) {
                     position.y = partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2;
                 }

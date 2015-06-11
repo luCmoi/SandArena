@@ -52,7 +52,6 @@ public class EffetAttaque {
     }
 
     public int degat(int caractA, int caractD) {
-        //todo degat infligé
-        return 100;
+        return caractA + (caractD-caractA);
     }
 }

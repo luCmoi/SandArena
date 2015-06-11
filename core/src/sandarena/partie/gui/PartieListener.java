@@ -67,8 +67,10 @@ public class PartieListener extends InputListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        anciennePositionX = x;
-        anciennePositionY = y;
+        if (pointer == 0) {
+            anciennePositionX = x;
+            anciennePositionY = y;
+        }
         return true;
     }
 
@@ -78,7 +80,9 @@ public class PartieListener extends InputListener {
 
     @Override
     public synchronized void touchDragged(InputEvent event, float i, float i1, int i2) {
-        this.partie.getCamera().dragged(anciennePositionX, anciennePositionY, i, i1);
+        if (i2 == 0) {
+            this.partie.getCamera().dragged(anciennePositionX, anciennePositionY, i, i1);
+        }
     }
 
     @Override

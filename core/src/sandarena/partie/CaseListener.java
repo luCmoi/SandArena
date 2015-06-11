@@ -5,6 +5,7 @@
  */
 package sandarena.partie;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
@@ -14,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * @author Guillaume
  */
 public class CaseListener extends InputListener {
-
+    private boolean presence;
     private Case caseEcoute;
 
     public CaseListener(Case aThis) {
@@ -23,12 +24,21 @@ public class CaseListener extends InputListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        presence = true;
         return true;
     }
 
     @Override
+    public void touchDragged(InputEvent event, float x, float y, int pointer) {
+        super.touchDragged(event, x, y, pointer);
+        presence = false;
+    }
+
+    @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-        caseEcoute.clique();
+        if (presence) {
+            caseEcoute.clique();
+        }
     }
 
 }

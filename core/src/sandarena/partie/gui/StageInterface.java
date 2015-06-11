@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import sandarena.partie.Case;
 import sandarena.partie.Partie;
 import sandarena.partie.compcase.PersonnageIG;
 
@@ -16,16 +17,37 @@ import sandarena.partie.compcase.PersonnageIG;
 public class StageInterface extends Stage {
     private Partie partie;
     private PersonnageIG personnageActif;
-    private ArrayList<EmplacementComp> emplacementComps;
+    private Case caseSelect;
+    private ArrayList<EmplacementComp> emplacementCompsActif;
+    private ArrayList<EmplacementComp> emplacementCompsSelect;
+    private EmplacementPerso emplacementPersoActif;
+    private EmplacementPerso emplacementPersoSelect;
+    protected int tailleCoteHeight;
+    protected int tailleCoteWidth;
 
     public StageInterface(Viewport viewport, Batch batch) {
         super(viewport, batch);
-        emplacementComps = new ArrayList<EmplacementComp>();
-        emplacementComps.add(new EmplacementComp(0, this));
-        emplacementComps.add(new EmplacementComp(1, this));
-        emplacementComps.add(new EmplacementComp(2, this));
-        emplacementComps.add(new EmplacementComp(3, this));
-        for (EmplacementComp emp : emplacementComps) {
+        this.tailleCoteHeight =  (int)this.getHeight();
+        //this.tailleCoteWidth = (int)(this.getHeight()* Resolution.ratioHeight);
+        this.tailleCoteWidth = (int)(this.getWidth()/8);
+        emplacementPersoActif = new EmplacementPerso(0, this);
+        emplacementPersoSelect = new EmplacementPerso(1, this);
+        this.addActor(emplacementPersoActif);
+        this.addActor(emplacementPersoSelect);
+        emplacementCompsActif = new ArrayList<EmplacementComp>();
+        emplacementCompsActif.add(new EmplacementComp(0, this));
+        emplacementCompsActif.add(new EmplacementComp(1, this));
+        emplacementCompsActif.add(new EmplacementComp(2, this));
+        emplacementCompsActif.add(new EmplacementComp(3, this));
+        for (EmplacementComp emp : emplacementCompsActif) {
+            this.addActor(emp);
+        }
+        emplacementCompsSelect = new ArrayList<EmplacementComp>();
+        emplacementCompsSelect.add(new EmplacementComp(4, this));
+        emplacementCompsSelect.add(new EmplacementComp(5, this));
+        emplacementCompsSelect.add(new EmplacementComp(6, this));
+        emplacementCompsSelect.add(new EmplacementComp(7, this));
+        for (EmplacementComp emp : emplacementCompsSelect) {
             this.addActor(emp);
         }
     }
@@ -38,7 +60,8 @@ public class StageInterface extends Stage {
 
     public void setPersonnageActif(PersonnageIG perso) {
         this.personnageActif = perso;
-        for (EmplacementComp emp : emplacementComps) {
+        emplacementPersoActif.perso = perso;
+        for (EmplacementComp emp : emplacementCompsActif) {
             emp.setCompetenceIG(perso.getCompetence()[emp.getPlace()]);
         }
     }
@@ -54,5 +77,25 @@ public class StageInterface extends Stage {
     @Override
     public Actor hit(float stageX, float stageY, boolean touchable) {
         return super.hit(stageX, stageY, touchable);
+    }
+
+    public Case getCaseSelect() {
+        return caseSelect;
+    }
+
+    public void setCaseSelect(Case caseSelect) {
+        this.caseSelect = caseSelect;
+        if (caseSelect.getPresence() != null) {
+            emplacementPersoSelect.perso = caseSelect.getPresence();
+        } else {
+            emplacementPersoSelect.perso = null;
+        }
+        for (EmplacementComp emp : emplacementCompsSelect) {
+            if (caseSelect.getPresence() != null) {
+                emp.setCompetenceIG(caseSelect.getPresence().getCompetence()[emp.getPlace() - 4]);
+            } else {
+                emp.setCompetenceIG(null);
+            }
+        }
     }
 }

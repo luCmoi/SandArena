@@ -258,5 +258,6 @@ public class Partie extends Stage {
             this.caseSelect.setSelect(false);
         }
         this.caseSelect = caseSelect;
+        stageInterface.setCaseSelect(caseSelect);
     }
 }
