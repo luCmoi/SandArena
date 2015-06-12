@@ -9,6 +9,7 @@ import sandarena.partie.Case;
  * @author Guillaume
  */
 public class EffetAttaque {
+    public static final int STUN = 0;
     public IntegerNew type;
     public double mul = 1;
 
@@ -52,6 +53,6 @@ public class EffetAttaque {
     }
 
     public int degat(int caractA, int caractD) {
-        return caractA + (caractD-caractA);
+        return caractA + (caractA-caractD);
     }
 }

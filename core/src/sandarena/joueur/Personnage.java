@@ -26,13 +26,13 @@ public class Personnage {
         this.nom = BanquePersonnage.getNom(nom);
 
         //Ligne qui changera les compétence n'étant pas init au pifometre
-        this.competences[0] = BanqueCompetence.getCompetence(commun.affinite);
+        this.competences[0] = BanqueCompetence.getCompetence(commun.affinite[0]);
         this.competences[0].incremente();
-        this.competences[1] = BanqueCompetence.getCompetence(commun.affinite);
+        this.competences[1] = BanqueCompetence.getCompetence(commun.affinite[0]);
         this.competences[1].incremente();
-        this.competences[2] = BanqueCompetence.getCompetence(commun.affinite);
+        this.competences[2] = BanqueCompetence.getCompetence(commun.affinite[0]);
         this.competences[2].incremente();
-        this.competences[3] = BanqueCompetence.getCompetence(commun.affinite);
+        this.competences[3] = BanqueCompetence.getCompetence(commun.affinite[1]);
         this.competences[3].incremente();
     }
 
@@ -50,7 +50,8 @@ public class Personnage {
     }
 
     public String getNom() {
-        return nom;
+        return "Fred";
+        //return nom;
     }
 
     public EntreeCompetence[] getCompetences() {

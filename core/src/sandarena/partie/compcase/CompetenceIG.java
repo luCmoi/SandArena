@@ -53,4 +53,14 @@ public class CompetenceIG {
 
         }
     }
+
+    public String[] toStrings() {
+        Object[] tmp = info.competence.toStrings().toArray();
+        String[] retour = new String[tmp.length + 1];
+        retour[0] = info.nom;
+        for (int i = 1; i < retour.length; i++) {
+            retour[i] = (String) (tmp[i - 1]);
+        }
+        return retour;
+    }
 }

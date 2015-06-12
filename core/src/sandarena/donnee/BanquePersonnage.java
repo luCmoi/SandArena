@@ -22,7 +22,7 @@ public class BanquePersonnage extends Banque {
         banque.add(new DonneePersonnage("Barbare des Sables",
                 "Ces hommes vivaient dans le desert avant que les Arènes ne s'y établissent, certains racontent qu'ils sont nés sur ces terres attiré par la soif de combats",
                 "Image/Personnage/BarbareDesSables.png",
-                15, 4, 5, 2, 2, Affinite.FORCE));
+                15, 4, 5, 2, 2, Affinite.FORCE,Affinite.TRIBAL));
     }
 
     /**
@@ -43,9 +43,9 @@ public class BanquePersonnage extends Banque {
         public int force;
         public int magie;
         public int agilite;
-        public int affinite;
+        public int[] affinite;
 
-        public DonneePersonnage(String nom, String description, String chemin, int vie, int vitesse, int force, int magie, int agilite, int affinite) {
+        public DonneePersonnage(String nom, String description, String chemin, int vie, int vitesse, int force, int magie, int agilite, int... affinite) {
             super(nom, description, chemin);
             this.vie = vie;
             this.vitesse = vitesse;

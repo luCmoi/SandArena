@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import sandarena.Resolution;
@@ -27,7 +28,7 @@ public class ScreenPartie implements Screen {
     private SandArena conteneur;
     private Partie partie;
     private int differenceBas;
-    private StageInterface interfaceS;
+    private sandarena.partie.gui.interfacep.StageInterface interfaceS;
     //Temporaire
     private Joueur joueur1;
     private Joueur joueur2;
@@ -63,9 +64,9 @@ public class ScreenPartie implements Screen {
     @Override
     public void show() {
         setBatch(new SpriteBatch());
-        this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas), batch);
+        this.interfaceS = new sandarena.partie.gui.interfacep.StageInterface(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas), batch);
         this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
-        surcouche = new Stage(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas));
+        surcouche = new Stage(new FillViewport(Resolution.width,Resolution.height));
         interfaceS.setPartie(partie);
         Gdx.input.setInputProcessor(this.partie);
     }
@@ -120,7 +121,7 @@ public class ScreenPartie implements Screen {
         return this.partie;
     }
 
-    public StageInterface getStageInterface() {
+    public sandarena.partie.gui.interfacep.StageInterface getStageInterface() {
         return this.interfaceS;
     }
 

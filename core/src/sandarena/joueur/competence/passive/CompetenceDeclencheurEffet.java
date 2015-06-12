@@ -21,9 +21,11 @@ public class CompetenceDeclencheurEffet extends CompetencePassive {
     private ArrayList<Double> infodeclencheur = new ArrayList<Double>();
     private int typeEffet;
     private ArrayList<Double> infoEffet = new ArrayList<Double>();
+    private String toStrings;
 
-    public CompetenceDeclencheurEffet(int type, int typedeclencheur, int cible, double... donnees) {
+    public CompetenceDeclencheurEffet(String toStrings, int type, int typedeclencheur, int cible, double... donnees) {
         super(type);
+        this.toStrings=toStrings;
         this.typedeclencheur = typedeclencheur;
         this.cible = cible;
         int i = 0;
@@ -48,4 +50,10 @@ public class CompetenceDeclencheurEffet extends CompetencePassive {
     }
 
 
+    @Override
+    public ArrayList<String> toStrings() {
+        ArrayList<String> retour = new ArrayList<String>();
+        retour.add(this.toStrings);
+        return retour;
+    }
 }

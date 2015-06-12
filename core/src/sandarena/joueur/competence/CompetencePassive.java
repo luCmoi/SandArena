@@ -6,6 +6,8 @@
 
 package sandarena.joueur.competence;
 
+import java.util.ArrayList;
+
 /**
  * @author Guillaume
  */
@@ -15,4 +17,8 @@ public abstract class CompetencePassive extends Competence {
         super(type);
     }
 
+    @Override
+    public ArrayList<String> toStrings() {
+        return null;
+    }
 }

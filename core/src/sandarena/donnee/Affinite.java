@@ -8,4 +8,5 @@ package sandarena.donnee;
  */
 public class Affinite {
     public static int FORCE = 0;
+    public static int TRIBAL = 1;
 }

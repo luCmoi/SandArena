@@ -148,11 +148,11 @@ public class PersonnageIG {
     public void addBuf(EffetBuf effet) {
         //todo a completer au fur et a mesure check type buff ajoute
         switch (effet.getChangement()) {
-            case (EffetBuf.VALATTAQUE):
+            case (EffetBuf.MULATTAQUE):
             case (EffetBuf.TYPEATTAQUE):
                 changeAtt.add(effet);
                 break;
-            case (EffetBuf.VALDEFENSE):
+            case (EffetBuf.MULDEFENSE):
             case (EffetBuf.TYPEDEFENSE):
                 changeDef.add(effet);
                 break;
@@ -166,5 +166,16 @@ public class PersonnageIG {
 
     public void addDeclencheur(EffetDeclencheur effetDeclencheur) {
         declencheurs.add(effetDeclencheur);
+    }
+
+    public String[] toStrings() {
+        String[] retour = new String[6];
+        retour[0] = donnee.getNom();
+        retour[1] = vieActuelle + "/" + donnee.commun.vie;
+        retour[2] = vitesseRestante + "/" + donnee.commun.vitesse;
+        retour[3] = Integer.toString(donnee.commun.force);
+        retour[4] = Integer.toString(donnee.commun.agilite);
+        retour[5] = Integer.toString(donnee.commun.magie);
+        return retour;
     }
 }

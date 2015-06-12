@@ -17,7 +17,7 @@ import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.gui.Camera;
 import sandarena.partie.gui.PartieListener;
 import sandarena.partie.gui.ScreenPartie;
-import sandarena.partie.gui.StageInterface;
+import sandarena.partie.gui.interfacep.StageInterface;
 
 /**
  * Stock toutes les donnees relatives à une instance de partie

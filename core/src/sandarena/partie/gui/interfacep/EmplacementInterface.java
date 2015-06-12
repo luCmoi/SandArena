@@ -1,4 +1,4 @@
-package sandarena.partie.gui;
+package sandarena.partie.gui.interfacep;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;

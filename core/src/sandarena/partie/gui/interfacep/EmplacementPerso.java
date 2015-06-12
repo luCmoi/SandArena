@@ -1,9 +1,7 @@
-package sandarena.partie.gui;
+package sandarena.partie.gui.interfacep;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import sandarena.donnee.Utili;
 import sandarena.partie.compcase.PersonnageIG;
@@ -12,9 +10,9 @@ import sandarena.partie.compcase.PersonnageIG;
  * Created by Guillaume on 10/06/2015.
  */
 public class EmplacementPerso extends EmplacementInterface {
-    PersonnageIG perso;
+    public PersonnageIG perso;
     private boolean actif;
-    InfoWindow info;
+    sandarena.partie.gui.infowindow.InfoWindow info;
 
 
     public EmplacementPerso(int place, StageInterface container) {
@@ -31,8 +29,8 @@ public class EmplacementPerso extends EmplacementInterface {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
-        if (perso != null) {
-            batch.draw(perso.getDonnee().commun.image, getX(), getY(), getWidth(), getHeight());
+        if (getPerso() != null) {
+            batch.draw(getPerso().getDonnee().commun.image, getX(), getY(), getWidth(), getHeight());
         } else {
         }
     }
@@ -47,7 +45,11 @@ public class EmplacementPerso extends EmplacementInterface {
     }
 
     public void pression() {
-        this.info = new InfoWindow(this);
+        this.info = new sandarena.partie.gui.infowindow.InfoWindow(this);
         container.getPartie().getContainer().getSurcouche().addActor(info);
+    }
+
+    public PersonnageIG getPerso() {
+        return perso;
     }
 }

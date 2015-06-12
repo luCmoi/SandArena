@@ -7,9 +7,14 @@ public class EffetBuf {
     //type buff
     public static final int TYPEATTAQUE = 0;
     public static final int TYPEDEFENSE = 1;
-    public static final int VALATTAQUE = 2;
-    public static final int VALDEFENSE = 3;
+    public static final int MULATTAQUE = 2;
+    public static final int MULDEFENSE = 3;
     //todo a complete fur et a mesure
+    public static final int DOT = 4;
+    public static final int VALVITESSE = 5;
+    public static final int VALATTAQUE = 6;
+    //
+    public static final int CONDITIONBUFF = 0;
 
     private int changement;
     private double multiVal;
@@ -21,7 +26,7 @@ public class EffetBuf {
         changement = type;
         if (getChangement() == TYPEATTAQUE || getChangement() == TYPEDEFENSE) {
             typeNouveau = (int) val;
-        } else if (getChangement() == VALATTAQUE || getChangement() == VALDEFENSE) {
+        } else if (getChangement() == MULATTAQUE || getChangement() == MULDEFENSE) {
             multiVal = val;
         }
         if (conditions != null) {
@@ -52,8 +57,8 @@ public class EffetBuf {
             case (TYPEDEFENSE):
                 type.anInt = typeNouveau;
                 break;
-            case (VALATTAQUE):
-            case (VALDEFENSE):
+            case (MULATTAQUE):
+            case (MULDEFENSE):
                 val.aDouble = val.aDouble * multiVal;
                 break;
         }

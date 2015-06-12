@@ -1,5 +1,7 @@
 package sandarena.joueur.competence;
 
+import java.util.ArrayList;
+
 /**
  * @author Guillaume
  */
@@ -57,5 +59,25 @@ public abstract class CompetenceActive extends Competence {
 
     public void setZone(int zone) {
         this.zone = zone;
+    }
+
+    @Override
+    public ArrayList<String> toStrings() {
+        ArrayList<String> retour = new ArrayList<String>();
+        if (rechargement != 0) {
+            retour.add("Rechargement : " + rechargement);
+        }
+        if (porte != 0) {
+            retour.add("Portée : " + porte);
+        }
+        if (portemin != 1) {
+            retour.add("Portée minimale : " + portemin);
+        }
+        if (zone != 1) {
+            retour.add("Portée de zone : " + portemin);
+        } if (utilisation != 0){
+            retour.add("Utilisation : "+utilisation);
+        }
+        return retour;
     }
 }
