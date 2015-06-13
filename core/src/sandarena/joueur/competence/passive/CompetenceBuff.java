@@ -14,9 +14,9 @@ import sandarena.joueur.competence.CompetencePassive;
  * @author Guillaume
  */
 public class CompetenceBuff extends CompetencePassive {
-    protected int typeBuff;
-    protected int val;
-    protected double[] donnee;
+    private int typeBuff;
+    private int val;
+    private double[] donnee;
     protected  String toStrings;
     public CompetenceBuff(String toStrings, int type,int typeBuff, int val, double... donnee) {
         super(type);
@@ -31,5 +31,17 @@ public class CompetenceBuff extends CompetencePassive {
         ArrayList<String> retour = new ArrayList<String>();
         retour.add(this.toStrings);
         return retour;
+    }
+
+    public int getTypeBuff() {
+        return typeBuff;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public double[] getDonnee() {
+        return donnee;
     }
 }

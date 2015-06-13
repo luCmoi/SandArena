@@ -2,6 +2,7 @@ package sandarena.partie.effet;
 
 
 import sandarena.donnee.IntegerNew;
+import sandarena.partie.compcase.PersonnageIG;
 
 public class EffetBuf {
     //type buff
@@ -13,28 +14,34 @@ public class EffetBuf {
     public static final int DOT = 4;
     public static final int VALVITESSE = 5;
     public static final int VALATTAQUE = 6;
+    public static final int DEGAT = 7;
+
     //
     public static final int CONDITIONBUFF = 0;
+    public static final int CONDITIONDUREE = 1;
 
     private int changement;
     private double multiVal;
+    private int val;
+    private int duree;
     private int typeNouveau;
     private double[][] condition;
 
     public EffetBuf(int type, double val, double... conditions) {
         //todo ne prend pas en compte attaque en def et def en attaque
         changement = type;
+        this.duree = -1;
         if (getChangement() == TYPEATTAQUE || getChangement() == TYPEDEFENSE) {
             typeNouveau = (int) val;
         } else if (getChangement() == MULATTAQUE || getChangement() == MULDEFENSE) {
             multiVal = val;
+        } else if (getChangement() == VALATTAQUE || getChangement() == VALVITESSE || getChangement() == DEGAT) {
+            this.val = (int) val;
+        } else if (getChangement() == DOT) {
+            this.val = (int) val;
         }
         if (conditions != null) {
-            condition = new double[conditions.length / 2][2];
-            for (int i = 0; i < conditions.length; i = i + 2) {
-                condition[i][0] = conditions[i];
-                condition[i][1] = conditions[i + 1];
-            }
+
         } else {
             condition = null;
         }
@@ -60,6 +67,20 @@ public class EffetBuf {
             case (MULATTAQUE):
             case (MULDEFENSE):
                 val.aDouble = val.aDouble * multiVal;
+                break;
+            case (VALATTAQUE):
+                val.aDouble = val.aDouble + this.val;
+                break;
+            case (VALVITESSE):
+                val.aDouble = val.aDouble + this.val;
+        }
+    }
+
+    public void inflige(PersonnageIG cible) {
+        switch (getChangement()) {
+            case (DEGAT):
+            case (DOT):
+                cible.inflige(this.val);
                 break;
         }
     }

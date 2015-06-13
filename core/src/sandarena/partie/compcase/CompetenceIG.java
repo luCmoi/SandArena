@@ -3,6 +3,7 @@ package sandarena.partie.compcase;
 import sandarena.donnee.BanqueCompetence.EntreeCompetence;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.joueur.competence.active.CompetenceAttaque;
+import sandarena.joueur.competence.active.CompetenceBuffActif;
 import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
 import sandarena.partie.AlgorithmePathfinding;
@@ -18,15 +19,22 @@ import sandarena.partie.effet.EffetBuf;
 public class CompetenceIG {
     public EntreeCompetence info;
     private PersonnageIG container;
+    private int recharge = 0;
+    private int utilisationRestante = -1;
+    private boolean active = true;
 
     CompetenceIG(PersonnageIG perso, EntreeCompetence c) {
         container = perso;
         info = c;
         if (c.competence instanceof CompetenceBuff) {
-            //todo a remplir
-            perso.addBuf(new EffetBuf(0, 0));
+            perso.addBuf(new EffetBuf(((CompetenceBuff) c.competence).getTypeBuff(), ((CompetenceBuff) c.competence).getVal(), ((CompetenceBuff) c.competence).getDonnee()));
         } else if (c.competence instanceof CompetenceDeclencheurEffet) {
             perso.addDeclencheur(((CompetenceDeclencheurEffet) c.competence).enJeu());
+        }
+        if (c.competence instanceof CompetenceActive){
+            if (((CompetenceActive)c.competence).getUtilisation()!=0){
+                this.utilisationRestante = ((CompetenceActive)c.competence).getUtilisation();
+            }
         }
     }
 
@@ -40,17 +48,23 @@ public class CompetenceIG {
     }
 
     public void agit(Case aCase) {
-        if (info.competence instanceof CompetenceAttaque) {
-            new EffetAttaque((CompetenceAttaque) this.info.competence).lance(this.container.getContainer(), aCase);
-        }
-        this.container.setAAgi(true);
-    }
-
-    public void init() {
-        if (info.competence instanceof CompetenceBuff) {
-
-        } else if (info.competence instanceof CompetenceDeclencheurEffet) {
-
+        if (aCase.getPresence() != null) {
+            if (info.competence instanceof CompetenceAttaque) {
+                new EffetAttaque((CompetenceAttaque) this.info.competence).lance(this.container.getContainer(), aCase);
+            } else if (info.competence instanceof CompetenceBuffActif) {
+                aCase.getPresence().addBuf(new EffetBuf(((CompetenceBuffActif) info.competence).getTypeBuff(), ((CompetenceBuffActif) info.competence).getVal(), ((CompetenceBuffActif) info.competence).getDonnee()));
+            }
+            if (((CompetenceActive)info.competence).getUtilisation()!=0){
+                this.utilisationRestante = this.getUtilisationRestante() - 1;
+                if (this.getUtilisationRestante() == 0){
+                    active = false;
+                }
+            }
+            if (((CompetenceActive)info.competence).getRechargement()!=0){
+                this.recharge = ((CompetenceActive)info.competence).getRechargement();
+                active = false;
+            }
+            this.container.setAAgi(true);
         }
     }
 
@@ -62,5 +76,26 @@ public class CompetenceIG {
             retour[i] = (String) (tmp[i - 1]);
         }
         return retour;
+    }
+
+    public void tour(){
+        if (getRecharge() != 0){
+            recharge = getRecharge() - 1;
+            if (getRecharge() == 0){
+                active = true;
+            }
+        }
+    }
+
+    public int getRecharge() {
+        return recharge;
+    }
+
+    public int getUtilisationRestante() {
+        return utilisationRestante;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }

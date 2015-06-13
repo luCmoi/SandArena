@@ -46,7 +46,7 @@ public class BanqueCompetence extends Banque {
                 "L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances soit communes",
                 "Image/Competence/PoupeeVaudou.png",
                 new CompetenceBuffActif("Inflige " + 1 + " de dégat par tour a la cible",
-                        Affinite.TRIBAL, 0, 1, 15, 1, 1, Caract.MAGIE, EffetBuf.DOT, 1, 0),
+                        Affinite.TRIBAL, 0, 1, 15, 1, 1, Caract.MAGIE, EffetBuf.DOT, 1),
                 new ArrayList(Arrays.asList(Affinite.TRIBAL))));
         banque.add(new EntreeCompetence("Leg Day",
                 "Le personnage à travaillé ses jambes tous les jours",
@@ -58,7 +58,7 @@ public class BanqueCompetence extends Banque {
                 "Parfoit il faut sacrifier une partie de soit pour en renforcer une autre",
                 "Image/Competence/RituelDeSang.png",
                 new CompetenceBuffActif("Le personnage perd "+4+" Points de Vie mais sa Force augmente de "+1,
-                        Affinite.TRIBAL,3,0,0,0,1,Caract.MAGIE, EffetBuf.DOT, 4, -1, EffetBuf.CONDITIONBUFF,EffetBuf.VALATTAQUE, 1),
+                        Affinite.TRIBAL,3,0,0,0,1,Caract.MAGIE, EffetBuf.DEGAT, 4, EffetBuf.CONDITIONBUFF,EffetBuf.VALATTAQUE, 1),
                 new ArrayList<Integer>(Arrays.asList(Affinite.TRIBAL))));
         banque.add(new EntreeCompetence("Ecrase-Face",
                 "Un tel coup peut ferait s'évanouir n'importe quel être vivant",

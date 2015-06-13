@@ -28,6 +28,8 @@ public class PersonnageIG {
     //Buff
     private ArrayList<EffetBuf> changeDef = new ArrayList<EffetBuf>();
     private ArrayList<EffetBuf> changeAtt = new ArrayList<EffetBuf>();
+    private ArrayList<EffetBuf> changeVitesse = new ArrayList<EffetBuf>();
+    private ArrayList<EffetBuf> dot = new ArrayList<EffetBuf>();
     //Declencheur
     private ArrayList<EffetDeclencheur> declencheurs = new ArrayList<EffetDeclencheur>();
 
@@ -106,7 +108,9 @@ public class PersonnageIG {
             this.container.getContainer().setCompetenceActive(null);
             this.container.getContainer().finPerso();
         } else {
-            this.setVitesseRestante(this.donnee.commun.vitesse);
+            for(CompetenceIG c : competence){
+                c.tour();
+            }
         }
     }
 
@@ -134,6 +138,20 @@ public class PersonnageIG {
         }
     }
 
+    public void modifVitesse() {
+        IntegerNew tmp = new IntegerNew(vitesseRestante);
+        for (EffetBuf effet : changeVitesse) {
+            effet.modif(tmp, null);
+        }
+        vitesseRestante = (int)tmp.aDouble;
+    }
+
+    public void infligeDot() {
+        for (EffetBuf effet : dot) {
+            effet.inflige(this);
+        }
+    }
+
     public void inflige(int val) {
         this.setVieActuelle(getVieActuelle() - val);
         if (vieActuelle <= 0) {
@@ -150,13 +168,22 @@ public class PersonnageIG {
         switch (effet.getChangement()) {
             case (EffetBuf.MULATTAQUE):
             case (EffetBuf.TYPEATTAQUE):
+            case (EffetBuf.VALATTAQUE):
                 changeAtt.add(effet);
                 break;
             case (EffetBuf.MULDEFENSE):
             case (EffetBuf.TYPEDEFENSE):
                 changeDef.add(effet);
                 break;
-
+            case (EffetBuf.VALVITESSE):
+                changeVitesse.add(effet);
+                break;
+            case (EffetBuf.DEGAT):
+                effet.inflige(this);
+                break;
+            case (EffetBuf.DOT):
+                dot.add(effet);
+                break;
         }
     }
 
@@ -178,4 +205,5 @@ public class PersonnageIG {
         retour[5] = Integer.toString(donnee.commun.magie);
         return retour;
     }
+
 }

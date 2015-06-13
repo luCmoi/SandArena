@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import sandarena.Resolution;
 import sandarena.joueur.Joueur;
+import sandarena.joueur.competence.CompetenceActive;
 import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.compcase.JoueurIG;
 import sandarena.partie.compcase.PersonnageIG;
@@ -98,9 +99,16 @@ public class Partie extends Stage {
     private void tour() {
         for (PersonnageIG perso : joueur1.getPersonnages()) {
             perso.setAAgi(false);
+            perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
+            perso.modifVitesse();
+            perso.infligeDot();
+
         }
         for (PersonnageIG perso : joueur2.getPersonnages()) {
             perso.setAAgi(false);
+            perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
+            perso.modifVitesse();
+            perso.infligeDot();
         }
         phase(getJoueur1());
     }
@@ -243,7 +251,15 @@ public class Partie extends Stage {
     public void setCompetenceActive(CompetenceIG competenceActive) {
         this.competenceActive = competenceActive;
         if (this.competenceActive != null) {
-            this.competenceActive.select(plateau);
+            if (this.competenceActive.info.competence instanceof CompetenceActive) {
+                if (((CompetenceActive) this.competenceActive.info.competence).getPorte() == 0) {
+                    competenceActive.agit(personnageActif.getContainer());
+                } else {
+                    this.competenceActive.select(plateau);
+                }
+            } else {
+                this.competenceActive.select(plateau);
+            }
         } else {
             for (Case[] c : plateau) {
                 for (Case cc : c) {

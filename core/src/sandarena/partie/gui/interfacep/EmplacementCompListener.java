@@ -25,7 +25,6 @@ public class EmplacementCompListener extends InputListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        //todo check pr infomess
         if (!pression){
             pression = true;
             time = System.currentTimeMillis();
@@ -37,6 +36,7 @@ public class EmplacementCompListener extends InputListener {
         if (pression && time != 0 && System.currentTimeMillis() - time >= 1000) {
             time = 0;
             emplacementEcoute.pression();
+            pression = false;
         }
         return true;
     }
@@ -46,8 +46,8 @@ public class EmplacementCompListener extends InputListener {
         if (pression) {
             emplacementEcoute.clique();
             pression = false;
-            emplacementEcoute.finPression();
         }
+        emplacementEcoute.finPression();
     }
 
 }

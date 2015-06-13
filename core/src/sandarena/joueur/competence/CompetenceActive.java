@@ -70,7 +70,7 @@ public abstract class CompetenceActive extends Competence {
         if (porte != 0) {
             retour.add("Portée : " + porte);
         }
-        if (portemin != 1) {
+        if (portemin != 1 && portemin != 0) {
             retour.add("Portée minimale : " + portemin);
         }
         if (zone != 1) {
