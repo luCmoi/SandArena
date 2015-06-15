@@ -26,6 +26,8 @@ public class Resolution {
     public static float ratioWidth;
     public static float ratioHeight;
     public static Boolean fullScreen;
+    public static int differenceBas;
+
 
     /**
      * Calcul la résolution en utilisant le fichier de réglage en mode Desktop
@@ -57,6 +59,7 @@ public class Resolution {
         ratioHeight = (float) (height / 1080.0);
         widthCase = (int) (128 * ratioWidth);
         heightCase = (int) (128 * ratioHeight);
+        differenceBas = Resolution.height / 4;
     }
 
     /**

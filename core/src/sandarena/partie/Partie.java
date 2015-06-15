@@ -61,7 +61,7 @@ public class Partie extends Stage {
         this.joueur1 = new JoueurIG(joueur1);
         this.joueur2 = new JoueurIG(joueur2);
         //Changera lorsqu'on saura a partir de quoit creer la partie
-        int coteTmp = 25;
+        int coteTmp = 20;
         plateau = new Case[coteTmp][coteTmp];
         this.groupeCase = new Group();
         for (int x = 0; x < coteTmp; x++) {
@@ -140,19 +140,24 @@ public class Partie extends Stage {
     public void dispose() {
         super.dispose();
         setContainer(null);
-        groupeCase.remove();
+        groupeCase.clear();
         for (Case[] tabC : getPlateau()) {
             for (Case c : tabC) {
-                groupeCase.removeActor(c);
                 c.dispose();
             }
         }
         groupeCase = null;
         setPlateau(null);
-        dispose();
         camera.dispose();
         camera = null;
+        getViewport().setCamera(null);
         setViewport(null);
+        personnageActif = null;
+        competenceActive =null;
+        caseSelect=null;
+        stageInterface=null;
+        chemin.clear();
+        chemin =null;
         joueur1 = null;
         joueur2 = null;
     }
@@ -229,7 +234,7 @@ public class Partie extends Stage {
     @Override
     public Actor hit(float stageX, float stageY, boolean touchable) {
         Vector2 vScreen = stageToScreenCoordinates(new Vector2(stageX, stageY));
-        if (Resolution.height - vScreen.y < this.container.getDifferenceBas()) {
+        if (Resolution.height - vScreen.y < Resolution.differenceBas) {
             return stageInterface.hit(vScreen.x, Resolution.height - vScreen.y, touchable);
         } else {
             return super.hit(stageX, stageY, touchable);

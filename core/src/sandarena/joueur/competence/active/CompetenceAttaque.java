@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import sandarena.donnee.Caract;
 import sandarena.joueur.competence.CompetenceActive;
 
-/**
- * @author Guillaume
- */
 public class CompetenceAttaque extends CompetenceActive {
 
     protected int caract;

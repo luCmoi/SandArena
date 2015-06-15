@@ -8,7 +8,6 @@ import sandarena.partie.Partie;
 /**
  * Camera du ScreenPartie qui permet de parcourir le terrain de jeu
  *
- * @author Guillaume
  */
 public class Camera extends OrthographicCamera {
 
@@ -21,7 +20,7 @@ public class Camera extends OrthographicCamera {
 
     public Camera(Partie partie) {
         super();
-        this.setToOrtho(false, Resolution.width, Resolution.height - partie.getContainer().getDifferenceBas());
+        this.setToOrtho(false, Resolution.width, Resolution.height - Resolution.differenceBas);
         this.position.set(Resolution.width / 2, Resolution.height / 2, 0);
         this.partie = partie;
     }
@@ -47,10 +46,10 @@ public class Camera extends OrthographicCamera {
             }
         }
         if (deplacementBas) {
-            if (position.y > partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
+            if (position.y > partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas) {
                 translate(0, -(int) (VITESSECAM * Resolution.ratioHeight), 0);
-                if (position.y < partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
-                    position.y = partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas();
+                if (position.y < partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas) {
+                    position.y = partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas;
                 }
             }
         }
@@ -68,33 +67,19 @@ public class Camera extends OrthographicCamera {
         this.partie = null;
     }
 
-    public boolean isDeplacementGauche() {
-        return deplacementGauche;
-    }
-
     public void setDeplacementGauche(boolean deplacementGauche) {
         this.deplacementGauche = deplacementGauche;
-    }
-
-    public boolean isDeplacementDroit() {
-        return deplacementDroit;
     }
 
     public void setDeplacementDroit(boolean deplacementDroit) {
         this.deplacementDroit = deplacementDroit;
     }
 
-    public boolean isDeplacementHaut() {
-        return deplacementHaut;
-    }
 
     public void setDeplacementHaut(boolean deplacementHaut) {
         this.deplacementHaut = deplacementHaut;
     }
 
-    public boolean isDeplacementBas() {
-        return deplacementBas;
-    }
 
     public void setDeplacementBas(boolean deplacementBas) {
         this.deplacementBas = deplacementBas;
@@ -118,8 +103,8 @@ public class Camera extends OrthographicCamera {
         if (position.x > partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2) {
             position.x = partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2;
         }
-        if (position.y < partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas()) {
-            position.y = partie.getViewport().getWorldHeight() / 2 - partie.getContainer().getDifferenceBas();
+        if (position.y < partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas) {
+            position.y = partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas;
         }
         if (position.y > partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2) {
             position.y = partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2;

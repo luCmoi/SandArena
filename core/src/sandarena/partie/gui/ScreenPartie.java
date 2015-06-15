@@ -16,19 +16,18 @@ import sandarena.SandArena;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.partie.Partie;
+import sandarena.partie.gui.interfacep.StageInterface;
 
 /**
  * Screen permetant d'afficher la partie
  *
- * @author Guillaume
  */
 public class ScreenPartie implements Screen {
 
     private Batch batch;
     private SandArena conteneur;
     private Partie partie;
-    private int differenceBas;
-    private sandarena.partie.gui.interfacep.StageInterface interfaceS;
+    private StageInterface interfaceS;
     //Temporaire
     private Joueur joueur1;
     private Joueur joueur2;
@@ -37,7 +36,6 @@ public class ScreenPartie implements Screen {
     public ScreenPartie(SandArena conteneur) {
         this.conteneur = conteneur;
         this.batch = conteneur.getBatch();
-        this.differenceBas = Resolution.height / 4;
         //Temporaire
         joueur1 = new Joueur();
         joueur2 = new Joueur();
@@ -51,7 +49,7 @@ public class ScreenPartie implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.partie.getViewport().update();
         this.partie.draw();
-        Gdx.gl.glViewport(0, 0, Resolution.width, differenceBas);
+        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.differenceBas);
         this.interfaceS.draw();
         Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
         this.surcouche.draw();
@@ -64,7 +62,7 @@ public class ScreenPartie implements Screen {
     @Override
     public void show() {
         setBatch(new SpriteBatch());
-        this.interfaceS = new sandarena.partie.gui.interfacep.StageInterface(new ExtendViewport(Resolution.width, this.differenceBas, Resolution.width, this.differenceBas), batch);
+        this.interfaceS = new sandarena.partie.gui.interfacep.StageInterface(new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
         this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
         surcouche = new Stage(new FillViewport(Resolution.width,Resolution.height));
         interfaceS.setPartie(partie);
@@ -87,10 +85,15 @@ public class ScreenPartie implements Screen {
     public void dispose() {
         if (getBatch() != null) {
             getBatch().dispose();
+            this.batch = null;
         }
         conteneur = null;
+        partie.dispose();
         partie = null;
+        interfaceS.dispose();
         interfaceS = null;
+        surcouche.dispose();
+        surcouche = null;
     }
 
     public Batch getBatch() {
@@ -103,18 +106,6 @@ public class ScreenPartie implements Screen {
 
     public SandArena getConteneur() {
         return conteneur;
-    }
-
-    public void setConteneur(SandArena conteneur) {
-        this.conteneur = conteneur;
-    }
-
-    public int getDifferenceBas() {
-        return differenceBas;
-    }
-
-    public void setDifferenceBas(int differenceBas) {
-        this.differenceBas = differenceBas;
     }
 
     public Partie getPartie() {

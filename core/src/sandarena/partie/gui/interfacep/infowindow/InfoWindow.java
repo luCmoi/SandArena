@@ -1,4 +1,4 @@
-package sandarena.partie.gui.infowindow;
+package sandarena.partie.gui.interfacep.infowindow;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -19,17 +19,21 @@ import sandarena.partie.gui.interfacep.EmplacementPerso;
 public class InfoWindow extends Group {
     private PersonnageIG perso;
     private CompetenceIG comp;
+    private Icone icone;
+    private Info info;
 
     public InfoWindow(EmplacementInterface emplacement) {
         if (emplacement instanceof  EmplacementPerso){
             this.perso = ((EmplacementPerso)emplacement).getPerso();
-            setBounds(Gdx.input.getX(), ((Resolution.height/4*4) - Gdx.input.getY()), (Resolution.height/4) *2 ,Resolution.height/4);
+            setBounds(Gdx.input.getX(), ((Resolution.height / 4 * 4) - Gdx.input.getY()), (Resolution.height / 4) * 2, Resolution.height / 4);
         } else if (emplacement instanceof  EmplacementComp){
             this.comp = ((EmplacementComp)emplacement).getCompetenceIG();
             setBounds(Gdx.input.getX(), ((Resolution.height) - Gdx.input.getY()), (Resolution.height/4) *3 ,(float)((Resolution.height/4)/1.5));
         }
-        this.addActor(new Icone(this));
-        this.addActor(new Info(this));
+        icone = new Icone(this);
+        info = new Info(this);
+        this.addActor(icone);
+        this.addActor(info);
         if (this.perso == null && this.comp == null){
         }
     }
@@ -47,6 +51,10 @@ public class InfoWindow extends Group {
         comp = null;
         clear();
         remove();
+        this.icone.dispose();
+        this.info.dispose();
+        icone = null;
+        info = null;
     }
 
     public PersonnageIG getPerso() {

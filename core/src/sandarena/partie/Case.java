@@ -15,10 +15,9 @@ import sandarena.partie.compcase.Sol;
  */
 public class Case extends Actor {
 
-    private final Partie container;
+    private Partie container;
     private int placeX;
     private int placeY;
-    private Rectangle position;
     private Sol sol;
     private PersonnageIG presence;
     private boolean accessible;
@@ -79,14 +78,10 @@ public class Case extends Actor {
             this.presence.dispose();
             this.presence = null;
         }
-    }
-
-    public Rectangle getPosition() {
-        return position;
-    }
-
-    public void setPosition(Rectangle position) {
-        this.position = position;
+        container = null;
+        predecesseur =null;
+        ((CaseListener)getListeners().get(0)).dispose();
+        clear();
     }
 
     public Sol getSol() {
@@ -101,16 +96,8 @@ public class Case extends Actor {
         return placeX;
     }
 
-    public void setPlaceX(int placeX) {
-        this.placeX = placeX;
-    }
-
     public int getPlaceY() {
         return placeY;
-    }
-
-    public void setPlaceY(int placeY) {
-        this.placeY = placeY;
     }
 
     public PersonnageIG getPresence() {
@@ -141,10 +128,6 @@ public class Case extends Actor {
 
     public void setPredecesseur(Case predecesseur) {
         this.predecesseur = predecesseur;
-    }
-
-    public boolean isChemin() {
-        return chemin;
     }
 
     public void setChemin(boolean chemin) {

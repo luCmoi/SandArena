@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Guillaume
  */
 public class AlgorithmePathfinding {
-
+    private static Graph graph;
 
     public static void calculCaseAccessible(int vitesseRestante, Case caseDepart, Case[][] plateau) {
         int distance = vitesseRestante;
@@ -17,6 +17,9 @@ public class AlgorithmePathfinding {
             plateau[som.x][som.y].setAccessible(true);
             plateau[som.x][som.y].setPredecesseur(plateau[som.pere.x][som.pere.y]);
         }
+        liste.clear();
+        graph.dispose();
+        graph = null;
     }
 
     public static void calculCaseTouchable(int portemin, int porte, Case caseDepart, Case[][] plateau) {
@@ -28,10 +31,11 @@ public class AlgorithmePathfinding {
                 plateau[som.x][som.y].setCompetenceable(true);
             }
         }
+        liste.clear();
     }
 
     public static Sommet tabToGraph(Case depart, Case[][] plateau) {
-        Graph graph = new Graph(plateau.length, plateau[0].length);
+        graph = new Graph(plateau.length, plateau[0].length);
         Sommet joueur = null;
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[0].length; j++) {
@@ -64,14 +68,10 @@ public class AlgorithmePathfinding {
                     joueur = graph.listeSommets[(i * plateau[0].length) + j];
                 }
                 if (i < plateau.length - 1) {
-                    //if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i + 1][j].isTraversable() || plateau[i + 1][j] == depart)) {
                     graph.addSommet(i, j, i + 1, j, plateau[0].length);
-                    //}
                 }
                 if (j < plateau[0].length - 1) {
-                    //if ((plateau[i][j].isTraversable() || plateau[i][j] == depart) && (plateau[i][j + 1].isTraversable() || plateau[i][j + 1] == depart)) {
                     graph.addSommet(i, j, i, j + 1, plateau[0].length);
-                    //}
                 }
             }
         }
@@ -106,7 +106,7 @@ public class AlgorithmePathfinding {
             ArrayList<Sommet> list = new ArrayList<Sommet>();
             this.marque = false;
             file.add(this);
-            Sommet tmp = null;
+            Sommet tmp;
             while (!file.isEmpty()) {
                 tmp = file.pop();
                 for (Sommet s : tmp.listFrere) {
@@ -121,7 +121,14 @@ public class AlgorithmePathfinding {
                     }
                 }
             }
+            file.clear();
             return list;
+        }
+
+        public void dispose() {
+            listFrere.clear();
+            listFrere = null;
+            pere = null;
         }
     }
 
@@ -141,6 +148,14 @@ public class AlgorithmePathfinding {
         public void addSommet(int x, int y, int i, int j, int yTaille) {
             listeSommets[(x * yTaille) + y].ajouterConnexion(listeSommets[(i * yTaille) + j]);
         }
+
+        public void dispose() {
+            for (Sommet s : listeSommets) {
+                s.dispose();
+            }
+            listeSommets = null;
+        }
     }
+
 
 }

@@ -1,4 +1,4 @@
-package sandarena.partie.gui.infowindow;
+package sandarena.partie.gui.interfacep.infowindow;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -13,7 +13,6 @@ public class Icone extends Actor {
     public Icone(InfoWindow container){
         super();
         setBounds(0,0,container.getHeight(),container.getHeight());
-        //setBounds(container.getX(),container.getY(),container.getHeight(),container.getHeight());
         if (container.getPerso() != null){
             img = container.getPerso().getDonnee().commun.image;
         } else if (container.getComp() != null){
@@ -24,6 +23,11 @@ public class Icone extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(img,getX(),getY(),getWidth(),getHeight());
+        batch.draw(img, getX(), getY(), getWidth(), getHeight());
+    }
+
+    public void dispose() {
+        img = null;
+        clear();
     }
 }

@@ -7,18 +7,14 @@ import sandarena.joueur.competence.CompetenceActive;
 import sandarena.partie.compcase.CompetenceIG;
 
 /**
- * Created by Guillaume on 08/06/2015.
  */
 public class EmplacementComp extends EmplacementInterface {
     private CompetenceIG competenceIG;
-    private boolean actif;
-    sandarena.partie.gui.infowindow.InfoWindow info;
 
 
     public EmplacementComp(int place, StageInterface container) {
         super(place, container);
-        this.setBounds((container.tailleCoteHeight / 2 * (2 + (int) (getPlace() / 2) + (2 * (int) (getPlace() / 4)))), 0 + ((container.tailleCoteHeight / 2) * (getPlace() % 2)), container.tailleCoteHeight / 2, container.tailleCoteHeight / 2);
-        this.addListener(new EmplacementCompListener(this));
+        this.setBounds((container.tailleCoteHeight / 2 * (2 + (getPlace() / 2) + (2 * (getPlace() / 4)))), 0 + ((container.tailleCoteHeight / 2) * (getPlace() % 2)), container.tailleCoteHeight / 2, container.tailleCoteHeight / 2);
         if (place < 4) {
             actif = true;
         } else {
@@ -29,7 +25,7 @@ public class EmplacementComp extends EmplacementInterface {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        ((EmplacementCompListener) getListeners().get(0)).update();
+        super.draw(batch, parentAlpha);
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         if (getCompetenceIG() != null) {
             batch.draw(getCompetenceIG().info.image, getX(), getY(), getWidth(), getHeight());
@@ -38,6 +34,7 @@ public class EmplacementComp extends EmplacementInterface {
     }
 
     public void dispose() {
+        super.dispose();
         setCompetenceIG(null);
     }
 
@@ -58,19 +55,6 @@ public class EmplacementComp extends EmplacementInterface {
                 }
             }
         }
-    }
-
-
-    public void finPression() {
-        if (info != null) {
-            this.info.dispose();
-            info = null;
-        }
-    }
-
-    public void pression() {
-        this.info = new sandarena.partie.gui.infowindow.InfoWindow(this);
-        container.getPartie().getContainer().getSurcouche().addActor(info);
     }
 
     public CompetenceIG getCompetenceIG() {

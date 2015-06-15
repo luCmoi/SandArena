@@ -11,43 +11,37 @@ import sandarena.partie.Case;
 import sandarena.partie.Partie;
 import sandarena.partie.compcase.PersonnageIG;
 
-/**
- * @author Guillaume
- */
 public class StageInterface extends Stage {
     private Partie partie;
-    private PersonnageIG personnageActif;
-    private Case caseSelect;
-    private ArrayList<sandarena.partie.gui.interfacep.EmplacementComp> emplacementCompsActif;
-    private ArrayList<sandarena.partie.gui.interfacep.EmplacementComp> emplacementCompsSelect;
-    private sandarena.partie.gui.interfacep.EmplacementPerso emplacementPersoActif;
-    private sandarena.partie.gui.interfacep.EmplacementPerso emplacementPersoSelect;
+    private ArrayList<EmplacementComp> emplacementCompsActif;
+    private ArrayList<EmplacementComp> emplacementCompsSelect;
+    private EmplacementPerso emplacementPersoActif;
+    private EmplacementPerso emplacementPersoSelect;
     protected int tailleCoteHeight;
     protected int tailleCoteWidth;
 
     public StageInterface(Viewport viewport, Batch batch) {
         super(viewport, batch);
         this.tailleCoteHeight =  (int)this.getHeight();
-        //this.tailleCoteWidth = (int)(this.getHeight()* Resolution.ratioHeight);
         this.tailleCoteWidth = (int)(this.getWidth()/8);
-        emplacementPersoActif = new sandarena.partie.gui.interfacep.EmplacementPerso(0, this);
+        emplacementPersoActif = new EmplacementPerso(0, this);
         emplacementPersoSelect = new EmplacementPerso(1, this);
         this.addActor(emplacementPersoActif);
         this.addActor(emplacementPersoSelect);
-        emplacementCompsActif = new ArrayList<sandarena.partie.gui.interfacep.EmplacementComp>();
-        emplacementCompsActif.add(new sandarena.partie.gui.interfacep.EmplacementComp(0, this));
-        emplacementCompsActif.add(new sandarena.partie.gui.interfacep.EmplacementComp(1, this));
-        emplacementCompsActif.add(new sandarena.partie.gui.interfacep.EmplacementComp(2, this));
-        emplacementCompsActif.add(new sandarena.partie.gui.interfacep.EmplacementComp(3, this));
-        for (sandarena.partie.gui.interfacep.EmplacementComp emp : emplacementCompsActif) {
+        emplacementCompsActif = new ArrayList<EmplacementComp>();
+        emplacementCompsActif.add(new EmplacementComp(0, this));
+        emplacementCompsActif.add(new EmplacementComp(1, this));
+        emplacementCompsActif.add(new EmplacementComp(2, this));
+        emplacementCompsActif.add(new EmplacementComp(3, this));
+        for (EmplacementComp emp : emplacementCompsActif) {
             this.addActor(emp);
         }
-        emplacementCompsSelect = new ArrayList<sandarena.partie.gui.interfacep.EmplacementComp>();
-        emplacementCompsSelect.add(new sandarena.partie.gui.interfacep.EmplacementComp(4, this));
-        emplacementCompsSelect.add(new sandarena.partie.gui.interfacep.EmplacementComp(5, this));
-        emplacementCompsSelect.add(new sandarena.partie.gui.interfacep.EmplacementComp(6, this));
-        emplacementCompsSelect.add(new sandarena.partie.gui.interfacep.EmplacementComp(7, this));
-        for (sandarena.partie.gui.interfacep.EmplacementComp emp : emplacementCompsSelect) {
+        emplacementCompsSelect = new ArrayList<EmplacementComp>();
+        emplacementCompsSelect.add(new EmplacementComp(4, this));
+        emplacementCompsSelect.add(new EmplacementComp(5, this));
+        emplacementCompsSelect.add(new EmplacementComp(6, this));
+        emplacementCompsSelect.add(new EmplacementComp(7, this));
+        for (EmplacementComp emp : emplacementCompsSelect) {
             this.addActor(emp);
         }
     }
@@ -58,9 +52,37 @@ public class StageInterface extends Stage {
 
     }
 
+    public void dispose(){
+        super.dispose();
+        if (emplacementPersoActif != null) {
+            emplacementPersoActif.dispose();
+            emplacementPersoActif = null;
+        }
+        if (emplacementPersoSelect != null) {
+            emplacementPersoSelect.dispose();
+            emplacementPersoSelect = null;
+        }
+        for(EmplacementComp c : emplacementCompsActif){
+            if (c != null){
+                c.dispose();
+                c = null;
+            }
+        }
+        for(EmplacementComp c : emplacementCompsSelect){
+            if (c != null){
+                c.dispose();
+                c = null;
+            }
+        }
+        emplacementCompsActif.clear();
+        emplacementCompsActif = null;
+        emplacementCompsSelect.clear();
+        emplacementCompsSelect = null;
+        clear();
+    }
+
     public void setPersonnageActif(PersonnageIG perso) {
-        this.personnageActif = perso;
-        emplacementPersoActif.perso = perso;
+        emplacementPersoActif.setPerso(perso);
         for (sandarena.partie.gui.interfacep.EmplacementComp emp : emplacementCompsActif) {
             emp.setCompetenceIG(perso.getCompetence()[emp.getPlace()]);
         }
@@ -79,16 +101,11 @@ public class StageInterface extends Stage {
         return super.hit(stageX, stageY, touchable);
     }
 
-    public Case getCaseSelect() {
-        return caseSelect;
-    }
-
     public void setCaseSelect(Case caseSelect) {
-        this.caseSelect = caseSelect;
         if (caseSelect.getPresence() != null) {
-            emplacementPersoSelect.perso = caseSelect.getPresence();
+            emplacementPersoActif.setPerso(caseSelect.getPresence());
         } else {
-            emplacementPersoSelect.perso = null;
+            emplacementPersoSelect.setPerso(null);
         }
         for (sandarena.partie.gui.interfacep.EmplacementComp emp : emplacementCompsSelect) {
             if (caseSelect.getPresence() != null) {

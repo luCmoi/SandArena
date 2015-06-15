@@ -41,4 +41,8 @@ public class CaseListener extends InputListener {
         }
     }
 
+    public void dispose(){
+        caseEcoute = null;
+    }
+
 }

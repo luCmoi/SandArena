@@ -8,7 +8,6 @@ import sandarena.donnee.BanquePersonnage.DonneePersonnage;
 /**
  * Represente les donnee fixes d'un personnage
  *
- * @author Guillaume
  */
 public class Personnage {
 
@@ -51,7 +50,7 @@ public class Personnage {
 
     public String getNom() {
         return "Fred";
-        //return nom;
+        //todo return nom;
     }
 
     public EntreeCompetence[] getCompetences() {

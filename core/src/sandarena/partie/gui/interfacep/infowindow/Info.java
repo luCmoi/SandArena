@@ -1,4 +1,4 @@
-package sandarena.partie.gui.infowindow;
+package sandarena.partie.gui.interfacep.infowindow;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -55,6 +55,13 @@ public class Info extends Actor {
                 }
             }
         }
+    }
+
+    public void dispose() {
+        for (String s : texte){
+            s = null;
+        }
+        this.clear();
     }
 }
 

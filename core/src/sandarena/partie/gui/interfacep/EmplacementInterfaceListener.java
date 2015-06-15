@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sandarena.partie.gui.interfacep;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
- * Ecoute les interactions effectuées avec une case
- *
- * @author Guillaume
+ * Created by Guillaume on 15/06/2015.
  */
-public class EmplacementCompListener extends InputListener {
+public class EmplacementInterfaceListener extends InputListener {
     private boolean pression;
-    private EmplacementComp emplacementEcoute;
+    private EmplacementInterface emplacementEcoute;
     private long time;
 
-    public EmplacementCompListener(EmplacementComp aThis) {
+    public EmplacementInterfaceListener(EmplacementInterface aThis) {
         emplacementEcoute = aThis;
     }
 
@@ -50,4 +43,8 @@ public class EmplacementCompListener extends InputListener {
         emplacementEcoute.finPression();
     }
 
+    public void dispose() {
+        this.emplacementEcoute = null;
+    }
 }
+

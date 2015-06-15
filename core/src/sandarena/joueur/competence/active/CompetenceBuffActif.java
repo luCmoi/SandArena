@@ -3,15 +3,11 @@ package sandarena.joueur.competence.active;
 import java.util.ArrayList;
 
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.partie.effet.EffetBuf;
 
-/**
- * @author Guillaume
- */
 public class CompetenceBuffActif extends CompetenceActive {
     protected  String toStrings;
     private int caract;
-    //
+    //todo on gere tout d'ici
     private int typeBuff;
     private int val;
     private double[] donnee;
@@ -24,15 +20,6 @@ public class CompetenceBuffActif extends CompetenceActive {
         this.val = val;
         this.donnee = donnee;
     }
-
-    public EffetBuf enJeu(){
-        return new EffetBuf(this.getTypeBuff(), this.getVal(), getDonnee());
-    }
-
-    public int getCaract() {
-        return caract;
-    }
-
     public void setCaract(int caract) {
         this.caract = caract;
     }

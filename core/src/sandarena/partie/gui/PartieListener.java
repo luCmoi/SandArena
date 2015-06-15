@@ -9,7 +9,6 @@ import sandarena.partie.Partie;
 /**
  * Listener du ScreenPartie
  *
- * @author Guillaume
  */
 public class PartieListener extends InputListener {
 
