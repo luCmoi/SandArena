@@ -9,42 +9,42 @@ import sandarena.partie.Case;
  * @author Guillaume
  */
 public class EffetAttaque {
-    public static final int STUN = 0;
-    public IntegerNew type;
-    public double mul = 1;
+    public int type;
+    public int mul = 0;
     private EffetBuf suite;
 
     public EffetAttaque(int type) {
-        this.type = new IntegerNew(type);
+        this.type = type;
     }
 
     public EffetAttaque(CompetenceAttaque comp, EffetBuf suite) {
-        this.type = new IntegerNew(comp.getCaract());
+        this.type = comp.getCaract();
         this.mul = comp.getMultiAttaque();
         this.suite = suite;
     }
 
     public void lance(Case attaquant, Case defenseur) {
         if (defenseur.getPresence() != null) {
-            IntegerNew att = new IntegerNew(0);
-            IntegerNew def = new IntegerNew(0);
-            switch (type.anInt) {
+            int att = 0;
+            int def = 0;
+            switch (type) {
                 case (Caract.FORCE):
-                    att.anInt = attaquant.getPresence().getDonnee().commun.force;
-                    def.anInt = defenseur.getPresence().getDonnee().commun.force;
+                    att = attaquant.getPresence().getDonnee().commun.force;
+                    def= defenseur.getPresence().getDonnee().commun.force;
                     break;
                 case (Caract.AGILITE):
-                    att.anInt = attaquant.getPresence().getDonnee().commun.agilite;
-                    def.anInt = defenseur.getPresence().getDonnee().commun.agilite;
+                    att = attaquant.getPresence().getDonnee().commun.agilite;
+                    def = defenseur.getPresence().getDonnee().commun.agilite;
                     break;
                 case (Caract.MAGIE):
-                    att.anInt = attaquant.getPresence().getDonnee().commun.magie;
-                    def.anInt = defenseur.getPresence().getDonnee().commun.magie;
+                    att = attaquant.getPresence().getDonnee().commun.magie;
+                    def = defenseur.getPresence().getDonnee().commun.magie;
                     break;
             }
-            attaquant.getPresence().modifAttaque(att, type);
-            defenseur.getPresence().modifDefense(def, type);
-            int degat = degat(att.anInt, def.anInt);
+            att = attaquant.getPresence().modifAttaque(att, type);
+            att = att + mul;
+            def = defenseur.getPresence().modifDefense(def, type);
+            int degat = degat(att, def);
             for (EffetDeclencheur effet : defenseur.getPresence().getDeclencheurs()) {
                 //effet.check(type.anInt, defenseur.getPresence(), attaquant.getPresence(), degat);
             }

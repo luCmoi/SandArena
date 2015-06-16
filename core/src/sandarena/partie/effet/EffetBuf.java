@@ -17,6 +17,9 @@ public class EffetBuf {
 
     public void setContainer(PersonnageIG container) {
         this.container = container;
+        if(chaine != null){
+            container.addBuf(chaine);
+        }
     }
 
     public EffetBuf getChaine() {

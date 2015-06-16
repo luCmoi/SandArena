@@ -15,6 +15,7 @@ public class EffetBuffDommage extends EffetBuf{
     }
 
     public void setContainer(PersonnageIG container){
+        super.setContainer(container);
         container.inflige(val);
     }
 

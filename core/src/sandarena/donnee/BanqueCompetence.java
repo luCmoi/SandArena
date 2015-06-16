@@ -35,14 +35,13 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Bourre-pif",
                 "Coup de poing puissant au visage, de préférence dans le nez.",
                 "Image/Competence/Bourrepif.png",
-                new CompetenceAttaque(Affinite.FORCE, 0, 0, 1, 1, 1, Caract.FORCE, 1.2),
+                new CompetenceAttaque(Affinite.FORCE, 0, 0, 1, 1, 1, Caract.FORCE, 1),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
-       /* banque.add(new EntreeCompetence("Berzerk",
+        banque.add(new EntreeCompetence("Berzerk",
                 "Plus le personnage est blessé plus sa folie est grande.",
                 "Image/Competence/Berzerk.png",
-                new CompetenceDeclencheurEffet("Chaque foit qu'il reçoit des dégats le personnage voit sa Force augmenter par " + 1.10,
-                        Affinite.FORCE, EffetDeclencheur.DEGATRECU, EffetDeclencheur.SOI, CompetenceDeclencheurEffet.FIN, EffetDeclencheur.BUFF, EffetBuf.MULATTAQUE, 1.10),
-                new ArrayList(Arrays.asList(Affinite.FORCE))));*/
+                new CompetenceDeclencheurEffet(Affinite.FORCE, CompetenceToEffet.DEGATRECU, CompetenceToEffet.SOI, CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.VALATTAQUE, 1),
+                new ArrayList(Arrays.asList(Affinite.FORCE))));
         banque.add(new EntreeCompetence("Poupée Vaudou",
                 "L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances soit communes",
                 "Image/Competence/PoupeeVaudou.png",
@@ -61,7 +60,7 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Ecrase-Face",
                 "Un tel coup peut ferait s'évanouir n'importe quel être vivant",
                 "Image/Competence/EcraseFace.png",
-                new CompetenceAttaque(Affinite.FORCE, 3, 0, 1, 1, 1, Caract.FORCE, 1, EffetAttaque.STUN, 1),
+                new CompetenceAttaque(Affinite.FORCE, 3, 0, 1, 1, 1, Caract.FORCE, 0),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
     }
 

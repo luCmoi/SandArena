@@ -133,20 +133,18 @@ public class PersonnageIG {
         return possesseur;
     }
 
-    public void modifAttaque(IntegerNew val, IntegerNew type) {
-        int tmp = val.anInt;
+    public int modifAttaque(int val, int type) {
         for (EffetBuffValAttaque effet : changeAtt) {
-            tmp = effet.modif(tmp);
+            val = effet.modif(val);
         }
-        val.anInt = tmp;
+        return val;
     }
 
-    public void modifDefense(IntegerNew val, IntegerNew type) {
-        int tmp = val.anInt;
+    public int modifDefense(int val, int type) {
         for (EffetBuffValDefense effet : changeDef) {
-            tmp = effet.modif(tmp);
+            val = effet.modif(val);
         }
-        val.anInt = tmp;
+        return val;
     }
 
     public void modifVitesse() {

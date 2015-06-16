@@ -7,17 +7,18 @@ import sandarena.partie.effet.CompetenceToEffet;
 
 public class CompetenceBuffActif extends CompetenceActive {
     private int caract;
-    //todo on gere tout d'ici
     private int typeBuff;
     private int val;
-    private double[] donnee;
+    private int[] donnee;
 
-    public CompetenceBuffActif(int type, int recharge, int utilisation, int porte, int portemin, int zone, int caract, int typeBuff, int val, double... donnee) {
+    public CompetenceBuffActif(int type, int recharge, int utilisation, int porte, int portemin, int zone, int caract, int typeBuff, int val, int... donnee) {
         super(type, recharge, utilisation, porte, portemin, zone);
         this.setCaract(caract);
         this.typeBuff = typeBuff;
         this.val = val;
-        this.donnee = donnee;
+        if (donnee.length > 0) {
+            this.donnee = donnee;
+        }
     }
     public void setCaract(int caract) {
         this.caract = caract;
@@ -39,7 +40,7 @@ public class CompetenceBuffActif extends CompetenceActive {
         return val;
     }
 
-    public double[] getDonnee() {
+    public int[] getDonnee() {
         return donnee;
     }
 }

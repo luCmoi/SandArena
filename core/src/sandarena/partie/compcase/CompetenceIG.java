@@ -29,7 +29,7 @@ public class CompetenceIG {
         if (c.competence instanceof CompetenceBuff) {
             perso.addBuf(CompetenceToEffet.toEffet(this));
         } else if (c.competence instanceof CompetenceDeclencheurEffet) {
-            perso.addDeclencheur(((CompetenceDeclencheurEffet) c.competence).enJeu());
+            perso.addDeclencheur(CompetenceToEffet.toDeclencheur(this));
         }
         if (c.competence instanceof CompetenceActive){
             if (((CompetenceActive)c.competence).getUtilisation()!=0){
@@ -50,7 +50,6 @@ public class CompetenceIG {
     public void agit(Case aCase) {
         if (aCase.getPresence() != null) {
             if (info.competence instanceof CompetenceAttaque) {
-                //todo effet d'attaque viennent d'ici
                 new EffetAttaque((CompetenceAttaque) this.info.competence,null).lance(this.getContainer().getContainer(), aCase);
             } else if (info.competence instanceof CompetenceBuffActif) {
                 aCase.getPresence().addBuf(CompetenceToEffet.toEffet(this));

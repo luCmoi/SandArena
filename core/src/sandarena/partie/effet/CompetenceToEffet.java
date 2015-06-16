@@ -12,7 +12,6 @@ import sandarena.partie.effet.effetbuff.EffetBuffDot;
 import sandarena.partie.effet.effetbuff.effetbufftype.EffetBuffTypeAttaque;
 import sandarena.partie.effet.effetbuff.effetbufftype.EffetBuffTypeDefense;
 import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValAttaque;
-import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValDefense;
 import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValVitesse;
 
 /**
@@ -20,26 +19,30 @@ import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValVitesse;
  */
 //TODO gestion des conditions
 public class CompetenceToEffet {
+    //todo a complete fur et a mesure
+//Static type buff
     public static final int TYPEATTAQUE = 0;
     public static final int TYPEDEFENSE = 1;
-    //todo a complete fur et a mesure
     public static final int DOT = 4;
     public static final int VALVITESSE = 5;
     public static final int VALATTAQUE = 6;
     public static final int DEGAT = 7;
-
-    //
-    public static final int CONDITIONBUFF=3;
-    public static final int CONDITIONDUREE = 0;
+    //static type declencheur
+    public static final int DEGATRECU = 0;
+    //static cible declencheur
+    public static final int SOI = 0;
+    //static suite
+    public static final int CONDITIONBUFF = 0;
+    public static final int CONDITIONDUREE = 1;
 
     public static ArrayList<String> toStrings(Competence comp) {
         ArrayList<String> retour = new ArrayList<String>();
         if (comp instanceof CompetenceBuff) {
             CompetenceBuff tmp = (CompetenceBuff) comp;
-            retour.add(switchTypeBuff(tmp.getTypeBuff(), tmp.getVal()));
+            retour.addAll(switchTypeBuff(tmp.getTypeBuff(), tmp.getVal(), tmp.getDonnee()));
         } else if (comp instanceof CompetenceBuffActif) {
             CompetenceBuffActif tmp = (CompetenceBuffActif) comp;
-            retour.add(switchTypeBuff(tmp.getTypeBuff(), tmp.getVal()));
+            retour.addAll(switchTypeBuff(tmp.getTypeBuff(), tmp.getVal(), tmp.getDonnee()));
         }
         return retour;
     }
@@ -56,22 +59,39 @@ public class CompetenceToEffet {
         return null;
     }
 
-    public static String switchTypeBuff(int type, int val) {
+    public static ArrayList<String> switchTypeBuff(int type, int val, int[] donnee) {
+        ArrayList<String> retour = new ArrayList<String>();
         switch (type) {
             case (TYPEATTAQUE):
-                return "Change le type d'attaque en " + switchtype(val);
+                retour.add("Change le type d'attaque en " + switchtype(val));
+                break;
             case (TYPEDEFENSE):
-                return "Change le type de defense en " + switchtype(val);
+                retour.add("Change le type de defense en " + switchtype(val));
+                break;
             case (VALATTAQUE):
-                return "Augmente l'attaque de " + val;
+                retour.add("Augmente l'attaque de " + val);
+                break;
             case (VALVITESSE):
-                return "Augmente la vitesse de " + val;
+                retour.add("Augmente la vitesse de " + val);
+                break;
             case (DEGAT):
-                return "Inflige " + val + " degats";
+                retour.add("Inflige " + val + " degats");
+                break;
             case (DOT):
-                return "Inflige " + val + " degats par tour";
+                retour.add("Inflige " + val + " degats par tour");
+                break;
         }
-        return null;
+        if (donnee != null && donnee[0] == CONDITIONBUFF) {
+            int[] donneetmp = null;
+            if (donnee.length != 3) {
+                donneetmp = new int[donnee.length - 3];
+                for (int i = 0; i < donnee.length - 3; i++) {
+                    donneetmp[i] = donnee[i + 3];
+                }
+            }
+            retour.addAll(switchTypeBuff(donnee[1], donnee[2], donneetmp));
+        }
+        return retour;
     }
 
     public static EffetBuf toEffet(CompetenceIG competenceIG) {
@@ -85,21 +105,39 @@ public class CompetenceToEffet {
         return null;
     }
 
-    private static EffetBuf creerEffet(int type, int val, double[] donnee) {
-        switch (type) {
-            case (TYPEATTAQUE):
-                return new EffetBuffTypeAttaque(val, null);
-            case (TYPEDEFENSE):
-                return new EffetBuffTypeDefense(val, null);
-            case (VALATTAQUE):
-                return new EffetBuffValAttaque(val, null);
-            case (VALVITESSE):
-                return new EffetBuffValVitesse(val, null);
-            case (DEGAT):
-                return new EffetBuffDommage(val, null);
-            case (DOT):
-                return new EffetBuffDot(val, null);
+    private static EffetBuf creerEffet(int type, int val, int[] donnee) {
+        EffetBuf tmp = null;
+        if (donnee!= null) {
+            if (donnee[0] == CONDITIONBUFF) {
+                int[] donneetmp = null;
+                if (donnee.length != 3) {
+                    donneetmp = new int[donnee.length - 3];
+                    for (int i = 0; i < donnee.length - 3; i++) {
+                        donneetmp[i] = donnee[i + 3];
+                    }
+                }
+                tmp = creerEffet(donnee[1], donnee[2], donneetmp);
+            }
         }
+            switch (type) {
+                case (TYPEATTAQUE):
+                    return new EffetBuffTypeAttaque(val, tmp);
+                case (TYPEDEFENSE):
+                    return new EffetBuffTypeDefense(val, tmp);
+                case (VALATTAQUE):
+                    return new EffetBuffValAttaque(val, tmp);
+                case (VALVITESSE):
+                    return new EffetBuffValVitesse(val, tmp);
+                case (DEGAT):
+                    return new EffetBuffDommage(val, tmp);
+                case (DOT):
+                    return new EffetBuffDot(val, tmp);
+            }
+            return null;
+        }
+
+    public static EffetDeclencheur toDeclencheur(CompetenceIG competenceIG) {
         return null;
+        //todo comme pour les buff pleins de classes
     }
 }

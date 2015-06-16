@@ -11,12 +11,14 @@ public class CompetenceBuff extends CompetencePassive {
 
     private int typeBuff;
     private int val;
-    private double[] donnee;
-    public CompetenceBuff(int type,int typeBuff, int val, double... donnee) {
+    private int[] donnee = null;
+    public CompetenceBuff(int type,int typeBuff, int val, int... donnee) {
         super(type);
         this.typeBuff = typeBuff;
         this.val = val;
-        this.donnee = donnee;
+        if (donnee.length > 0) {
+            this.donnee = donnee;
+        }
     }
 
     @Override
@@ -34,7 +36,7 @@ public class CompetenceBuff extends CompetencePassive {
         return val;
     }
 
-    public double[] getDonnee() {
+    public int[] getDonnee() {
         return donnee;
     }
 }

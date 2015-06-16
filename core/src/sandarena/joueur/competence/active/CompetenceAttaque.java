@@ -8,14 +8,16 @@ import sandarena.joueur.competence.CompetenceActive;
 public class CompetenceAttaque extends CompetenceActive {
 
     protected int caract;
-    protected double multiAttaque;
-    protected double[] effetSpeciaux;
+    protected int multiAttaque;
+    protected int[] donnee;
 
-    public CompetenceAttaque(int type, int recharge, int utilisation, int porte, int portemin, int zone, int caract, double multiAttaque, double... effetSpeciaux) {
+    public CompetenceAttaque(int type, int recharge, int utilisation, int porte, int portemin, int zone, int caract, int multiAttaque, int... donnee) {
         super(type, recharge, utilisation, porte, portemin, zone);
         this.setCaract(caract);
         this.setMultiAttaque(multiAttaque);
-        this.effetSpeciaux = effetSpeciaux;
+        if (donnee.length > 0) {
+            this.donnee = donnee;
+        }
     }
 
     public int getCaract() {
@@ -26,11 +28,11 @@ public class CompetenceAttaque extends CompetenceActive {
         this.caract = caract;
     }
 
-    public double getMultiAttaque() {
+    public int getMultiAttaque() {
         return multiAttaque;
     }
 
-    public void setMultiAttaque(double multiAttaque) {
+    public void setMultiAttaque(int multiAttaque) {
         this.multiAttaque = multiAttaque;
     }
 
