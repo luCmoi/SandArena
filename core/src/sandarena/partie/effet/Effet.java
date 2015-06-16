@@ -13,5 +13,4 @@ import sandarena.partie.Case;
  */
 public abstract class Effet {
 
-    public abstract void lance(Case attaquant, Case defenseur);
 }

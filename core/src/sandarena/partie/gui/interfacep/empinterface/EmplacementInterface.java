@@ -1,9 +1,10 @@
-package sandarena.partie.gui.interfacep;
+package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
+import sandarena.partie.gui.interfacep.StageInterface;
 import sandarena.partie.gui.interfacep.infowindow.InfoWindow;
 
 

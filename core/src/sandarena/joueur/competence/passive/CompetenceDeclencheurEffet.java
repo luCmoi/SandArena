@@ -37,9 +37,10 @@ public class CompetenceDeclencheurEffet extends CompetencePassive {
     public EffetDeclencheur enJeu() {
         Double[] infos = infodeclencheur.toArray(new Double[infodeclencheur.size()]);
         Double[] infos2 = infoEffet.toArray(new Double[infoEffet.size()]);
-        EffetDeclencheur tmp = new EffetDeclencheur(typedeclencheur, cible, infos);
-        tmp.addEffet(typeEffet, infos2);
-        return tmp;
+        //EffetDeclencheur tmp = new EffetDeclencheur(typedeclencheur, cible, infos);
+        //tmp.addEffet(typeEffet, infos2);
+        //return tmp;
+        return null;
     }
 
 

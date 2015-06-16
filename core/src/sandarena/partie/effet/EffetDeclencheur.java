@@ -6,7 +6,7 @@ import sandarena.partie.compcase.PersonnageIG;
  * Created by Guillaume on 09/06/2015.
  */
 public class EffetDeclencheur {
-    //type déclenche
+    /*//type déclenche
     public static final int DEGATRECU = 0;
     //type action
     public static final int BUFF = 0;
@@ -21,6 +21,8 @@ public class EffetDeclencheur {
     private int typeEffet;
     private double val;
     private Double[] infosEffet;
+
+    private EffetBuf suite;
 
     //todo a completer petit a petit
     public EffetDeclencheur(int type, int cible, Double... infos) {
@@ -62,5 +64,5 @@ public class EffetDeclencheur {
                 personnage.addBuf(effet);
                 break;
         }
-    }
+    }*/
 }

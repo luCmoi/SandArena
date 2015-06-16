@@ -8,9 +8,9 @@ import sandarena.Resolution;
 import sandarena.donnee.Utili;
 import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.compcase.PersonnageIG;
-import sandarena.partie.gui.interfacep.EmplacementComp;
-import sandarena.partie.gui.interfacep.EmplacementInterface;
-import sandarena.partie.gui.interfacep.EmplacementPerso;
+import sandarena.partie.gui.interfacep.empinterface.EmplacementComp;
+import sandarena.partie.gui.interfacep.empinterface.EmplacementInterface;
+import sandarena.partie.gui.interfacep.empinterface.EmplacementPerso;
 
 
 /**

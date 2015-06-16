@@ -5,15 +5,15 @@ package sandarena.joueur.competence.passive;
 import java.util.ArrayList;
 
 import sandarena.joueur.competence.CompetencePassive;
+import sandarena.partie.effet.CompetenceToEffet;
 
 public class CompetenceBuff extends CompetencePassive {
+
     private int typeBuff;
     private int val;
     private double[] donnee;
-    protected  String toStrings;
-    public CompetenceBuff(String toStrings, int type,int typeBuff, int val, double... donnee) {
+    public CompetenceBuff(int type,int typeBuff, int val, double... donnee) {
         super(type);
-        this.toStrings=toStrings;
         this.typeBuff = typeBuff;
         this.val = val;
         this.donnee = donnee;
@@ -22,7 +22,7 @@ public class CompetenceBuff extends CompetencePassive {
     @Override
     public ArrayList<String> toStrings() {
         ArrayList<String> retour = new ArrayList<String>();
-        retour.add(this.toStrings);
+        retour.addAll(CompetenceToEffet.toStrings(this));
         return retour;
     }
 

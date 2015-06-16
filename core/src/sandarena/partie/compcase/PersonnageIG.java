@@ -10,6 +10,12 @@ import sandarena.joueur.Personnage;
 import sandarena.partie.Case;
 import sandarena.partie.effet.EffetBuf;
 import sandarena.partie.effet.EffetDeclencheur;
+import sandarena.partie.effet.effetbuff.EffetBuffDot;
+import sandarena.partie.effet.effetbuff.effetbufftype.EffetBuffTypeAttaque;
+import sandarena.partie.effet.effetbuff.effetbufftype.EffetBuffTypeDefense;
+import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValAttaque;
+import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValDefense;
+import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValVitesse;
 
 /**
  * Une instance de Personnage en partie
@@ -17,7 +23,7 @@ import sandarena.partie.effet.EffetDeclencheur;
  * @author Guillaume
  */
 public class PersonnageIG {
-
+//TODO imperatif rebosser les caract
     private final CompetenceIG[] competence = new CompetenceIG[4];
     private Personnage donnee;
     private JoueurIG possesseur;
@@ -26,10 +32,12 @@ public class PersonnageIG {
     private Case container;
     private boolean aAgi;
     //Buff
-    private ArrayList<EffetBuf> changeDef = new ArrayList<EffetBuf>();
-    private ArrayList<EffetBuf> changeAtt = new ArrayList<EffetBuf>();
-    private ArrayList<EffetBuf> changeVitesse = new ArrayList<EffetBuf>();
-    private ArrayList<EffetBuf> dot = new ArrayList<EffetBuf>();
+    private ArrayList<EffetBuffValDefense> changeDef = new ArrayList<EffetBuffValDefense>();
+    private ArrayList<EffetBuffValAttaque> changeAtt = new ArrayList<EffetBuffValAttaque>();
+    private ArrayList<EffetBuffTypeAttaque> changeTypeAtt = new ArrayList<EffetBuffTypeAttaque>();
+    private ArrayList<EffetBuffTypeDefense> changeTypeDef = new ArrayList<EffetBuffTypeDefense>();
+    private ArrayList<EffetBuffValVitesse> changeVitesse = new ArrayList<EffetBuffValVitesse>();
+    private ArrayList<EffetBuffDot> dot = new ArrayList<EffetBuffDot>();
     //Declencheur
     private ArrayList<EffetDeclencheur> declencheurs = new ArrayList<EffetDeclencheur>();
 
@@ -126,29 +134,32 @@ public class PersonnageIG {
     }
 
     public void modifAttaque(IntegerNew val, IntegerNew type) {
-        for (EffetBuf effet : changeAtt) {
-            effet.modif(val, type);
+        int tmp = val.anInt;
+        for (EffetBuffValAttaque effet : changeAtt) {
+            tmp = effet.modif(tmp);
         }
-        val.anInt = (int) val.aDouble;
+        val.anInt = tmp;
     }
 
     public void modifDefense(IntegerNew val, IntegerNew type) {
-        for (EffetBuf effet : changeDef) {
-            effet.modif(val, type);
+        int tmp = val.anInt;
+        for (EffetBuffValDefense effet : changeDef) {
+            tmp = effet.modif(tmp);
         }
+        val.anInt = tmp;
     }
 
     public void modifVitesse() {
-        IntegerNew tmp = new IntegerNew(vitesseRestante);
-        for (EffetBuf effet : changeVitesse) {
-            effet.modif(tmp, null);
+        int tmp = this.donnee.commun.vitesse;
+        for (EffetBuffValVitesse effet : changeVitesse) {
+            tmp = effet.modif(tmp);
         }
-        vitesseRestante = (int)tmp.aDouble;
+        vitesseRestante = tmp;
     }
 
     public void infligeDot() {
-        for (EffetBuf effet : dot) {
-            effet.inflige(this);
+        for (EffetBuffDot effet : dot) {
+            effet.inflige();
         }
     }
 
@@ -164,26 +175,19 @@ public class PersonnageIG {
     }
 
     public void addBuf(EffetBuf effet) {
-        //todo a completer au fur et a mesure check type buff ajoute
-        switch (effet.getChangement()) {
-            case (EffetBuf.MULATTAQUE):
-            case (EffetBuf.TYPEATTAQUE):
-            case (EffetBuf.VALATTAQUE):
-                changeAtt.add(effet);
-                break;
-            case (EffetBuf.MULDEFENSE):
-            case (EffetBuf.TYPEDEFENSE):
-                changeDef.add(effet);
-                break;
-            case (EffetBuf.VALVITESSE):
-                changeVitesse.add(effet);
-                break;
-            case (EffetBuf.DEGAT):
-                effet.inflige(this);
-                break;
-            case (EffetBuf.DOT):
-                dot.add(effet);
-                break;
+        effet.setContainer(this);
+        if (effet instanceof EffetBuffValAttaque){
+            changeAtt.add((EffetBuffValAttaque)effet);
+        }else if (effet instanceof EffetBuffValDefense){
+            changeDef.add((EffetBuffValDefense)effet);
+        }else if (effet instanceof EffetBuffValVitesse){
+            changeVitesse.add((EffetBuffValVitesse)effet);
+        }else if (effet instanceof EffetBuffTypeAttaque){
+            changeTypeAtt.add((EffetBuffTypeAttaque)effet);
+        } else if (effet instanceof EffetBuffTypeDefense){
+            changeTypeDef.add((EffetBuffTypeDefense)effet);
+        }  else if (effet instanceof EffetBuffDot){
+            dot.add((EffetBuffDot)effet);
         }
     }
 

@@ -1,10 +1,11 @@
-package sandarena.partie.gui.interfacep;
+package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import sandarena.donnee.Utili;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.partie.compcase.CompetenceIG;
+import sandarena.partie.gui.interfacep.StageInterface;
 
 /**
  */

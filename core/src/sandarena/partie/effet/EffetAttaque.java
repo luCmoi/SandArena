@@ -12,14 +12,16 @@ public class EffetAttaque {
     public static final int STUN = 0;
     public IntegerNew type;
     public double mul = 1;
+    private EffetBuf suite;
 
     public EffetAttaque(int type) {
         this.type = new IntegerNew(type);
     }
 
-    public EffetAttaque(CompetenceAttaque comp) {
+    public EffetAttaque(CompetenceAttaque comp, EffetBuf suite) {
         this.type = new IntegerNew(comp.getCaract());
         this.mul = comp.getMultiAttaque();
+        this.suite = suite;
     }
 
     public void lance(Case attaquant, Case defenseur) {
@@ -40,15 +42,16 @@ public class EffetAttaque {
                     def.anInt = defenseur.getPresence().getDonnee().commun.magie;
                     break;
             }
-            att.aDouble = att.anInt;
-            def.aDouble = def.anInt;
             attaquant.getPresence().modifAttaque(att, type);
             defenseur.getPresence().modifDefense(def, type);
             int degat = degat(att.anInt, def.anInt);
             for (EffetDeclencheur effet : defenseur.getPresence().getDeclencheurs()) {
-                effet.check(type.anInt, defenseur.getPresence(), attaquant.getPresence(), degat);
+                //effet.check(type.anInt, defenseur.getPresence(), attaquant.getPresence(), degat);
             }
             defenseur.getPresence().inflige(degat);
+            if (suite != null){
+                defenseur.getPresence().addBuf(suite);
+            }
         }
     }
 

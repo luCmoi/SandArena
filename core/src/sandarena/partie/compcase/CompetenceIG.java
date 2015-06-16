@@ -8,8 +8,8 @@ import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
 import sandarena.partie.AlgorithmePathfinding;
 import sandarena.partie.Case;
+import sandarena.partie.effet.CompetenceToEffet;
 import sandarena.partie.effet.EffetAttaque;
-import sandarena.partie.effet.EffetBuf;
 
 /**
  * Une instance de compétence en Partie
@@ -27,7 +27,7 @@ public class CompetenceIG {
         container = perso;
         info = c;
         if (c.competence instanceof CompetenceBuff) {
-            perso.addBuf(new EffetBuf(((CompetenceBuff) c.competence).getTypeBuff(), ((CompetenceBuff) c.competence).getVal(), ((CompetenceBuff) c.competence).getDonnee()));
+            perso.addBuf(CompetenceToEffet.toEffet(this));
         } else if (c.competence instanceof CompetenceDeclencheurEffet) {
             perso.addDeclencheur(((CompetenceDeclencheurEffet) c.competence).enJeu());
         }
@@ -44,15 +44,16 @@ public class CompetenceIG {
     }
 
     public void select(Case[][] plateau) {
-        AlgorithmePathfinding.calculCaseTouchable(((CompetenceActive) info.competence).getPortemin(), ((CompetenceActive) info.competence).getPorte(), this.container.getContainer(), plateau);
+        AlgorithmePathfinding.calculCaseTouchable(((CompetenceActive) info.competence).getPortemin(), ((CompetenceActive) info.competence).getPorte(), this.getContainer().getContainer(), plateau);
     }
 
     public void agit(Case aCase) {
         if (aCase.getPresence() != null) {
             if (info.competence instanceof CompetenceAttaque) {
-                new EffetAttaque((CompetenceAttaque) this.info.competence).lance(this.container.getContainer(), aCase);
+                //todo effet d'attaque viennent d'ici
+                new EffetAttaque((CompetenceAttaque) this.info.competence,null).lance(this.getContainer().getContainer(), aCase);
             } else if (info.competence instanceof CompetenceBuffActif) {
-                aCase.getPresence().addBuf(new EffetBuf(((CompetenceBuffActif) info.competence).getTypeBuff(), ((CompetenceBuffActif) info.competence).getVal(), ((CompetenceBuffActif) info.competence).getDonnee()));
+                aCase.getPresence().addBuf(CompetenceToEffet.toEffet(this));
             }
             if (((CompetenceActive)info.competence).getUtilisation()!=0){
                 this.utilisationRestante = this.getUtilisationRestante() - 1;
@@ -64,7 +65,7 @@ public class CompetenceIG {
                 this.recharge = ((CompetenceActive)info.competence).getRechargement();
                 active = false;
             }
-            this.container.setAAgi(true);
+            this.getContainer().setAAgi(true);
         }
     }
 
@@ -97,5 +98,9 @@ public class CompetenceIG {
 
     public boolean isActive() {
         return active;
+    }
+
+    public PersonnageIG getContainer() {
+        return container;
     }
 }
