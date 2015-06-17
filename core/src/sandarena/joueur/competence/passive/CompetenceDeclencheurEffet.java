@@ -29,4 +29,16 @@ public class CompetenceDeclencheurEffet extends CompetencePassive {
         retour.addAll(CompetenceToEffet.toStrings(this));
         return retour;
     }
+
+    public int getCible() {
+        return cible;
+    }
+
+    public int getTypedeclencheur() {
+        return typedeclencheur;
+    }
+
+    public int[] getDonnee() {
+        return donnee;
+    }
 }

@@ -3,7 +3,7 @@ package sandarena.partie.effet;
 import sandarena.partie.compcase.PersonnageIG;
 
 //todo conditions
-public class EffetBuf {
+public class EffetBuf extends Effet{
     private PersonnageIG container;
     private EffetBuf chaine;
 

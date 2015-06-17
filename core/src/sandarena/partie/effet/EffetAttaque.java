@@ -8,12 +8,12 @@ import sandarena.partie.Case;
 /**
  * @author Guillaume
  */
-public class EffetAttaque {
+public class EffetAttaque extends Effet{
     public int type;
     public int mul = 0;
     private EffetBuf suite;
 
-    public EffetAttaque(int type) {
+    public EffetAttaque(int type)  {
         this.type = type;
     }
 
@@ -45,12 +45,10 @@ public class EffetAttaque {
             att = att + mul;
             def = defenseur.getPresence().modifDefense(def, type);
             int degat = degat(att, def);
-            for (EffetDeclencheur effet : defenseur.getPresence().getDeclencheurs()) {
-                //effet.check(type.anInt, defenseur.getPresence(), attaquant.getPresence(), degat);
-            }
             defenseur.getPresence().inflige(degat);
             if (suite != null){
                 defenseur.getPresence().addBuf(suite);
+                System.out.println("Bim");
             }
         }
     }

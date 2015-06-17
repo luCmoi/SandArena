@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import sandarena.donnee.Caract;
 import sandarena.joueur.competence.CompetenceActive;
+import sandarena.partie.effet.CompetenceToEffet;
 
 public class CompetenceAttaque extends CompetenceActive {
 
@@ -51,8 +52,22 @@ public class CompetenceAttaque extends CompetenceActive {
                 car = "Magie";
                 break;
         }
-        retour.add("Attaque de type "+car+" de puissance "+multiAttaque);
+        retour.add("Attaque de type " + car + " de puissance " + multiAttaque);
+        if (donnee != null){
+            int[] donneetmp = null;
+            if (donnee.length > 3) {
+                donneetmp = new int[donnee.length-3];
+                for (int i = 0; i < donnee.length-3; i++) {
+                    donneetmp[i]=donnee[i+3];
+                }
+            }
+            retour.addAll(CompetenceToEffet.switchTypeBuff(donnee[1], donnee[2],donneetmp));
+        }
         retour.addAll(super.toStrings());
         return retour;
+    }
+
+    public int[] getDonnee() {
+        return donnee;
     }
 }

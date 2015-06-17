@@ -40,7 +40,9 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Berzerk",
                 "Plus le personnage est blessé plus sa folie est grande.",
                 "Image/Competence/Berzerk.png",
-                new CompetenceDeclencheurEffet(Affinite.FORCE, CompetenceToEffet.DEGATRECU, CompetenceToEffet.SOI, CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.VALATTAQUE, 1),
+                new CompetenceDeclencheurEffet(Affinite.FORCE, CompetenceToEffet.DEGATRECU, CompetenceToEffet.SOI,
+                        CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.VALATTAQUE, 1,
+                        CompetenceToEffet.CONDITIONTYPE, Caract.FORCE),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
         banque.add(new EntreeCompetence("Poupée Vaudou",
                 "L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances soit communes",
@@ -55,12 +57,14 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Rituel de sang",
                 "Parfoit il faut sacrifier une partie de soit pour en renforcer une autre",
                 "Image/Competence/RituelDeSang.png",
-                new CompetenceBuffActif(Affinite.TRIBAL,3,0,0,0,1,Caract.MAGIE, CompetenceToEffet.DEGAT, 4, CompetenceToEffet.CONDITIONBUFF,CompetenceToEffet.VALATTAQUE, 1),
+                new CompetenceBuffActif(Affinite.TRIBAL,3,0,0,0,1,Caract.MAGIE, CompetenceToEffet.DEGAT, 4,
+                        CompetenceToEffet.CONDITIONBUFF,CompetenceToEffet.VALATTAQUE, 1),
                 new ArrayList<Integer>(Arrays.asList(Affinite.TRIBAL))));
         banque.add(new EntreeCompetence("Ecrase-Face",
                 "Un tel coup peut ferait s'évanouir n'importe quel être vivant",
                 "Image/Competence/EcraseFace.png",
-                new CompetenceAttaque(Affinite.FORCE, 3, 0, 1, 1, 1, Caract.FORCE, 0),
+                new CompetenceAttaque(Affinite.FORCE, 3, 0, 1, 1, 1, Caract.FORCE, -1,
+                        CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.STUN, 1),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
     }
 

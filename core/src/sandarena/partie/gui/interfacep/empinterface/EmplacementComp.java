@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import sandarena.donnee.Utili;
 import sandarena.joueur.competence.CompetenceActive;
+import sandarena.joueur.competence.CompetencePassive;
 import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.gui.interfacep.StageInterface;
 
@@ -30,6 +31,13 @@ public class EmplacementComp extends EmplacementInterface {
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         if (getCompetenceIG() != null) {
             batch.draw(getCompetenceIG().info.image, getX(), getY(), getWidth(), getHeight());
+            if (getCompetenceIG().getRecharge()!=0){
+                batch.draw(Utili.recharge, getX(), getY(),
+                        getWidth()/ ((CompetenceActive)getCompetenceIG().info.competence).getRechargement()*getCompetenceIG().getRecharge(),
+                        getHeight());
+            }if (getCompetenceIG().info.competence instanceof CompetencePassive || getCompetenceIG().getUtilisationRestante()==0){
+                    batch.draw(Utili.passive, getX(), getY(), getWidth(), getHeight());
+            }
         } else {
         }
     }

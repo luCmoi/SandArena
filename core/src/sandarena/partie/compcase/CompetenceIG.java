@@ -50,7 +50,7 @@ public class CompetenceIG {
     public void agit(Case aCase) {
         if (aCase.getPresence() != null) {
             if (info.competence instanceof CompetenceAttaque) {
-                new EffetAttaque((CompetenceAttaque) this.info.competence,null).lance(this.getContainer().getContainer(), aCase);
+                new EffetAttaque((CompetenceAttaque)this.info.competence, CompetenceToEffet.toEffet(this)).lance(this.getContainer().getContainer(), aCase);
             } else if (info.competence instanceof CompetenceBuffActif) {
                 aCase.getPresence().addBuf(CompetenceToEffet.toEffet(this));
             }
