@@ -12,10 +12,12 @@ import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.effet.effetbuff.EffetBuffDommage;
 import sandarena.partie.effet.effetbuff.EffetBuffDot;
 import sandarena.partie.effet.effetbuff.EffetBuffStun;
+import sandarena.partie.effet.effetbuff.EffetBuffType;
 import sandarena.partie.effet.effetbuff.EffetBuffVal;
 import sandarena.partie.effet.effetbuff.effetbufftype.EffetBuffTypeAttaque;
 import sandarena.partie.effet.effetbuff.effetbufftype.EffetBuffTypeDefense;
 import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValAttaque;
+import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValDefense;
 import sandarena.partie.effet.effetbuff.effetbuffval.EffetBuffValVitesse;
 import sandarena.partie.effet.effetdeclencheur.EffetDeclencheurDegatRecu;
 
@@ -33,6 +35,7 @@ public class CompetenceToEffet {
     public static final int VALATTAQUE = 6;
     public static final int DEGAT = 7;
     public static final int STUN = 8;
+    public static final int VALDEFENSE = 9;
     //static type declencheur
     public static final int DEGATRECU = 0;
     //static cible declencheur
@@ -118,6 +121,9 @@ public class CompetenceToEffet {
             case (STUN):
                 retour.add("Assomme pendant " + val + " tours");
                 break;
+            case (VALDEFENSE):
+                retour.add("Augmente la defense de "+val);
+                break;
         }
         if (donnee != null) {
             for (int y = 0; y < donnee.length; y++) {
@@ -186,6 +192,9 @@ public class CompetenceToEffet {
                 break;
             case (STUN):
                 retour = new EffetBuffStun(val, null);
+                break;
+            case (VALDEFENSE):
+                retour = new EffetBuffValDefense(val, null);
         }
         if (donnee != null) {
             for (int y = 0; y < donnee.length; y++) {
@@ -201,7 +210,10 @@ public class CompetenceToEffet {
                     y = donnee.length;
                 } else if (donnee[y] == CONDITIONTYPE) {
                     if (retour instanceof EffetBuffVal) {
-                        ((EffetBuffVal) retour).setType(donnee[y + 1]);
+                        ((EffetBuffVal) retour).setTypeCond(donnee[y + 1]);
+                        y++;
+                    }else if (retour instanceof EffetBuffType){
+                        ((EffetBuffType) retour).setTypeCond(donnee[y+1]);
                         y++;
                     }
                 }

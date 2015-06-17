@@ -162,6 +162,20 @@ public class PersonnageIG {
     }
 
     public int modifAttaque(int val, int type) {
+        for(EffetBuffTypeAttaque effet : changeTypeAtt){
+            type = effet.modif(type);
+            switch (type){
+                case(Caract.FORCE):
+                    val = donnee.commun.force;
+                    break;
+                case(Caract.AGILITE):
+                    val = donnee.commun.agilite;
+                    break;
+                case(Caract.MAGIE):
+                    val = donnee.commun.magie;
+                    break;
+            }
+        }
         for (EffetBuffValAttaque effet : changeAtt) {
             val = effet.modif(val, type);
         }
@@ -169,6 +183,20 @@ public class PersonnageIG {
     }
 
     public int modifDefense(int val, int type) {
+        for(EffetBuffTypeDefense effet : changeTypeDef){
+            type = effet.modif(type);
+            switch (type){
+                case(Caract.FORCE):
+                    val = donnee.commun.force;
+                    break;
+                case(Caract.AGILITE):
+                    val = donnee.commun.agilite;
+                    break;
+                case(Caract.MAGIE):
+                    val = donnee.commun.magie;
+                    break;
+            }
+        }
         for (EffetBuffValDefense effet : changeDef) {
             val = effet.modif(val, type);
         }
@@ -217,10 +245,13 @@ public class PersonnageIG {
             modifCaract();
         } else if (effet instanceof EffetBuffValVitesse) {
             changeVitesse.add((EffetBuffValVitesse) effet);
+            modifCaract();
         } else if (effet instanceof EffetBuffTypeAttaque) {
             changeTypeAtt.add((EffetBuffTypeAttaque) effet);
+            modifCaract();
         } else if (effet instanceof EffetBuffTypeDefense) {
             changeTypeDef.add((EffetBuffTypeDefense) effet);
+            modifCaract();
         } else if (effet instanceof EffetBuffDot) {
             dot.add((EffetBuffDot) effet);
         } else if (effet instanceof EffetBuffStun) {
@@ -293,8 +324,10 @@ public class PersonnageIG {
             modifCaract();
         } else if (effet instanceof EffetBuffTypeAttaque) {
             changeTypeAtt.remove(effet);
+            modifCaract();
         } else if (effet instanceof EffetBuffTypeDefense) {
             changeTypeDef.remove(effet);
+            modifCaract();
         } else if (effet instanceof EffetBuffDot) {
             dot.remove(effet);
         } else if (effet instanceof EffetBuffStun) {

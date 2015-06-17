@@ -32,6 +32,7 @@ public class BanqueCompetence extends Banque {
      * Initialise toutes les compétences du jeu
      */
     public static void init() {
+        //FORCE
         banque.add(new EntreeCompetence("Bourre-pif",
                 "Coup de poing puissant au visage, de préférence dans le nez.",
                 "Image/Competence/Bourrepif.png",
@@ -44,15 +45,28 @@ public class BanqueCompetence extends Banque {
                         CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.VALATTAQUE, 1,
                         CompetenceToEffet.CONDITIONTYPE, Caract.FORCE),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
-        banque.add(new EntreeCompetence("Poupée Vaudou",
-                "L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances soit communes",
-                "Image/Competence/PoupeeVaudou.png",
-                new CompetenceBuffActif(Affinite.TRIBAL, 0, 1, 15, 1, 1, Caract.MAGIE, CompetenceToEffet.DOT, 1),
-                new ArrayList(Arrays.asList(Affinite.TRIBAL))));
+        banque.add(new EntreeCompetence("Ecrase-Face",
+                "Un tel coup peut ferait s'évanouir n'importe quel être vivant",
+                "Image/Competence/EcraseFace.png",
+                new CompetenceAttaque(Affinite.FORCE, 3, 0, 1, 1, 1, Caract.FORCE, -1,
+                        CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.STUN, 1),
+                new ArrayList(Arrays.asList(Affinite.FORCE))));
         banque.add(new EntreeCompetence("Leg Day",
                 "Le personnage à travaillé ses jambes tous les jours",
                 "Image/Competence/LegDay.png",
                 new CompetenceBuff(Affinite.TRIBAL, CompetenceToEffet.VALVITESSE, 4),
+                new ArrayList(Arrays.asList(Affinite.FORCE))));
+        banque.add(new EntreeCompetence("Contraction Musculaire",
+                "Des muscles puissants suffisent à arreter un coup mortel",
+                "Image/Competence/ContractionMusculaire.png",
+                new CompetenceBuffActif(Affinite.FORCE, 3, 0, 0, 0, 1, Caract.FORCE, CompetenceToEffet.VALDEFENSE, 3,
+                        CompetenceToEffet.CONDITIONTYPE, Caract.FORCE),
+                new ArrayList(Arrays.asList(Affinite.FORCE))));
+        //TRIBAL
+        banque.add(new EntreeCompetence("Lance de Pai",
+                "On dit que l'originale lancée par Pai fendit une montagne",
+                "Image/Competence/LanceDePai.png",
+                new CompetenceAttaque(Affinite.TRIBAL, 2, 0, 5, 2, 1, Caract.MAGIE, 0),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
         banque.add(new EntreeCompetence("Rituel de sang",
                 "Parfoit il faut sacrifier une partie de soit pour en renforcer une autre",
@@ -60,12 +74,23 @@ public class BanqueCompetence extends Banque {
                 new CompetenceBuffActif(Affinite.TRIBAL,3,0,0,0,1,Caract.MAGIE, CompetenceToEffet.DEGAT, 4,
                         CompetenceToEffet.CONDITIONBUFF,CompetenceToEffet.VALATTAQUE, 1),
                 new ArrayList<Integer>(Arrays.asList(Affinite.TRIBAL))));
-        banque.add(new EntreeCompetence("Ecrase-Face",
-                "Un tel coup peut ferait s'évanouir n'importe quel être vivant",
-                "Image/Competence/EcraseFace.png",
-                new CompetenceAttaque(Affinite.FORCE, 3, 0, 1, 1, 1, Caract.FORCE, -1,
-                        CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.STUN, 1),
-                new ArrayList(Arrays.asList(Affinite.FORCE))));
+        banque.add(new EntreeCompetence("Poupée Vaudou",
+                "L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances soit communes",
+                "Image/Competence/PoupeeVaudou.png",
+                new CompetenceBuffActif(Affinite.TRIBAL, 0, 1, 15, 1, 1, Caract.MAGIE, CompetenceToEffet.DOT, 1),
+                new ArrayList(Arrays.asList(Affinite.TRIBAL))));
+        banque.add(new EntreeCompetence("Tiki de To´a-Hiti",
+                "Ce tiki puise dans la force pour defendre l'esprit",
+                "Image/Competence/TikiDeToahiti.png",
+                new CompetenceBuff(Affinite.TRIBAL, CompetenceToEffet.TYPEDEFENSE, Caract.FORCE,
+                        CompetenceToEffet.CONDITIONTYPE, Caract.MAGIE),
+                new ArrayList(Arrays.asList(Affinite.TRIBAL))));
+        banque.add(new EntreeCompetence("Tiki de Tu",
+                "Ce tiki donne a l'esprit la force des muscles",
+                "Image/Competence/TikiDeTu.png",
+                new CompetenceBuff(Affinite.TRIBAL, CompetenceToEffet.TYPEATTAQUE, Caract.FORCE,
+                        CompetenceToEffet.CONDITIONTYPE, Caract.MAGIE),
+                new ArrayList(Arrays.asList(Affinite.TRIBAL))));
     }
 
     /**

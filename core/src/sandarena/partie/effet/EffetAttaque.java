@@ -48,7 +48,6 @@ public class EffetAttaque extends Effet{
             defenseur.getPresence().inflige(degat);
             if (suite != null){
                 defenseur.getPresence().addBuf(suite);
-                System.out.println("Bim");
             }
         }
     }

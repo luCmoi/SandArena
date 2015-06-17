@@ -7,7 +7,7 @@ import sandarena.partie.effet.EffetBuf;
  */
 public class EffetBuffVal extends EffetBuf {
     protected int val;
-    private int type = -1;
+    private int typeCond = -1;
 
     public EffetBuffVal(int val, EffetBuf chaine) {
         super(chaine);
@@ -15,9 +15,9 @@ public class EffetBuffVal extends EffetBuf {
     }
 
     public int modif(int val,int type){
-        if (this.getType() == -1) {
+        if (this.getTypeCond() == -1) {
             return val + this.val;
-        }else if (this.getType() == type){
+        }else if (this.getTypeCond() == type){
             return val + this.val;
         }else{
             return val;
@@ -27,11 +27,11 @@ public class EffetBuffVal extends EffetBuf {
         return val + this.val;
     }
 
-    public int getType() {
-        return type;
+    public int getTypeCond() {
+        return typeCond;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setTypeCond(int type) {
+        this.typeCond = type;
     }
 }
