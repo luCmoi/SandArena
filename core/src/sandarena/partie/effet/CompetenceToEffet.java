@@ -6,6 +6,7 @@ import sandarena.donnee.Caract;
 import sandarena.joueur.competence.Competence;
 import sandarena.joueur.competence.active.CompetenceAttaque;
 import sandarena.joueur.competence.active.CompetenceBuffActif;
+import sandarena.joueur.competence.active.CompetenceDispel;
 import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
 import sandarena.partie.compcase.CompetenceIG;
@@ -140,6 +141,8 @@ public class CompetenceToEffet {
                 } else if (donnee[y] == CONDITIONTYPE) {
                     retour.add("Sur la caractéristique " + switchtype(donnee[y + 1]));
                     y++;
+                }else if (donnee[y] == CONDITIONDUREE){
+                    retour.add("Dure "+donnee[y+1]+" tours");
                 }
             }
         }
@@ -155,6 +158,18 @@ public class CompetenceToEffet {
             return creerEffet(tmp.getTypeBuff(), tmp.getVal(), tmp.getDonnee());
         } else if (competenceIG.info.competence instanceof CompetenceAttaque) {
             CompetenceAttaque tmp = (CompetenceAttaque) competenceIG.info.competence;
+            if (tmp.getDonnee() != null) {
+                int[] donneetmp = null;
+                if (tmp.getDonnee().length > 3) {
+                    donneetmp = new int[tmp.getDonnee().length - 3];
+                    for (int i = 0; i < tmp.getDonnee().length - 3; i++) {
+                        donneetmp[i] = tmp.getDonnee()[i + 3];
+                    }
+                }
+                return CompetenceToEffet.creerEffet(tmp.getDonnee()[1], tmp.getDonnee()[2], donneetmp);
+            }
+        }else if (competenceIG.info.competence instanceof CompetenceDispel){
+            CompetenceDispel tmp = (CompetenceDispel) competenceIG.info.competence;
             if (tmp.getDonnee() != null) {
                 int[] donneetmp = null;
                 if (tmp.getDonnee().length > 3) {
@@ -216,6 +231,9 @@ public class CompetenceToEffet {
                         ((EffetBuffType) retour).setTypeCond(donnee[y+1]);
                         y++;
                     }
+                }else if (donnee[y]== CONDITIONDUREE){
+                    retour.setDuree(donnee[y+1]);
+                    y++;
                 }
             }
         }

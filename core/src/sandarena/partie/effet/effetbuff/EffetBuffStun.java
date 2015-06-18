@@ -13,11 +13,12 @@ public class EffetBuffStun extends EffetBuf{
         this.duree = duree;
     }
 
-    public void tour(){
-        duree = getDuree() - 1;
-    }
-
     public int getDuree() {
         return duree;
+    }
+
+    @Override
+    public boolean isBenefique() {
+        return false;
     }
 }

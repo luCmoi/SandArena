@@ -19,6 +19,10 @@ public class EffetBuffDommage extends EffetBuf{
         container.inflige(val);
     }
 
+    @Override
+    public boolean isBenefique() {
+        return true;
+    }
 
 
 }

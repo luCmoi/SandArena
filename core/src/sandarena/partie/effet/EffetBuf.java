@@ -3,11 +3,12 @@ package sandarena.partie.effet;
 import sandarena.partie.compcase.PersonnageIG;
 
 //todo conditions
-public class EffetBuf extends Effet{
+public abstract class EffetBuf extends Effet {
     private PersonnageIG container;
     private EffetBuf chaine;
+    private int duree = -1;
 
-    public EffetBuf(EffetBuf chaine){
+    public EffetBuf(EffetBuf chaine) {
         this.setChaine(chaine);
     }
 
@@ -17,10 +18,12 @@ public class EffetBuf extends Effet{
 
     public void setContainer(PersonnageIG container) {
         this.container = container;
-        if(chaine != null){
+        if (chaine != null) {
             container.addBuf(chaine);
         }
     }
+
+    public abstract boolean isBenefique();
 
     public EffetBuf getChaine() {
         return chaine;
@@ -30,4 +33,15 @@ public class EffetBuf extends Effet{
         this.chaine = chaine;
     }
 
+    public void setDuree(int d) {
+        this.duree = d;
+    }
+
+    public boolean tour() {
+        this.duree--;
+        if (this.duree == 0) {
+            return true;
+        }
+        return false;
+    }
 }

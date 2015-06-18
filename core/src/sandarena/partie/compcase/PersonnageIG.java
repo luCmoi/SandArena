@@ -3,6 +3,7 @@ package sandarena.partie.compcase;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import sandarena.donnee.BanqueCompetence.EntreeCompetence;
 import sandarena.donnee.Caract;
@@ -10,6 +11,7 @@ import sandarena.joueur.Personnage;
 import sandarena.partie.Case;
 import sandarena.partie.effet.EffetBuf;
 import sandarena.partie.effet.EffetDeclencheur;
+import sandarena.partie.effet.effetbuff.EffetBuffDommage;
 import sandarena.partie.effet.effetbuff.EffetBuffDot;
 import sandarena.partie.effet.effetbuff.EffetBuffStun;
 import sandarena.partie.effet.effetbuff.effetbufftype.EffetBuffTypeAttaque;
@@ -41,6 +43,9 @@ public class PersonnageIG {
     private ArrayList<EffetBuffValVitesse> changeVitesse = new ArrayList<EffetBuffValVitesse>();
     private ArrayList<EffetBuffDot> dot = new ArrayList<EffetBuffDot>();
     private ArrayList<EffetBuffStun> stun = new ArrayList<EffetBuffStun>();
+    //Dispel
+    private ArrayList<EffetBuf> buffBenefique= new ArrayList<EffetBuf>();
+    private ArrayList<EffetBuf> buffMauvais = new ArrayList<EffetBuf>();
     //Declencheur
     private ArrayList<EffetDeclencheurDegatRecu> recoiDegat = new ArrayList<EffetDeclencheurDegatRecu>();
     //caract en jeu
@@ -136,15 +141,6 @@ public class PersonnageIG {
                 c.tour();
             }
             if (!stun.isEmpty()) {
-                ArrayList<EffetBuffStun> toRemove = new ArrayList<EffetBuffStun>();
-                for (EffetBuffStun effet : stun) {
-                    effet.tour();
-                    if (effet.getDuree() == 0) {
-                        toRemove.add(effet);
-                    }
-                }
-                stun.removeAll(toRemove);
-                toRemove.clear();
                 this.aAgi = true;
             }
         }
@@ -237,6 +233,11 @@ public class PersonnageIG {
 
     public void addBuf(EffetBuf effet) {
         effet.setContainer(this);
+        if (!(effet instanceof EffetBuffDommage) && effet.isBenefique()){
+            buffBenefique.add(effet);
+        }else {
+            buffMauvais.add(effet);
+        }
         if (effet instanceof EffetBuffValAttaque) {
             changeAtt.add((EffetBuffValAttaque) effet);
             modifCaract();
@@ -313,6 +314,8 @@ public class PersonnageIG {
     }
 
     public void removeBuff(EffetBuf effet) {
+        buffBenefique.remove(effet);
+        buffMauvais.remove(effet);
         if (effet instanceof EffetBuffValAttaque) {
             changeAtt.remove(effet);
             modifCaract();
@@ -333,5 +336,28 @@ public class PersonnageIG {
         } else if (effet instanceof EffetBuffStun) {
             stun.remove(effet);
         }
+    }
+
+    public void tourBuff() {
+        ArrayList<EffetBuf> toRemove = new ArrayList<EffetBuf>();
+        for(EffetBuf effet : buffBenefique){
+            if(effet.tour())toRemove.add(effet);
+        }for (EffetBuf effet :buffMauvais){
+            if(effet.tour())toRemove.add(effet);
+        }
+        for (EffetBuf effet : toRemove){
+            removeBuff(effet);
+        }
+        toRemove.clear();
+    }
+
+    public void removeBuffBenefique() {
+        Collections.shuffle(buffBenefique);
+        buffBenefique.remove(0);
+    }
+
+    public void removeBuffMauvais() {
+        Collections.shuffle(buffMauvais);
+        buffMauvais.remove(0);
     }
 }

@@ -99,12 +99,14 @@ public class Partie extends Stage {
     private void tour() {
         for (PersonnageIG perso : joueur1.getPersonnages()) {
             perso.setAAgi(false);
+            perso.tourBuff();
             perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
             perso.infligeDot();
             perso.modifCaract();
         }
         for (PersonnageIG perso : joueur2.getPersonnages()) {
             perso.setAAgi(false);
+            perso.tourBuff();
             perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
             perso.modifVitesse();
             perso.infligeDot();

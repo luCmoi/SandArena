@@ -13,9 +13,6 @@ public class EffetAttaque extends Effet{
     public int mul = 0;
     private EffetBuf suite;
 
-    public EffetAttaque(int type)  {
-        this.type = type;
-    }
 
     public EffetAttaque(CompetenceAttaque comp, EffetBuf suite) {
         this.type = comp.getCaract();

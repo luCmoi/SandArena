@@ -4,12 +4,14 @@ import sandarena.donnee.BanqueCompetence.EntreeCompetence;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.joueur.competence.active.CompetenceAttaque;
 import sandarena.joueur.competence.active.CompetenceBuffActif;
+import sandarena.joueur.competence.active.CompetenceDispel;
 import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
 import sandarena.partie.AlgorithmePathfinding;
 import sandarena.partie.Case;
 import sandarena.partie.effet.CompetenceToEffet;
 import sandarena.partie.effet.EffetAttaque;
+import sandarena.partie.effet.EffetDispel;
 
 /**
  * Une instance de compétence en Partie
@@ -51,7 +53,9 @@ public class CompetenceIG {
         if (aCase.getPresence() != null) {
             if (info.competence instanceof CompetenceAttaque) {
                 new EffetAttaque((CompetenceAttaque)this.info.competence, CompetenceToEffet.toEffet(this)).lance(this.getContainer().getContainer(), aCase);
-            } else if (info.competence instanceof CompetenceBuffActif) {
+            } else if (info.competence instanceof CompetenceDispel) {
+                new EffetDispel((CompetenceDispel) this.info.competence, CompetenceToEffet.toEffet(this)).lance(this.getContainer().getContainer(), aCase);
+            }else if (info.competence instanceof CompetenceBuffActif) {
                 aCase.getPresence().addBuf(CompetenceToEffet.toEffet(this));
             }
             if (((CompetenceActive)info.competence).getUtilisation()!=0){

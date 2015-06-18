@@ -17,4 +17,9 @@ public class EffetBuffDot extends EffetBuf {
     public void inflige(){
         getContainer().inflige(degat);
     }
+
+    @Override
+    public boolean isBenefique() {
+        return false;
+    }
 }

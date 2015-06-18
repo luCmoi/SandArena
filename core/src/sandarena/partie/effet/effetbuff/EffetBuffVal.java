@@ -34,4 +34,9 @@ public class EffetBuffVal extends EffetBuf {
     public void setTypeCond(int type) {
         this.typeCond = type;
     }
+
+    @Override
+    public boolean isBenefique() {
+        return (val<0);
+    }
 }

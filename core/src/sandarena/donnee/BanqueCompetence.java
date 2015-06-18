@@ -7,6 +7,7 @@ import java.util.Collections;
 import sandarena.joueur.competence.Competence;
 import sandarena.joueur.competence.active.CompetenceAttaque;
 import sandarena.joueur.competence.active.CompetenceBuffActif;
+import sandarena.joueur.competence.active.CompetenceDispel;
 import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
 import sandarena.partie.effet.CompetenceToEffet;
@@ -60,7 +61,8 @@ public class BanqueCompetence extends Banque {
                 "Des muscles puissants suffisent à arreter un coup mortel",
                 "Image/Competence/ContractionMusculaire.png",
                 new CompetenceBuffActif(Affinite.FORCE, 3, 0, 0, 0, 1, Caract.FORCE, CompetenceToEffet.VALDEFENSE, 3,
-                        CompetenceToEffet.CONDITIONTYPE, Caract.FORCE),
+                        CompetenceToEffet.CONDITIONTYPE, Caract.FORCE,
+                        CompetenceToEffet.CONDITIONDUREE, 2),
                 new ArrayList(Arrays.asList(Affinite.FORCE))));
         //TRIBAL
         banque.add(new EntreeCompetence("Lance de Pai",
@@ -90,6 +92,11 @@ public class BanqueCompetence extends Banque {
                 "Image/Competence/TikiDeTu.png",
                 new CompetenceBuff(Affinite.TRIBAL, CompetenceToEffet.TYPEATTAQUE, Caract.FORCE,
                         CompetenceToEffet.CONDITIONTYPE, Caract.MAGIE),
+                new ArrayList(Arrays.asList(Affinite.TRIBAL))));
+        banque.add(new EntreeCompetence("Perle de Purification",
+                "Purifie le corps de ses afflictions",
+                "Image/Competence/PerleDePurification.png",
+                new CompetenceDispel(Affinite.TRIBAL,4,3,4,0,1, false, 1),
                 new ArrayList(Arrays.asList(Affinite.TRIBAL))));
     }
 
