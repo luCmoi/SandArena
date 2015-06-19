@@ -15,5 +15,9 @@ public class Utili {
     public static Texture contour = new Texture(Gdx.files.internal("Image/Util/Contour.png"));
     public static Texture recharge = new Texture(Gdx.files.internal("Image/Util/Recharge.png"));
     public static Texture passive = new Texture(Gdx.files.internal("Image/Util/Passive.png"));
-
+    public static Texture force = new Texture(Gdx.files.internal("Image/Util/Force.png"));
+    public static Texture agilite = new Texture(Gdx.files.internal("Image/Util/Agilite.png"));
+    public static Texture magie = new Texture(Gdx.files.internal("Image/Util/Magie.png"));
+    public static Texture vie = new Texture(Gdx.files.internal("Image/Util/Vie.png"));
+    public static Texture vitesse = new Texture(Gdx.files.internal("Image/Util/Vitesse.png"));
 }

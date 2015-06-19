@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import sandarena.Resolution;
 import sandarena.donnee.Font;
 import sandarena.donnee.RegexTexte;
+import sandarena.donnee.Utili;
 
 
 /**
@@ -34,12 +35,38 @@ public class Info extends Actor {
         if (perso) {
             Font.font.setScale(Resolution.ratioWidth * 3, Resolution.ratioHeight * 3);
             Font.font.draw(batch, texte[0], getX() + getHeight(), getY() + getHeight());
-            Font.font.setScale((float)(Resolution.ratioWidth * 1.5), Resolution.ratioHeight * 2);
-            Font.font.draw(batch, texte[1], getX() + getHeight(), getY() + getHeight() - Font.font.getLineHeight() - (Resolution.ratioHeight * 5));
-            Font.font.draw(batch, texte[2], getX() + getHeight() + (getHeight() / 2), getY() + getHeight() - Font.font.getLineHeight() - (Resolution.ratioHeight * 5));
-            Font.font.draw(batch, texte[3], getX() + getHeight(), getY() + getHeight() - (Font.font.getLineHeight() * 2) - (Resolution.ratioHeight * 10));
-            Font.font.draw(batch, texte[4], getX() + getHeight() + (getHeight() / 2), getY() + getHeight() - (Font.font.getLineHeight() * 2) - (Resolution.ratioHeight * 10));
-            Font.font.draw(batch, texte[5], getX() + getHeight(), getY() + getHeight() - (Font.font.getLineHeight() * 3) - (Resolution.ratioHeight * 15));
+            Font.font.setScale((float) (Resolution.ratioWidth * 1.5), Resolution.ratioHeight * 2);
+
+            batch.draw(Utili.vie, getX() + getHeight(),
+                    getY() + getHeight() - (2*Font.font.getLineHeight()) - (Resolution.ratioHeight * 5),
+                    Font.font.getLineHeight(), Font.font.getLineHeight());
+            Font.font.draw(batch, texte[1], getX() + getHeight() + Font.font.getLineHeight(),
+                    getY() + getHeight() - Font.font.getLineHeight() - (Resolution.ratioHeight * 5));
+
+            batch.draw(Utili.vitesse, getX() + getHeight()+ (getHeight() / 2)+Font.font.getLineHeight(),
+                    getY() + getHeight() - (2*Font.font.getLineHeight()) - (Resolution.ratioHeight * 5),
+                    Font.font.getLineHeight(),Font.font.getLineHeight());
+            Font.font.draw(batch, texte[2], getX() + getHeight() + (getHeight() / 2) + (Font.font.getLineHeight()*2),
+                    getY() + getHeight() - Font.font.getLineHeight() - (Resolution.ratioHeight * 5));
+
+            batch.draw(Utili.force, getX() + getHeight(),
+                    getY() + getHeight() - (Font.font.getLineHeight()*3) - (Resolution.ratioHeight * 10),
+                    Font.font.getLineHeight(),Font.font.getLineHeight());
+            Font.font.draw(batch, texte[3], getX() + getHeight() + Font.font.getLineHeight(),
+                    getY() + getHeight() - (Font.font.getLineHeight() * 2) - (Resolution.ratioHeight * 10));
+
+            batch.draw(Utili.agilite, getX() + getHeight()+ (getHeight() / 2)+Font.font.getLineHeight(),
+                    getY() + getHeight() - (Font.font.getLineHeight()*3) - (Resolution.ratioHeight * 10),
+                    Font.font.getLineHeight(),Font.font.getLineHeight());
+            Font.font.draw(batch, texte[4], getX() + getHeight() + (getHeight() / 2) + (Font.font.getLineHeight()*2),
+                    getY() + getHeight() - (Font.font.getLineHeight() * 2) - (Resolution.ratioHeight * 10));
+
+            batch.draw(Utili.magie, getX() + getHeight(),
+                    getY() + getHeight() - (Font.font.getLineHeight()*4) - (Resolution.ratioHeight * 15),
+                    Font.font.getLineHeight(),Font.font.getLineHeight());
+            Font.font.draw(batch, texte[5], getX() + getHeight() + Font.font.getLineHeight(),
+                    getY() + getHeight() - (Font.font.getLineHeight() * 3) - (Resolution.ratioHeight * 15));
+
         }
         else {
             Font.font.setScale(Resolution.ratioWidth * 3, Resolution.ratioHeight * 3);
