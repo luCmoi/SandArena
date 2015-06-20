@@ -88,7 +88,9 @@ public class Partie extends Stage {
         /* Placement des unitées
          */
         getPlateau()[5][5].entrePresence(getJoueur1().getPersonnages().get(0));
+        getPlateau()[5][6].entrePresence(getJoueur1().getPersonnages().get(1));
         getPlateau()[7][5].entrePresence(getJoueur2().getPersonnages().get(0));
+        getPlateau()[7][6].entrePresence(getJoueur2().getPersonnages().get(1));
         tour();
     }
 

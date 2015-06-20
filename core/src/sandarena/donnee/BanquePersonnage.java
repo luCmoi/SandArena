@@ -23,6 +23,10 @@ public class BanquePersonnage extends Banque {
                 "Ces hommes vivaient dans le desert avant que les Arènes ne s'y établissent, certains racontent qu'ils sont nés sur ces terres attiré par la soif de combats",
                 "Image/Personnage/BarbareDesSables.png",
                 15, 4, 5, 2, 2, Affinite.FORCE,Affinite.TRIBAL));
+        banque.add(new DonneePersonnage("Sauvageon des Sables",
+                "Personne ne sait s'il sont de la même espèce que les barbares qu'ils semblent servire où s'ils sont entrés en symbiose",
+                "Image/Personnage/SauvageonDesSables.png",
+                10, 4, 1, 6, 3/*,Affinite.AGILITE, Affinite.POISON,*/, Affinite.TRIBAL));
     }
 
     /**
