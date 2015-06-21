@@ -26,7 +26,7 @@ public class BanquePersonnage extends Banque {
         banque.add(new DonneePersonnage("Sauvageon des Sables",
                 "Personne ne sait s'il sont de la même espèce que les barbares qu'ils semblent servire où s'ils sont entrés en symbiose",
                 "Image/Personnage/SauvageonDesSables.png",
-                10, 4, 1, 6, 3/*,Affinite.AGILITE, Affinite.POISON,*/, Affinite.TRIBAL));
+                10, 4, 1, 6, 3,Affinite.AGILITE, Affinite.POISON, Affinite.TRIBAL));
     }
 
     /**

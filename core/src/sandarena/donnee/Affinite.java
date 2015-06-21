@@ -9,6 +9,6 @@ package sandarena.donnee;
 public class Affinite {
     public static int FORCE = 0;
     public static int TRIBAL = 1;
-    public static final int AGILITE = 3;
-    public static final int POISON = 4;
+    public static final int AGILITE = 2;
+    public static final int POISON = 3;
 }

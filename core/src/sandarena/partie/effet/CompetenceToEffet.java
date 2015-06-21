@@ -143,6 +143,7 @@ public class CompetenceToEffet {
                     y++;
                 }else if (donnee[y] == CONDITIONDUREE){
                     retour.add("Dure "+donnee[y+1]+" tours");
+                    y++;
                 }
             }
         }

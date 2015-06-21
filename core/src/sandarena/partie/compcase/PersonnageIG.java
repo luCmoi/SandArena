@@ -27,7 +27,6 @@ import sandarena.partie.effet.effetdeclencheur.EffetDeclencheurDegatRecu;
  * @author Guillaume
  */
 public class PersonnageIG {
-    //TODO imperatif rebosser les caract
     private final CompetenceIG[] competence = new CompetenceIG[4];
     private Personnage donnee;
     private JoueurIG possesseur;
@@ -256,6 +255,7 @@ public class PersonnageIG {
         } else if (effet instanceof EffetBuffDot) {
             dot.add((EffetBuffDot) effet);
         } else if (effet instanceof EffetBuffStun) {
+            this.setAAgi(true);
             stun.add((EffetBuffStun) effet);
         }
     }

@@ -98,6 +98,36 @@ public class BanqueCompetence extends Banque {
                 "Image/Competence/PerleDePurification.png",
                 new CompetenceDispel(Affinite.TRIBAL,4,3,4,0,1, false, 1),
                 new ArrayList(Arrays.asList(Affinite.TRIBAL))));
+        //AGILITE
+        banque.add(new EntreeCompetence("Frappe chirurgicale",
+                "Certains points sensibles du corps suffisent a entrainer la mort",
+                "Image/Competence/FrappeChirurgicale.png",
+                new CompetenceAttaque(Affinite.AGILITE,4,0,1,1,1, Caract.AGILITE, 2),
+                new ArrayList(Arrays.asList(Affinite.AGILITE))));
+        banque.add(new EntreeCompetence("Esquive naturelle",
+                "Certaines personnes sont plus capable que d'autre d'esquiver une lame mortelle",
+                "Image/Competence/EsquiveNaturelle.png",
+                new CompetenceBuff(Affinite.AGILITE,CompetenceToEffet.VALDEFENSE,  2,
+                        CompetenceToEffet.CONDITIONTYPE, Caract.AGILITE),
+                new ArrayList(Arrays.asList(Affinite.AGILITE))));
+        banque.add(new EntreeCompetence("Jet De Sable",
+                "Un ennemi aveuglé deviens moins dangeureux",
+                "Image/Competence/JetDeSable.png",
+                new CompetenceBuffActif(Affinite.AGILITE,2,4,3,1,1, Caract.AGILITE, CompetenceToEffet.VALATTAQUE, -2,
+                        CompetenceToEffet.CONDITIONDUREE, 2),
+                new ArrayList(Arrays.asList(Affinite.AGILITE))));
+        //POISON
+        banque.add(new EntreeCompetence("Poison Corosif",
+                "Un tel poison ronge les chairs de l'interieur",
+                "Image/Competence/PoisonCorosif.png",
+                new CompetenceBuffActif(Affinite.POISON,2,4,5,1,1, Caract.AGILITE, CompetenceToEffet.DOT, 2,
+                        CompetenceToEffet.CONDITIONDUREE, 2),
+                new ArrayList(Arrays.asList(Affinite.POISON))));
+        banque.add(new EntreeCompetence("Poison Musculaire",
+                "Ce poison rend sa cible faible au point qu'il lui deviens difficile de se déplacer",
+                "Image/Competence/PoisonMusculaire.png",
+                new CompetenceBuffActif(Affinite.POISON,2,4,5,1,1, Caract.AGILITE, CompetenceToEffet.VALVITESSE, -4, CompetenceToEffet.CONDITIONDUREE, 3),
+                new ArrayList(Arrays.asList(Affinite.POISON))));
     }
 
     /**
