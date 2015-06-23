@@ -358,6 +358,8 @@ public class PersonnageIG {
 
     public void removeBuffMauvais() {
         Collections.shuffle(buffMauvais);
-        buffMauvais.remove(0);
+        if (buffMauvais.size() >0) {
+            buffMauvais.remove(0);
+        }
     }
 }

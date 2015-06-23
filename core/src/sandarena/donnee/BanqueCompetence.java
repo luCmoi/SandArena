@@ -11,9 +11,6 @@ import sandarena.joueur.competence.active.CompetenceDispel;
 import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
 import sandarena.partie.effet.CompetenceToEffet;
-import sandarena.partie.effet.EffetAttaque;
-import sandarena.partie.effet.EffetBuf;
-import sandarena.partie.effet.EffetDeclencheur;
 
 
 /**
@@ -73,8 +70,8 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Rituel de sang",
                 "Parfoit il faut sacrifier une partie de soit pour en renforcer une autre",
                 "Image/Competence/RituelDeSang.png",
-                new CompetenceBuffActif(Affinite.TRIBAL,3,0,0,0,1,Caract.MAGIE, CompetenceToEffet.DEGAT, 4,
-                        CompetenceToEffet.CONDITIONBUFF,CompetenceToEffet.VALATTAQUE, 1),
+                new CompetenceBuffActif(Affinite.TRIBAL, 3, 0, 0, 0, 1, Caract.MAGIE, CompetenceToEffet.DEGAT, 4,
+                        CompetenceToEffet.CONDITIONBUFF, CompetenceToEffet.VALATTAQUE, 1),
                 new ArrayList<Integer>(Arrays.asList(Affinite.TRIBAL))));
         banque.add(new EntreeCompetence("Poupée Vaudou",
                 "L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances soit communes",
@@ -96,37 +93,37 @@ public class BanqueCompetence extends Banque {
         banque.add(new EntreeCompetence("Perle de Purification",
                 "Purifie le corps de ses afflictions",
                 "Image/Competence/PerleDePurification.png",
-                new CompetenceDispel(Affinite.TRIBAL,4,3,4,0,1, false, 1),
+                new CompetenceDispel(Affinite.TRIBAL, 4, 3, 4, 0, 1, false, 1),
                 new ArrayList(Arrays.asList(Affinite.TRIBAL))));
         //AGILITE
         banque.add(new EntreeCompetence("Frappe chirurgicale",
                 "Certains points sensibles du corps suffisent a entrainer la mort",
                 "Image/Competence/FrappeChirurgicale.png",
-                new CompetenceAttaque(Affinite.AGILITE,4,0,1,1,1, Caract.AGILITE, 2),
+                new CompetenceAttaque(Affinite.AGILITE, 4, 0, 1, 1, 1, Caract.AGILITE, 2),
                 new ArrayList(Arrays.asList(Affinite.AGILITE))));
         banque.add(new EntreeCompetence("Esquive naturelle",
                 "Certaines personnes sont plus capable que d'autre d'esquiver une lame mortelle",
                 "Image/Competence/EsquiveNaturelle.png",
-                new CompetenceBuff(Affinite.AGILITE,CompetenceToEffet.VALDEFENSE,  2,
+                new CompetenceBuff(Affinite.AGILITE, CompetenceToEffet.VALDEFENSE, 2,
                         CompetenceToEffet.CONDITIONTYPE, Caract.AGILITE),
                 new ArrayList(Arrays.asList(Affinite.AGILITE))));
         banque.add(new EntreeCompetence("Jet De Sable",
                 "Un ennemi aveuglé deviens moins dangeureux",
                 "Image/Competence/JetDeSable.png",
-                new CompetenceBuffActif(Affinite.AGILITE,2,4,3,1,1, Caract.AGILITE, CompetenceToEffet.VALATTAQUE, -2,
+                new CompetenceBuffActif(Affinite.AGILITE, 2, 4, 3, 1, 1, Caract.AGILITE, CompetenceToEffet.VALATTAQUE, -2,
                         CompetenceToEffet.CONDITIONDUREE, 2),
                 new ArrayList(Arrays.asList(Affinite.AGILITE))));
         //POISON
         banque.add(new EntreeCompetence("Poison Corosif",
                 "Un tel poison ronge les chairs de l'interieur",
                 "Image/Competence/PoisonCorosif.png",
-                new CompetenceBuffActif(Affinite.POISON,2,4,5,1,1, Caract.AGILITE, CompetenceToEffet.DOT, 2,
+                new CompetenceBuffActif(Affinite.POISON, 2, 4, 5, 1, 1, Caract.AGILITE, CompetenceToEffet.DOT, 2,
                         CompetenceToEffet.CONDITIONDUREE, 2),
                 new ArrayList(Arrays.asList(Affinite.POISON))));
         banque.add(new EntreeCompetence("Poison Musculaire",
                 "Ce poison rend sa cible faible au point qu'il lui deviens difficile de se déplacer",
                 "Image/Competence/PoisonMusculaire.png",
-                new CompetenceBuffActif(Affinite.POISON,2,4,5,1,1, Caract.AGILITE, CompetenceToEffet.VALVITESSE, -4, CompetenceToEffet.CONDITIONDUREE, 3),
+                new CompetenceBuffActif(Affinite.POISON, 2, 4, 5, 1, 1, Caract.AGILITE, CompetenceToEffet.VALVITESSE, -4, CompetenceToEffet.CONDITIONDUREE, 3),
                 new ArrayList(Arrays.asList(Affinite.POISON))));
     }
 
@@ -136,10 +133,17 @@ public class BanqueCompetence extends Banque {
      * @param affinite
      * @return
      */
-    public static EntreeCompetence getCompetence(int affinite, Competence... dejaAcquise) {
-        Collections.shuffle(banque);
-        for (Entree e : banque) {
+    public static EntreeCompetence getCompetence(int affinite, EntreeCompetence... dejaAcquise) {
+        ArrayList<Entree> tmpBanque = (ArrayList<Entree>)banque.clone();
+        Collections.shuffle(tmpBanque);
+        for (EntreeCompetence c : dejaAcquise) {
+            if (c != null) {
+                tmpBanque.remove(c);
+            }
+        }
+        for (Entree e : tmpBanque) {
             if (((EntreeCompetence) e).affinite.contains(affinite)) {
+                tmpBanque.clear();
                 return (EntreeCompetence) e;
             }
         }

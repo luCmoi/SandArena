@@ -37,6 +37,6 @@ public class EffetBuffVal extends EffetBuf {
 
     @Override
     public boolean isBenefique() {
-        return (val<0);
+        return (val>=0);
     }
 }
