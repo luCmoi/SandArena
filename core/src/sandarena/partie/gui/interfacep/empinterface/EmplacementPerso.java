@@ -2,17 +2,16 @@ package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-
 import sandarena.donnee.Utili;
 import sandarena.partie.compcase.PersonnageIG;
-import sandarena.partie.gui.interfacep.*;
+import sandarena.partie.gui.interfacep.StageInterface;
+import sandarena.partie.gui.interfacep.infowindow.InfoWindow;
 
 /**
  * Created by Guillaume on 10/06/2015.
  */
 public class EmplacementPerso extends EmplacementInterface {
     private PersonnageIG perso;
-
 
 
     public EmplacementPerso(int place, StageInterface container) {
@@ -35,12 +34,21 @@ public class EmplacementPerso extends EmplacementInterface {
         }
     }
 
-    public void dispose(){
+    public void dispose() {
         super.dispose();
         this.perso = null;
     }
+
     public void clique() {
 
+    }
+
+    @Override
+    public void pression() {
+        if (this.getPerso() != null) {
+            this.info = new InfoWindow(this);
+            container.getPartie().getContainer().getSurcouche().addActor(info);
+        }
     }
 
     public PersonnageIG getPerso() {

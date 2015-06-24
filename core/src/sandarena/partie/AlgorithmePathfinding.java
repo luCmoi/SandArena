@@ -64,6 +64,7 @@ public class AlgorithmePathfinding {
         Sommet joueur = null;
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[0].length; j++) {
+                plateau[i][j].setCompetenceable(false);
                 if (plateau[i][j] == depart) {
                     joueur = graph.listeSommets[(i * plateau[0].length) + j];
                 }

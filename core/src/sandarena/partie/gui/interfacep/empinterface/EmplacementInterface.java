@@ -52,8 +52,5 @@ public abstract class EmplacementInterface extends Actor {
     }
 
 
-    public void pression() {
-        this.info = new InfoWindow(this);
-        container.getPartie().getContainer().getSurcouche().addActor(info);
-    }
+    public abstract void pression();
 }

@@ -5,9 +5,12 @@
  */
 package sandarena.partie;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+
+import sandarena.Resolution;
 
 /**
  * Ecoute les interactions effectuées avec une case
@@ -15,8 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * @author Guillaume
  */
 public class CaseListener extends InputListener {
-    private boolean presence;
+    private boolean presence = true;
     private Case caseEcoute;
+    Vector2 vec;
 
     public CaseListener(Case aThis) {
         caseEcoute = aThis;
@@ -24,22 +28,30 @@ public class CaseListener extends InputListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        presence = true;
+        this.vec = caseEcoute.getContainer().stageToScreenCoordinates(caseEcoute.localToStageCoordinates(new Vector2(x, y)));
         return true;
     }
 
     @Override
     public void touchDragged(InputEvent event, float x, float y, int pointer) {
         super.touchDragged(event, x, y, pointer);
-        presence = false;
     }
 
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-        if (presence) {
+        Vector2 vScreen = caseEcoute.getContainer().stageToScreenCoordinates(caseEcoute.localToStageCoordinates(new Vector2(x, y)));
+        if (presence && Math.abs(vec.x - vScreen.x)< 50 * Resolution.ratioWidth && Math.abs(vec.y - vScreen.y)< 50 * Resolution.ratioHeight){
             caseEcoute.clique();
         }
+        presence = true;
     }
+
+    @Override
+    public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+        super.enter(event, x, y, pointer, fromActor);
+        presence = false;
+    }
+
 
     public void dispose(){
         caseEcoute = null;

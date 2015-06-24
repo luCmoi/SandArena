@@ -261,7 +261,12 @@ public class Partie extends Stage {
         if (this.competenceActive != null) {
             if (this.competenceActive.info.competence instanceof CompetenceActive) {
                 if (((CompetenceActive) this.competenceActive.info.competence).getPorte() == 0) {
-                    competenceActive.agit(personnageActif.getContainer());
+                    for (Case[] c : plateau) {
+                        for (Case cc : c) {
+                            cc.setCompetenceable(false);
+                        }
+                    }
+                    personnageActif.getContainer().setCompetenceable(true);
                 } else {
                     this.competenceActive.select(plateau);
                 }

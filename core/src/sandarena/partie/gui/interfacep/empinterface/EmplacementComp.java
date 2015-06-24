@@ -7,6 +7,7 @@ import sandarena.joueur.competence.CompetenceActive;
 import sandarena.joueur.competence.CompetencePassive;
 import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.gui.interfacep.StageInterface;
+import sandarena.partie.gui.interfacep.infowindow.InfoWindow;
 
 /**
  */
@@ -31,12 +32,13 @@ public class EmplacementComp extends EmplacementInterface {
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         if (getCompetenceIG() != null) {
             batch.draw(getCompetenceIG().info.image, getX(), getY(), getWidth(), getHeight());
-            if (getCompetenceIG().getRecharge()!=0){
+            if (getCompetenceIG().getRecharge() != 0) {
                 batch.draw(Utili.recharge, getX(), getY(),
-                        getWidth()/ ((CompetenceActive)getCompetenceIG().info.competence).getRechargement()*getCompetenceIG().getRecharge(),
+                        getWidth() / ((CompetenceActive) getCompetenceIG().info.competence).getRechargement() * getCompetenceIG().getRecharge(),
                         getHeight());
-            }if (getCompetenceIG().info.competence instanceof CompetencePassive || getCompetenceIG().getUtilisationRestante()==0){
-                    batch.draw(Utili.passive, getX(), getY(), getWidth(), getHeight());
+            }
+            if (getCompetenceIG().info.competence instanceof CompetencePassive || getCompetenceIG().getUtilisationRestante() == 0) {
+                batch.draw(Utili.passive, getX(), getY(), getWidth(), getHeight());
             }
         } else {
         }
@@ -63,6 +65,14 @@ public class EmplacementComp extends EmplacementInterface {
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public void pression() {
+        if (this.getCompetenceIG() != null) {
+            this.info = new InfoWindow(this);
+            container.getPartie().getContainer().getSurcouche().addActor(info);
         }
     }
 

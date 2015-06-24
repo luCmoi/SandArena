@@ -26,7 +26,7 @@ public class EmplacementInterfaceListener extends InputListener {
     }
 
     public boolean update() {
-        if (pression && time != 0 && System.currentTimeMillis() - time >= 1000) {
+        if (pression && time != 0 && System.currentTimeMillis() - time >= 500) {
             time = 0;
             emplacementEcoute.pression();
             pression = false;
