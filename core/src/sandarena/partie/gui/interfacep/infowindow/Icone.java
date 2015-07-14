@@ -17,6 +17,8 @@ public class Icone extends Actor {
             img = container.getPerso().getDonnee().commun.image;
         } else if (container.getComp() != null){
             img = container.getComp().info.image;
+        }else {
+            img = null;
         }
     }
 

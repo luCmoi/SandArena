@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegexTexte {
-    public static int CHARACTERS_PER_FRAME = 40;
+    public static int CHARACTERS_PER_FRAME = 35;
     private static final String regex_per_frame = ".{1," + CHARACTERS_PER_FRAME + "}[ ]+";
 
     public static String[] parse_string(String line) {

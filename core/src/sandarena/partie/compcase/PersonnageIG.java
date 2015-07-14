@@ -9,6 +9,7 @@ import sandarena.donnee.BanqueCompetence.EntreeCompetence;
 import sandarena.donnee.Caract;
 import sandarena.joueur.Personnage;
 import sandarena.partie.Case;
+import sandarena.partie.effet.Effet;
 import sandarena.partie.effet.EffetBuf;
 import sandarena.partie.effet.EffetDeclencheur;
 import sandarena.partie.effet.effetbuff.EffetBuffDommage;
@@ -40,11 +41,13 @@ public class PersonnageIG {
     private ArrayList<EffetBuffTypeAttaque> changeTypeAtt = new ArrayList<EffetBuffTypeAttaque>();
     private ArrayList<EffetBuffTypeDefense> changeTypeDef = new ArrayList<EffetBuffTypeDefense>();
     private ArrayList<EffetBuffValVitesse> changeVitesse = new ArrayList<EffetBuffValVitesse>();
+    private ArrayList<EffetBuffValVitesse> changeVie = new ArrayList<EffetBuffValVitesse>();
     private ArrayList<EffetBuffDot> dot = new ArrayList<EffetBuffDot>();
     private ArrayList<EffetBuffStun> stun = new ArrayList<EffetBuffStun>();
     //Dispel
     private ArrayList<EffetBuf> buffBenefique= new ArrayList<EffetBuf>();
     private ArrayList<EffetBuf> buffMauvais = new ArrayList<EffetBuf>();
+    private ArrayList<EffetBuf> buffPassif = new ArrayList<EffetBuf>();
     //Declencheur
     private ArrayList<EffetDeclencheurDegatRecu> recoiDegat = new ArrayList<EffetDeclencheurDegatRecu>();
     //caract en jeu
@@ -139,7 +142,7 @@ public class PersonnageIG {
             for (CompetenceIG c : competence) {
                 c.tour();
             }
-            if (!stun.isEmpty()) {
+            if (!getStun().isEmpty()) {
                 this.aAgi = true;
             }
         }
@@ -157,7 +160,7 @@ public class PersonnageIG {
     }
 
     public int modifAttaque(int val, int type) {
-        for(EffetBuffTypeAttaque effet : changeTypeAtt){
+        for(EffetBuffTypeAttaque effet : getChangeTypeAtt()){
             type = effet.modif(type);
             switch (type){
                 case(Caract.FORCE):
@@ -171,14 +174,14 @@ public class PersonnageIG {
                     break;
             }
         }
-        for (EffetBuffValAttaque effet : changeAtt) {
+        for (EffetBuffValAttaque effet : getChangeAtt()) {
             val = effet.modif(val, type);
         }
         return val;
     }
 
     public int modifDefense(int val, int type) {
-        for(EffetBuffTypeDefense effet : changeTypeDef){
+        for(EffetBuffTypeDefense effet : getChangeTypeDef()){
             type = effet.modif(type);
             switch (type){
                 case(Caract.FORCE):
@@ -192,7 +195,7 @@ public class PersonnageIG {
                     break;
             }
         }
-        for (EffetBuffValDefense effet : changeDef) {
+        for (EffetBuffValDefense effet : getChangeDef()) {
             val = effet.modif(val, type);
         }
         return val;
@@ -200,7 +203,7 @@ public class PersonnageIG {
 
     public void modifVitesse() {
         int tmp = this.donnee.commun.vitesse;
-        for (EffetBuffValVitesse effet : changeVitesse) {
+        for (EffetBuffValVitesse effet : getChangeVitesse()) {
             tmp = effet.modif(tmp);
         }
         vitesseRestante = tmp;
@@ -213,7 +216,7 @@ public class PersonnageIG {
     }
 
     public void infligeDot() {
-        for (EffetBuffDot effet : dot) {
+        for (EffetBuffDot effet : getDot()) {
             effet.inflige();
         }
     }
@@ -230,33 +233,37 @@ public class PersonnageIG {
         //todo mort
     }
 
-    public void addBuf(EffetBuf effet) {
-        effet.setContainer(this);
-        if (!(effet instanceof EffetBuffDommage) && effet.isBenefique()){
-            buffBenefique.add(effet);
+    public void addBuf(EffetBuf effet, boolean dispelable) {
+        effet.setContainer(this, dispelable);
+        if (dispelable) {
+            if (!(effet instanceof EffetBuffDommage) && effet.isBenefique()) {
+                buffBenefique.add(effet);
+            } else {
+                buffMauvais.add(effet);
+            }
         }else {
-            buffMauvais.add(effet);
+            buffPassif.add(effet);
         }
         if (effet instanceof EffetBuffValAttaque) {
-            changeAtt.add((EffetBuffValAttaque) effet);
+            getChangeAtt().add((EffetBuffValAttaque) effet);
             modifCaract();
         } else if (effet instanceof EffetBuffValDefense) {
-            changeDef.add((EffetBuffValDefense) effet);
+            getChangeDef().add((EffetBuffValDefense) effet);
             modifCaract();
         } else if (effet instanceof EffetBuffValVitesse) {
-            changeVitesse.add((EffetBuffValVitesse) effet);
+            getChangeVitesse().add((EffetBuffValVitesse) effet);
             modifCaract();
         } else if (effet instanceof EffetBuffTypeAttaque) {
-            changeTypeAtt.add((EffetBuffTypeAttaque) effet);
+            getChangeTypeAtt().add((EffetBuffTypeAttaque) effet);
             modifCaract();
         } else if (effet instanceof EffetBuffTypeDefense) {
-            changeTypeDef.add((EffetBuffTypeDefense) effet);
+            getChangeTypeDef().add((EffetBuffTypeDefense) effet);
             modifCaract();
         } else if (effet instanceof EffetBuffDot) {
-            dot.add((EffetBuffDot) effet);
+            getDot().add((EffetBuffDot) effet);
         } else if (effet instanceof EffetBuffStun) {
             this.setAAgi(true);
-            stun.add((EffetBuffStun) effet);
+            getStun().add((EffetBuffStun) effet);
         }
     }
 
@@ -317,24 +324,24 @@ public class PersonnageIG {
         buffBenefique.remove(effet);
         buffMauvais.remove(effet);
         if (effet instanceof EffetBuffValAttaque) {
-            changeAtt.remove(effet);
+            getChangeAtt().remove(effet);
             modifCaract();
         } else if (effet instanceof EffetBuffValDefense) {
-            changeDef.remove(effet);
+            getChangeDef().remove(effet);
             modifCaract();
         } else if (effet instanceof EffetBuffValVitesse) {
-            changeVitesse.remove(effet);
+            getChangeVitesse().remove(effet);
             modifCaract();
         } else if (effet instanceof EffetBuffTypeAttaque) {
-            changeTypeAtt.remove(effet);
+            getChangeTypeAtt().remove(effet);
             modifCaract();
         } else if (effet instanceof EffetBuffTypeDefense) {
-            changeTypeDef.remove(effet);
+            getChangeTypeDef().remove(effet);
             modifCaract();
         } else if (effet instanceof EffetBuffDot) {
-            dot.remove(effet);
+            getDot().remove(effet);
         } else if (effet instanceof EffetBuffStun) {
-            stun.remove(effet);
+            getStun().remove(effet);
         }
     }
 
@@ -361,5 +368,37 @@ public class PersonnageIG {
         if (buffMauvais.size() >0) {
             buffMauvais.remove(0);
         }
+    }
+
+    public ArrayList<EffetBuffValDefense> getChangeDef() {
+        return changeDef;
+    }
+
+    public ArrayList<EffetBuffValAttaque> getChangeAtt() {
+        return changeAtt;
+    }
+
+    public ArrayList<EffetBuffTypeAttaque> getChangeTypeAtt() {
+        return changeTypeAtt;
+    }
+
+    public ArrayList<EffetBuffTypeDefense> getChangeTypeDef() {
+        return changeTypeDef;
+    }
+
+    public ArrayList<EffetBuffValVitesse> getChangeVitesse() {
+        return changeVitesse;
+    }
+
+    public ArrayList<EffetBuffValVitesse> getChangeVie() {
+        return changeVie;
+    }
+
+    public ArrayList<EffetBuffDot> getDot() {
+        return dot;
+    }
+
+    public ArrayList<EffetBuffStun> getStun() {
+        return stun;
     }
 }

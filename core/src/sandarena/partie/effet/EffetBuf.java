@@ -1,5 +1,7 @@
 package sandarena.partie.effet;
 
+import java.util.ArrayList;
+
 import sandarena.partie.compcase.PersonnageIG;
 
 //todo conditions
@@ -7,8 +9,10 @@ public abstract class EffetBuf extends Effet {
     private PersonnageIG container;
     private EffetBuf chaine;
     private int duree = -1;
+    private String nom;
 
-    public EffetBuf(EffetBuf chaine) {
+    public EffetBuf(String nom, EffetBuf chaine) {
+        this.nom= nom;
         this.setChaine(chaine);
     }
 
@@ -16,10 +20,10 @@ public abstract class EffetBuf extends Effet {
         return container;
     }
 
-    public void setContainer(PersonnageIG container) {
+    public void setContainer(PersonnageIG container, boolean dispelable) {
         this.container = container;
         if (chaine != null) {
-            container.addBuf(chaine);
+            container.addBuf(chaine, dispelable);
         }
     }
 
@@ -43,5 +47,15 @@ public abstract class EffetBuf extends Effet {
             return true;
         }
         return false;
+    }
+
+    public int getDuree(){
+        return duree;
+    }
+
+    public ArrayList<String> toStrings(){
+        ArrayList<String> retour = new ArrayList<String>();
+        retour.add(nom);
+        return retour;
     }
 }

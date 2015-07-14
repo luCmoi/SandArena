@@ -52,7 +52,8 @@ public class CompetenceAttaque extends CompetenceActive {
                 car = "Magie";
                 break;
         }
-        retour.add("Attaque de type " + car + " de puissance " + multiAttaque);
+        retour.add("Attaque de type " + car);
+        retour.add(" De puissance " + multiAttaque);
         if (donnee != null){
             int[] donneetmp = null;
             if (donnee.length > 3) {

@@ -24,7 +24,7 @@ public class EffetDispel extends Effet {
             receveur.getPresence().removeBuffMauvais();
         }
         if (suite != null){
-            receveur.getPresence().addBuf(suite);
+            receveur.getPresence().addBuf(suite, true);
         }
     }
 }

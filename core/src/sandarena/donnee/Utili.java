@@ -20,4 +20,9 @@ public class Utili {
     public static Texture magie = new Texture(Gdx.files.internal("Image/Util/Magie.png"));
     public static Texture vie = new Texture(Gdx.files.internal("Image/Util/Vie.png"));
     public static Texture vitesse = new Texture(Gdx.files.internal("Image/Util/Vitesse.png"));
+    public static Texture attaque= new Texture(Gdx.files.internal("Image/Util/Attaque.png"));
+    public static Texture defense= new Texture(Gdx.files.internal("Image/Util/Defense.png"));
+    public static Texture dot= new Texture(Gdx.files.internal("Image/Util/Dot.png"));
+    public static Texture stun= new Texture(Gdx.files.internal("Image/Util/Stun.png"));
+
 }

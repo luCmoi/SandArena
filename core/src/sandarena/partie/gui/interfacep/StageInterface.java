@@ -11,12 +11,15 @@ import sandarena.partie.Case;
 import sandarena.partie.Partie;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementComp;
+import sandarena.partie.gui.interfacep.empinterface.EmplacementEffet;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementPerso;
 
 public class StageInterface extends Stage {
     private Partie partie;
     private ArrayList<EmplacementComp> emplacementCompsActif;
     private ArrayList<EmplacementComp> emplacementCompsSelect;
+    private ArrayList<EmplacementEffet> emplacementEffetsActif;
+    private ArrayList<EmplacementEffet> emplacementEffetsSelect;
     private EmplacementPerso emplacementPersoActif;
     private EmplacementPerso emplacementPersoSelect;
     public int tailleCoteHeight;
@@ -35,7 +38,20 @@ public class StageInterface extends Stage {
         emplacementCompsActif.add(new EmplacementComp(1, this));
         emplacementCompsActif.add(new EmplacementComp(2, this));
         emplacementCompsActif.add(new EmplacementComp(3, this));
+        emplacementEffetsActif = new ArrayList<EmplacementEffet>();
+        emplacementEffetsActif.add(new EmplacementEffet(0, this));
+        emplacementEffetsActif.add(new EmplacementEffet(1, this));
+        emplacementEffetsActif.add(new EmplacementEffet(2, this));
+        emplacementEffetsActif.add(new EmplacementEffet(3, this));
+        emplacementEffetsActif.add(new EmplacementEffet(4, this));
+        emplacementEffetsActif.add(new EmplacementEffet(5, this));
+        emplacementEffetsActif.add(new EmplacementEffet(6, this));
+        emplacementEffetsActif.add(new EmplacementEffet(7, this));
+
         for (EmplacementComp emp : emplacementCompsActif) {
+            this.addActor(emp);
+        }
+        for (EmplacementEffet emp : emplacementEffetsActif) {
             this.addActor(emp);
         }
         emplacementCompsSelect = new ArrayList<EmplacementComp>();
@@ -43,7 +59,19 @@ public class StageInterface extends Stage {
         emplacementCompsSelect.add(new EmplacementComp(5, this));
         emplacementCompsSelect.add(new EmplacementComp(6, this));
         emplacementCompsSelect.add(new EmplacementComp(7, this));
+        emplacementEffetsSelect = new ArrayList<EmplacementEffet>();
+        emplacementEffetsSelect.add(new EmplacementEffet(8, this));
+        emplacementEffetsSelect.add(new EmplacementEffet(9, this));
+        emplacementEffetsSelect.add(new EmplacementEffet(10, this));
+        emplacementEffetsSelect.add(new EmplacementEffet(11, this));
+        emplacementEffetsSelect.add(new EmplacementEffet(12, this));
+        emplacementEffetsSelect.add(new EmplacementEffet(13, this));
+        emplacementEffetsSelect.add(new EmplacementEffet(14, this));
+        emplacementEffetsSelect.add(new EmplacementEffet(15, this));
         for (EmplacementComp emp : emplacementCompsSelect) {
+            this.addActor(emp);
+        }
+        for (EmplacementEffet emp : emplacementEffetsSelect) {
             this.addActor(emp);
         }
     }
@@ -76,6 +104,22 @@ public class StageInterface extends Stage {
                 c = null;
             }
         }
+        for(EmplacementEffet c : emplacementEffetsSelect){
+            if (c != null){
+                c.dispose();
+                c = null;
+            }
+        }
+        for(EmplacementEffet c : emplacementEffetsActif){
+            if (c != null){
+                c.dispose();
+                c = null;
+            }
+        }
+        emplacementEffetsActif.clear();
+        emplacementEffetsActif = null;
+        emplacementEffetsSelect.clear();
+        emplacementEffetsSelect = null;
         emplacementCompsActif.clear();
         emplacementCompsActif = null;
         emplacementCompsSelect.clear();
@@ -87,6 +131,9 @@ public class StageInterface extends Stage {
         emplacementPersoActif.setPerso(perso);
         for (EmplacementComp emp : emplacementCompsActif) {
             emp.setCompetenceIG(perso.getCompetence()[emp.getPlace()]);
+        }
+        for (EmplacementEffet emp : emplacementEffetsActif) {
+            emp.setEffet(perso);
         }
     }
 
@@ -114,6 +161,13 @@ public class StageInterface extends Stage {
                 emp.setCompetenceIG(caseSelect.getPresence().getCompetence()[emp.getPlace() - 4]);
             } else {
                 emp.setCompetenceIG(null);
+            }
+        }
+        for (EmplacementEffet emp : emplacementEffetsSelect) {
+            if (caseSelect.getPresence() != null) {
+                emp.setEffet(caseSelect.getPresence());
+            } else {
+                emp.setEffet(null);
             }
         }
     }

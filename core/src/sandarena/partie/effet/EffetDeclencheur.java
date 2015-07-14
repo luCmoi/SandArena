@@ -23,9 +23,9 @@ public class EffetDeclencheur extends Effet{
     public void launch(PersonnageIG personnage) {
         if (chaine instanceof EffetBuf){
             if (cible == CompetenceToEffet.SOI) {
-                container.addBuf((EffetBuf)chaine);
+                container.addBuf((EffetBuf)chaine, true);
             } else {
-                personnage.addBuf((EffetBuf)chaine);
+                personnage.addBuf((EffetBuf)chaine, true);
             }
         }
     }

@@ -9,13 +9,13 @@ import sandarena.partie.effet.EffetBuf;
 public class EffetBuffDommage extends EffetBuf{
     int val;
 
-    public EffetBuffDommage(int val, EffetBuf chaine) {
-        super(chaine);
+    public EffetBuffDommage(String nom,int val, EffetBuf chaine) {
+        super(nom, chaine);
         this.val = val;
     }
 
-    public void setContainer(PersonnageIG container){
-        super.setContainer(container);
+    public void setContainer(PersonnageIG container, boolean dispelable){
+        super.setContainer(container, dispelable);
         container.inflige(val);
     }
 

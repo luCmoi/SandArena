@@ -1,5 +1,7 @@
 package sandarena.partie.effet.effetbuff;
 
+import java.util.ArrayList;
+
 import sandarena.partie.effet.EffetBuf;
 
 /**
@@ -7,10 +9,10 @@ import sandarena.partie.effet.EffetBuf;
  */
 public class EffetBuffVal extends EffetBuf {
     protected int val;
-    private int typeCond = -1;
+    protected int typeCond = -1;
 
-    public EffetBuffVal(int val, EffetBuf chaine) {
-        super(chaine);
+    public EffetBuffVal(String nom,int val, EffetBuf chaine) {
+        super(nom, chaine);
         this.val = val;
     }
 
@@ -39,4 +41,9 @@ public class EffetBuffVal extends EffetBuf {
     public boolean isBenefique() {
         return (val>=0);
     }
+
+    public ArrayList<String> toStrings(){
+        return super.toStrings();
+    }
+
 }

@@ -29,7 +29,7 @@ public class CompetenceIG {
         container = perso;
         info = c;
         if (c.competence instanceof CompetenceBuff) {
-            perso.addBuf(CompetenceToEffet.toEffet(this));
+            perso.addBuf(CompetenceToEffet.toEffet(this), false);
         } else if (c.competence instanceof CompetenceDeclencheurEffet) {
             perso.addDeclencheur(CompetenceToEffet.toDeclencheur(this));
         }
@@ -56,7 +56,7 @@ public class CompetenceIG {
             } else if (info.competence instanceof CompetenceDispel) {
                 new EffetDispel((CompetenceDispel) this.info.competence, CompetenceToEffet.toEffet(this)).lance(this.getContainer().getContainer(), aCase);
             }else if (info.competence instanceof CompetenceBuffActif) {
-                aCase.getPresence().addBuf(CompetenceToEffet.toEffet(this));
+                aCase.getPresence().addBuf(CompetenceToEffet.toEffet(this), true);
             }
             if (((CompetenceActive)info.competence).getUtilisation()!=0){
                 this.utilisationRestante = this.getUtilisationRestante() - 1;

@@ -44,7 +44,7 @@ public class EffetAttaque extends Effet{
             int degat = degat(att, def);
             defenseur.getPresence().inflige(degat);
             if (suite != null){
-                defenseur.getPresence().addBuf(suite);
+                defenseur.getPresence().addBuf(suite, true);
             }
         }
     }
