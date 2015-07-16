@@ -131,6 +131,20 @@ public class Partie extends Stage {
         }
     }
 
+    public void finPhase() {
+        if (personnageActif.getPossesseur().equals(getJoueur1())) {
+            for (PersonnageIG perso : getJoueur1().getPersonnages()) {
+                perso.setAAgi(true);
+            }
+            phase(getJoueur2());
+        } else {
+            for (PersonnageIG perso : getJoueur2().getPersonnages()) {
+                perso.setAAgi(true);
+            }
+            tour();
+        }
+    }
+
 
     public void finPerso() {
         phase(personnageActif.getPossesseur());
@@ -156,11 +170,11 @@ public class Partie extends Stage {
         getViewport().setCamera(null);
         setViewport(null);
         personnageActif = null;
-        competenceActive =null;
-        caseSelect=null;
-        stageInterface=null;
+        competenceActive = null;
+        caseSelect = null;
+        stageInterface = null;
         chemin.clear();
-        chemin =null;
+        chemin = null;
         joueur1 = null;
         joueur2 = null;
     }

@@ -24,5 +24,9 @@ public class Utili {
     public static Texture defense= new Texture(Gdx.files.internal("Image/Util/Defense.png"));
     public static Texture dot= new Texture(Gdx.files.internal("Image/Util/Dot.png"));
     public static Texture stun= new Texture(Gdx.files.internal("Image/Util/Stun.png"));
+    public static Texture fond= new Texture(Gdx.files.internal("Image/Util/Fond.png"));
+    public static Texture sablier= new Texture(Gdx.files.internal("Image/Util/Sablier.png"));
+    public static Texture rouage= new Texture(Gdx.files.internal("Image/Util/Rouage.png"));
+    public static Texture drapeau= new Texture(Gdx.files.internal("Image/Util/Drapeau.png"));
 
 }

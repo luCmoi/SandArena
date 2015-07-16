@@ -48,7 +48,7 @@ public class InfoWindow extends Group {
             this.effet = ((EmplacementEffet)emplacement).getEffets();
             info = new Info(this);
             this.addActor(info);
-            setBounds(Gdx.input.getX(), ((Resolution.height) - Gdx.input.getY()) + DIFF, (float) ((Resolution.height / 4) * 2.5), TAILLE_EFFET * info.getTexte().length);
+            setBounds(Gdx.input.getX(), ((Resolution.height) - Gdx.input.getY()) + DIFF, (float) ((Resolution.height / 4) * 1.5), TAILLE_EFFET * info.getTexte().length);
             this.getChildren().get(0).setBounds(0, 0, getWidth(), getHeight());
         }
         if (getX()+ getWidth() > Resolution.width){

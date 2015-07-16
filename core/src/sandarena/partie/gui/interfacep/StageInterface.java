@@ -1,5 +1,6 @@
 package sandarena.partie.gui.interfacep;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -7,11 +8,14 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import sandarena.donnee.Utili;
 import sandarena.partie.Case;
 import sandarena.partie.Partie;
 import sandarena.partie.compcase.PersonnageIG;
+import sandarena.partie.gui.interfacep.empinterface.EmplacementBouton;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementComp;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementEffet;
+import sandarena.partie.gui.interfacep.empinterface.EmplacementFond;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementPerso;
 
 public class StageInterface extends Stage {
@@ -20,6 +24,7 @@ public class StageInterface extends Stage {
     private ArrayList<EmplacementComp> emplacementCompsSelect;
     private ArrayList<EmplacementEffet> emplacementEffetsActif;
     private ArrayList<EmplacementEffet> emplacementEffetsSelect;
+    private ArrayList<EmplacementBouton> emplacementBoutons;
     private EmplacementPerso emplacementPersoActif;
     private EmplacementPerso emplacementPersoSelect;
     public int tailleCoteHeight;
@@ -29,6 +34,7 @@ public class StageInterface extends Stage {
         super(viewport, batch);
         this.tailleCoteHeight =  (int)this.getHeight();
         this.tailleCoteWidth = (int)(this.getWidth()/8);
+        this.addActor(new EmplacementFond(this));
         emplacementPersoActif = new EmplacementPerso(0, this);
         emplacementPersoSelect = new EmplacementPerso(1, this);
         this.addActor(emplacementPersoActif);
@@ -74,12 +80,13 @@ public class StageInterface extends Stage {
         for (EmplacementEffet emp : emplacementEffetsSelect) {
             this.addActor(emp);
         }
-    }
-
-    @Override
-    public void draw() {
-        super.draw();
-
+        emplacementBoutons = new ArrayList<EmplacementBouton>();
+        emplacementBoutons.add(new EmplacementBouton(0,this));
+        emplacementBoutons.add(new EmplacementBouton(1,this));
+        emplacementBoutons.add(new EmplacementBouton(2,this));
+        for (EmplacementBouton emp : emplacementBoutons) {
+            this.addActor(emp);
+        }
     }
 
     public void dispose(){
@@ -116,6 +123,12 @@ public class StageInterface extends Stage {
                 c = null;
             }
         }
+        for(EmplacementBouton c : emplacementBoutons){
+            if (c != null){
+                c.dispose();
+                c = null;
+            }
+        }
         emplacementEffetsActif.clear();
         emplacementEffetsActif = null;
         emplacementEffetsSelect.clear();
@@ -124,6 +137,8 @@ public class StageInterface extends Stage {
         emplacementCompsActif = null;
         emplacementCompsSelect.clear();
         emplacementCompsSelect = null;
+        emplacementBoutons.clear();
+        emplacementBoutons = null;
         clear();
     }
 
