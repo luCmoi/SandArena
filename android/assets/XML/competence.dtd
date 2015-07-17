@@ -1,0 +1,50 @@
+<!ELEMENT listecompetence (entreecomp)>
+	<!ELEMENT entrecomp (nom, description, image, 
+		compattaque | compdeclencheureffet | compbuff | compbuffactif | compdispel,
+		affinite) >
+		<!ELEMENT nom (#PCDATA)>
+		<!ELEMENT description (#PCDATA)>
+		<!ELEMENT image (#PCDATA)>
+		
+		<!ELEMENT complance EMPTY>
+		<!ATTLIST complance
+			recharge NMTOKEN  #REQUIRED
+			utilisation NMTOKEN  #REQUIRED
+			porte NMTOKEN  #REQUIRED
+			portemin NMTOKEN  #REQUIRED
+			zone NMTOKEN  #REQUIRED
+			caract NMTOKEN  #REQUIRED
+		>
+		
+		<!ELEMENT compattaque (complance, compbuff?)>
+		<!ATTLIST compattaque
+			bonus NMTOKEN  #REQUIRED
+		>
+		
+		<!ELEMENT compdeclencheureffet (compbuff | compattaque)>
+		<!ATTLIST compdeclencheureffet
+			typedeclencheur NMTOKEN  #REQUIRED
+			cible NMTOKEN  #REQUIRED
+		>
+		
+		<!ELEMENT compbuffactif (complance, compbuff)>
+
+		
+		<!ELEMENT compdispel (complance, compbuff?)>
+		<!ATTLIST compdispel
+			cible NMTOKEN  #REQUIRED
+			nombre NMTOKEN  #REQUIRED
+		>
+		
+		<!ELEMENT compbuff ((condtype | condduree)*, compbuff?)>
+		<!ATTLIST compbuff
+			type NMTOKEN  #REQUIRED
+			valeur NMTOKEN  #REQUIRED
+		>
+		
+		<!ELEMENT condtype (#PCDATA)>
+		<!ELEMENT condduree (#PCDATA)>
+		
+		<!ELEMENT affinite (entreaffinite+)>
+		<!ELEMENT entreaffinite (#PCDATA)>
+
