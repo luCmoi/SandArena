@@ -1,6 +1,6 @@
-<!ELEMENT listecompetence (entreecomp)>
+<!ELEMENT listecompetence (entrecomp*)>
 	<!ELEMENT entrecomp (nom, description, image, 
-		compattaque | compdeclencheureffet | compbuff | compbuffactif | compdispel,
+		(compattaque | compdeclencheureffet | compbuff | compbuffactif | compdispel),
 		affinite) >
 		<!ELEMENT nom (#PCDATA)>
 		<!ELEMENT description (#PCDATA)>

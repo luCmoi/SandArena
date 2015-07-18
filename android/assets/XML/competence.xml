@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE listecompetence SYSTEM "competence.dtd">
+<listecompetence>
+	<entrecomp>
+		<nom>Test</nom>
+		<description>TestBis</description>
+		<image>chemin</image>
+		<compbuff type="test" valeur="1">
+		</compbuff>
+		<affinite>
+			<entreaffinite>FORCE</entreaffinite>
+		</affinite>
+	</entrecomp>
+</listecompetence>
