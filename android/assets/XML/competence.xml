@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE listecompetence SYSTEM "competence.dtd">
 <listecompetence>
+	
+	
 	<entrecomp>
-		<nom>Test</nom>
-		<description>TestBis</description>
-		<image>chemin</image>
-		<compbuff type="0" valeur="1">
-		</compbuff>
+		<nom>Bourre-pif</nom>
+		<description>Coup de poing puissant au visage, de préférence dans le nez</description>
+		<image>Image/Competence/Bourrepif.png</image>
+		<compattaque bonus="1">
+			<complance recharge="0" utilisation="0" porte="1" portemin="1" zone="1" caract ="&caractforce;"/>
+		</compattaque>
 		<affinite>
-			<entreaffinite>0</entreaffinite>
+			<entreaffinite>&affforce;</entreaffinite>
 		</affinite>
 	</entrecomp>
+	
+	
+	<entrecomp>
+		<nom>Leg Day</nom>
+		<description>Le personnage à travaillé ses jambes tous les jours</description>
+		<image>Image/Competence/LegDay.png</image>
+		<compbuff type="&buffvalvitesse;" valeur = "4">
+		</compbuff>
+		<affinite>
+			<entreaffinite>&affforce;</entreaffinite>
+		</affinite>
+	</entrecomp>
+		
+	
+	<entrecomp>
+		<nom>Rituel de sang</nom>
+		<description>Parfoit il faut sacrifier une partie de soit pour en renforcer une autre</description>
+		<image>Image/Competence/RituelDeSang.png</image>
+		<compbuffactif>
+			<complance recharge="3" utilisation="0" porte="0" portemin="0" zone="1" caract="&caractmagie;"/>
+			<compbuff type="&buffdegat;" valeur = "4">
+				<compbuff type="&buffvalattaque;" valeur = "1">
+				</compbuff>
+			</compbuff>
+		</compbuffactif>
+		<affinite>
+			<entreaffinite>&afftribal;</entreaffinite>
+		</affinite>
+	</entrecomp>
+	
+	
+	<entrecomp>
+		<nom>Perle de Purification</nom>
+		<description>Purifie le corps de ses afflictions</description>
+		<image>Image/Competence/PerleDePurification.png</image>
+		<compdispel cible="0" nombre="1">
+			<complance recharge="4" utilisation="3" porte="4" portemin="0" zone="1" caract="&caractmagie;"/>
+		</compdispel>
+		<affinite>
+			<entreaffinite>&afftribal;</entreaffinite>
+		</affinite>
+	</entrecomp>
+	
+	
 </listecompetence>

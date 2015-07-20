@@ -3,6 +3,7 @@ package sandarena.joueur.competence.active;
 import java.util.ArrayList;
 
 import sandarena.donnee.Caract;
+import sandarena.donnee.CompXML;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.partie.effet.CompetenceToEffet;
 
@@ -19,6 +20,11 @@ public class CompetenceAttaque extends CompetenceActive {
         if (donnee.length > 0) {
             this.donnee = donnee;
         }
+    }
+
+    public CompetenceAttaque(CompXML.CompLance attaque, int bonus) {
+        super(attaque);
+        this.multiAttaque = bonus;
     }
 
     public int getCaract() {

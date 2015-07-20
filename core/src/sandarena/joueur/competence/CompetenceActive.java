@@ -2,6 +2,9 @@ package sandarena.joueur.competence;
 
 import java.util.ArrayList;
 
+import sandarena.donnee.CompXML;
+import sandarena.joueur.competence.active.CompetenceAttaque;
+
 public abstract class CompetenceActive extends Competence {
     protected int rechargement;
     protected int utilisation;
@@ -15,6 +18,14 @@ public abstract class CompetenceActive extends Competence {
         this.porte=porte;
         this.portemin=portemin;
         this.zone=zone;
+    }
+
+    public CompetenceActive(CompXML.CompLance compLance){
+        this.rechargement=compLance.recharge;
+        this.utilisation=compLance.utilisation;
+        this.porte=compLance.porte;
+        this.portemin=compLance.portemin;
+        this.zone=compLance.zone;
     }
 
     public int getRechargement() {

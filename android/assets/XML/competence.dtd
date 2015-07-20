@@ -48,3 +48,20 @@
 		<!ELEMENT affinite (entreaffinite+)>
 		<!ELEMENT entreaffinite (#PCDATA)>
 
+		<!ENTITY affforce "0">
+		<!ENTITY afftribal "1">
+		<!ENTITY affagilite "2">
+		<!ENTITY affpoison "3">
+		
+		<!ENTITY bufftypeattaque "0">
+		<!ENTITY bufftypedefense "1">
+		<!ENTITY buffdot "4">
+		<!ENTITY buffvalvitesse "5">
+		<!ENTITY buffvalattaque "6">
+		<!ENTITY buffdegat "7">
+		<!ENTITY buffstun "8">
+		<!ENTITY buffvaldefense "9">
+		
+		<!ENTITY caractforce "0">
+		<!ENTITY caractagilite "1">
+		<!ENTITY caractmagie "2">

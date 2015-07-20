@@ -2,6 +2,7 @@ package sandarena.joueur.competence.active;
 
 import java.util.ArrayList;
 
+import sandarena.donnee.CompXML;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.partie.effet.CompetenceToEffet;
 
@@ -20,6 +21,12 @@ public class CompetenceDispel extends CompetenceActive {
         if (donnee.length > 0) {
             this.donnee = donnee;
         }
+    }
+
+    public CompetenceDispel(CompXML.CompLance attaque, boolean cible, int nombre){
+        super(attaque);
+        this.cible = cible;
+        this.nombre = nombre;
     }
 
     @Override

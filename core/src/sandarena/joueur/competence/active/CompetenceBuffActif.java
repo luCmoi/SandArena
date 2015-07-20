@@ -2,7 +2,9 @@ package sandarena.joueur.competence.active;
 
 import java.util.ArrayList;
 
+import sandarena.donnee.CompXML;
 import sandarena.joueur.competence.CompetenceActive;
+import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.partie.effet.CompetenceToEffet;
 
 public class CompetenceBuffActif extends CompetenceActive {
@@ -20,6 +22,11 @@ public class CompetenceBuffActif extends CompetenceActive {
             this.donnee = donnee;
         }
     }
+
+    public CompetenceBuffActif(CompXML.CompLance attaque ) {
+        super(attaque);
+    }
+
     public void setCaract(int caract) {
         this.caract = caract;
     }
