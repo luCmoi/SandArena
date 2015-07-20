@@ -7,8 +7,8 @@ import sandarena.joueur.competence.CompetenceActive;
 
 public class CompetenceInvocation extends CompetenceActive {
 
-    public CompetenceInvocation(int type, int recharge, int utilisation, int porte, int portemin, int zone) {
-        super(type, recharge, utilisation, porte, portemin, zone);
+    public CompetenceInvocation( int recharge, int utilisation, int porte, int portemin, int zone) {
+        super( recharge, utilisation, porte, portemin, zone);
     }
 
     @Override

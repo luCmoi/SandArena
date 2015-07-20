@@ -9,8 +9,7 @@ public abstract class CompetenceActive extends Competence {
     protected int portemin;
     private int zone;
 
-    public CompetenceActive(int type, int recharge, int utilisation, int porte, int portemin, int zone) {
-        super(type);
+    public CompetenceActive( int recharge, int utilisation, int porte, int portemin, int zone) {
         this.rechargement=recharge;
         this.utilisation=utilisation;
         this.porte=porte;

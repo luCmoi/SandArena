@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public abstract class CompetencePassive extends Competence {
 
-    public CompetencePassive(int type) {
-        super(type);
+
+    public CompetencePassive() {
     }
 
     @Override

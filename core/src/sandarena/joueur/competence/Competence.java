@@ -2,14 +2,23 @@ package sandarena.joueur.competence;
 
 import java.util.ArrayList;
 
-public abstract class Competence {
-    protected int type;
+import sandarena.joueur.competence.passive.CompetenceBuff;
 
-    public Competence(int type) {
-        this.type = type;
+public abstract class Competence {
+    protected CompetenceBuff succ;
+
+    public Competence() {
     }
 
     public void dispose() {
+    }
+
+    public void setSucc(CompetenceBuff succ){
+        this.succ = succ;
+    }
+
+    public CompetenceBuff getSucc(){
+        return succ;
     }
 
     public abstract ArrayList<String> toStrings();

@@ -12,8 +12,7 @@ public class CompetenceBuff extends CompetencePassive {
     private int typeBuff;
     private int val;
     private int[] donnee = null;
-    public CompetenceBuff(int type,int typeBuff, int val, int... donnee) {
-        super(type);
+    public CompetenceBuff(int typeBuff, int val, int... donnee) {
         this.typeBuff = typeBuff;
         this.val = val;
         if (donnee.length > 0) {

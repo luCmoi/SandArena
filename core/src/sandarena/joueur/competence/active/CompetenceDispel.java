@@ -13,8 +13,8 @@ public class CompetenceDispel extends CompetenceActive {
     private int nombre;
     protected int[] donnee = null;
 
-    public CompetenceDispel(int type, int recharge, int utilisation, int porte, int portemin, int zone,boolean cible, int nombre, int... donnee) {
-        super(type, recharge, utilisation, porte, portemin, zone);
+    public CompetenceDispel( int recharge, int utilisation, int porte, int portemin, int zone,boolean cible, int nombre, int... donnee) {
+        super( recharge, utilisation, porte, portemin, zone);
         this.cible = cible;
         this.nombre = nombre;
         if (donnee.length > 0) {

@@ -12,8 +12,8 @@ public class CompetenceAttaque extends CompetenceActive {
     protected int multiAttaque;
     protected int[] donnee;
 
-    public CompetenceAttaque(int type, int recharge, int utilisation, int porte, int portemin, int zone, int caract, int multiAttaque, int... donnee) {
-        super(type, recharge, utilisation, porte, portemin, zone);
+    public CompetenceAttaque( int recharge, int utilisation, int porte, int portemin, int zone, int caract, int multiAttaque, int... donnee) {
+        super( recharge, utilisation, porte, portemin, zone);
         this.setCaract(caract);
         this.setMultiAttaque(multiAttaque);
         if (donnee.length > 0) {

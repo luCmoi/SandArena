@@ -5,10 +5,10 @@
 		<nom>Test</nom>
 		<description>TestBis</description>
 		<image>chemin</image>
-		<compbuff type="test" valeur="1">
+		<compbuff type="0" valeur="1">
 		</compbuff>
 		<affinite>
-			<entreaffinite>FORCE</entreaffinite>
+			<entreaffinite>0</entreaffinite>
 		</affinite>
 	</entrecomp>
 </listecompetence>

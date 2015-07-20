@@ -11,8 +11,8 @@ public class CompetenceBuffActif extends CompetenceActive {
     private int val;
     private int[] donnee;
 
-    public CompetenceBuffActif(int type, int recharge, int utilisation, int porte, int portemin, int zone, int caract, int typeBuff, int val, int... donnee) {
-        super(type, recharge, utilisation, porte, portemin, zone);
+    public CompetenceBuffActif( int recharge, int utilisation, int porte, int portemin, int zone, int caract, int typeBuff, int val, int... donnee) {
+        super( recharge, utilisation, porte, portemin, zone);
         this.setCaract(caract);
         this.typeBuff = typeBuff;
         this.val = val;

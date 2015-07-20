@@ -13,8 +13,7 @@ public class CompetenceDeclencheurEffet extends CompetencePassive {
     private int cible;
     private int[] donnee = null;
 
-    public CompetenceDeclencheurEffet(int type, int typedeclencheur, int cible, int... donnee) {
-        super(type);
+    public CompetenceDeclencheurEffet( int typedeclencheur, int cible, int... donnee) {
         this.typedeclencheur = typedeclencheur;
         this.cible = cible;
         if (donnee.length > 0){
