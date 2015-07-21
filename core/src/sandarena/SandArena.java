@@ -29,7 +29,7 @@ public class SandArena extends Game {
     public void create() {
         BanqueSol.init();
         BanquePersonnage.init();
-        BanqueCompetence.init();
+        //BanqueCompetence.init();
         batch = new SpriteBatch();
         try {
             Resolution.calculResolution();

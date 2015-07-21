@@ -13,23 +13,11 @@ public class CompetenceDeclencheurEffet extends CompetencePassive {
     private int typedeclencheur;
     private int cible;
     private Competence effet;
-    private int[] donnee = null;
 
-    public CompetenceDeclencheurEffet( int typedeclencheur, int cible, int... donnee) {
-        this.typedeclencheur = typedeclencheur;
-        this.cible = cible;
-        if (donnee.length > 0){
-            this.donnee = donnee;
-        }
-    }
-
-    public CompetenceDeclencheurEffet( int typedeclencheur, int cible, Competence effet, int... donnee) {
+    public CompetenceDeclencheurEffet( int typedeclencheur, int cible, Competence effet) {
         this.typedeclencheur = typedeclencheur;
         this.cible = cible;
         this.effet = effet;
-        if (donnee.length > 0){
-            this.donnee = donnee;
-        }
     }
 
 
@@ -48,7 +36,8 @@ public class CompetenceDeclencheurEffet extends CompetencePassive {
         return typedeclencheur;
     }
 
-    public int[] getDonnee() {
-        return donnee;
+    public Competence getEffet() {
+        return effet;
     }
+
 }

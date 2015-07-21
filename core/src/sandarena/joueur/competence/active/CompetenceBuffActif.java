@@ -8,27 +8,9 @@ import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.partie.effet.CompetenceToEffet;
 
 public class CompetenceBuffActif extends CompetenceActive {
-    private int caract;
-    private int typeBuff;
-    private int val;
-    private int[] donnee;
-
-    public CompetenceBuffActif( int recharge, int utilisation, int porte, int portemin, int zone, int caract, int typeBuff, int val, int... donnee) {
-        super( recharge, utilisation, porte, portemin, zone);
-        this.setCaract(caract);
-        this.typeBuff = typeBuff;
-        this.val = val;
-        if (donnee.length > 0) {
-            this.donnee = donnee;
-        }
-    }
 
     public CompetenceBuffActif(CompXML.CompLance attaque ) {
         super(attaque);
-    }
-
-    public void setCaract(int caract) {
-        this.caract = caract;
     }
 
     @Override
@@ -39,15 +21,4 @@ public class CompetenceBuffActif extends CompetenceActive {
         return retour;
     }
 
-    public int getTypeBuff() {
-        return typeBuff;
-    }
-
-    public int getVal() {
-        return val;
-    }
-
-    public int[] getDonnee() {
-        return donnee;
-    }
 }

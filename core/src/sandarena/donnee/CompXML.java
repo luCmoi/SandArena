@@ -60,6 +60,11 @@ public class CompXML {
         if (racine.getElementsByTagName("compdeclencheureffet").getLength() != 0) {
             comp = (Element) racine.getElementsByTagName("compdeclencheureffet").item(0);
             competence = compDeclencheurEffet(comp);
+            if (comp.getElementsByTagName("compbuff").getLength() != 0) {
+                comp  = (Element) comp.getElementsByTagName("compbuff").item(0);
+            } else {
+                comp  = (Element) comp.getElementsByTagName("compattaque").item(0);
+            }
         }
         else if (racine.getElementsByTagName("compbuffactif").getLength() != 0) {
             comp = (Element) racine.getElementsByTagName("compbuffactif").item(0);
@@ -97,7 +102,15 @@ public class CompXML {
     private static CompetenceBuff compBuff(Element comp) {
         int type = Integer.parseInt(comp.getAttribute("type"));
         int valeur = Integer.parseInt(comp.getAttribute("valeur"));
-        return new CompetenceBuff(type, valeur);
+        int condduree=-1;
+        int condtype=-1;
+        if (comp.getElementsByTagName("condtype").getLength() != 0) {
+            condtype = Integer.parseInt(comp.getElementsByTagName("condtype").item(0).getTextContent());
+        }
+        if (comp.getElementsByTagName("condduree").getLength() != 0) {
+            condduree = Integer.parseInt(comp.getElementsByTagName("condduree").item(0).getTextContent());
+        }
+        return new CompetenceBuff(type, valeur,condtype,condduree);
     }
 
     private static CompetenceDeclencheurEffet compDeclencheurEffet(Element comp) {

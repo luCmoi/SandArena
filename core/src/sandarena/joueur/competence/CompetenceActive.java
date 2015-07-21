@@ -3,7 +3,6 @@ package sandarena.joueur.competence;
 import java.util.ArrayList;
 
 import sandarena.donnee.CompXML;
-import sandarena.joueur.competence.active.CompetenceAttaque;
 
 public abstract class CompetenceActive extends Competence {
     protected int rechargement;

@@ -2,6 +2,7 @@
 <!DOCTYPE listecompetence SYSTEM "competence.dtd">
 <listecompetence>
 	
+	<!-- FORCE MAIN -->
 	
 	<entrecomp>
 		<nom>Bourre-pif</nom>
@@ -15,6 +16,19 @@
 		</affinite>
 	</entrecomp>
 	
+	<entrecomp>
+		<nom>Berzerk</nom>
+		<description>Plus le personnage est blessé plus sa folie est grande</description>
+		<image>Image/Competence/Berzerk.png</image>
+		<compdeclencheureffet typedeclencheur="&declenchedegatrecu;" cible = "&ciblesoi;">
+			<compbuff type="&buffvalattaque;" valeur = "1">
+				<condtype>&caractforce;</condtype>
+			</compbuff>
+		</compdeclencheureffet>
+		<affinite>
+			<entreaffinite>&affforce;</entreaffinite>
+		</affinite>
+	</entrecomp>
 	
 	<entrecomp>
 		<nom>Leg Day</nom>
@@ -27,6 +41,34 @@
 		</affinite>
 	</entrecomp>
 		
+	<entrecomp>
+		<nom>Ecrase-Face</nom>
+		<description>Un tel coup peut ferait s'évanouir n'importe quel être vivant</description>
+		<image>Image/Competence/EcraseFace.png</image>
+		<compattaque bonus="-1">
+			<complance recharge="3" utilisation="0" porte="1" portemin="1" zone="1" caract ="&caractforce;"/>
+		</compattaque>
+		<affinite>
+			<entreaffinite>&affforce;</entreaffinite>
+		</affinite>
+	</entrecomp>	
+	
+	<entrecomp>
+		<nom>Contraction Musculaire</nom>
+		<description>Des muscles puissants suffisent à arreter un coup mortel</description>
+		<image>Image/Competence/ContractionMusculaire.png</image>
+		<compbuffactif>
+			<complance recharge="3" utilisation="0" porte="0" portemin="0" zone="1" caract="&caractforce;"/>
+			<compbuff type="&buffvaldefense;" valeur = "3">
+				<condduree>2</condduree>
+			</compbuff>
+		</compbuffactif>
+		<affinite>
+			<entreaffinite>&affforce;</entreaffinite>
+		</affinite>
+	</entrecomp>	
+	
+	<!-- TRIBAL MAIN -->
 	
 	<entrecomp>
 		<nom>Rituel de sang</nom>
@@ -44,7 +86,6 @@
 		</affinite>
 	</entrecomp>
 	
-	
 	<entrecomp>
 		<nom>Perle de Purification</nom>
 		<description>Purifie le corps de ses afflictions</description>
@@ -57,5 +98,140 @@
 		</affinite>
 	</entrecomp>
 	
+	<entrecomp>
+		<nom>Lance de Pai</nom>
+		<description>On dit que l'originale lancée par Pai fendit une montagne</description>
+		<image>Image/Competence/LanceDePai.png</image>
+		<compattaque bonus="0">
+			<complance recharge="2" utilisation="0" porte="5" portemin="2" zone="1" caract ="&caractmagie;"/>
+		</compattaque>
+		<affinite>
+			<entreaffinite>&afftribal;</entreaffinite>
+		</affinite>
+	</entrecomp>
+
+	<entrecomp>
+		<nom>Poupée Vaudou</nom>
+		<description>L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances soit communes</description>
+		<image>Image/Competence/PoupeeVaudou.png</image>
+		<compbuffactif>
+			<complance recharge="0" utilisation="1" porte="15" portemin="1" zone="1" caract="&caractmagie;"/>
+			<compbuff type="&buffdot;" valeur = "1">
+			</compbuff>
+		</compbuffactif>
+		<affinite>
+			<entreaffinite>&afftribal;</entreaffinite>
+		</affinite>
+	</entrecomp>
+
+	<entrecomp>
+		<nom>Tiki de To´a-Hiti</nom>
+		<description>Ce tiki puise dans la force pour defendre l'esprit</description>
+		<image>Image/Competence/TikiDeToahiti.png</image>
+		<compbuff type="&bufftypedefense;" valeur = "&caractforce;">
+			<condtype>&caractmagie;</condtype>
+		</compbuff>
+		<affinite>
+			<entreaffinite>&afftribal;</entreaffinite>
+		</affinite>
+	</entrecomp>
 	
+	<entrecomp>
+		<nom>Tiki de Tu</nom>
+		<description>Ce tiki donne a l'esprit la force des muscles</description>
+		<image>Image/Competence/TikiDeTu.png</image>
+		<compbuff type="&bufftypeattaque;" valeur = "&caractforce;">
+			<condtype>&caractmagie;</condtype>
+		</compbuff>
+		<affinite>
+			<entreaffinite>&afftribal;</entreaffinite>
+		</affinite>
+	</entrecomp>
+
+	<!-- AGILITE MAIN -->
+
+	<entrecomp>
+		<nom>Frappe chirurgicale</nom>
+		<description>Certains points sensibles du corps suffisent a entrainer la mort</description>
+		<image>Image/Competence/FrappeChirurgicale.png</image>
+		<compattaque bonus="2">
+			<complance recharge="4" utilisation="0" porte="1" portemin="1" zone="1" caract ="&caractagilite;"/>
+		</compattaque>
+		<affinite>
+			<entreaffinite>&affagilite;</entreaffinite>
+		</affinite>
+	</entrecomp>
+
+	<entrecomp>
+		<nom>Esquive naturelle</nom>
+		<description>Certaines personnes sont plus capable que d'autre d'esquiver une lame mortelle</description>
+		<image>Image/Competence/EsquiveNaturelle.png</image>
+		<compbuff type="&buffvaldefense;" valeur = "2">
+			<condtype>&caractagilite;</condtype>
+		</compbuff>
+		<affinite>
+			<entreaffinite>&affagilite;</entreaffinite>
+		</affinite>
+	</entrecomp>
+
+	<entrecomp>
+		<nom>Jet De Sable</nom>
+		<description>Un ennemi aveuglé deviens moins dangeureux</description>
+		<image>Image/Competence/JetDeSable.png</image>
+		<compbuffactif>
+			<complance recharge="2" utilisation="4" porte="3" portemin="1" zone="1" caract="&caractagilite;"/>
+			<compbuff type="&buffvalattaque;" valeur = "-2">
+				<condduree>2</condduree>
+			</compbuff>
+		</compbuffactif>
+		<affinite>
+			<entreaffinite>&affagilite;</entreaffinite>
+		</affinite>
+	</entrecomp>
+
+	<entrecomp>
+		<nom>Riposte éclaire</nom>
+		<description>Des reflexes tels qu'aucun coup reçus n'a été rendu</description>
+		<image>Image/Competence/RiposteEclaire.png</image>
+		<compdeclencheureffet typedeclencheur="&declenchedegatrecu;" cible = "&cibledeclenche;">
+			<compbuff type="&buffdegat;" valeur = "3">
+			</compbuff>
+		</compdeclencheureffet>
+		<affinite>
+			<entreaffinite>&affagilite;</entreaffinite>
+		</affinite>
+	</entrecomp>
+		
+    <!-- POISON MAIN -->
+	
+	<entrecomp>
+		<nom>Poison Corosif</nom>
+		<description>Un tel poison ronge les chairs de l'interieur</description>
+		<image>Image/Competence/PoisonCorosif.png</image>
+		<compbuffactif>
+			<complance recharge="2" utilisation="4" porte="5" portemin="1" zone="1" caract="&caractagilite;"/>
+			<compbuff type="&buffdot;" valeur = "2">
+				<condduree>2</condduree>
+			</compbuff>
+		</compbuffactif>
+		<affinite>
+			<entreaffinite>&affpoison;</entreaffinite>
+		</affinite>
+	</entrecomp>
+	
+	<entrecomp>
+		<nom>Poison Musculaire</nom>
+		<description>Ce poison rend sa cible faible au point qu'il lui deviens difficile de se déplacer</description>
+		<image>Image/Competence/PoisonMusculaire.png</image>
+		<compbuffactif>
+			<complance recharge="2" utilisation="4" porte="5" portemin="1" zone="1" caract="&caractagilite;"/>
+			<compbuff type="&buffvalvitesse;" valeur = "-4">
+				<condduree>3</condduree>
+			</compbuff>
+		</compbuffactif>
+		<affinite>
+			<entreaffinite>&affpoison;</entreaffinite>
+		</affinite>
+	</entrecomp>
+
 </listecompetence>

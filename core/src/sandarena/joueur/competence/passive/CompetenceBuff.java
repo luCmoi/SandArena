@@ -11,13 +11,14 @@ public class CompetenceBuff extends CompetencePassive {
 
     private int typeBuff;
     private int val;
-    private int[] donnee = null;
-    public CompetenceBuff(int typeBuff, int val, int... donnee) {
+    private int condtype;
+    private int condduree;
+
+    public CompetenceBuff(int typeBuff, int val, int condtype, int condduree) {
         this.typeBuff = typeBuff;
         this.val = val;
-        if (donnee.length > 0) {
-            this.donnee = donnee;
-        }
+        this.condtype = condtype;
+        this.condduree = condduree;
     }
 
     @Override
@@ -35,7 +36,13 @@ public class CompetenceBuff extends CompetencePassive {
         return val;
     }
 
-    public int[] getDonnee() {
-        return donnee;
+    public int getCondtype() {
+        return condtype;
     }
+
+    public int getCondduree() {
+        return condduree;
+    }
+
+
 }

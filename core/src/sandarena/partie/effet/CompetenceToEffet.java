@@ -50,33 +50,27 @@ public class CompetenceToEffet {
         ArrayList<String> retour = new ArrayList<String>();
         if (comp instanceof CompetenceBuff) {
             CompetenceBuff tmp = (CompetenceBuff) comp;
-            retour.addAll(switchTypeBuff(tmp.getTypeBuff(), tmp.getVal(), tmp.getDonnee()));
+            retour.addAll(switchTypeBuff(tmp));
         } else if (comp instanceof CompetenceBuffActif) {
             CompetenceBuffActif tmp = (CompetenceBuffActif) comp;
-            retour.addAll(switchTypeBuff(tmp.getTypeBuff(), tmp.getVal(), tmp.getDonnee()));
+            retour.addAll(switchTypeBuff(tmp.getSucc()));
         } else if (comp instanceof CompetenceDeclencheurEffet) {
             CompetenceDeclencheurEffet tmp = (CompetenceDeclencheurEffet) comp;
-            retour.addAll(switchTypeDeclencheur(tmp.getTypedeclencheur(), tmp.getCible(), tmp.getDonnee()));
+            retour.addAll(switchTypeDeclencheur(tmp.getTypedeclencheur(), tmp.getCible(), tmp.getEffet(), tmp.getSucc()));
         }
         return retour;
     }
 
-    private static ArrayList<String> switchTypeDeclencheur(int type, int cible, int[] donnee) {
+    private static ArrayList<String> switchTypeDeclencheur(int type, int cible, Competence effet, CompetenceBuff succ) {
         ArrayList<String> retour = new ArrayList<String>();
         switch (type) {
             case (DEGATRECU):
                 retour.add("Quand le personnage reçoit des dégats");
                 break;
         }
-        if (donnee != null && donnee[0] == CONDITIONBUFF) {
-            int[] donneetmp = null;
-            if (donnee.length != 3) {
-                donneetmp = new int[donnee.length - 3];
-                for (int i = 0; i < donnee.length - 3; i++) {
-                    donneetmp[i] = donnee[i + 3];
-                }
-            }
-            retour.addAll(switchTypeBuff(donnee[1], donnee[2], donneetmp));
+        retour.addAll(toStrings(effet));
+        if (succ != null) {
+            retour.addAll(switchTypeBuff(succ));
         }
         if (cible == SOI) {
             retour.add("Cible : soi");
@@ -98,54 +92,42 @@ public class CompetenceToEffet {
         return null;
     }
 
-    public static ArrayList<String> switchTypeBuff(int type, int val, int[] donnee) {
+    public static ArrayList<String> switchTypeBuff(CompetenceBuff comp) {
         ArrayList<String> retour = new ArrayList<String>();
-        switch (type) {
+        switch (comp.getTypeBuff()) {
             case (TYPEATTAQUE):
-                retour.add("Change le type d'attaque en " + switchtype(val));
+                retour.add("Change le type d'attaque en " + switchtype(comp.getVal()));
                 break;
             case (TYPEDEFENSE):
-                retour.add("Change le type de defense en " + switchtype(val));
+                retour.add("Change le type de defense en " + switchtype(comp.getVal()));
                 break;
             case (VALATTAQUE):
-                retour.add("Augmente l'attaque de " + val);
+                retour.add("Augmente l'attaque de " + comp.getVal());
                 break;
             case (VALVITESSE):
-                retour.add("Augmente la vitesse de " + val);
+                retour.add("Augmente la vitesse de " + comp.getVal());
                 break;
             case (DEGAT):
-                retour.add("Inflige " + val + " degats");
+                retour.add("Inflige " + comp.getVal() + " degats");
                 break;
             case (DOT):
-                retour.add("Inflige " + val + " degats par tour");
+                retour.add("Inflige " + comp.getVal() + " degats par tour");
                 break;
             case (STUN):
-                retour.add("Assomme pendant " + val + " tours");
+                retour.add("Assomme pendant " + comp.getVal() + " tours");
                 break;
             case (VALDEFENSE):
-                retour.add("Augmente la defense de "+val);
+                retour.add("Augmente la defense de " + comp.getVal());
                 break;
         }
-        if (donnee != null) {
-            for (int y = 0; y < donnee.length; y++) {
-                if (donnee[y] == CONDITIONBUFF) {
-                    int[] donneetmp = null;
-                    if (donnee.length != 3 + y) {
-                        donneetmp = new int[donnee.length - 3 - y];
-                        for (int i = y; i < donnee.length - 3 - y; i++) {
-                            donneetmp[i] = donnee[i + 3];
-                        }
-                    }
-                    retour.addAll(switchTypeBuff(donnee[1], donnee[2], donneetmp));
-                    y = donnee.length;
-                } else if (donnee[y] == CONDITIONTYPE) {
-                    retour.add("Sur la caractéristique " + switchtype(donnee[y + 1]));
-                    y++;
-                }else if (donnee[y] == CONDITIONDUREE){
-                    retour.add("Dure "+donnee[y+1]+" tours");
-                    y++;
-                }
-            }
+        if (comp.getSucc() != null) {
+            retour.addAll(switchTypeBuff(comp.getSucc()));
+        }
+        if (comp.getCondtype() != -1) {
+            retour.add("Sur la caractéristique " + switchtype(comp.getCondtype()));
+        }
+        if (comp.getCondduree() != -1) {
+            retour.add("Dure " + comp.getCondduree() + " tours");
         }
         return retour;
     }
@@ -154,108 +136,72 @@ public class CompetenceToEffet {
         String nom = competenceIG.info.nom;
         if (competenceIG.info.competence instanceof CompetenceBuff) {
             CompetenceBuff tmp = (CompetenceBuff) competenceIG.info.competence;
-            return creerEffet(nom, tmp.getTypeBuff(), tmp.getVal(), tmp.getDonnee());
+            return creerEffet(nom, tmp);
         } else if (competenceIG.info.competence instanceof CompetenceBuffActif) {
             CompetenceBuffActif tmp = (CompetenceBuffActif) competenceIG.info.competence;
-            return creerEffet(nom,tmp.getTypeBuff(), tmp.getVal(), tmp.getDonnee());
+            return creerEffet(nom, tmp.getSucc());
         } else if (competenceIG.info.competence instanceof CompetenceAttaque) {
             CompetenceAttaque tmp = (CompetenceAttaque) competenceIG.info.competence;
-            if (tmp.getDonnee() != null) {
-                int[] donneetmp = null;
-                if (tmp.getDonnee().length > 3) {
-                    donneetmp = new int[tmp.getDonnee().length - 3];
-                    for (int i = 0; i < tmp.getDonnee().length - 3; i++) {
-                        donneetmp[i] = tmp.getDonnee()[i + 3];
-                    }
-                }
-                return CompetenceToEffet.creerEffet(nom,tmp.getDonnee()[1], tmp.getDonnee()[2], donneetmp);
+            if (tmp.getSucc() != null) {
+                return creerEffet(nom, tmp.getSucc());
             }
-        }else if (competenceIG.info.competence instanceof CompetenceDispel){
+        } else if (competenceIG.info.competence instanceof CompetenceDispel) {
             CompetenceDispel tmp = (CompetenceDispel) competenceIG.info.competence;
-            if (tmp.getDonnee() != null) {
-                int[] donneetmp = null;
-                if (tmp.getDonnee().length > 3) {
-                    donneetmp = new int[tmp.getDonnee().length - 3];
-                    for (int i = 0; i < tmp.getDonnee().length - 3; i++) {
-                        donneetmp[i] = tmp.getDonnee()[i + 3];
-                    }
-                }
-                return CompetenceToEffet.creerEffet(nom,tmp.getDonnee()[1], tmp.getDonnee()[2], donneetmp);
+            if (tmp.getSucc() != null) {
+                return creerEffet(nom, tmp.getSucc());
             }
         }
         return null;
     }
 
-    private static EffetBuf creerEffet(String nom,int type, int val, int[] donnee) {
+    private static EffetBuf creerEffet(String nom, CompetenceBuff comp) {
         EffetBuf retour = null;
-        switch (type) {
+        switch (comp.getTypeBuff()) {
             case (TYPEATTAQUE):
-                retour = new EffetBuffTypeAttaque(nom,val, null);
+                retour = new EffetBuffTypeAttaque(nom, comp.getVal(), null);
                 break;
             case (TYPEDEFENSE):
-                retour = new EffetBuffTypeDefense(nom,val, null);
+                retour = new EffetBuffTypeDefense(nom, comp.getVal(), null);
                 break;
             case (VALATTAQUE):
-                retour = new EffetBuffValAttaque(nom,val, null);
+                retour = new EffetBuffValAttaque(nom, comp.getVal(), null);
                 break;
             case (VALVITESSE):
-                retour = new EffetBuffValVitesse(nom,val, null);
+                retour = new EffetBuffValVitesse(nom, comp.getVal(), null);
                 break;
             case (DEGAT):
-                retour = new EffetBuffDommage(nom,val, null);
+                retour = new EffetBuffDommage(nom, comp.getVal(), null);
                 break;
             case (DOT):
-                retour = new EffetBuffDot(nom,val, null);
+                retour = new EffetBuffDot(nom, comp.getVal(), null);
                 break;
             case (STUN):
-                retour = new EffetBuffStun(nom,val, null);
+                retour = new EffetBuffStun(nom, comp.getVal(), null);
                 break;
             case (VALDEFENSE):
-                retour = new EffetBuffValDefense(nom,val, null);
+                retour = new EffetBuffValDefense(nom, comp.getVal(), null);
         }
-        if (donnee != null) {
-            for (int y = 0; y < donnee.length; y++) {
-                if (donnee[y] == CONDITIONBUFF) {
-                    int[] donneetmp = null;
-                    if (donnee.length != 3 + y) {
-                        donneetmp = new int[donnee.length - 3 - y];
-                        for (int i = y; i < donnee.length - 3 - y; i++) {
-                            donneetmp[i] = donnee[i + 3];
-                        }
-                    }
-                    retour.setChaine(creerEffet(nom,donnee[1], donnee[2], donneetmp));
-                    y = donnee.length;
-                } else if (donnee[y] == CONDITIONTYPE) {
-                    if (retour instanceof EffetBuffVal) {
-                        ((EffetBuffVal) retour).setTypeCond(donnee[y + 1]);
-                        y++;
-                    }else if (retour instanceof EffetBuffType){
-                        ((EffetBuffType) retour).setTypeCond(donnee[y+1]);
-                        y++;
-                    }
-                }else if (donnee[y]== CONDITIONDUREE){
-                    retour.setDuree(donnee[y+1]);
-                    y++;
-                }
+        if (comp.getSucc() != null) {
+            retour.setChaine(creerEffet(nom, comp.getSucc()));
+        }
+        if (comp.getCondtype() != -1) {
+            if (retour instanceof EffetBuffVal) {
+                ((EffetBuffVal) retour).setTypeCond(comp.getCondtype());
+            } else if (retour instanceof EffetBuffType) {
+                ((EffetBuffType) retour).setTypeCond(comp.getCondtype());
             }
+        } else if (comp.getCondduree() != -1) {
+            retour.setDuree(comp.getCondduree());
         }
+
         return retour;
     }
 
     public static EffetDeclencheur toDeclencheur(CompetenceIG comp) {
         CompetenceDeclencheurEffet tmp2 = (CompetenceDeclencheurEffet) comp.info.competence;
         EffetBuf tmp = null;
-        if (tmp2.getDonnee() != null) {
-            if (tmp2.getDonnee()[0] == CONDITIONBUFF) {
-                int[] donneetmp = null;
-                if (tmp2.getDonnee().length != 3) {
-                    donneetmp = new int[tmp2.getDonnee().length - 3];
-                    for (int i = 0; i < tmp2.getDonnee().length - 3; i++) {
-                        donneetmp[i] = tmp2.getDonnee()[i + 3];
-                    }
-                }
-                tmp = creerEffet(comp.info.nom, tmp2.getDonnee()[1], tmp2.getDonnee()[2], donneetmp);
-            }
+        if (tmp2.getSucc() != null) {
+            tmp = creerEffet(comp.info.nom, tmp2.getSucc());
         }
         switch (tmp2.getTypedeclencheur()) {
             case (DEGATRECU):

@@ -28,7 +28,9 @@ public class Personnage {
         for (int i = 0; i < 4; i++) {
             int tmp = (int)(Math.random()*commun.affinite.length);
             this.competences[i] = BanqueCompetence.getCompetence(commun.affinite[tmp], competences);
-            this.competences[i].incremente();
+            if (this.competences[i]!=null) {
+                this.competences[i].incremente();
+            }
         }
     }
 

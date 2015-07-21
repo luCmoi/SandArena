@@ -9,7 +9,6 @@ import sandarena.donnee.BanqueCompetence.EntreeCompetence;
 import sandarena.donnee.Caract;
 import sandarena.joueur.Personnage;
 import sandarena.partie.Case;
-import sandarena.partie.effet.Effet;
 import sandarena.partie.effet.EffetBuf;
 import sandarena.partie.effet.EffetDeclencheur;
 import sandarena.partie.effet.effetbuff.EffetBuffDommage;
@@ -45,7 +44,7 @@ public class PersonnageIG {
     private ArrayList<EffetBuffDot> dot = new ArrayList<EffetBuffDot>();
     private ArrayList<EffetBuffStun> stun = new ArrayList<EffetBuffStun>();
     //Dispel
-    private ArrayList<EffetBuf> buffBenefique= new ArrayList<EffetBuf>();
+    private ArrayList<EffetBuf> buffBenefique = new ArrayList<EffetBuf>();
     private ArrayList<EffetBuf> buffMauvais = new ArrayList<EffetBuf>();
     private ArrayList<EffetBuf> buffPassif = new ArrayList<EffetBuf>();
     //Declencheur
@@ -140,7 +139,9 @@ public class PersonnageIG {
             this.container.getContainer().finPerso();
         } else {
             for (CompetenceIG c : competence) {
-                c.tour();
+                if (c != null) {
+                    c.tour();
+                }
             }
             if (!getStun().isEmpty()) {
                 this.aAgi = true;
@@ -160,16 +161,16 @@ public class PersonnageIG {
     }
 
     public int modifAttaque(int val, int type) {
-        for(EffetBuffTypeAttaque effet : getChangeTypeAtt()){
+        for (EffetBuffTypeAttaque effet : getChangeTypeAtt()) {
             type = effet.modif(type);
-            switch (type){
-                case(Caract.FORCE):
+            switch (type) {
+                case (Caract.FORCE):
                     val = donnee.commun.force;
                     break;
-                case(Caract.AGILITE):
+                case (Caract.AGILITE):
                     val = donnee.commun.agilite;
                     break;
-                case(Caract.MAGIE):
+                case (Caract.MAGIE):
                     val = donnee.commun.magie;
                     break;
             }
@@ -181,16 +182,16 @@ public class PersonnageIG {
     }
 
     public int modifDefense(int val, int type) {
-        for(EffetBuffTypeDefense effet : getChangeTypeDef()){
+        for (EffetBuffTypeDefense effet : getChangeTypeDef()) {
             type = effet.modif(type);
-            switch (type){
-                case(Caract.FORCE):
+            switch (type) {
+                case (Caract.FORCE):
                     val = donnee.commun.force;
                     break;
-                case(Caract.AGILITE):
+                case (Caract.AGILITE):
                     val = donnee.commun.agilite;
                     break;
-                case(Caract.MAGIE):
+                case (Caract.MAGIE):
                     val = donnee.commun.magie;
                     break;
             }
@@ -241,7 +242,7 @@ public class PersonnageIG {
             } else {
                 buffMauvais.add(effet);
             }
-        }else {
+        } else {
             buffPassif.add(effet);
         }
         if (effet instanceof EffetBuffValAttaque) {
@@ -347,12 +348,13 @@ public class PersonnageIG {
 
     public void tourBuff() {
         ArrayList<EffetBuf> toRemove = new ArrayList<EffetBuf>();
-        for(EffetBuf effet : buffBenefique){
-            if(effet.tour())toRemove.add(effet);
-        }for (EffetBuf effet :buffMauvais){
-            if(effet.tour())toRemove.add(effet);
+        for (EffetBuf effet : buffBenefique) {
+            if (effet.tour()) toRemove.add(effet);
         }
-        for (EffetBuf effet : toRemove){
+        for (EffetBuf effet : buffMauvais) {
+            if (effet.tour()) toRemove.add(effet);
+        }
+        for (EffetBuf effet : toRemove) {
             removeBuff(effet);
         }
         toRemove.clear();
@@ -365,7 +367,7 @@ public class PersonnageIG {
 
     public void removeBuffMauvais() {
         Collections.shuffle(buffMauvais);
-        if (buffMauvais.size() >0) {
+        if (buffMauvais.size() > 0) {
             buffMauvais.remove(0);
         }
     }
