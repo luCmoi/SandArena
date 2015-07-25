@@ -19,8 +19,8 @@ public class Info extends Actor {
     private String[] texte = new String[0];
     private boolean perso;
     private boolean comp;
-    private static final int PARLIGNECOMP = 40;
-    private static final int PARLIGNEEFFET = 60;
+    private static final int PARLIGNECOMP = 35;
+    private static final int PARLIGNEEFFET = 50;
 
     public Info(InfoWindow container) {
         super();
@@ -50,6 +50,7 @@ public class Info extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         if (perso) {
+            RegexTexte.changeCharacter(PARLIGNECOMP);
             Font.font.setScale((float) (Resolution.ratioWidth * 3.25), (float) (Resolution.ratioHeight * 3.25));
             Font.font.draw(batch, texte[0], getX() + getHeight(), getY() + getHeight());
             Font.font.setScale((float) (Resolution.ratioWidth * 2), (float) (Resolution.ratioHeight * 2.5));
@@ -85,7 +86,7 @@ public class Info extends Actor {
                     getY() + getHeight() - (Font.font.getLineHeight() * 3) - (Resolution.ratioHeight * 15));
 
         } else if (comp) {
-            RegexTexte.CHARACTERS_PER_FRAME = PARLIGNECOMP;
+            RegexTexte.changeCharacter(PARLIGNECOMP);
             Font.font.setScale((float) (Resolution.ratioWidth * 3.25), (float) (Resolution.ratioHeight * 3.25));
             Font.font.draw(batch, texte[0], getX() + getHeight(), getY() + getHeight());
             Font.font.setScale((float) (Resolution.ratioWidth * 2), (float) (Resolution.ratioHeight * 2.5));
@@ -98,7 +99,7 @@ public class Info extends Actor {
                 }
             }
         } else {
-            RegexTexte.CHARACTERS_PER_FRAME = PARLIGNEEFFET;
+            RegexTexte.changeCharacter(PARLIGNEEFFET);
             Font.font.setScale((float) (Resolution.ratioWidth * 2), (float) (Resolution.ratioHeight * 2.5));
             float tSize = Font.font.getLineHeight();
             Font.font.setScale((float) (Resolution.ratioWidth * 1.5), (float) (Resolution.ratioHeight * 2));

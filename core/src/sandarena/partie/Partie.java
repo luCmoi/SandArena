@@ -147,6 +147,7 @@ public class Partie extends Stage {
 
 
     public void finPerso() {
+        stageInterface.recharge();
         phase(personnageActif.getPossesseur());
     }
 

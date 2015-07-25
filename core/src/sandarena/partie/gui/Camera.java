@@ -15,7 +15,7 @@ public class Camera extends OrthographicCamera {
     private boolean deplacementDroit = false;
     private boolean deplacementHaut = false;
     private boolean deplacementBas = false;
-    public static int VITESSECAM = 8;
+    private static int VITESSECAM = 8;
     private Partie partie;
 
     public Camera(Partie partie) {

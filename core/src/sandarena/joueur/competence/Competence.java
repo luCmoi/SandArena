@@ -7,7 +7,7 @@ import sandarena.joueur.competence.passive.CompetenceBuff;
 public abstract class Competence {
     protected CompetenceBuff succ;
 
-    public Competence() {
+    Competence() {
     }
 
     public void dispose() {

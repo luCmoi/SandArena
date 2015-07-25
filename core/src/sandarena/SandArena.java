@@ -9,6 +9,7 @@ import sandarena.donnee.BanqueCompetence;
 import sandarena.donnee.BanquePersonnage;
 import sandarena.donnee.BanqueSol;
 import sandarena.partie.gui.ScreenPartie;
+import sandarena.preparematch.ScreenPrepaMatch;
 
 import static sandarena.donnee.CompXML.parseCompXML;
 
@@ -29,19 +30,18 @@ public class SandArena extends Game {
     public void create() {
         BanqueSol.init();
         BanquePersonnage.init();
-        //BanqueCompetence.init();
         batch = new SpriteBatch();
         try {
             Resolution.calculResolution();
         } catch (IOException ex) {
             System.err.println("error : File");
         }
-        //
         parseCompXML();
+        this.setScreen(new ScreenPrepaMatch(this));
         //
-        this.screenPartie = new ScreenPartie(this);
+        /*this.screenPartie = new ScreenPartie(this);
         this.setScreen(screenPartie);
-    }
+    */}
 
     public SpriteBatch getBatch() {
         return this.batch;

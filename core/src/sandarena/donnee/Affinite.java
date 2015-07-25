@@ -6,7 +6,7 @@ package sandarena.donnee;
  *
  * @author Guillaume
  */
-public class Affinite {
+class Affinite {
     public static int FORCE = 0;
     public static int TRIBAL = 1;
     public static final int AGILITE = 2;

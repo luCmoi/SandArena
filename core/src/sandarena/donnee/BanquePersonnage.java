@@ -20,13 +20,17 @@ public class BanquePersonnage extends Banque {
      */
     public static void init() {
         banque.add(new DonneePersonnage("Barbare des Sables",
-                "Ces hommes vivaient dans le desert avant que les Arènes ne s'y établissent, certains racontent qu'ils sont nés sur ces terres attiré par la soif de combats",
+                "Ces hommes vivaient dans le desert avant que les Arènes ne s'y établissent, certains racontent qu'ils sont à l'origine des premières arènes du désert",
                 "Image/Personnage/BarbareDesSables.png",
-                15, 4, 5, 2, 2, Affinite.FORCE,Affinite.TRIBAL));
+                15, 3, 5, 2, 2, Affinite.FORCE,Affinite.TRIBAL));
         banque.add(new DonneePersonnage("Sauvageon des Sables",
-                "Personne ne sait s'il sont de la même espèce que les barbares qu'ils semblent servire où s'ils sont entrés en symbiose",
+                "Personne ne sait s'il sont de la même espèce que les barbares qu'ils semblent servire où s'ils sont entrés en symbiose avec leur communautée",
                 "Image/Personnage/SauvageonDesSables.png",
                 10, 4, 1, 6, 3,Affinite.AGILITE, Affinite.POISON, Affinite.TRIBAL));
+        banque.add(new DonneePersonnage("Guetteur",
+                "Créature des profondeurs trouvées dans des cavernes abandonnées il faut de nombreux traqueur expérimentés pour en ramener un dans l'arène",
+                "Image/Personnage/Guetteur.png",
+                13, 4, 2, 2, 5, Affinite.POISON/*Affinite.MAGIE*/));
     }
 
     /**

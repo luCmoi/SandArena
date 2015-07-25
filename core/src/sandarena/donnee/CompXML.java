@@ -29,12 +29,12 @@ public class CompXML {
 
     public static void parseCompXML() {
         DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-        domFactory.setValidating(true);
+        //domFactory.setValidating(true);
         DocumentBuilder builder = null;
         Document doc = null;
         try {
             builder = domFactory.newDocumentBuilder();
-            doc = builder.parse(Gdx.files.internal("XML/competence.xml").file());
+            doc = builder.parse(Gdx.files.internal("XML/competence.xml").read());
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -61,24 +61,20 @@ public class CompXML {
             comp = (Element) racine.getElementsByTagName("compdeclencheureffet").item(0);
             competence = compDeclencheurEffet(comp);
             if (comp.getElementsByTagName("compbuff").getLength() != 0) {
-                comp  = (Element) comp.getElementsByTagName("compbuff").item(0);
+                comp = (Element) comp.getElementsByTagName("compbuff").item(0);
             } else {
-                comp  = (Element) comp.getElementsByTagName("compattaque").item(0);
+                comp = (Element) comp.getElementsByTagName("compattaque").item(0);
             }
-        }
-        else if (racine.getElementsByTagName("compbuffactif").getLength() != 0) {
+        } else if (racine.getElementsByTagName("compbuffactif").getLength() != 0) {
             comp = (Element) racine.getElementsByTagName("compbuffactif").item(0);
             competence = competenceBuffActif(comp);
-        }
-        else if (racine.getElementsByTagName("compdispel").getLength() != 0) {
+        } else if (racine.getElementsByTagName("compdispel").getLength() != 0) {
             comp = (Element) racine.getElementsByTagName("compdispel").item(0);
             competence = compDispel(comp);
-        }
-        else if (racine.getElementsByTagName("compattaque").getLength() != 0) {
+        } else if (racine.getElementsByTagName("compattaque").getLength() != 0) {
             comp = (Element) racine.getElementsByTagName("compattaque").item(0);
             competence = compAttaque(comp);
-        }
-        else if (racine.getElementsByTagName("compbuff").getLength() != 0) {
+        } else if (racine.getElementsByTagName("compbuff").getLength() != 0) {
             comp = (Element) racine.getElementsByTagName("compbuff").item(0);
             competence = compBuff(comp);
         }
@@ -93,29 +89,29 @@ public class CompXML {
         for (int i = 0; i < listeAffi.getChildNodes().getLength(); i++) {
             Node tmp = listeAffi.getChildNodes().item(i);
             if (tmp.getNodeType() == Node.ELEMENT_NODE) {
-                affinite.add(Integer.parseInt(tmp.getTextContent()));
+                affinite.add(parseIntStatic(tmp.getTextContent()));
             }
         }
         BanqueCompetence.banque.add(new BanqueCompetence.EntreeCompetence(nom, description, chemin, competence, affinite));
     }
 
     private static CompetenceBuff compBuff(Element comp) {
-        int type = Integer.parseInt(comp.getAttribute("type"));
-        int valeur = Integer.parseInt(comp.getAttribute("valeur"));
-        int condduree=-1;
-        int condtype=-1;
+        int type = parseIntStatic(comp.getAttribute("type"));
+        int valeur = parseIntStatic(comp.getAttribute("valeur"));
+        int condduree = -1;
+        int condtype = -1;
         if (comp.getElementsByTagName("condtype").getLength() != 0) {
-            condtype = Integer.parseInt(comp.getElementsByTagName("condtype").item(0).getTextContent());
+            condtype = parseIntStatic(comp.getElementsByTagName("condtype").item(0).getTextContent());
         }
         if (comp.getElementsByTagName("condduree").getLength() != 0) {
             condduree = Integer.parseInt(comp.getElementsByTagName("condduree").item(0).getTextContent());
         }
-        return new CompetenceBuff(type, valeur,condtype,condduree);
+        return new CompetenceBuff(type, valeur, condtype, condduree);
     }
 
     private static CompetenceDeclencheurEffet compDeclencheurEffet(Element comp) {
-        int typeDeclencheur = Integer.parseInt(comp.getAttribute("typedeclencheur"));
-        int cible = Integer.parseInt(comp.getAttribute("cible"));
+        int typeDeclencheur = parseIntStatic(comp.getAttribute("typedeclencheur"));
+        int cible = parseIntStatic(comp.getAttribute("cible"));
         Competence succ = null;
         if (comp.getElementsByTagName("compbuff").getLength() != 0) {
             succ = compBuff((Element) comp.getElementsByTagName("compbuff").item(0));
@@ -149,7 +145,7 @@ public class CompXML {
                 Integer.parseInt(lance.getAttribute("porte")),
                 Integer.parseInt(lance.getAttribute("portemin")),
                 Integer.parseInt(lance.getAttribute("zone")),
-                Integer.parseInt(lance.getAttribute("caract")));
+                parseIntStatic(lance.getAttribute("caract")));
     }
 
     public static class CompLance {
@@ -167,6 +163,35 @@ public class CompXML {
             this.portemin = portemin;
             this.zone = zone;
             this.caract = caract;
+        }
+    }
+
+    public static int parseIntStatic(String mess) {
+        if (mess.equals("affforce")) return 0;
+        else if (mess.equals("afftribal")) return 1;
+        else if (mess.equals("affagilite")) return 2;
+        else if (mess.equals("affpoison")) return 3;
+
+        else if (mess.equals("bufftypeattaque")) return 0;
+        else if (mess.equals("bufftypedefense")) return 1;
+        else if (mess.equals("buffdot")) return 4;
+        else if (mess.equals("buffvalvitesse")) return 5;
+        else if (mess.equals("buffvalattaque")) return 6;
+        else if (mess.equals("buffdegat")) return 7;
+        else if (mess.equals("buffstun")) return 8;
+        else if (mess.equals("buffvaldefense")) return 9;
+
+        else if (mess.equals("caractforce")) return 0;
+        else if (mess.equals("caractagilite")) return 1;
+        else if (mess.equals("caractmagie")) return 2;
+
+        else if (mess.equals("declenchedegatrecu")) return 0;
+
+        else if (mess.equals("ciblesoi")) return 0;
+        else if (mess.equals("cibledeclenche"))return 1;
+
+        else {
+            return Integer.parseInt(mess);
         }
     }
 }

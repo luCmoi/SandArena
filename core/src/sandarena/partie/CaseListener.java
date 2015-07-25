@@ -17,10 +17,10 @@ import sandarena.Resolution;
  *
  * @author Guillaume
  */
-public class CaseListener extends InputListener {
+class CaseListener extends InputListener {
     private boolean presence = true;
     private Case caseEcoute;
-    Vector2 vec;
+    private Vector2 vec;
 
     public CaseListener(Case aThis) {
         caseEcoute = aThis;

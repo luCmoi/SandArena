@@ -63,10 +63,9 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void show() {
-        setBatch(new SpriteBatch());
         this.interfaceS = new sandarena.partie.gui.interfacep.StageInterface(new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
         this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
-        surcouche = new Stage(new FillViewport(Resolution.width,Resolution.height));
+        surcouche = new Stage(new FillViewport(Resolution.width,Resolution.height),batch);
         interfaceS.setPartie(partie);
         Gdx.input.setInputProcessor(this.partie);
     }

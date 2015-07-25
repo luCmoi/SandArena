@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class RegexTexte {
     public static int CHARACTERS_PER_FRAME = 35;
-    private static final String regex_per_frame = ".{1," + CHARACTERS_PER_FRAME + "}[ ]+";
+    private static String regex_per_frame = ".{1," + CHARACTERS_PER_FRAME + "}[ ]+";
 
     public static String[] parse_string(String line) {
         line += " ";
@@ -20,8 +20,12 @@ public class RegexTexte {
         while (m.find()) {
             liste.add(m.group());
         }
-        String[] fin = liste.toArray(new String[liste.size()]);
-        return fin;
+        return liste.toArray(new String[liste.size()]);
+    }
+
+    public static void changeCharacter(int nombre){
+        CHARACTERS_PER_FRAME = nombre;
+        regex_per_frame = ".{1," + CHARACTERS_PER_FRAME + "}[ ]+";
     }
 
 }

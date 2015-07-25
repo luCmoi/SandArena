@@ -43,10 +43,7 @@ public abstract class EffetBuf extends Effet {
 
     public boolean tour() {
         this.duree--;
-        if (this.duree == 0) {
-            return true;
-        }
-        return false;
+        return this.duree == 0;
     }
 
     public int getDuree(){

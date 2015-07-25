@@ -186,4 +186,8 @@ public class StageInterface extends Stage {
             }
         }
     }
+
+    public void recharge() {
+        setCaseSelect(emplacementPersoSelect.getPerso().getContainer());
+    }
 }

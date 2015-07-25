@@ -17,11 +17,7 @@ public class EmplacementPerso extends EmplacementInterface {
     public EmplacementPerso(int place, StageInterface container) {
         super(place, container);
         this.setBounds((container.tailleCoteHeight / 2) * getPlace() * 5, 0, container.tailleCoteHeight, container.tailleCoteHeight);
-        if (place < 1) {
-            actif = true;
-        } else {
-            actif = false;
-        }
+        actif = place < 1;
     }
 
     @Override

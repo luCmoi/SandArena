@@ -9,8 +9,8 @@ import sandarena.partie.Case;
  * @author Guillaume
  */
 public class EffetAttaque extends Effet{
-    public int type;
-    public int mul = 0;
+    private int type;
+    private int mul = 0;
     private EffetBuf suite;
 
 
