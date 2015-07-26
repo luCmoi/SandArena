@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import sandarena.Resolution;
 import sandarena.SandArena;
 import sandarena.joueur.Joueur;
+import sandarena.joueur.Personnage;
 
 
 /**
@@ -31,7 +32,14 @@ public class ScreenPrepaMatch implements Screen {
     public ScreenPrepaMatch(SandArena conteneur) {
         this.conteneur = conteneur;
         this.batch = conteneur.getBatch();
-        this.joueur=joueur;
+        //Temp
+        joueur = new Joueur();
+        joueur.getPersonnages().add(new Personnage("Barbare des Sables"));
+        joueur.getPersonnages().add(new Personnage("Sauvageon des Sables"));
+        joueur.getPersonnages().add(new Personnage("Guetteur"));
+        joueur.getPersonnages().add(new Personnage("Barbare des Sables"));
+        joueur.getPersonnages().add(new Personnage("Sauvageon des Sables"));
+        joueur.getPersonnages().add(new Personnage("Guetteur"));
     }
 
     @Override
@@ -40,7 +48,7 @@ public class ScreenPrepaMatch implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
         this.getPrincipal().draw();
-        Gdx.gl.glViewport(Resolution.differenceBas/2, 0, Resolution.width-Resolution.differenceBas, Resolution.differenceBas);
+        Gdx.gl.glViewport(Resolution.differenceBas / 2, 0, Resolution.width - Resolution.differenceBas, Resolution.differenceBas);
         this.getBarre().draw();
     }
 
@@ -100,5 +108,9 @@ public class ScreenPrepaMatch implements Screen {
 
     public void setSurcouche(Stage surcouche) {
         this.surcouche = surcouche;
+    }
+
+    public Joueur getJoueur(){
+        return joueur;
     }
 }

@@ -45,7 +45,7 @@ public class StagePrincipalScreenPrepa extends Stage {
     public Actor hit(float stageX, float stageY, boolean touchable) {
         Vector2 vScreen = stageToScreenCoordinates(new Vector2(stageX, stageY));
         if (Resolution.height - vScreen.y < Resolution.differenceBas && Resolution.width - vScreen.x > Resolution.differenceBas/2 && Resolution.width - vScreen.x < Resolution.width - (Resolution.differenceBas/2)) {
-            return barre.hit(vScreen.x, Resolution.height - vScreen.y, touchable);
+            return barre.hit(stageX - (Resolution.differenceBas/2), Resolution.height - vScreen.y, touchable);
         } else {
             return super.hit(stageX, stageY, touchable);
         }
@@ -54,4 +54,5 @@ public class StagePrincipalScreenPrepa extends Stage {
     public StageBarre getBarre() {
         return barre;
     }
+
 }

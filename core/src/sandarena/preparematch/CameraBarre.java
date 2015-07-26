@@ -19,7 +19,6 @@ public class CameraBarre extends OrthographicCamera {
     }
 
     public void gauche(){
-        System.out.println("Gauche");
         if (position.x > container.getViewport().getWorldWidth() / 2) {
             translate(-(int) (VITESSECAM * Resolution.ratioWidth), 0, 0);
             if (position.x < container.getViewport().getWorldWidth() / 2) {
@@ -29,7 +28,6 @@ public class CameraBarre extends OrthographicCamera {
     }
 
     public void droite(){
-        System.out.println("Droite");
         if (position.x < container.getWidthTailleTotale() - container.getViewport().getWorldWidth() / 2) {
             translate((int) (VITESSECAM * Resolution.ratioWidth), 0, 0);
             if (position.x > container.getWidthTailleTotale() - container.getViewport().getWorldWidth() / 2) {
