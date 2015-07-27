@@ -53,10 +53,13 @@ public class PanelScreenPrepaMatch extends Group {
     public boolean relacheUnit(float x, float y, UnitBarre container) {
         for (UnitPanelScreenPrepaMatch place : places){
             if (place.contient(x,y, container)){
-                System.out.println("RelacheOK");
                 return true;
             }
         }
         return false;
+    }
+
+    public StagePrincipalScreenPrepa getContainer() {
+        return container;
     }
 }

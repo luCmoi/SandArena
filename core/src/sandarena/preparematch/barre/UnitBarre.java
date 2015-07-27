@@ -14,7 +14,7 @@ import sandarena.joueur.Personnage;
  */
 public class UnitBarre extends Group {
     private StageBarre container;
-    private final int place;
+    private int place;
     private Personnage perso;
     private boolean ouvert;
     private boolean dragged;
@@ -44,7 +44,7 @@ public class UnitBarre extends Group {
             this.setWidth(getWidth() + Resolution.differenceBas);
             ouvert = true;
         } else {
-            this.getContainer().diminueWidthTailleTotale(this.place);
+            this.getContainer().diminueWidthTailleTotale(this.place, false);
             this.setWidth(getWidth() - Resolution.differenceBas);
             ouvert = false;
         }
@@ -61,7 +61,7 @@ public class UnitBarre extends Group {
     public synchronized void dragged() {
         if (!isDragged()) {
             if (ouvert) {
-                this.getContainer().diminueWidthTailleTotale(this.place);
+                this.getContainer().diminueWidthTailleTotale(this.place, false);
                 this.setWidth(getWidth() - Resolution.differenceBas);
                 ouvert = false;
             }
@@ -99,6 +99,7 @@ public class UnitBarre extends Group {
     }
 
     public void dispose() {
+        container.getPersos().remove(this);
         container = null;
         perso = null;
         ((UnitBarreListener)(getListeners().get(0))).dispose();
@@ -108,5 +109,9 @@ public class UnitBarre extends Group {
 
     public Personnage getPerso() {
         return perso;
+    }
+
+    public void setPlace(int place) {
+        this.place = place;
     }
 }

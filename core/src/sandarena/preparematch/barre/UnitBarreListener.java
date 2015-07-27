@@ -29,7 +29,7 @@ public class UnitBarreListener extends InputListener {
     }
 
     @Override
-    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+    public synchronized void touchUp(InputEvent event, float x, float y, int pointer, int button) {
         if (pointer == 0) {
             departDragged = false;
             if (!container.isDragged()) {
@@ -37,16 +37,11 @@ public class UnitBarreListener extends InputListener {
                     container.clique();
                 }
             } else {
-                Vector2 v = container.localToStageCoordinates(new Vector2(x,y));
+                Vector2 v = container.localToStageCoordinates(new Vector2(x, y));
                 if (!container.getContainer().getPrincipal().relacheUnit(v.x, v.y, container)) {
-                    if (System.currentTimeMillis() - debutDragged <= 100) {
-                        container.clique();
-                    }else{
                         container.dragged();
-                    }
                 } else {
-                    System.out.println("RelacheTermine");
-                    container.getContainer().diminueWidthTailleTotale(container.getPlace());
+                    container.getContainer().diminueWidthTailleTotale(container.getPlace(),true);
                     container.dispose();
                 }
             }
@@ -59,7 +54,7 @@ public class UnitBarreListener extends InputListener {
     }
 
     @Override
-    public void touchDragged(InputEvent event, float x, float y, int pointer) {
+    public synchronized void touchDragged(InputEvent event, float x, float y, int pointer) {
         if (pointer == 0) {
             if (!departDragged) {
                 debutDragged = System.currentTimeMillis();

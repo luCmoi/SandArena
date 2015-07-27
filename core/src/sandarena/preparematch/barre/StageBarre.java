@@ -48,10 +48,13 @@ public class StageBarre extends Stage {
         }
     }
 
-    public void diminueWidthTailleTotale(int place){
+    public void diminueWidthTailleTotale(int place, boolean baisse){
         this.widthTailleTotale = this.widthTailleTotale-Resolution.differenceBas;
         for (int i = place+1; i < persos.size(); i++) {
             persos.get(i).decaleGauche();
+            if (baisse){
+                persos.get(i).setPlace(persos.get(i).getPlace()-1);
+            }
         }
     }
 
@@ -78,5 +81,15 @@ public class StageBarre extends Stage {
     @Override
     public Actor hit(float stageX, float stageY, boolean touchable) {
         return super.hit(stageX, stageY, touchable);
+    }
+
+    public void ajoute(Personnage perso) {
+        persos.add(new sandarena.preparematch.barre.UnitBarre(this, persos.size() ,perso));
+        this.addActor(persos.get(persos.size() - 1));
+        this.widthTailleTotale = this.widthTailleTotale+Resolution.differenceBas;
+    }
+
+    public ArrayList<UnitBarre> getPersos() {
+        return persos;
     }
 }

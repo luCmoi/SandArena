@@ -19,11 +19,14 @@ public class UnitPanelScreenPrepaMatchListener extends InputListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        if (container.getPerso()!=null){
+            container.getContainer().getContainer().getBarre().ajoute(container.getPerso());
+            container.setPerso(null);
+        }
         return super.touchDown(event, x, y, pointer, button);
     }
 
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-        System.out.println("Releve");
     }
 }
