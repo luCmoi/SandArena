@@ -1,4 +1,4 @@
-package sandarena.preparematch;
+package sandarena.preparematch.barre;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -13,7 +13,7 @@ import sandarena.joueur.Personnage;
  * Created by Guillaume on 26/07/2015.
  */
 public class UnitBarre extends Group {
-    private final StageBarre container;
+    private StageBarre container;
     private final int place;
     private Personnage perso;
     private boolean ouvert;
@@ -40,11 +40,11 @@ public class UnitBarre extends Group {
 
     public void clique() {
         if (!ouvert) {
-            this.container.augmenteWidthTailleTotale(this.place);
+            this.getContainer().augmenteWidthTailleTotale(this.place);
             this.setWidth(getWidth() + Resolution.differenceBas);
             ouvert = true;
         } else {
-            this.container.diminueWidthTailleTotale(this.place);
+            this.getContainer().diminueWidthTailleTotale(this.place);
             this.setWidth(getWidth() - Resolution.differenceBas);
             ouvert = false;
         }
@@ -61,12 +61,12 @@ public class UnitBarre extends Group {
     public synchronized void dragged() {
         if (!isDragged()) {
             if (ouvert) {
-                this.container.diminueWidthTailleTotale(this.place);
+                this.getContainer().diminueWidthTailleTotale(this.place);
                 this.setWidth(getWidth() - Resolution.differenceBas);
                 ouvert = false;
             }
             this.remove();
-            container.getPrincipal().addActor(this);
+            getContainer().getPrincipal().addActor(this);
             setDragged(true);
             ancienX = getX();
         }
@@ -75,7 +75,7 @@ public class UnitBarre extends Group {
             this.setY(Resolution.height - Gdx.input.getY(0) - (Resolution.differenceBas/2));
         } else {
             this.remove();
-            this.container.addActor(this);
+            this.getContainer().addActor(this);
             setDragged(false);
             this.setX(ancienX);
             this.setY(0);
@@ -88,5 +88,25 @@ public class UnitBarre extends Group {
 
     public void setDragged(boolean dragged) {
         this.dragged = dragged;
+    }
+
+    public StageBarre getContainer() {
+        return container;
+    }
+
+    public int getPlace() {
+        return place;
+    }
+
+    public void dispose() {
+        container = null;
+        perso = null;
+        ((UnitBarreListener)(getListeners().get(0))).dispose();
+        getListeners().clear();
+        remove();
+    }
+
+    public Personnage getPerso() {
+        return perso;
     }
 }

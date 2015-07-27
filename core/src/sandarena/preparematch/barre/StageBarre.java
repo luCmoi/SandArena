@@ -1,7 +1,8 @@
-package sandarena.preparematch;
+package sandarena.preparematch.barre;
 
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import sandarena.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
+import sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 
 
 /**
@@ -20,7 +22,7 @@ public class StageBarre extends Stage {
     private final Joueur joueur;
     private CameraBarre camera;
     private float widthTailleTotale;
-    private ArrayList<UnitBarre> persos;
+    private ArrayList<sandarena.preparematch.barre.UnitBarre> persos;
 
 
     public StageBarre(StagePrincipalScreenPrepa principal, Joueur joueur, ExtendViewport extendViewport, Batch batch) {
@@ -31,9 +33,9 @@ public class StageBarre extends Stage {
         this.camera = (CameraBarre) (this.getViewport().getCamera());
         this.widthTailleTotale = Resolution.differenceBas*joueur.getPersonnages().size();
         int x = 0;
-        persos = new ArrayList<UnitBarre>();
+        persos = new ArrayList<sandarena.preparematch.barre.UnitBarre>();
         for (Personnage perso : joueur.getPersonnages()){
-            persos.add(new UnitBarre(this, x ,perso));
+            persos.add(new sandarena.preparematch.barre.UnitBarre(this, x ,perso));
             this.addActor(persos.get(x));
             x ++;
         }
@@ -69,4 +71,12 @@ public class StageBarre extends Stage {
         return principal;
     }
 
+    public void stop() {
+        this.camera.stop();
+    }
+
+    @Override
+    public Actor hit(float stageX, float stageY, boolean touchable) {
+        return super.hit(stageX, stageY, touchable);
+    }
 }

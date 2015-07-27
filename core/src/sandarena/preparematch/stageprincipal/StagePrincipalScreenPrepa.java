@@ -1,4 +1,4 @@
-package sandarena.preparematch;
+package sandarena.preparematch.stageprincipal;
 
 
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import sandarena.Resolution;
 import sandarena.joueur.Joueur;
+import sandarena.preparematch.ScreenPrepaMatch;
+import sandarena.preparematch.barre.UnitBarre;
 
 /**
  * Created by Guillaume on 23/07/2015.
@@ -19,7 +21,7 @@ public class StagePrincipalScreenPrepa extends Stage {
     private final Joueur joueur;
     private final FlecheListe gauche;
     private final FlecheListe droite;
-    private StageBarre barre;
+    private sandarena.preparematch.barre.StageBarre barre;
     private PanelScreenPrepaMatch panelGauche;
     private PanelScreenPrepaMatch panelDroit;
 
@@ -37,7 +39,7 @@ public class StagePrincipalScreenPrepa extends Stage {
         this.addActor(droite);
     }
 
-    public void setBarre(StageBarre barre){
+    public void setBarre(sandarena.preparematch.barre.StageBarre barre){
         this.barre=barre;
     }
 
@@ -45,14 +47,17 @@ public class StagePrincipalScreenPrepa extends Stage {
     public Actor hit(float stageX, float stageY, boolean touchable) {
         Vector2 vScreen = stageToScreenCoordinates(new Vector2(stageX, stageY));
         if (Resolution.height - vScreen.y < Resolution.differenceBas && Resolution.width - vScreen.x > Resolution.differenceBas/2 && Resolution.width - vScreen.x < Resolution.width - (Resolution.differenceBas/2)) {
-            return barre.hit(stageX - (Resolution.differenceBas/2), Resolution.height - vScreen.y, touchable);
+            return barre.hit(vScreen.x - (Resolution.differenceBas/2), Resolution.height - vScreen.y, touchable);
         } else {
             return super.hit(stageX, stageY, touchable);
         }
     }
 
-    public StageBarre getBarre() {
+    public sandarena.preparematch.barre.StageBarre getBarre() {
         return barre;
     }
 
+    public boolean relacheUnit(float x, float y, UnitBarre container) {
+        return panelGauche.relacheUnit(x, y, container);
+    }
 }

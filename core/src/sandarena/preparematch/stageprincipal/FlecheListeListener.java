@@ -1,4 +1,4 @@
-package sandarena.preparematch;
+package sandarena.preparematch.stageprincipal;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -7,9 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * Created by Guillaume on 25/07/2015.
  */
 public class FlecheListeListener extends InputListener {
-    private FlecheListe flecheListe;
+    private sandarena.preparematch.stageprincipal.FlecheListe flecheListe;
 
-    public FlecheListeListener(FlecheListe flecheListe) {
+    public FlecheListeListener(sandarena.preparematch.stageprincipal.FlecheListe flecheListe) {
         this.flecheListe = flecheListe;
     }
 
@@ -23,4 +23,9 @@ public class FlecheListeListener extends InputListener {
         return true;
     }
 
+    @Override
+    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+        this.flecheListe.getContainer().getBarre().stop();
+        super.touchUp(event, x, y, pointer, button);
+    }
 }

@@ -23,8 +23,8 @@ import sandarena.joueur.Personnage;
 public class ScreenPrepaMatch implements Screen {
     private Batch batch;
     private SandArena conteneur;
-    private StageBarre barre;
-    private StagePrincipalScreenPrepa principal;
+    private sandarena.preparematch.barre.StageBarre barre;
+    private sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa principal;
     private Stage surcouche;
     private Joueur joueur;
 
@@ -59,8 +59,8 @@ public class ScreenPrepaMatch implements Screen {
 
     @Override
     public void show() {
-        this.setPrincipal(new StagePrincipalScreenPrepa(this,joueur, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
-        this.setBarre(new StageBarre(this.getPrincipal(),joueur, new ExtendViewport(Resolution.width-Resolution.differenceBas, Resolution.differenceBas, Resolution.width-Resolution.differenceBas, Resolution.differenceBas), batch));
+        this.setPrincipal(new sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa(this,joueur, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
+        this.setBarre(new sandarena.preparematch.barre.StageBarre(this.getPrincipal(),joueur, new ExtendViewport(Resolution.width-Resolution.differenceBas, Resolution.differenceBas, Resolution.width-Resolution.differenceBas, Resolution.differenceBas), batch));
         setSurcouche(new Stage(new FillViewport(Resolution.width,Resolution.height),batch));
         getPrincipal().setBarre(this.getBarre());
         Gdx.input.setInputProcessor(this.getPrincipal());
@@ -86,19 +86,19 @@ public class ScreenPrepaMatch implements Screen {
 
     }
 
-    public StageBarre getBarre() {
+    public sandarena.preparematch.barre.StageBarre getBarre() {
         return barre;
     }
 
-    public void setBarre(StageBarre barre) {
+    public void setBarre(sandarena.preparematch.barre.StageBarre barre) {
         this.barre = barre;
     }
 
-    public StagePrincipalScreenPrepa getPrincipal() {
+    public sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(StagePrincipalScreenPrepa principal) {
+    public void setPrincipal(sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa principal) {
         this.principal = principal;
     }
 

@@ -1,4 +1,4 @@
-package sandarena.preparematch;
+package sandarena.preparematch.stageprincipal;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,10 +12,10 @@ import sandarena.donnee.Utili;
  */
 public class FlecheListe extends Actor {
 
-    private final StagePrincipalScreenPrepa container;
+    private final sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa container;
     private final boolean gauche;
 
-    public FlecheListe(StagePrincipalScreenPrepa container, boolean gauche) {
+    public FlecheListe(sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa container, boolean gauche) {
         this.container = container;
         this.setTouchable(Touchable.enabled);
         this.gauche = gauche;
@@ -38,7 +38,7 @@ public class FlecheListe extends Actor {
     }
 
 
-    public StagePrincipalScreenPrepa getContainer() {
+    public sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa getContainer() {
         return container;
     }
 }
