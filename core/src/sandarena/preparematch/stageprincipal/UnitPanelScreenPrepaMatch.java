@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import sandarena.Resolution;
 import sandarena.donnee.Utili;
 import sandarena.joueur.Personnage;
-import sandarena.preparematch.barre.UnitBarre;
+import sandarena.preparematch.barre.EmplacementBarre;
 
 /**
  * Created by Guillaume on 23/07/2015.
@@ -40,7 +40,7 @@ public class UnitPanelScreenPrepaMatch extends Actor {
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
     }
 
-    public boolean contient(float x, float y, UnitBarre recoi) {
+    public boolean contient(float x, float y, EmplacementBarre recoi) {
         if (getX()<x && getY()<y&&(getX() +getWidth())>x && (getY() + getHeight())>y){
             if (perso == null) {
                 perso = recoi.getPerso();

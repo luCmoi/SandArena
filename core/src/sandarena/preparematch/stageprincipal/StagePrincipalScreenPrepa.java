@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import sandarena.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.preparematch.ScreenPrepaMatch;
-import sandarena.preparematch.barre.UnitBarre;
+import sandarena.preparematch.barre.EmplacementBarre;
 
 /**
  * Created by Guillaume on 23/07/2015.
@@ -57,7 +57,7 @@ public class StagePrincipalScreenPrepa extends Stage {
         return barre;
     }
 
-    public boolean relacheUnit(float x, float y, UnitBarre container) {
+    public boolean relacheUnit(float x, float y, EmplacementBarre container) {
         return panelGauche.relacheUnit(x, y, container);
     }
 }

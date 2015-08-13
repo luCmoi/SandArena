@@ -6,13 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Guillaume on 13/08/2015.
  */
-public class UnitBarreListener extends InputListener {
-    UnitBarre container;
+public class CompBarreListener extends InputListener {
+    CompetenceBarre container;
     private boolean pression;
     private long time;
 
-    public UnitBarreListener(UnitBarre unitBarre) {
-        container = unitBarre;
+    public CompBarreListener(CompetenceBarre competenceBarre) {
+        container = competenceBarre;
     }
 
     @Override

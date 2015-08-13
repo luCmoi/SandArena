@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.ArrayList;
 
 import sandarena.donnee.Utili;
+import sandarena.infowindow.windows.InfoWindowEffect;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.effet.EffetBuf;
 import sandarena.partie.gui.interfacep.StageInterface;
-import sandarena.partie.gui.interfacep.infowindow.InfoWindow;
+import sandarena.infowindow.InfoWindow;
 
 /**
  * Created by Guillaume on 26/06/2015.
@@ -72,7 +73,7 @@ public class EmplacementEffet extends EmplacementInterface {
     @Override
     public void pression() {
         if (!this.getEffets().isEmpty()) {
-            this.info = new InfoWindow(this);
+            this.info = new InfoWindowEffect(this);
             container.getPartie().getContainer().getSurcouche().addActor(info);
         }
     }

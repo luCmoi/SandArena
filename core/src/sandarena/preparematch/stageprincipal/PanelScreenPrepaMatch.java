@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import java.util.ArrayList;
 
 import sandarena.Resolution;
-import sandarena.preparematch.barre.UnitBarre;
+import sandarena.preparematch.barre.EmplacementBarre;
 
 /**
  * Created by Guillaume on 23/07/2015.
@@ -50,7 +50,7 @@ public class PanelScreenPrepaMatch extends Group {
         super.draw(batch, parentAlpha);
     }
 
-    public boolean relacheUnit(float x, float y, UnitBarre container) {
+    public boolean relacheUnit(float x, float y, EmplacementBarre container) {
         for (UnitPanelScreenPrepaMatch place : places){
             if (place.contient(x,y, container)){
                 return true;

@@ -3,9 +3,10 @@ package sandarena.partie.gui.interfacep.empinterface;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import sandarena.donnee.Utili;
+import sandarena.infowindow.windows.InfoWindowPersoIG;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.gui.interfacep.StageInterface;
-import sandarena.partie.gui.interfacep.infowindow.InfoWindow;
+import sandarena.infowindow.InfoWindow;
 
 /**
  * Created by Guillaume on 10/06/2015.
@@ -42,7 +43,7 @@ public class EmplacementPerso extends EmplacementInterface {
     @Override
     public void pression() {
         if (this.getPerso() != null) {
-            this.info = new InfoWindow(this);
+            this.info = new InfoWindowPersoIG(this);
             container.getPartie().getContainer().getSurcouche().addActor(info);
         }
     }

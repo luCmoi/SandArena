@@ -1,117 +1,59 @@
 package sandarena.preparematch.barre;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.Resolution;
 import sandarena.donnee.Utili;
+import sandarena.infowindow.windows.InfoWindowPerso;
 import sandarena.joueur.Personnage;
 
 /**
- * Created by Guillaume on 26/07/2015.
+ * Created by Guillaume on 13/08/2015.
  */
-public class UnitBarre extends Group {
-    private StageBarre container;
-    private int place;
+public class UnitBarre extends Actor {
     private Personnage perso;
-    private boolean ouvert;
-    private boolean dragged;
-    private float ancienX;
+    private InfoWindowPerso info;
+    private EmplacementBarre container;
 
-    public UnitBarre(StageBarre container, int place, Personnage perso) {
+    public UnitBarre(EmplacementBarre container, Personnage perso) {
+        super();
         this.container = container;
-        this.place = place;
         this.perso = perso;
-        this.setBounds(Resolution.differenceBas * place, 0, Resolution.differenceBas, Resolution.differenceBas);
-        this.setTouchable(Touchable.enabled);
+        this.setBounds(0, 0, Resolution.differenceBas, Resolution.differenceBas);
         this.addListener(new UnitBarreListener(this));
-        ouvert = false;
-        setDragged(false);
+        this.setTouchable(Touchable.enabled);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(perso.commun.image, getX(), getY(), Resolution.differenceBas, getHeight());
+        batch.draw(perso.commun.image, getX(), getY(), getWidth(), getHeight());
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
-    }
-
-    public void clique() {
-        if (!ouvert) {
-            this.getContainer().augmenteWidthTailleTotale(this.place);
-            this.setWidth(getWidth() + Resolution.differenceBas);
-            ouvert = true;
-        } else {
-            this.getContainer().diminueWidthTailleTotale(this.place, false);
-            this.setWidth(getWidth() - Resolution.differenceBas);
-            ouvert = false;
-        }
-    }
-
-    public void decaleGauche() {
-        this.setX(getX() - Resolution.differenceBas);
-    }
-
-    public void decaleDroite() {
-        this.setX(getX() + Resolution.differenceBas);
-    }
-
-    public synchronized void dragged() {
-        if (!isDragged()) {
-            if (ouvert) {
-                this.getContainer().diminueWidthTailleTotale(this.place, false);
-                this.setWidth(getWidth() - Resolution.differenceBas);
-                ouvert = false;
-            }
-            this.remove();
-            getContainer().getPrincipal().addActor(this);
-            setDragged(true);
-            ancienX = getX();
-        }
-        if (Gdx.input.isTouched()) {
-            this.setX(Gdx.input.getX(0)- (Resolution.differenceBas/2));
-            this.setY(Resolution.height - Gdx.input.getY(0) - (Resolution.differenceBas/2));
-        } else {
-            this.remove();
-            this.getContainer().addActor(this);
-            setDragged(false);
-            this.setX(ancienX);
-            this.setY(0);
-        }
-    }
-
-    public boolean isDragged() {
-        return dragged;
-    }
-
-    public void setDragged(boolean dragged) {
-        this.dragged = dragged;
-    }
-
-    public StageBarre getContainer() {
-        return container;
-    }
-
-    public int getPlace() {
-        return place;
+        ((UnitBarreListener) (getListeners().get(0))).update();
     }
 
     public void dispose() {
-        container.getPersos().remove(this);
-        container = null;
-        perso = null;
-        ((UnitBarreListener)(getListeners().get(0))).dispose();
+        ((CompBarreListener) (getListeners().get(0))).dispose();
         getListeners().clear();
+        perso = null;
+        this.container = null;
         remove();
     }
 
-    public Personnage getPerso() {
-        return perso;
+    public void pression() {
+        if (perso != null) {
+            this.info = new InfoWindowPerso(perso);
+            container.fenetre();
+        }
     }
 
-    public void setPlace(int place) {
-        this.place = place;
+    public void finPression() {
+        if (info != null) {
+            this.info.dispose();
+            info = null;
+        }
     }
 }
+

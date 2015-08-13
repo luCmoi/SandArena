@@ -1,8 +1,10 @@
-package sandarena.partie.gui.interfacep.infowindow;
+package sandarena.infowindow;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import javax.xml.soap.Text;
 
 /**
  * Created by Guillaume on 12/06/2015.
@@ -10,16 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Icone extends Actor {
     private Texture img;
 
-    public Icone(InfoWindow container){
+    public Icone(InfoWindow container, Texture img){
         super();
         setBounds(0,0,container.getHeight(),container.getHeight());
-        if (container.getPerso() != null){
-            img = container.getPerso().getDonnee().commun.image;
-        } else if (container.getComp() != null){
-            img = container.getComp().info.image;
-        }else {
-            img = null;
-        }
+        this.img = img;
     }
 
     @Override
