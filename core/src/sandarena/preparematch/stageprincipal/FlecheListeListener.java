@@ -7,9 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * Created by Guillaume on 25/07/2015.
  */
 public class FlecheListeListener extends InputListener {
-    private sandarena.preparematch.stageprincipal.FlecheListe flecheListe;
+    private FlecheListe flecheListe;
 
-    public FlecheListeListener(sandarena.preparematch.stageprincipal.FlecheListe flecheListe) {
+    public FlecheListeListener(FlecheListe flecheListe) {
         this.flecheListe = flecheListe;
     }
 

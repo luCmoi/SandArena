@@ -7,7 +7,6 @@ import sandarena.donnee.Font;
 import sandarena.donnee.RegexTexte;
 import sandarena.donnee.Utili;
 import sandarena.infowindow.Info;
-import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.windows.InfoWindowPersoIG;
 
 /**

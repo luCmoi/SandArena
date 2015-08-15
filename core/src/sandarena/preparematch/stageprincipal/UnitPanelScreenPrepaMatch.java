@@ -23,9 +23,9 @@ public class UnitPanelScreenPrepaMatch extends Actor {
         this.actif = b;
         this.place = i;
         if (actif) {
-            this.setBounds(container.coteMoyen * (place / 2),Resolution.differenceBas+ container.coteMoyen * (place % 2),container.coteMoyen, container.coteMoyen);
+            this.setBounds(container.coteMoyen * (place % 2), Resolution.differenceBas + container.coteMoyen * (1 - (place / 2)), container.coteMoyen, container.coteMoyen);
         } else {
-            this.setBounds(container.getWidth() - (container.coteMoyen * (1 + (place / 2))), Resolution.differenceBas + container.coteMoyen * (place % 2), container.coteMoyen, container.coteMoyen);
+            this.setBounds(container.getWidth() - (container.coteMoyen * (2 - place % 2)), Resolution.differenceBas + container.coteMoyen * (1 - (place / 2)), container.coteMoyen, container.coteMoyen);
         }
         this.setTouchable(Touchable.enabled);
         this.addListener(new UnitPanelScreenPrepaMatchListener(this));
@@ -34,23 +34,10 @@ public class UnitPanelScreenPrepaMatch extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (perso != null){
+        if (perso != null) {
             batch.draw(perso.commun.image, getX(), getY(), getWidth(), getHeight());
         }
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
-    }
-
-    public boolean contient(float x, float y, EmplacementBarre recoi) {
-        if (getX()<x && getY()<y&&(getX() +getWidth())>x && (getY() + getHeight())>y){
-            if (perso == null) {
-                perso = recoi.getPerso();
-                return true;
-            } else {
-                getContainer().getContainer().getBarre().ajoute(recoi.getPerso());
-                perso = recoi.getPerso();
-            }
-        }
-        return false;
     }
 
     public Personnage getPerso() {

@@ -13,10 +13,10 @@ public class JoueurIG {
     private Joueur joueur;
     private ArrayList<PersonnageIG> personnages = new ArrayList();
 
-    public JoueurIG(Joueur joueur) {
+    public JoueurIG(Joueur joueur, ArrayList<Personnage> personnages) {
         this.joueur = joueur;
-        for (Personnage personage : joueur.getPersonnages()) {
-            personnages.add(new PersonnageIG(personage, this));
+        for (Personnage personage : personnages) {
+            this.personnages.add(new PersonnageIG(personage, this));
         }
 
     }

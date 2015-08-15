@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import java.util.ArrayList;
 
 import sandarena.Resolution;
+import sandarena.donnee.Utili;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa;
@@ -23,6 +24,7 @@ public class StageBarre extends Stage {
     private CameraBarre camera;
     private float widthTailleTotale;
     private ArrayList<EmplacementBarre> persos;
+    private  Fond fond;
 
 
     public StageBarre(StagePrincipalScreenPrepa principal, Joueur joueur, ExtendViewport extendViewport, Batch batch) {
@@ -33,12 +35,15 @@ public class StageBarre extends Stage {
         this.camera = (CameraBarre) (this.getViewport().getCamera());
         this.widthTailleTotale = Resolution.differenceBas*joueur.getPersonnages().size();
         int x = 0;
+        fond = new Fond(this);
+        this.addActor(fond);
         persos = new ArrayList<EmplacementBarre>();
         for (Personnage perso : joueur.getPersonnages()){
             persos.add(new EmplacementBarre(this, x ,perso));
             this.addActor(persos.get(x));
             x ++;
         }
+
     }
 
     public void augmenteWidthTailleTotale(int place){
@@ -91,5 +96,17 @@ public class StageBarre extends Stage {
 
     public ArrayList<EmplacementBarre> getPersos() {
         return persos;
+    }
+
+    public void select(EmplacementBarre selected) {
+        Personnage tmp = selected.getPerso();
+        this.diminueWidthTailleTotale(selected.getPlace(), true);
+        selected.dispose();
+        principal.ajoutGauche(tmp);
+    }
+
+    @Override
+    public void draw() {
+        super.draw();
     }
 }

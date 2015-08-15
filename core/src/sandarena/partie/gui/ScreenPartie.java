@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
+import java.util.ArrayList;
+
 import sandarena.Resolution;
 import sandarena.SandArena;
 import sandarena.joueur.Joueur;
@@ -29,20 +31,21 @@ public class ScreenPartie implements Screen {
     private Partie partie;
     private StageInterface interfaceS;
     //Temporaire
-    private Joueur joueur1;
-    private Joueur joueur2;
+    private Joueur joueurActif;
+    private Joueur joueurAutre;
     private Stage surcouche;
 
-    public ScreenPartie(SandArena conteneur) {
+    public ScreenPartie(SandArena conteneur, Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence) {
         this.conteneur = conteneur;
         this.batch = conteneur.getBatch();
         //Temporaire
-        joueur1 = new Joueur();
-        joueur2 = new Joueur();
-        joueur1.getPersonnages().add(new Personnage("Barbare des Sables"));
-        joueur1.getPersonnages().add(new Personnage("Sauvageon des Sables"));
-        joueur2.getPersonnages().add(new Personnage("Barbare des Sables"));
-        joueur2.getPersonnages().add(new Personnage("Sauvageon des Sables"));
+        joueurActif = joueur;
+        joueurAutre = new Joueur();
+        this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
+        this.partie = new Partie(this, joueurActif,personnagesActif, joueurAutre,personnagesAutre,commence, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
+        surcouche = new Stage(new FillViewport(Resolution.width,Resolution.height),batch);
+        interfaceS.setPartie(partie);
+        Gdx.input.setInputProcessor(this.partie);
     }
 
     @Override
@@ -63,11 +66,7 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void show() {
-        this.interfaceS = new sandarena.partie.gui.interfacep.StageInterface(new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
-        this.partie = new Partie(this, joueur1, joueur2, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
-        surcouche = new Stage(new FillViewport(Resolution.width,Resolution.height),batch);
-        interfaceS.setPartie(partie);
-        Gdx.input.setInputProcessor(this.partie);
+
     }
 
     @Override
@@ -113,7 +112,7 @@ public class ScreenPartie implements Screen {
         return this.partie;
     }
 
-    public sandarena.partie.gui.interfacep.StageInterface getStageInterface() {
+    public StageInterface getStageInterface() {
         return this.interfaceS;
     }
 

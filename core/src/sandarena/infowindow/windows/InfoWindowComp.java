@@ -19,12 +19,16 @@ public class InfoWindowComp extends InfoWindow {
         if (emplacement != null) {
             this.comp = emplacement;
             setBounds(Gdx.input.getX(), ((Resolution.height) - Gdx.input.getY()) + DIFF, (float) ((Resolution.height / 4) * 3.5), (float) ((Resolution.height / 4)));
-            icone = new Icone(this, comp.image);
+            icone = new Icone(this, getComp().image);
             info = new InfoComp(this);
             this.addActor(icone);
             this.addActor(info);
             affiche = true;
             checkPlace();
         }
+    }
+
+    public BanqueCompetence.EntreeCompetence getComp() {
+        return comp;
     }
 }

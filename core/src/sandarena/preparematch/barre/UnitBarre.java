@@ -35,7 +35,7 @@ public class UnitBarre extends Actor {
     }
 
     public void dispose() {
-        ((CompBarreListener) (getListeners().get(0))).dispose();
+        ((UnitBarreListener) (getListeners().get(0))).dispose();
         getListeners().clear();
         perso = null;
         this.container = null;
@@ -46,6 +46,7 @@ public class UnitBarre extends Actor {
         if (perso != null) {
             this.info = new InfoWindowPerso(perso);
             container.fenetre();
+            container.getContainer().getPrincipal().getContainer().getSurcouche().addActor(info);
         }
     }
 

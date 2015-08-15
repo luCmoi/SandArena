@@ -11,10 +11,14 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
+import java.util.ArrayList;
+
 import sandarena.Resolution;
 import sandarena.SandArena;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
+import sandarena.preparematch.barre.StageBarre;
+import sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 
 
 /**
@@ -22,17 +26,18 @@ import sandarena.joueur.Personnage;
  */
 public class ScreenPrepaMatch implements Screen {
     private Batch batch;
-    private SandArena conteneur;
-    private sandarena.preparematch.barre.StageBarre barre;
-    private sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa principal;
+    private SandArena container;
+    private StageBarre barre;
+    private StagePrincipalScreenPrepa principal;
     private Stage surcouche;
     private Joueur joueur;
 
 
     public ScreenPrepaMatch(SandArena conteneur) {
-        this.conteneur = conteneur;
+        this.container = conteneur;
         this.batch = conteneur.getBatch();
-        //Temp
+        //Il faudra voir qui commence
+        //Temp joueur
         joueur = new Joueur();
         joueur.getPersonnages().add(new Personnage("Barbare des Sables"));
         joueur.getPersonnages().add(new Personnage("Sauvageon des Sables"));
@@ -46,10 +51,11 @@ public class ScreenPrepaMatch implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
-        this.getPrincipal().draw();
         Gdx.gl.glViewport(Resolution.differenceBas / 2, 0, Resolution.width - Resolution.differenceBas, Resolution.differenceBas);
         this.getBarre().draw();
+        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
+        this.getPrincipal().draw();
+        this.getSurcouche().draw();
     }
 
     @Override
@@ -59,9 +65,12 @@ public class ScreenPrepaMatch implements Screen {
 
     @Override
     public void show() {
-        this.setPrincipal(new sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa(this,joueur, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
-        this.setBarre(new sandarena.preparematch.barre.StageBarre(this.getPrincipal(),joueur, new ExtendViewport(Resolution.width-Resolution.differenceBas, Resolution.differenceBas, Resolution.width-Resolution.differenceBas, Resolution.differenceBas), batch));
-        setSurcouche(new Stage(new FillViewport(Resolution.width,Resolution.height),batch));
+        //A changer
+        boolean alea = ((int)(Math.random()*2)==0);
+
+        this.setPrincipal(new StagePrincipalScreenPrepa(this,joueur,alea, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
+        this.setBarre(new StageBarre(this.getPrincipal(), joueur, new ExtendViewport(Resolution.width - Resolution.differenceBas, Resolution.differenceBas, Resolution.width - Resolution.differenceBas, Resolution.differenceBas), batch));
+        setSurcouche(new Stage(new FillViewport(Resolution.width, Resolution.height), batch));
         getPrincipal().setBarre(this.getBarre());
         Gdx.input.setInputProcessor(this.getPrincipal());
     }
@@ -86,19 +95,19 @@ public class ScreenPrepaMatch implements Screen {
 
     }
 
-    public sandarena.preparematch.barre.StageBarre getBarre() {
+    public StageBarre getBarre() {
         return barre;
     }
 
-    public void setBarre(sandarena.preparematch.barre.StageBarre barre) {
+    public void setBarre(StageBarre barre) {
         this.barre = barre;
     }
 
-    public sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa getPrincipal() {
+    public StagePrincipalScreenPrepa getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa principal) {
+    public void setPrincipal(StagePrincipalScreenPrepa principal) {
         this.principal = principal;
     }
 
@@ -112,5 +121,11 @@ public class ScreenPrepaMatch implements Screen {
 
     public Joueur getJoueur(){
         return joueur;
+    }
+
+    public void finPrepare() {
+        ArrayList<Personnage> personnagesActif = principal.getPersonnagesActif();
+        ArrayList<Personnage> personnagesAutre = principal.getPersonnagesAutre();
+        container.lancePartie(joueur, personnagesActif, personnagesAutre, !(principal.getCommence()));
     }
 }

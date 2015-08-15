@@ -21,7 +21,7 @@ public class CompetenceBarre extends Actor {
         super();
         this.container = container;
         this.comp = comp;
-        this.setBounds((Resolution.differenceBas / 2) * (2 + (place / 2)), 0 + ((Resolution.differenceBas / 2) * (place % 2)), Resolution.differenceBas / 2, Resolution.differenceBas / 2);
+        this.setBounds((Resolution.differenceBas / 2) * (2 + (place % 2)), 0 + ((Resolution.differenceBas / 2) * (1 - (place / 2))), Resolution.differenceBas / 2, Resolution.differenceBas / 2);
         this.addListener(new CompBarreListener(this));
         this.setTouchable(Touchable.disabled);
     }
@@ -40,7 +40,6 @@ public class CompetenceBarre extends Actor {
         ((CompBarreListener) (getListeners().get(0))).dispose();
         getListeners().clear();
         comp = null;
-        dispose();
         remove();
     }
 
@@ -48,6 +47,7 @@ public class CompetenceBarre extends Actor {
         if (comp != null) {
             this.info = new InfoWindowComp(comp);
             container.fenetre();
+            container.getContainer().getPrincipal().getContainer().getSurcouche().addActor(info);
         }
     }
 

@@ -17,8 +17,8 @@ public class EmplacementBarre extends Group {
     private int place;
     private Personnage perso;
     private boolean ouvert;
-    private InfoWindowPerso info;
     private UnitBarre unit;
+    private AccepteBarre accepte;
     private CompetenceBarre[] enfants = new CompetenceBarre[4];
 
     public EmplacementBarre(StageBarre container, int place, Personnage perso) {
@@ -42,6 +42,8 @@ public class EmplacementBarre extends Group {
         for (CompetenceBarre comp : enfants) {
             if (comp != null) addActor(comp);
         }
+        accepte = new AccepteBarre(this);
+        this.addActor(accepte);
     }
 
     @Override
@@ -59,6 +61,7 @@ public class EmplacementBarre extends Group {
                     comp.setTouchable(Touchable.enabled);
                 }
             }
+            accepte.setTouchable(Touchable.enabled);
         } else {
             this.getContainer().diminueWidthTailleTotale(this.place, false);
             this.setWidth(getWidth() - Resolution.differenceBas);
@@ -67,6 +70,7 @@ public class EmplacementBarre extends Group {
                     comp.setTouchable(Touchable.disabled);
                 }
             }
+            accepte.setTouchable(Touchable.disabled);
             ouvert = false;
         }
     }

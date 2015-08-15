@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import sandarena.Resolution;
 import sandarena.joueur.Joueur;
+import sandarena.joueur.Personnage;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.compcase.JoueurIG;
@@ -40,26 +41,36 @@ public class Partie extends Stage {
     private StageInterface stageInterface;
     private CompetenceIG competenceActive;
     private Case caseSelect = null;
+    private Boolean joueurActif;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
      * tard de donne de la carte ainsi que des deux joueurs
-     *
-     * @param container
+     *  @param container
      * @param joueur1
+     * @param personnagesActif
      * @param joueur2
+     * @param personnagesAutre
+     * @param commence
      * @param viewport
      * @param batch
      */
-    public Partie(ScreenPartie container, Joueur joueur1, Joueur joueur2, Viewport viewport, Batch batch) {
+    public Partie(ScreenPartie container, Joueur joueur1, ArrayList<Personnage> personnagesActif, Joueur joueur2, ArrayList<Personnage> personnagesAutre, boolean commence, Viewport viewport, Batch batch) {
         super(viewport, batch);
         this.container = container;
         this.stageInterface = this.container.getStageInterface();
         this.getViewport().setCamera(new Camera(this));
 
         this.camera = (Camera) (this.getViewport().getCamera());
-        this.joueur1 = new JoueurIG(joueur1);
-        this.joueur2 = new JoueurIG(joueur2);
+        if (commence) {
+            this.joueur1 = new JoueurIG(joueur1, personnagesActif);
+            this.joueur2 = new JoueurIG(joueur2, personnagesAutre);
+            joueurActif = true;
+        }else{
+            this.joueur2 = new JoueurIG(joueur1, personnagesActif);
+            this.joueur1 = new JoueurIG(joueur2, personnagesAutre);
+            joueurActif = false;
+        }
         //Changera lorsqu'on saura a partir de quoit creer la partie
         int coteTmp = 20;
         plateau = new Case[coteTmp][coteTmp];
@@ -89,8 +100,12 @@ public class Partie extends Stage {
          */
         getPlateau()[5][5].entrePresence(getJoueur1().getPersonnages().get(0));
         getPlateau()[5][6].entrePresence(getJoueur1().getPersonnages().get(1));
+        getPlateau()[5][7].entrePresence(getJoueur1().getPersonnages().get(2));
+        getPlateau()[5][8].entrePresence(getJoueur1().getPersonnages().get(3));
         getPlateau()[7][5].entrePresence(getJoueur2().getPersonnages().get(0));
         getPlateau()[7][6].entrePresence(getJoueur2().getPersonnages().get(1));
+        getPlateau()[7][7].entrePresence(getJoueur2().getPersonnages().get(2));
+        getPlateau()[7][8].entrePresence(getJoueur2().getPersonnages().get(3));
         tour();
     }
 
