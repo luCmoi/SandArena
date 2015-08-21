@@ -39,10 +39,9 @@ public class EffetAttaque extends Effet{
                     break;
             }
             att = attaquant.getPresence().modifAttaque(att, type);
-            att = att + mul;
             def = defenseur.getPresence().modifDefense(def, type);
             int degat = degat(att, def);
-            defenseur.getPresence().inflige(degat);
+            defenseur.getPresence().inflige(degat + mul);
             if (suite != null){
                 defenseur.getPresence().addBuf(suite, true);
             }

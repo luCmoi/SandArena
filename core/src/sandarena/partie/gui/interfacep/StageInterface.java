@@ -32,8 +32,8 @@ public class StageInterface extends Stage {
 
     public StageInterface(Viewport viewport, Batch batch) {
         super(viewport, batch);
-        this.tailleCoteHeight =  (int)this.getHeight();
-        this.tailleCoteWidth = (int)(this.getWidth()/8);
+        this.tailleCoteHeight = (int) this.getHeight();
+        this.tailleCoteWidth = (int) (this.getWidth() / 8);
         this.addActor(new EmplacementFond(this));
         emplacementPersoActif = new EmplacementPerso(0, this);
         emplacementPersoSelect = new EmplacementPerso(1, this);
@@ -81,15 +81,15 @@ public class StageInterface extends Stage {
             this.addActor(emp);
         }
         emplacementBoutons = new ArrayList<EmplacementBouton>();
-        emplacementBoutons.add(new EmplacementBouton(0,this));
-        emplacementBoutons.add(new EmplacementBouton(1,this));
-        emplacementBoutons.add(new EmplacementBouton(2,this));
+        emplacementBoutons.add(new EmplacementBouton(0, this));
+        emplacementBoutons.add(new EmplacementBouton(1, this));
+        emplacementBoutons.add(new EmplacementBouton(2, this));
         for (EmplacementBouton emp : emplacementBoutons) {
             this.addActor(emp);
         }
     }
 
-    public void dispose(){
+    public void dispose() {
         super.dispose();
         if (emplacementPersoActif != null) {
             emplacementPersoActif.dispose();
@@ -99,32 +99,32 @@ public class StageInterface extends Stage {
             emplacementPersoSelect.dispose();
             emplacementPersoSelect = null;
         }
-        for(EmplacementComp c : emplacementCompsActif){
-            if (c != null){
+        for (EmplacementComp c : emplacementCompsActif) {
+            if (c != null) {
                 c.dispose();
                 c = null;
             }
         }
-        for(EmplacementComp c : emplacementCompsSelect){
-            if (c != null){
+        for (EmplacementComp c : emplacementCompsSelect) {
+            if (c != null) {
                 c.dispose();
                 c = null;
             }
         }
-        for(EmplacementEffet c : emplacementEffetsSelect){
-            if (c != null){
+        for (EmplacementEffet c : emplacementEffetsSelect) {
+            if (c != null) {
                 c.dispose();
                 c = null;
             }
         }
-        for(EmplacementEffet c : emplacementEffetsActif){
-            if (c != null){
+        for (EmplacementEffet c : emplacementEffetsActif) {
+            if (c != null) {
                 c.dispose();
                 c = null;
             }
         }
-        for(EmplacementBouton c : emplacementBoutons){
-            if (c != null){
+        for (EmplacementBouton c : emplacementBoutons) {
+            if (c != null) {
                 c.dispose();
                 c = null;
             }
@@ -188,6 +188,8 @@ public class StageInterface extends Stage {
     }
 
     public void recharge() {
-        setCaseSelect(emplacementPersoSelect.getPerso().getContainer());
+        if (emplacementPersoSelect.getPerso() != null) {
+            setCaseSelect(emplacementPersoSelect.getPerso().getContainer());
+        }
     }
 }

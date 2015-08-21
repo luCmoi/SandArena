@@ -41,10 +41,7 @@ public class CompetenceToEffet {
     public static final int DEGATRECU = 0;
     //static cible declencheur
     public static final int SOI = 0;
-    //static suite
-    public static final int CONDITIONBUFF = 0;
-    public static final int CONDITIONDUREE = 1;
-    public static final int CONDITIONTYPE = 2;
+
 
     public static ArrayList<String> toStrings(Competence comp) {
         ArrayList<String> retour = new ArrayList<String>();
@@ -102,10 +99,10 @@ public class CompetenceToEffet {
                 retour.add("Change le type de defense en " + switchtype(comp.getVal()));
                 break;
             case (VALATTAQUE):
-                retour.add("Augmente l'attaque de " + comp.getVal());
+                retour.add((comp.getVal()<0?"Diminue" : "Augmente")+" l'attaque de " + comp.getVal());
                 break;
             case (VALVITESSE):
-                retour.add("Augmente la vitesse de " + comp.getVal());
+                retour.add((comp.getVal()<0?"Diminue" : "Augmente")+" la vitesse de " + comp.getVal());
                 break;
             case (DEGAT):
                 retour.add("Inflige " + comp.getVal() + " degats");
@@ -193,18 +190,24 @@ public class CompetenceToEffet {
         } else if (comp.getCondduree() != -1) {
             retour.setDuree(comp.getCondduree());
         }
-
         return retour;
     }
 
     public static EffetDeclencheur toDeclencheur(CompetenceIG comp) {
         CompetenceDeclencheurEffet tmp2 = (CompetenceDeclencheurEffet) comp.info.competence;
-        EffetBuf tmp = null;
-        if (tmp2.getSucc() != null) {
-            tmp = creerEffet(comp.info.nom, tmp2.getSucc());
+        Effet tmp = null;
+        if (tmp2.getEffet() != null) {
+            if (tmp2.getEffet() instanceof CompetenceBuff){
+                System.out.println("On ajoute");
+                tmp = creerEffet(comp.info.nom,(CompetenceBuff) tmp2.getEffet());
+            }else {
+                //todo apres un declencheur une attaque ne peut faire de buff
+                tmp = new EffetAttaque(((CompetenceAttaque)tmp2.getEffet()), null);
+            }
         }
         switch (tmp2.getTypedeclencheur()) {
             case (DEGATRECU):
+                System.out.println(tmp.getClass());
                 return new EffetDeclencheurDegatRecu(tmp2.getCible(), tmp);
         }
         return null;

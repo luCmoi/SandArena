@@ -21,11 +21,18 @@ public class EffetDeclencheur extends Effet{
     }
 
     public void launch(PersonnageIG personnage) {
+        System.out.println(chaine.getClass());
         if (chaine instanceof EffetBuf){
             if (cible == CompetenceToEffet.SOI) {
                 container.addBuf((EffetBuf)chaine, true);
             } else {
                 personnage.addBuf((EffetBuf)chaine, true);
+            }
+        }else if (chaine instanceof EffetAttaque){
+            if (cible == CompetenceToEffet.SOI) {
+                ((EffetAttaque) chaine).lance(container.getContainer(), container.getContainer());
+            } else {
+                ((EffetAttaque) chaine).lance(container.getContainer(),personnage.getContainer());
             }
         }
     }

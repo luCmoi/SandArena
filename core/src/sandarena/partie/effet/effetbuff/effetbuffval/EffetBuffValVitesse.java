@@ -15,7 +15,7 @@ public class EffetBuffValVitesse extends EffetBuffVal {
     }
     public ArrayList<String> toStrings(){
         ArrayList<String> retour = super.toStrings();
-        retour.add("Modifie l'attaque de  "+val);
+        retour.add("Modifie la vitesse de  "+val);
         if (typeCond != -1){
             retour.add("Sur les attaques de type "+ CompetenceToEffet.switchtype(typeCond));
         }
