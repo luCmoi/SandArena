@@ -142,6 +142,8 @@ public class Case extends Actor {
                 getContainer().selectChemin(this);
             } else if (cible) {
                 getContainer().deplacement();
+            }else if (this.getPresence() != null && !this.getPresence().isAAgi() && this.getPresence().getPossesseur()==getContainer().getPersonnageActif().getPossesseur()){
+                getContainer().setPersonnageActif(this.getPresence());
             }
         } else if (this.competenceable) {
             getContainer().getCompetenceActive().agit(this);

@@ -27,7 +27,7 @@ public class EmplacementPerso extends EmplacementInterface {
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         if (getPerso() != null) {
             batch.draw(getPerso().getDonnee().commun.image, getX(), getY(), getWidth(), getHeight());
-        } else {
+            batch.draw(Utili.competenceable,getX(),getY(),getWidth()-((getWidth()/getPerso().getDonnee().commun.vie) *  (getPerso().getDonnee().commun.vie- getPerso().getVieActuelle())),getHeight()/8);
         }
     }
 

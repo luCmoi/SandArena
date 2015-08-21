@@ -7,7 +7,6 @@ import sandarena.partie.Partie;
 
 /**
  * Camera du ScreenPartie qui permet de parcourir le terrain de jeu
- *
  */
 public class Camera extends OrthographicCamera {
 
@@ -28,7 +27,7 @@ public class Camera extends OrthographicCamera {
     /**
      * Update de la position de la caméra
      */
-    public void updateExt() {
+    public void updateExt() {/*
         if (deplacementGauche) {
             if (position.x > partie.getViewport().getWorldWidth() / 2) {
                 translate(-(int) (VITESSECAM * Resolution.ratioWidth), 0, 0);
@@ -60,7 +59,7 @@ public class Camera extends OrthographicCamera {
                     position.y = partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2;
                 }
             }
-        }
+        }*/
     }
 
     public void dispose() {
@@ -94,20 +93,27 @@ public class Camera extends OrthographicCamera {
      * @param y2
      */
     public synchronized void dragged(float x1, float y1, float x2, float y2) {
-        int depX = (int) (x1 - x2);
-        int depY = (int) (y1 - y2);
+
+        float depX = x1 - x2;
+        float depY = y1 - y2;
+        if (position.x + depX < partie.getViewport().getWorldWidth() / 2) {
+            //position.x = partie.getViewport().getWorldWidth() / 2;
+            //depX = 0;
+            depX =  (partie.getViewport().getWorldWidth() / 2) - position.x;
+        } else if (position.x + depX > partie.getWidthTailleTotale() - (partie.getViewport().getWorldWidth() / 2)) {
+            //position.x = partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2;
+            //depX = 0;
+            depX = (partie.getWidthTailleTotale() - (partie.getViewport().getWorldWidth() / 2)) - position.x;
+        }
+        if (position.y + depY < (partie.getViewport().getWorldHeight() / 2) - Resolution.differenceBas) {
+            //position.y = partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas;
+            //depY = 0;
+            depY = ((partie.getViewport().getWorldHeight() / 2) - Resolution.differenceBas) - position.y;
+        } else if (position.y + depY > partie.getHeightTailleTotale() - (partie.getViewport().getWorldHeight() / 2)) {
+            //position.y = partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2;
+            //depY = 0;
+            depY = (partie.getHeightTailleTotale() - (partie.getViewport().getWorldHeight() / 2)) - position.y;
+        }
         this.translate(depX, depY);
-        if (position.x < partie.getViewport().getWorldWidth() / 2) {
-            position.x = partie.getViewport().getWorldWidth() / 2;
-        }
-        if (position.x > partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2) {
-            position.x = partie.getWidthTailleTotale() - partie.getViewport().getWorldWidth() / 2;
-        }
-        if (position.y < partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas) {
-            position.y = partie.getViewport().getWorldHeight() / 2 - Resolution.differenceBas;
-        }
-        if (position.y > partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2) {
-            position.y = partie.getHeightTailleTotale() - partie.getViewport().getWorldHeight() / 2;
-        }
     }
 }

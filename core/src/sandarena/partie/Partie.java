@@ -230,6 +230,7 @@ public class Partie extends Stage {
 
     public void setPersonnageActif(PersonnageIG personnageActif) {
         if (personnageActif != null) {
+            videChemin();
             this.personnageActif = personnageActif;
             AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
             this.stageInterface.setPersonnageActif(personnageActif);
