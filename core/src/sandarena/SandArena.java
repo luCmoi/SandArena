@@ -1,18 +1,17 @@
 package sandarena;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sandarena.donnee.BanqueCompetence;
 import sandarena.donnee.BanquePersonnage;
 import sandarena.donnee.BanqueSol;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.partie.gui.ScreenPartie;
-import sandarena.preparematch.ScreenPrepaMatch;
 
 import static sandarena.donnee.CompXML.parseCompXML;
 
@@ -40,8 +39,44 @@ public class SandArena extends Game {
             System.err.println("error : File");
         }
         parseCompXML();
-        this.setScreen(new ScreenPrepaMatch(this));
-        //
+        this.setScreen(new Screen() {
+            @Override
+            public void render(float delta) {
+
+            }
+
+            @Override
+            public void resize(int width, int height) {
+
+            }
+
+            @Override
+            public void show() {
+
+            }
+
+            @Override
+            public void hide() {
+
+            }
+
+            @Override
+            public void pause() {
+
+            }
+
+            @Override
+            public void resume() {
+
+            }
+
+            @Override
+            public void dispose() {
+
+            }
+        });
+        new ConnexionServeur(this);
+        //this.setScreen(new ScreenPrepaMatch(this));
     }
 
     public SpriteBatch getBatch() {

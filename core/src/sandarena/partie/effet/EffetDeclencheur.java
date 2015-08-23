@@ -26,7 +26,8 @@ public class EffetDeclencheur extends Effet{
             if (cible == CompetenceToEffet.SOI) {
                 container.addBuf((EffetBuf)chaine, true);
             } else {
-                personnage.addBuf((EffetBuf)chaine, true);
+                //--// TODO: 21/08/2015  Declencheur recoit lattaquand quand on l'a 
+                //personnage.addBuf((EffetBuf)chaine, true);
             }
         }else if (chaine instanceof EffetAttaque){
             if (cible == CompetenceToEffet.SOI) {
