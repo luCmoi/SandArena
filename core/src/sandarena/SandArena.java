@@ -76,7 +76,6 @@ public class SandArena extends Game {
             }
         });
         new ConnexionServeur(this);
-        //this.setScreen(new ScreenPrepaMatch(this));
     }
 
     public SpriteBatch getBatch() {

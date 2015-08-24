@@ -9,17 +9,18 @@ import sandarena.donnee.BanquePersonnage.DonneePersonnage;
  * Represente les donnee fixes d'un personnage
  *
  */
-public class Personnage {
+public class Personnage{
 
     public DonneePersonnage commun;
     private String nom;
     private EntreeCompetence[] competences = new EntreeCompetence[4];
 
-    /**
-     * Création d'un nouveau personnage tirer avec un nom et une comptence
-     *
-     * @param nom
-     */
+
+    public Personnage(int id){
+        this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, id);
+        this.nom = BanquePersonnage.getNom(commun.nom);
+    }
+
     public Personnage(String nom) {
         this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, nom);
         this.nom = BanquePersonnage.getNom(nom);
@@ -32,6 +33,10 @@ public class Personnage {
                 this.competences[i].incremente();
             }
         }
+    }
+
+    public int getId(){
+        return commun.getId();
     }
 
     public void dispose() {
@@ -54,5 +59,14 @@ public class Personnage {
 
     public EntreeCompetence[] getCompetences() {
         return competences;
+    }
+
+    public void addCompetence(EntreeCompetence compTmp) {
+        for (int i = 0; i < 4; i++) {
+            if (competences[i]== null){
+                competences[i] = compTmp;
+                break;
+            }
+        }
     }
 }

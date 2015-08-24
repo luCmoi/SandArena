@@ -2,6 +2,10 @@
 	<!ELEMENT entrecomp (nom, description, image, 
 		(compattaque | compdeclencheureffet | compbuff | compbuffactif | compdispel),
 		affinite) >
+	<!ATTLIST entrecomp
+		id NMTOKEN  #REQUIRED
+		>
+
 		<!ELEMENT nom (#PCDATA)>
 		<!ELEMENT description (#PCDATA)>
 		<!ELEMENT image (#PCDATA)>

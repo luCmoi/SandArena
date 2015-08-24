@@ -18,17 +18,18 @@ import sandarena.preparematch.ScreenPrepaMatch;
 public class ConnexionServeur {
     private String serverMessage;
     public static final String SERVERIP = "192.168.1.15";
-    //public static final String SERVERIP = "0.0.0.0";
     public static final int SERVERPORT = 5333;
     PrintWriter pw;
     BufferedReader br;
     private static final String BEGINMESS = "THOR";
     private static String CONECTMESS = "LOKI";
     private static final String SERVEURMESS = "ZEUS";
-    private static final String CLIENTMESS = "ARES";
     private static final String ENDCONV = "HERA";
     private static final String SERVEURETABLIT = "THOT";
+    private static final String TESTREC = "EOLE";
+    private static final String TESTENV = "RHEA";
     private SandArena container;
+
 
 
     public ConnexionServeur(SandArena container) {
@@ -44,27 +45,35 @@ public class ConnexionServeur {
                 while (serverMessage == null) {
                     serverMessage = br.readLine();
                 }
+                if (serverMessage.startsWith(TESTREC)) {
+                    pw.println(TESTENV);
+                    pw.flush();
+                }
+                serverMessage = null;
+                while (serverMessage == null) {
+                    serverMessage = br.readLine();
+                }
                 if (serverMessage.startsWith(CONECTMESS)) {
                     if (serverMessage.endsWith(SERVEURMESS)) {
-                        System.out.println("I am Serveur");
-                        ServerSocket serveur = new ServerSocket(14333);
-                        System.out.println("Success");
+                        ConnexionMatch.serverSocket = new ServerSocket(14333);
                         pw.println(SERVEURETABLIT);
                         pw.flush();
-                    }else {
+                        ConnexionMatch.socketLien = ConnexionMatch.serverSocket.accept();
+                    } else {
                         serverMessage = null;
                         while (serverMessage == null) {
                             serverMessage = br.readLine();
                         }
-                        System.out.println("I am Client");
-                        Socket socketPortable = new Socket(InetAddress.getByName(serverMessage),14333);
-                        System.out.println("Success");
+                        serverMessage = (serverMessage.split("/"))[1];
+                        System.out.println(serverMessage);
+                        ConnexionMatch.socketLien = new Socket(InetAddress.getByName(serverMessage), 14333);
                     }
                     pw.println(ENDCONV);
                     pw.flush();
                     dispose();
+                    ConnexionMatch.init();
                     container.setScreen(new ScreenPrepaMatch(container));
-                }else {
+                } else {
                     dispose();
                 }
             } catch (Exception e) {
@@ -78,14 +87,11 @@ public class ConnexionServeur {
     }
 
 
-
-
     private void dispose() {
         try {
             br.close();
             pw.close();
             serverMessage = null;
-            
         } catch (IOException e) {
             e.printStackTrace();
         }

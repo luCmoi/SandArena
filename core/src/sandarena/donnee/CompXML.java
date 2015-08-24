@@ -52,6 +52,7 @@ public class CompXML {
     }
 
     private static void parseCompetence(Element racine) {
+        int id = parseIntStatic(racine.getAttribute("id"));
         String nom = racine.getElementsByTagName("nom").item(0).getTextContent();
         String description = racine.getElementsByTagName("description").item(0).getTextContent();
         String chemin = racine.getElementsByTagName("image").item(0).getTextContent();
@@ -92,7 +93,7 @@ public class CompXML {
                 affinite.add(parseIntStatic(tmp.getTextContent()));
             }
         }
-        BanqueCompetence.banque.add(new BanqueCompetence.EntreeCompetence(nom, description, chemin, competence, affinite));
+        BanqueCompetence.banque.add(new BanqueCompetence.EntreeCompetence(id, nom, description, chemin, competence, affinite));
     }
 
     private static CompetenceBuff compBuff(Element comp) {

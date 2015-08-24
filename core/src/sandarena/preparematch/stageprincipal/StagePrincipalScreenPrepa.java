@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.ArrayList;
 
+import sandarena.ConnexionMatch;
 import sandarena.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -28,8 +29,9 @@ public class StagePrincipalScreenPrepa extends Stage {
     private PanelScreenPrepaMatch panelGauche;
     private PanelScreenPrepaMatch panelDroit;
     private boolean commence;
+    private boolean bloquand = false;
 
-    public StagePrincipalScreenPrepa(ScreenPrepaMatch screenPrepaMatch, Joueur joueur,boolean commence, ScalingViewport scalingViewport, Batch batch) {
+    public StagePrincipalScreenPrepa(ScreenPrepaMatch screenPrepaMatch, Joueur joueur, boolean commence, ScalingViewport scalingViewport, Batch batch) {
         super(scalingViewport, batch);
         this.container = screenPrepaMatch;
         this.joueur = joueur;
@@ -42,7 +44,7 @@ public class StagePrincipalScreenPrepa extends Stage {
         droite = new FlecheListe(this, false);
         this.addActor(gauche);
         this.addActor(droite);
-        if (!commence){
+        if (!commence) {
             recoitPersonnageAutre();
         }
     }
@@ -69,25 +71,38 @@ public class StagePrincipalScreenPrepa extends Stage {
         return container;
     }
 
-    public void ajoutGauche(Personnage tmp) {
+    public void ajoutGauche(final Personnage tmp) {
         panelGauche.ajout(tmp);
         if (!commence && testFin()) {
             container.finPrepare();
         } else {
-          recoitPersonnageAutre();
+            recoitPersonnageAutre();
         }
+        new Thread() {
+            @Override
+            public void run() {
+                ConnexionMatch.prepareMatchEnvoiPerso(tmp);
+            }
+        }.start();
     }
 
-    public void recoitPersonnageAutre(){
-        //Ici on attendra de recevoir le personnage
-        panelDroit.ajout(new Personnage("Barbare des Sables"));
-        if (commence && testFin()) {
-            container.finPrepare();
-        }
+    public void recoitPersonnageAutre() {
+        bloquand = true;
+        new Thread() {
+            @Override
+            public void run() {
+                Personnage recu = ConnexionMatch.prepareMatchRecoitPerso();
+                panelDroit.ajout(recu);
+                if (commence && testFin()) {
+                    container.finPrepare();
+                }
+                bloquand = false;
+            }
+        }.start();
     }
 
     private boolean testFin() {
-        if (panelGauche.testFin() && panelDroit.testFin()){
+        if (panelGauche.testFin() && panelDroit.testFin()) {
             return true;
         }
         return false;
@@ -103,5 +118,9 @@ public class StagePrincipalScreenPrepa extends Stage {
 
     public boolean getCommence() {
         return commence;
+    }
+
+    public boolean getBloquand() {
+        return bloquand;
     }
 }

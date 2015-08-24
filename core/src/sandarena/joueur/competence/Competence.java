@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import sandarena.joueur.competence.passive.CompetenceBuff;
 
-public abstract class Competence {
+public abstract class Competence{
     protected CompetenceBuff succ;
 
     Competence() {

@@ -1,16 +1,9 @@
 package sandarena.donnee;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import sandarena.joueur.competence.Competence;
-import sandarena.joueur.competence.active.CompetenceAttaque;
-import sandarena.joueur.competence.active.CompetenceBuffActif;
-import sandarena.joueur.competence.active.CompetenceDispel;
-import sandarena.joueur.competence.passive.CompetenceBuff;
-import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
-import sandarena.partie.effet.CompetenceToEffet;
 
 
 /**
@@ -55,13 +48,13 @@ public class BanqueCompetence extends Banque {
     /**
      * Une Entree de Competence
      */
-    public static class EntreeCompetence extends Entree {
+    public static class EntreeCompetence extends Entree{
 
         public Competence competence;
         private ArrayList<Integer> affinite;
 
-        public EntreeCompetence(String nom, String description, String chemin, Competence competence, ArrayList<Integer> affinite) {
-            super(nom, description, chemin);
+        public EntreeCompetence(int id, String nom, String description, String chemin, Competence competence, ArrayList<Integer> affinite) {
+            super(id, nom, description, chemin);
             this.competence = competence;
             this.affinite = affinite;
         }

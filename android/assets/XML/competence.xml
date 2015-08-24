@@ -5,7 +5,7 @@
 
     <!-- FORCE MAIN -->
 
-    <entrecomp>
+    <entrecomp id ="2001">
         <nom>Bourre-pif</nom>
         <description>Coup de poing puissant au visage, de préférence dans le nez</description>
         <image>Image/Competence/Bourrepif.png</image>
@@ -18,7 +18,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2002">
         <nom>Berzerk</nom>
         <description>Plus le personnage est blessé plus sa folie est grande</description>
         <image>Image/Competence/Berzerk.png</image>
@@ -32,7 +32,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2003">
         <nom>Leg Day</nom>
         <description>Le personnage à travaillé ses jambes tous les jours</description>
         <image>Image/Competence/LegDay.png</image>
@@ -42,7 +42,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2004">
         <nom>Ecrase-Face</nom>
         <description>Un tel coup peut ferait s'évanouir n'importe quel être vivant</description>
         <image>Image/Competence/EcraseFace.png</image>
@@ -56,7 +56,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2005">
         <nom>Contraction Musculaire</nom>
         <description>Des muscles puissants suffisent à arreter un coup mortel</description>
         <image>Image/Competence/ContractionMusculaire.png</image>
@@ -74,7 +74,7 @@
 
     <!-- TRIBAL MAIN -->
 
-    <entrecomp>
+    <entrecomp id ="2101">
         <nom>Rituel de sang</nom>
         <description>Parfoit il faut sacrifier une partie de soit pour en renforcer une autre
         </description>
@@ -91,7 +91,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2102">
         <nom>Perle de Purification</nom>
         <description>Purifie le corps de ses afflictions</description>
         <image>Image/Competence/PerleDePurification.png</image>
@@ -104,7 +104,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2103">
         <nom>Lance de Pai</nom>
         <description>On dit que l'originale lancée par Pai fendit une montagne</description>
         <image>Image/Competence/LanceDePai.png</image>
@@ -117,7 +117,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2104">
         <nom>Poupée Vaudou</nom>
         <description>L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances
             soit communes
@@ -135,7 +135,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2105">
         <nom>Tiki de To´a-Hiti</nom>
         <description>Ce tiki puise dans la force pour defendre l'esprit</description>
         <image>Image/Competence/TikiDeToahiti.png</image>
@@ -147,7 +147,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2106">
         <nom>Tiki de Tu</nom>
         <description>Ce tiki donne a l'esprit la force des muscles</description>
         <image>Image/Competence/TikiDeTu.png</image>
@@ -161,7 +161,7 @@
 
     <!-- AGILITE MAIN -->
 
-    <entrecomp>
+    <entrecomp id ="2201">
         <nom>Frappe chirurgicale</nom>
         <description>Certains points sensibles du corps suffisent a entrainer la mort</description>
         <image>Image/Competence/FrappeChirurgicale.png</image>
@@ -174,7 +174,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2202">
         <nom>Esquive naturelle</nom>
         <description>Certaines personnes sont plus capable que d'autre d'esquiver une lame
             mortelle
@@ -188,7 +188,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2203">
         <nom>Jet De Sable</nom>
         <description>Un ennemi aveuglé deviens moins dangeureux</description>
         <image>Image/Competence/JetDeSable.png</image>
@@ -204,7 +204,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2204">
         <nom>Riposte éclaire</nom>
         <description>Des reflexes tels qu'aucun coup reçus n'a été rendu</description>
         <image>Image/Competence/RiposteEclaire.png</image>
@@ -218,7 +218,7 @@
 
     <!-- POISON MAIN -->
 
-    <entrecomp>
+    <entrecomp id ="2301">
         <nom>Poison Corosif</nom>
         <description>Un tel poison ronge les chairs de l'interieur</description>
         <image>Image/Competence/PoisonCorosif.png</image>
@@ -234,7 +234,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2302">
         <nom>Poison Musculaire</nom>
         <description>Ce poison rend sa cible faible au point qu'il lui deviens difficile de se
             déplacer
@@ -252,7 +252,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2303">
         <nom>Jet d'acide</nom>
         <description>La peau se met à bouilloner et fondre a son contact</description>
         <image>Image/Competence/JetDacide.png</image>
@@ -265,7 +265,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2304">
         <nom>Coktail affaiblissant</nom>
         <description>Un assortiment de produit réduisant la puissance de la victime</description>
         <image>Image/Competence/CoktailAffaiblissant.png</image>
@@ -286,7 +286,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp>
+    <entrecomp id ="2305">
         <nom>Poison Mental</nom>
         <description>Les sens et la capacitée a se concentrer de la cible sont affaiblis
         </description>

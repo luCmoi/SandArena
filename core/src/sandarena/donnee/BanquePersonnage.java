@@ -19,15 +19,15 @@ public class BanquePersonnage extends Banque {
      * Initialise tous les personnages du jeu
      */
     public static void init() {
-        banque.add(new DonneePersonnage("Barbare des Sables",
+        banque.add(new DonneePersonnage(1001,"Barbare des Sables",
                 "Ces hommes vivaient dans le desert avant que les Arènes ne s'y établissent, certains racontent qu'ils sont à l'origine des premières arènes du désert",
                 "Image/Personnage/BarbareDesSables.png",
                 15, 3, 5, 2, 2, Affinite.FORCE,Affinite.TRIBAL));
-        banque.add(new DonneePersonnage("Sauvageon des Sables",
+        banque.add(new DonneePersonnage(1002,"Sauvageon des Sables",
                 "Personne ne sait s'il sont de la même espèce que les barbares qu'ils semblent servire où s'ils sont entrés en symbiose avec leur communautée",
                 "Image/Personnage/SauvageonDesSables.png",
                 10, 4, 1, 6, 3,Affinite.AGILITE, Affinite.POISON, Affinite.TRIBAL));
-        banque.add(new DonneePersonnage("Guetteur",
+        banque.add(new DonneePersonnage(1003,"Guetteur",
                 "Créature des profondeurs trouvées dans des cavernes abandonnées il faut de nombreux traqueur expérimentés pour en ramener un dans l'arène",
                 "Image/Personnage/Guetteur.png",
                 13, 4, 2, 2, 5, Affinite.POISON/*Affinite.MAGIE*/));
@@ -44,7 +44,7 @@ public class BanquePersonnage extends Banque {
         return "";
     }
 
-    public static class DonneePersonnage extends Entree {
+    public static class DonneePersonnage extends Entree{
 
         public int vie;
         public int vitesse;
@@ -53,8 +53,8 @@ public class BanquePersonnage extends Banque {
         public int agilite;
         public int[] affinite;
 
-        public DonneePersonnage(String nom, String description, String chemin, int vie, int vitesse, int force, int magie, int agilite, int... affinite) {
-            super(nom, description, chemin);
+        public DonneePersonnage(int id, String nom, String description, String chemin, int vie, int vitesse, int force, int magie, int agilite, int... affinite) {
+            super(id, nom, description, chemin);
             this.vie = vie;
             this.vitesse = vitesse;
             this.agilite = agilite;

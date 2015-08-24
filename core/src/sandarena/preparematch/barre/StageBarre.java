@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import java.util.ArrayList;
 
 import sandarena.Resolution;
-import sandarena.donnee.Utili;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa;
@@ -24,41 +23,41 @@ public class StageBarre extends Stage {
     private CameraBarre camera;
     private float widthTailleTotale;
     private ArrayList<EmplacementBarre> persos;
-    private  Fond fond;
+    private Fond fond;
 
 
     public StageBarre(StagePrincipalScreenPrepa principal, Joueur joueur, ExtendViewport extendViewport, Batch batch) {
-        super(extendViewport,batch);
+        super(extendViewport, batch);
         this.principal = principal;
         this.joueur = joueur;
         this.getViewport().setCamera(new CameraBarre(this));
         this.camera = (CameraBarre) (this.getViewport().getCamera());
-        this.widthTailleTotale = Resolution.differenceBas*joueur.getPersonnages().size();
+        this.widthTailleTotale = Resolution.differenceBas * joueur.getPersonnages().size();
         int x = 0;
         fond = new Fond(this);
         this.addActor(fond);
         persos = new ArrayList<EmplacementBarre>();
-        for (Personnage perso : joueur.getPersonnages()){
-            persos.add(new EmplacementBarre(this, x ,perso));
+        for (Personnage perso : joueur.getPersonnages()) {
+            persos.add(new EmplacementBarre(this, x, perso));
             this.addActor(persos.get(x));
-            x ++;
+            x++;
         }
 
     }
 
-    public void augmenteWidthTailleTotale(int place){
-        this.widthTailleTotale = this.widthTailleTotale+Resolution.differenceBas;
-        for (int i = place+1; i < persos.size(); i++) {
+    public void augmenteWidthTailleTotale(int place) {
+        this.widthTailleTotale = this.widthTailleTotale + Resolution.differenceBas;
+        for (int i = place + 1; i < persos.size(); i++) {
             persos.get(i).decaleDroite();
         }
     }
 
-    public void diminueWidthTailleTotale(int place, boolean baisse){
-        this.widthTailleTotale = this.widthTailleTotale-Resolution.differenceBas;
-        for (int i = place+1; i < persos.size(); i++) {
+    public void diminueWidthTailleTotale(int place, boolean baisse) {
+        this.widthTailleTotale = this.widthTailleTotale - Resolution.differenceBas;
+        for (int i = place + 1; i < persos.size(); i++) {
             persos.get(i).decaleGauche();
-            if (baisse){
-                persos.get(i).setPlace(persos.get(i).getPlace()-1);
+            if (baisse) {
+                persos.get(i).setPlace(persos.get(i).getPlace() - 1);
             }
         }
     }
@@ -89,9 +88,9 @@ public class StageBarre extends Stage {
     }
 
     public void ajoute(Personnage perso) {
-        persos.add(new EmplacementBarre(this, persos.size() ,perso));
+        persos.add(new EmplacementBarre(this, persos.size(), perso));
         this.addActor(persos.get(persos.size() - 1));
-        this.widthTailleTotale = this.widthTailleTotale+Resolution.differenceBas;
+        this.widthTailleTotale = this.widthTailleTotale + Resolution.differenceBas;
     }
 
     public ArrayList<EmplacementBarre> getPersos() {
@@ -99,10 +98,12 @@ public class StageBarre extends Stage {
     }
 
     public void select(EmplacementBarre selected) {
-        Personnage tmp = selected.getPerso();
-        this.diminueWidthTailleTotale(selected.getPlace(), true);
-        selected.dispose();
-        principal.ajoutGauche(tmp);
+        if (!principal.getBloquand()) {
+            Personnage tmp = selected.getPerso();
+            this.diminueWidthTailleTotale(selected.getPlace(), true);
+            selected.dispose();
+            principal.ajoutGauche(tmp);
+        }
     }
 
     @Override

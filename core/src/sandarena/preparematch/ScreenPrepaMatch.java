@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.ArrayList;
 
+import sandarena.ConnexionMatch;
 import sandarena.Resolution;
 import sandarena.SandArena;
 import sandarena.joueur.Joueur;
@@ -36,7 +37,6 @@ public class ScreenPrepaMatch implements Screen {
     public ScreenPrepaMatch(SandArena conteneur) {
         this.container = conteneur;
         this.batch = conteneur.getBatch();
-        //Il faudra voir qui commence
         //Temp joueur
         joueur = new Joueur();
         joueur.getPersonnages().add(new Personnage("Barbare des Sables"));
@@ -65,9 +65,7 @@ public class ScreenPrepaMatch implements Screen {
 
     @Override
     public void show() {
-        //A changer
-        boolean alea = ((int)(Math.random()*2)==0);
-
+        boolean alea = (ConnexionMatch.serverSocket==null);
         this.setPrincipal(new StagePrincipalScreenPrepa(this,joueur,alea, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
         this.setBarre(new StageBarre(this.getPrincipal(), joueur, new ExtendViewport(Resolution.width - Resolution.differenceBas, Resolution.differenceBas, Resolution.width - Resolution.differenceBas, Resolution.differenceBas), batch));
         setSurcouche(new Stage(new FillViewport(Resolution.width, Resolution.height), batch));

@@ -10,13 +10,15 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public abstract class Entree {
 
+    private int id;
     public String nom;
     public String description;
     public int instance = 0;
     public String cheminImage;
     public Texture image;
 
-    public Entree(String nom, String description, String chemin) {
+    public Entree(int id, String nom, String description, String chemin) {
+        this.id = id;
         this.nom = nom;
         this.description = description;
         this.cheminImage = chemin;
@@ -30,6 +32,10 @@ public abstract class Entree {
             image = new Texture(Gdx.files.internal(cheminImage));
         }
         instance++;
+    }
+
+    public int getId(){
+        return id;
     }
 
     /**

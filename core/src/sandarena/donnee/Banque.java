@@ -28,6 +28,16 @@ public abstract class Banque {
         return null;
     }
 
+    public static Entree getEntree(ArrayList<Entree> banque, int id) {
+        for (Entree e : banque) {
+            if (e.getId() == id) {
+                e.incremente();
+                return e;
+            }
+        }
+        return null;
+    }
+
     /**
      * Previent l'entree qu'on lui retire une instance
      *
