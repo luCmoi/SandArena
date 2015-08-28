@@ -50,19 +50,25 @@ public class ConnexionServeur {
                         serverMessage = null;
                     }
                 }
+                System.out.println(serverMessage);
                 if (serverMessage.startsWith(CONECTMESS)) {
                     if (serverMessage.endsWith(SERVEURMESS)) {
-                        ConnexionMatch.serverSocket = new ServerSocket(14333);
+                        System.out.println("Serveur");
+                        ConnexionMatch.serverSocket = new ServerSocket(4233);
+                        System.out.println("Socket pret");
                         pw.println(SERVEURETABLIT);
                         pw.flush();
                         ConnexionMatch.socketLien = ConnexionMatch.serverSocket.accept();
+                        System.out.println("Socket accepte");
                     } else {
                         serverMessage = null;
                         while (serverMessage == null) {
                             serverMessage = br.readLine();
                         }
+                        System.out.println(serverMessage);
                         serverMessage = (serverMessage.split("/"))[1];
-                        ConnexionMatch.socketLien = new Socket(InetAddress.getByName(serverMessage), 14333);
+                        System.out.println(serverMessage);
+                        ConnexionMatch.socketLien = new Socket(InetAddress.getByName(serverMessage), 4233);
                     }
                     pw.println(ENDCONV);
                     pw.flush();
@@ -70,6 +76,7 @@ public class ConnexionServeur {
                     ConnexionMatch.init();
                     container.setScreen(new ScreenPrepaMatch(container));
                 } else {
+                    System.out.println("Bad Message");
                     dispose();
                 }
             } catch (Exception e) {
