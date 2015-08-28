@@ -65,7 +65,7 @@ public class PersonnageIG {
         int i = 0;
         for (EntreeCompetence c : donnee.getCompetences()) {
             if (c != null) {
-                competence[i] = new CompetenceIG(this, c);
+                competence[i] = new CompetenceIG(this, c,i);
                 i++;
             }
         }

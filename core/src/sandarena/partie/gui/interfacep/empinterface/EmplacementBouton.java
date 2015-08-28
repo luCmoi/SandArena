@@ -2,6 +2,7 @@ package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+import sandarena.ConnexionMatch;
 import sandarena.donnee.Utili;
 import sandarena.partie.gui.interfacep.StageInterface;
 
@@ -36,7 +37,10 @@ public class EmplacementBouton extends EmplacementInterface {
     public void clique() {
         switch (place) {
             case 0:
-                container.getPartie().finPhase();
+                if (!container.getPartie().isBloquand()) {
+                    ConnexionMatch.partieEnvoiFinPhase();
+                    container.getPartie().finPhase();
+                }
                 break;
             case 1:
                 break;

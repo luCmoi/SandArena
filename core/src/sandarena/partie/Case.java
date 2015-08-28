@@ -1,10 +1,10 @@
 package sandarena.partie;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
+import sandarena.ConnexionMatch;
 import sandarena.Resolution;
 import sandarena.donnee.Utili;
 import sandarena.partie.compcase.PersonnageIG;
@@ -137,16 +137,20 @@ public class Case extends Actor {
     void clique() {
         container.setCaseSelect(this);
         this.select = true;
-        if (getContainer().getCompetenceActive() == null) {
-            if (isAccessible() && !cible) {
-                getContainer().selectChemin(this);
-            } else if (cible) {
-                getContainer().deplacement();
-            }else if (this.getPresence() != null && !this.getPresence().isAAgi() && this.getPresence().getPossesseur()==getContainer().getPersonnageActif().getPossesseur()){
-                getContainer().setPersonnageActif(this.getPresence());
+        if (!container.isBloquand()) {
+            if (getContainer().getCompetenceActive() == null) {
+                if (isAccessible() && !cible) {
+                    getContainer().selectChemin(this);
+                } else if (cible) {
+                    getContainer().deplacement();
+                } else if (this.getPresence() != null && !this.getPresence().isAAgi() && this.getPresence().getPossesseur() == getContainer().getPersonnageActif().getPossesseur()) {
+                    getContainer().setPersonnageActif(this.getPresence());
+                    ConnexionMatch.partieEnvoiPersoActif(getContainer().getJoueurActif().getPersonnages().indexOf(this.getPresence()));
+                }
+            } else if (this.competenceable) {
+                ConnexionMatch.partieEnvoiUtiliseCompetence(getContainer().getJoueurActif().getPersonnages().indexOf(getContainer().getPersonnageActif()), getContainer().getCompetenceActive().getPlace(),this.getPlaceX(),this.getPlaceY());
+                getContainer().getCompetenceActive().agit(this);
             }
-        } else if (this.competenceable) {
-            getContainer().getCompetenceActive().agit(this);
         }
     }
 

@@ -24,10 +24,12 @@ public class CompetenceIG {
     private int recharge = 0;
     private int utilisationRestante = -1;
     private boolean active = true;
+    private int place;
 
-    CompetenceIG(PersonnageIG perso, EntreeCompetence c) {
+    CompetenceIG(PersonnageIG perso, EntreeCompetence c, int place) {
         container = perso;
         info = c;
+        this.place = place;
         if (c.competence instanceof CompetenceBuff) {
             perso.addBuf(CompetenceToEffet.toEffet(this), false);
         } else if (c.competence instanceof CompetenceDeclencheurEffet) {
@@ -105,5 +107,9 @@ public class CompetenceIG {
 
     public PersonnageIG getContainer() {
         return container;
+    }
+
+    public int getPlace() {
+        return place;
     }
 }

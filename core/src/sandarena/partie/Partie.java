@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import sandarena.ConnexionMatch;
 import sandarena.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -30,10 +31,11 @@ public class Partie extends Stage {
 
     private final int widthTailleTotale;
     private final int heightTailleTotale;
+    private final boolean commence;
     private Case[][] plateau;
     private ScreenPartie container;
-    private JoueurIG joueur1;
-    private JoueurIG joueur2;
+    private JoueurIG joueurActif;
+    private JoueurIG joueurAutre;
     private PersonnageIG personnageActif;
     private Group groupeCase;
     private Camera camera;
@@ -41,12 +43,13 @@ public class Partie extends Stage {
     private StageInterface stageInterface;
     private CompetenceIG competenceActive;
     private Case caseSelect = null;
-    private Boolean joueurActif;
+    private boolean bloquand = false;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
      * tard de donne de la carte ainsi que des deux joueurs
-     *  @param container
+     *
+     * @param container
      * @param joueur1
      * @param personnagesActif
      * @param joueur2
@@ -60,17 +63,10 @@ public class Partie extends Stage {
         this.container = container;
         this.stageInterface = this.container.getStageInterface();
         this.getViewport().setCamera(new Camera(this));
-
+        this.commence = commence;
         this.camera = (Camera) (this.getViewport().getCamera());
-        if (commence) {
-            this.joueur1 = new JoueurIG(joueur1, personnagesActif);
-            this.joueur2 = new JoueurIG(joueur2, personnagesAutre);
-            joueurActif = true;
-        }else{
-            this.joueur2 = new JoueurIG(joueur1, personnagesActif);
-            this.joueur1 = new JoueurIG(joueur2, personnagesAutre);
-            joueurActif = false;
-        }
+        this.joueurActif = new JoueurIG(joueur1, personnagesActif);
+        this.joueurAutre = new JoueurIG(joueur2, personnagesAutre);
         //Changera lorsqu'on saura a partir de quoit creer la partie
         int coteTmp = 20;
         plateau = new Case[coteTmp][coteTmp];
@@ -86,6 +82,9 @@ public class Partie extends Stage {
         heightTailleTotale = this.plateau[0].length * Resolution.heightCase;
         this.addCaptureListener(new PartieListener(this));
         chemin = new ArrayList<Case>();
+
+        ConnexionMatch.ecouteMatch(this);
+
         lancement();
     }
 
@@ -98,14 +97,25 @@ public class Partie extends Stage {
     private void lancement() {
         /* Placement des unitées
          */
-        getPlateau()[5][5].entrePresence(getJoueur1().getPersonnages().get(0));
-        getPlateau()[5][6].entrePresence(getJoueur1().getPersonnages().get(1));
-        getPlateau()[5][7].entrePresence(getJoueur1().getPersonnages().get(2));
-        getPlateau()[5][8].entrePresence(getJoueur1().getPersonnages().get(3));
-        getPlateau()[7][5].entrePresence(getJoueur2().getPersonnages().get(0));
-        getPlateau()[7][6].entrePresence(getJoueur2().getPersonnages().get(1));
-        getPlateau()[7][7].entrePresence(getJoueur2().getPersonnages().get(2));
-        getPlateau()[7][8].entrePresence(getJoueur2().getPersonnages().get(3));
+        if (commence) {
+            getPlateau()[5][5].entrePresence(getJoueurActif().getPersonnages().get(0));
+            getPlateau()[5][6].entrePresence(getJoueurActif().getPersonnages().get(1));
+            getPlateau()[5][7].entrePresence(getJoueurActif().getPersonnages().get(2));
+            getPlateau()[5][8].entrePresence(getJoueurActif().getPersonnages().get(3));
+            getPlateau()[7][5].entrePresence(getJoueurAutre().getPersonnages().get(0));
+            getPlateau()[7][6].entrePresence(getJoueurAutre().getPersonnages().get(1));
+            getPlateau()[7][7].entrePresence(getJoueurAutre().getPersonnages().get(2));
+            getPlateau()[7][8].entrePresence(getJoueurAutre().getPersonnages().get(3));
+        } else {
+            getPlateau()[5][5].entrePresence(getJoueurAutre().getPersonnages().get(0));
+            getPlateau()[5][6].entrePresence(getJoueurAutre().getPersonnages().get(1));
+            getPlateau()[5][7].entrePresence(getJoueurAutre().getPersonnages().get(2));
+            getPlateau()[5][8].entrePresence(getJoueurAutre().getPersonnages().get(3));
+            getPlateau()[7][5].entrePresence(getJoueurActif().getPersonnages().get(0));
+            getPlateau()[7][6].entrePresence(getJoueurActif().getPersonnages().get(1));
+            getPlateau()[7][7].entrePresence(getJoueurActif().getPersonnages().get(2));
+            getPlateau()[7][8].entrePresence(getJoueurActif().getPersonnages().get(3));
+        }
         tour();
     }
 
@@ -114,49 +124,84 @@ public class Partie extends Stage {
     }
 
     private void tour() {
-        for (PersonnageIG perso : joueur1.getPersonnages()) {
-            perso.setAAgi(false);
-            perso.tourBuff();
-            perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
-            perso.infligeDot();
-            perso.modifCaract();
+        if (commence) {
+            for (PersonnageIG perso : joueurActif.getPersonnages()) {
+                perso.setAAgi(false);
+                perso.tourBuff();
+                perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
+                perso.infligeDot();
+                perso.modifCaract();
+            }
         }
-        for (PersonnageIG perso : joueur2.getPersonnages()) {
+        for (PersonnageIG perso : joueurAutre.getPersonnages()) {
             perso.setAAgi(false);
             perso.tourBuff();
             perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
             perso.modifVitesse();
             perso.infligeDot();
         }
-        phase(getJoueur1());
+        if (!commence) {
+            for (PersonnageIG perso : joueurActif.getPersonnages()) {
+                perso.setAAgi(false);
+                perso.tourBuff();
+                perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
+                perso.infligeDot();
+                perso.modifCaract();
+            }
+            phase(getJoueurAutre());
+        } else {
+            phase(getJoueurActif());
+        }
     }
 
 
     private void phase(JoueurIG joueur) {
+        if (joueur.equals(getJoueurAutre())) {
+            setBloquand(true);
+        } else {
+            setBloquand(false);
+        }
         for (PersonnageIG perso : joueur.getPersonnages()) {
             if (!perso.isAAgi()) {
                 this.setPersonnageActif(perso);
+                if (!bloquand) {
+                    ConnexionMatch.partieEnvoiPersoActif(getJoueurActif().getPersonnages().indexOf(perso));
+                }
                 return;
             }
         }
-        if (joueur.equals(getJoueur1())) {
-            phase(getJoueur2());
+        if (joueur.equals(getJoueurActif()) && commence) {
+            phase(getJoueurAutre());
         } else {
             tour();
         }
     }
 
     public void finPhase() {
-        if (personnageActif.getPossesseur().equals(getJoueur1())) {
-            for (PersonnageIG perso : getJoueur1().getPersonnages()) {
-                perso.setAAgi(true);
+        if (personnageActif.getPossesseur().equals(getJoueurActif())) {
+            if (commence) {
+                for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
+                    perso.setAAgi(true);
+                }
+                phase(getJoueurAutre());
+            }else {
+                for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
+                    perso.setAAgi(true);
+                }
+                tour();
             }
-            phase(getJoueur2());
-        } else {
-            for (PersonnageIG perso : getJoueur2().getPersonnages()) {
-                perso.setAAgi(true);
+        }else {
+            if (commence) {
+                for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
+                    perso.setAAgi(true);
+                }
+                tour();
+            }else {
+                for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
+                    perso.setAAgi(true);
+                }
+                phase(getJoueurActif());
             }
-            tour();
         }
     }
 
@@ -191,8 +236,8 @@ public class Partie extends Stage {
         stageInterface = null;
         chemin.clear();
         chemin = null;
-        joueur1 = null;
-        joueur2 = null;
+        joueurActif = null;
+        joueurAutre = null;
     }
 
     public Case[][] getPlateau() {
@@ -216,12 +261,12 @@ public class Partie extends Stage {
         return this.camera;
     }
 
-    public JoueurIG getJoueur1() {
-        return joueur1;
+    public JoueurIG getJoueurActif() {
+        return joueurActif;
     }
 
-    public JoueurIG getJoueur2() {
-        return joueur2;
+    public JoueurIG getJoueurAutre() {
+        return joueurAutre;
     }
 
     public PersonnageIG getPersonnageActif() {
@@ -234,6 +279,17 @@ public class Partie extends Stage {
             this.personnageActif = personnageActif;
             AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
             this.stageInterface.setPersonnageActif(personnageActif);
+        }
+    }
+
+    public void setPersonnageActif(int perso) {
+        if (personnageActif != null) {
+            if (personnageActif != joueurAutre.getPersonnages().get(perso)) {
+                videChemin();
+                this.personnageActif = joueurAutre.getPersonnages().get(perso);
+                AlgorithmePathfinding.calculCaseAccessible(personnageActif.getVitesseRestante(), personnageActif.getContainer(), plateau);
+                this.stageInterface.setPersonnageActif(personnageActif);
+            }
         }
     }
 
@@ -275,7 +331,10 @@ public class Partie extends Stage {
         }
     }
 
-    void deplacement() {
+    public void deplacement() {
+        if (!bloquand) {
+            ConnexionMatch.partieEnvoiDeplacement(getJoueurActif().getPersonnages().indexOf(personnageActif), chemin.get(0).getPlaceX(), chemin.get(0).getPlaceY());
+        }
         for (int i = 1; i <= chemin.size(); i++) {
             personnageActif.mouvement(chemin.get(chemin.size() - i));
         }
@@ -288,26 +347,28 @@ public class Partie extends Stage {
     }
 
     public void setCompetenceActive(CompetenceIG competenceActive) {
-        this.competenceActive = competenceActive;
-        if (this.competenceActive != null) {
-            if (this.competenceActive.info.competence instanceof CompetenceActive) {
-                if (((CompetenceActive) this.competenceActive.info.competence).getPorte() == 0) {
-                    for (Case[] c : plateau) {
-                        for (Case cc : c) {
-                            cc.setCompetenceable(false);
+        if (this.competenceActive != competenceActive) {
+            this.competenceActive = competenceActive;
+            if (this.competenceActive != null) {
+                if (this.competenceActive.info.competence instanceof CompetenceActive) {
+                    if (((CompetenceActive) this.competenceActive.info.competence).getPorte() == 0) {
+                        for (Case[] c : plateau) {
+                            for (Case cc : c) {
+                                cc.setCompetenceable(false);
+                            }
                         }
+                        personnageActif.getContainer().setCompetenceable(true);
+                    } else {
+                        this.competenceActive.select(plateau);
                     }
-                    personnageActif.getContainer().setCompetenceable(true);
                 } else {
                     this.competenceActive.select(plateau);
                 }
             } else {
-                this.competenceActive.select(plateau);
-            }
-        } else {
-            for (Case[] c : plateau) {
-                for (Case cc : c) {
-                    cc.setCompetenceable(false);
+                for (Case[] c : plateau) {
+                    for (Case cc : c) {
+                        cc.setCompetenceable(false);
+                    }
                 }
             }
         }
@@ -320,4 +381,13 @@ public class Partie extends Stage {
         this.caseSelect = caseSelect;
         stageInterface.setCaseSelect(caseSelect);
     }
+
+    public boolean isBloquand() {
+        return bloquand;
+    }
+
+    public void setBloquand(boolean bloquand) {
+        this.bloquand = bloquand;
+    }
+
 }

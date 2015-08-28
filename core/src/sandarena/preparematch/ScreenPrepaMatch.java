@@ -32,6 +32,7 @@ public class ScreenPrepaMatch implements Screen {
     private StagePrincipalScreenPrepa principal;
     private Stage surcouche;
     private Joueur joueur;
+    private Personnage check = null;
 
 
     public ScreenPrepaMatch(SandArena conteneur) {
@@ -52,6 +53,17 @@ public class ScreenPrepaMatch implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(Resolution.differenceBas / 2, 0, Resolution.width - Resolution.differenceBas, Resolution.differenceBas);
+        if (check != null){
+            check.commun.incremente();
+            check.getCompetences()[0].incremente();
+            check.getCompetences()[1].incremente();
+            check.getCompetences()[2].incremente();
+            check.getCompetences()[3].incremente();
+            setCheck(null);
+            if (principal.getCommence() && principal.testFin()) {
+                finPrepare();
+            }
+        }
         this.getBarre().draw();
         Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
         this.getPrincipal().draw();
@@ -125,5 +137,9 @@ public class ScreenPrepaMatch implements Screen {
         ArrayList<Personnage> personnagesActif = principal.getPersonnagesActif();
         ArrayList<Personnage> personnagesAutre = principal.getPersonnagesAutre();
         container.lancePartie(joueur, personnagesActif, personnagesAutre, !(principal.getCommence()));
+    }
+
+    public void setCheck(Personnage check) {
+        this.check = check;
     }
 }

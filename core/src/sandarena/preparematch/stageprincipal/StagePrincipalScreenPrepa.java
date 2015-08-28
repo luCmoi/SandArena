@@ -72,18 +72,18 @@ public class StagePrincipalScreenPrepa extends Stage {
     }
 
     public void ajoutGauche(final Personnage tmp) {
-        panelGauche.ajout(tmp);
-        if (!commence && testFin()) {
-            container.finPrepare();
-        } else {
-            recoitPersonnageAutre();
-        }
         new Thread() {
             @Override
             public void run() {
                 ConnexionMatch.prepareMatchEnvoiPerso(tmp);
             }
         }.start();
+        panelGauche.ajout(tmp);
+        if (!commence && testFin()) {
+            container.finPrepare();
+        } else {
+            recoitPersonnageAutre();
+        }
     }
 
     public void recoitPersonnageAutre() {
@@ -92,16 +92,14 @@ public class StagePrincipalScreenPrepa extends Stage {
             @Override
             public void run() {
                 Personnage recu = ConnexionMatch.prepareMatchRecoitPerso();
+                container.setCheck(recu);
                 panelDroit.ajout(recu);
-                if (commence && testFin()) {
-                    container.finPrepare();
-                }
                 bloquand = false;
             }
         }.start();
     }
 
-    private boolean testFin() {
+    public boolean testFin() {
         if (panelGauche.testFin() && panelDroit.testFin()) {
             return true;
         }
@@ -123,4 +121,6 @@ public class StagePrincipalScreenPrepa extends Stage {
     public boolean getBloquand() {
         return bloquand;
     }
+
+
 }

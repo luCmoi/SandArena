@@ -2,14 +2,13 @@ package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+import sandarena.ConnexionMatch;
 import sandarena.donnee.Utili;
-import sandarena.infowindow.windows.InfoWindowComp;
 import sandarena.infowindow.windows.InfoWindowCompIG;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.joueur.competence.CompetencePassive;
 import sandarena.partie.compcase.CompetenceIG;
 import sandarena.partie.gui.interfacep.StageInterface;
-import sandarena.infowindow.InfoWindow;
 
 /**
  */
@@ -53,13 +52,15 @@ public class EmplacementComp extends EmplacementInterface {
     }
 
     public void clique() {
-        if (actif) {
+        if (actif && !container.getPartie().isBloquand()) {
             if (container.getPartie().getCompetenceActive() != null && container.getPartie().getCompetenceActive().equals(this.getCompetenceIG())) {
+                ConnexionMatch.partieEnvoiCompetence(container.getPartie().getJoueurActif().getPersonnages().indexOf(container.getPartie().getPersonnageActif()),-1);
                 container.getPartie().setCompetenceActive(null);
             } else if (getCompetenceIG() != null) {
                 if (getCompetenceIG().isActive()) {
                     if (CompetenceActive.class.isAssignableFrom(getCompetenceIG().info.competence.getClass())) {
                         container.getPartie().setCompetenceActive(getCompetenceIG());
+                        ConnexionMatch.partieEnvoiCompetence(container.getPartie().getJoueurActif().getPersonnages().indexOf(container.getPartie().getPersonnageActif()), competenceIG.getPlace());
                     }
                 }
             }

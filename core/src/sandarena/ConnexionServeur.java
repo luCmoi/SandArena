@@ -65,7 +65,6 @@ public class ConnexionServeur {
                             serverMessage = br.readLine();
                         }
                         serverMessage = (serverMessage.split("/"))[1];
-                        System.out.println(serverMessage);
                         ConnexionMatch.socketLien = new Socket(InetAddress.getByName(serverMessage), 14333);
                     }
                     pw.println(ENDCONV);
