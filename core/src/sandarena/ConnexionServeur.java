@@ -17,7 +17,7 @@ import sandarena.preparematch.ScreenPrepaMatch;
  */
 public class ConnexionServeur {
     private String serverMessage;
-    public static final String SERVERIP = "192.168.1.15";
+    public static final String SERVERIP = "90.24.237.150";
     public static final int SERVERPORT = 5333;
     PrintWriter pw;
     BufferedReader br;
@@ -44,14 +44,11 @@ public class ConnexionServeur {
                 pw.flush();
                 while (serverMessage == null) {
                     serverMessage = br.readLine();
-                }
-                if (serverMessage.startsWith(TESTREC)) {
-                    pw.println(TESTENV);
-                    pw.flush();
-                }
-                serverMessage = null;
-                while (serverMessage == null) {
-                    serverMessage = br.readLine();
+                    if (serverMessage != null && serverMessage.startsWith(TESTREC)) {
+                        pw.println(TESTENV);
+                        pw.flush();
+                        serverMessage = null;
+                    }
                 }
                 if (serverMessage.startsWith(CONECTMESS)) {
                     if (serverMessage.endsWith(SERVEURMESS)) {
