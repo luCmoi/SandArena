@@ -48,7 +48,6 @@ public class ConnexionServeur {
                         serverMessage = null;
                     }
                 }
-                System.out.println(serverMessage);
                 if (serverMessage.startsWith(CONECTMESS)) {
                     if (serverMessage.endsWith(FIRST)) {
                         ConnexionMatch.first = true;
@@ -63,7 +62,6 @@ public class ConnexionServeur {
                     dispose();
                     container.setScreen(new ScreenPrepaMatch(container));
                 } else {
-                    System.out.println("Bad Message");
                     dispose();
                 }
             } catch (Exception e) {

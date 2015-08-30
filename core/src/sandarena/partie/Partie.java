@@ -170,10 +170,18 @@ public class Partie extends Stage {
                 return;
             }
         }
-        if (joueur.equals(getJoueurActif()) && commence) {
-            phase(getJoueurAutre());
+        if (joueur.equals(getJoueurActif())) {
+            if (commence) {
+                phase(getJoueurAutre());
+            } else {
+                tour();
+            }
         } else {
-            tour();
+            if (commence) {
+                tour();
+            }else{
+                phase(getJoueurAutre());
+            }
         }
     }
 
@@ -184,19 +192,19 @@ public class Partie extends Stage {
                     perso.setAAgi(true);
                 }
                 phase(getJoueurAutre());
-            }else {
+            } else {
                 for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
                     perso.setAAgi(true);
                 }
                 tour();
             }
-        }else {
+        } else {
             if (commence) {
                 for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
                     perso.setAAgi(true);
                 }
                 tour();
-            }else {
+            } else {
                 for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
                     perso.setAAgi(true);
                 }
