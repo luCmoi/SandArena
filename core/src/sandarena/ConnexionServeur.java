@@ -68,8 +68,6 @@ public class ConnexionServeur {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                socket.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
