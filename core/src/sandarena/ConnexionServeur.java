@@ -57,6 +57,8 @@ public class ConnexionServeur {
                         ConnexionMatch.first = false;
                     }
                     ConnexionMatch.socketLien = socket;
+                    ConnexionMatch.br = br;
+                    ConnexionMatch.pw = pw;
                     pw.println(ENDCONV);
                     pw.flush();
                     dispose();
