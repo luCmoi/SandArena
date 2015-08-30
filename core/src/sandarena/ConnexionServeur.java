@@ -2,7 +2,6 @@ package sandarena;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -79,13 +78,7 @@ public class ConnexionServeur {
 
 
     private void dispose() {
-        try {
-            br.close();
-            pw.close();
             serverMessage = null;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
 
