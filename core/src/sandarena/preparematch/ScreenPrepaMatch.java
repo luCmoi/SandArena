@@ -77,7 +77,7 @@ public class ScreenPrepaMatch implements Screen {
 
     @Override
     public void show() {
-        boolean alea = (ConnexionMatch.serverSocket==null);
+        boolean alea = (ConnexionMatch.first);
         this.setPrincipal(new StagePrincipalScreenPrepa(this,joueur,alea, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
         this.setBarre(new StageBarre(this.getPrincipal(), joueur, new ExtendViewport(Resolution.width - Resolution.differenceBas, Resolution.differenceBas, Resolution.width - Resolution.differenceBas, Resolution.differenceBas), batch));
         setSurcouche(new Stage(new FillViewport(Resolution.width, Resolution.height), batch));

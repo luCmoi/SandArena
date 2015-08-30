@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 import sandarena.preparematch.ScreenPrepaMatch;
@@ -23,9 +22,9 @@ public class ConnexionServeur {
     BufferedReader br;
     private static final String BEGINMESS = "THOR";
     private static String CONECTMESS = "LOKI";
-    private static final String SERVEURMESS = "ZEUS";
+    private static final String FIRST = "ZEUS";
     private static final String ENDCONV = "HERA";
-    private static final String SERVEURETABLIT = "THOT";
+    private static final String ETAPEOK = "THOT";
     private static final String TESTREC = "EOLE";
     private static final String TESTENV = "RHEA";
     private SandArena container;
@@ -52,28 +51,15 @@ public class ConnexionServeur {
                 }
                 System.out.println(serverMessage);
                 if (serverMessage.startsWith(CONECTMESS)) {
-                    if (serverMessage.endsWith(SERVEURMESS)) {
-                        System.out.println("Serveur");
-                        ConnexionMatch.serverSocket = new ServerSocket(4233);
-                        System.out.println("Socket pret");
-                        pw.println(SERVEURETABLIT);
-                        pw.flush();
-                        ConnexionMatch.socketLien = ConnexionMatch.serverSocket.accept();
-                        System.out.println("Socket accepte");
+                    if (serverMessage.endsWith(FIRST)) {
+                        ConnexionMatch.first = true;
                     } else {
-                        serverMessage = null;
-                        while (serverMessage == null) {
-                            serverMessage = br.readLine();
-                        }
-                        System.out.println(serverMessage);
-                        serverMessage = (serverMessage.split("/"))[1];
-                        System.out.println(serverMessage);
-                        ConnexionMatch.socketLien = new Socket(InetAddress.getByName(serverMessage), 4233);
+                        ConnexionMatch.first = false;
                     }
+                    ConnexionMatch.socketLien = socket;
                     pw.println(ENDCONV);
                     pw.flush();
                     dispose();
-                    ConnexionMatch.init();
                     container.setScreen(new ScreenPrepaMatch(container));
                 } else {
                     System.out.println("Bad Message");
