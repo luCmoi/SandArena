@@ -130,6 +130,7 @@ public class ConnexionMatch {
         int x = Integer.parseInt(br.readLine());
         int y = Integer.parseInt(br.readLine());
         partie.getCompetenceActive().agit(partie.getPlateau()[x][y]);
+        partie.getContainer().getStageInterface().recharge();
     }
 
     public static void partieEnvoiUtiliseCompetence(int perso, int comp, int coordX, int coordY) {
@@ -143,6 +144,7 @@ public class ConnexionMatch {
 
     public static void partieRecoitFinPhase(Partie partie){
         partie.finPhase();
+        partie.getContainer().getStageInterface().recharge();
     }
     
     public static void partieEnvoiFinPhase() {

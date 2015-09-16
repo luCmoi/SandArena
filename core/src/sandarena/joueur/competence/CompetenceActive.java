@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import sandarena.donnee.CompXML;
 
 public abstract class CompetenceActive extends Competence {
-    protected int rechargement;
-    protected int utilisation;
-    protected int porte;
-    protected int portemin;
-    private int zone;
+    protected byte rechargement;
+    protected byte utilisation;
+    protected byte porte;
+    protected byte portemin;
+    private byte zone;
 
-    public CompetenceActive( int recharge, int utilisation, int porte, int portemin, int zone) {
+    public CompetenceActive( byte recharge, byte utilisation, byte porte, byte portemin, byte zone) {
         this.rechargement=recharge;
         this.utilisation=utilisation;
         this.porte=porte;
@@ -54,15 +54,15 @@ public abstract class CompetenceActive extends Competence {
             retour.add("Rechargement : " + rechargement);
         }
         if (porte != 0) {
-            retour.add("Portée : " + porte);
+            retour.add("Portï¿½e : " + porte);
         }else {
-            retour.add("Portée : soi");
+            retour.add("Portï¿½e : soi");
         }
         if (portemin != 1 && portemin != 0) {
-            retour.add("Portée minimale : " + portemin);
+            retour.add("Portï¿½e minimale : " + portemin);
         }
         if (zone != 1) {
-            retour.add("Portée de zone : " + portemin);
+            retour.add("Portï¿½e de zone : " + portemin);
         } if (utilisation != 0){
             retour.add("Utilisation : "+utilisation);
         }

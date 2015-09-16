@@ -36,8 +36,8 @@ public class StagePrincipalScreenPrepa extends Stage {
         this.container = screenPrepaMatch;
         this.joueur = joueur;
         this.commence = commence;
-        this.panelGauche = new PanelScreenPrepaMatch(0, this);
-        this.panelDroit = new PanelScreenPrepaMatch(1, this);
+        this.panelGauche = new PanelScreenPrepaMatch(true, this);
+        this.panelDroit = new PanelScreenPrepaMatch(false, this);
         this.addActor(panelGauche);
         this.addActor(panelDroit);
         gauche = new FlecheListe(this, true);

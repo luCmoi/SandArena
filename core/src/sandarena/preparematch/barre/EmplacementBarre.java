@@ -5,8 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.Resolution;
-import sandarena.donnee.Utili;
-import sandarena.infowindow.windows.InfoWindowPerso;
 import sandarena.joueur.Personnage;
 
 /**
@@ -14,7 +12,7 @@ import sandarena.joueur.Personnage;
  */
 public class EmplacementBarre extends Group {
     private StageBarre container;
-    private int place;
+    private byte place;
     private Personnage perso;
     private boolean ouvert;
     private UnitBarre unit;
@@ -23,7 +21,7 @@ public class EmplacementBarre extends Group {
 
     public EmplacementBarre(StageBarre container, int place, Personnage perso) {
         this.container = container;
-        this.place = place;
+        this.place = (byte)place;
         this.perso = perso;
         this.setBounds(Resolution.differenceBas * place, 0, Resolution.differenceBas, Resolution.differenceBas);
         this.setTouchable(Touchable.enabled);
@@ -116,7 +114,7 @@ public class EmplacementBarre extends Group {
     }
 
     public void setPlace(int place) {
-        this.place = place;
+        this.place = (byte)place;
     }
 
     public void fenetre() {

@@ -54,7 +54,7 @@ public class CompetenceIG {
     public void agit(Case aCase) {
         if (aCase.getPresence() != null) {
             if (info.competence instanceof CompetenceAttaque) {
-                new EffetAttaque((CompetenceAttaque)this.info.competence, CompetenceToEffet.toEffet(this)).lance(this.getContainer().getContainer(), aCase);
+                new EffetAttaque((CompetenceAttaque)this.info.competence, CompetenceToEffet.toEffet(this)).lance(this.getContainer().getContainer(), aCase,true);
             } else if (info.competence instanceof CompetenceDispel) {
                 new EffetDispel((CompetenceDispel) this.info.competence, CompetenceToEffet.toEffet(this)).lance(this.getContainer().getContainer(), aCase);
             }else if (info.competence instanceof CompetenceBuffActif) {
@@ -112,4 +112,5 @@ public class CompetenceIG {
     public int getPlace() {
         return place;
     }
+
 }

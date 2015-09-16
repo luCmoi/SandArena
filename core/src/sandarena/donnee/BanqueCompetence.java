@@ -12,7 +12,6 @@ import sandarena.joueur.competence.Competence;
  * @author Guillaume
  */
 public class BanqueCompetence extends Banque {
-    public static final int FIN = 9999;
     public static ArrayList<Entree> banque = new ArrayList<Entree>();
 
     public static ArrayList<Entree> getBanque() {
@@ -41,7 +40,6 @@ public class BanqueCompetence extends Banque {
             }
         }
         tmpBanque.clear();
-        tmpBanque = null;
         return null;
     }
 

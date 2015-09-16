@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import sandarena.joueur.competence.Competence;
 import sandarena.joueur.competence.CompetencePassive;
 import sandarena.partie.effet.CompetenceToEffet;
-import sandarena.partie.effet.EffetDeclencheur;
 
 public class CompetenceDeclencheurEffet extends CompetencePassive {
-    private int typedeclencheur;
-    private int cible;
+    private byte typedeclencheur;
+    private byte cible;
     private Competence effet;
 
-    public CompetenceDeclencheurEffet( int typedeclencheur, int cible, Competence effet) {
+    public CompetenceDeclencheurEffet( byte typedeclencheur, byte cible, Competence effet) {
         this.typedeclencheur = typedeclencheur;
         this.cible = cible;
         this.effet = effet;

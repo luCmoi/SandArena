@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import sandarena.Resolution;
 import sandarena.joueur.Personnage;
-import sandarena.partie.gui.interfacep.empinterface.EmplacementPerso;
 
 /**
  * Created by Guillaume on 23/07/2015.
@@ -17,26 +16,26 @@ public class PanelScreenPrepaMatch extends Group {
     private ArrayList<UnitPanelScreenPrepaMatch> places;
     public float coteMoyen;
 
-    public PanelScreenPrepaMatch(int position, sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa container) {
+    public PanelScreenPrepaMatch(boolean position, StagePrincipalScreenPrepa container) {
         this.container = container;
-        places = new ArrayList<sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch>();
+        places = new ArrayList<UnitPanelScreenPrepaMatch>();
         this.setBounds(0,0,Resolution.width / 2, Resolution.height - Resolution.differenceBas);
         if (this.getHeight() > this.getWidth()){
             coteMoyen = getWidth()/2;
         }else {
             coteMoyen = getHeight()/2;
         }
-        if (position == 0) {
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, true, 0));
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, true, 1));
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, true, 2));
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, true, 3));
+        if (position) {
+            places.add(new UnitPanelScreenPrepaMatch(this, true, 0));
+            places.add(new UnitPanelScreenPrepaMatch(this, true, 1));
+            places.add(new UnitPanelScreenPrepaMatch(this, true, 2));
+            places.add(new UnitPanelScreenPrepaMatch(this, true, 3));
         } else {
             this.setX(Resolution.width / 2);
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, false, 0));
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, false, 1));
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, false, 2));
-            places.add(new sandarena.preparematch.stageprincipal.UnitPanelScreenPrepaMatch(this, false, 3));
+            places.add(new UnitPanelScreenPrepaMatch(this, false, 0));
+            places.add(new UnitPanelScreenPrepaMatch(this, false, 1));
+            places.add(new UnitPanelScreenPrepaMatch(this, false, 2));
+            places.add(new UnitPanelScreenPrepaMatch(this, false, 3));
         }
         /* Nombre Pourra varier */
         for (UnitPanelScreenPrepaMatch unit : places){

@@ -9,12 +9,12 @@ import sandarena.partie.effet.CompetenceToEffet;
 
 public class CompetenceBuff extends CompetencePassive {
 
-    private int typeBuff;
-    private int val;
-    private int condtype;
-    private int condduree;
+    private byte typeBuff;
+    private byte val;
+    private byte condtype;
+    private byte condduree;
 
-    public CompetenceBuff(int typeBuff, int val, int condtype, int condduree) {
+    public CompetenceBuff(byte typeBuff, byte val, byte condtype, byte condduree) {
         this.typeBuff = typeBuff;
         this.val = val;
         this.condtype = condtype;

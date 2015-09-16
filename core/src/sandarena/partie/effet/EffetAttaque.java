@@ -1,14 +1,13 @@
 package sandarena.partie.effet;
 
 import sandarena.donnee.Caract;
-import sandarena.donnee.IntegerNew;
 import sandarena.joueur.competence.active.CompetenceAttaque;
 import sandarena.partie.Case;
 
 /**
  * @author Guillaume
  */
-public class EffetAttaque extends Effet{
+public class EffetAttaque extends Effet {
     private int type;
     private int mul = 0;
     private EffetBuf suite;
@@ -20,14 +19,14 @@ public class EffetAttaque extends Effet{
         this.suite = suite;
     }
 
-    public void lance(Case attaquant, Case defenseur) {
+    public int lance(Case attaquant, Case defenseur, boolean agit) {
         if (defenseur.getPresence() != null) {
             int att = 0;
             int def = 0;
             switch (type) {
                 case (Caract.FORCE):
                     att = attaquant.getPresence().getDonnee().commun.force;
-                    def= defenseur.getPresence().getDonnee().commun.force;
+                    def = defenseur.getPresence().getDonnee().commun.force;
                     break;
                 case (Caract.AGILITE):
                     att = attaquant.getPresence().getDonnee().commun.agilite;
@@ -41,14 +40,17 @@ public class EffetAttaque extends Effet{
             att = attaquant.getPresence().modifAttaque(att, type);
             def = defenseur.getPresence().modifDefense(def, type);
             int degat = degat(att, def);
-            defenseur.getPresence().inflige(degat + mul);
-            if (suite != null){
-                defenseur.getPresence().addBuf(suite, true);
-            }
+            if (agit) {
+                defenseur.getPresence().inflige(degat + mul);
+                if (suite != null) {
+                    defenseur.getPresence().addBuf(suite, true);
+                }
+            }else return degat +mul;
         }
+        return 0;
     }
 
     public int degat(int caractA, int caractD) {
-        return caractA + (caractA-caractD);
+        return caractA + (caractA - caractD);
     }
 }

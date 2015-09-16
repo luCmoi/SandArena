@@ -15,8 +15,9 @@ import sandarena.preparematch.ScreenPrepaMatch;
  */
 public class ConnexionServeur {
     private String serverMessage;
-    public static final String SERVERIP = "90.24.237.150";
-    public static final int SERVERPORT = 5333;
+    //public static final String SERVERIP = "90.24.237.150";
+    public static final String SERVERIP = "0.0.0.0";
+    public static final short SERVERPORT = 5333;
     PrintWriter pw;
     BufferedReader br;
     private static final String BEGINMESS = "THOR";

@@ -2,6 +2,7 @@ package sandarena.partie.effet.effetbuff;
 
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.effet.EffetBufGroup;
 
 /**
  * Created by Guillaume on 16/06/2015.
@@ -9,8 +10,8 @@ import sandarena.partie.effet.EffetBuf;
 public class EffetBuffDommage extends EffetBuf{
     int val;
 
-    public EffetBuffDommage(String nom,int val, EffetBuf chaine) {
-        super(nom, chaine);
+    public EffetBuffDommage(String nom,int val, EffetBufGroup group) {
+        super(nom, group);
         this.val = val;
     }
 

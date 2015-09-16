@@ -9,11 +9,12 @@ import sandarena.partie.effet.CompetenceToEffet;
 
 public class CompetenceAttaque extends CompetenceActive {
 
-    protected int caract;
-    protected int multiAttaque;
+    protected byte caract;
+    protected byte multiAttaque;
 
-    public CompetenceAttaque(CompXML.CompLance attaque, int bonus) {
+    public CompetenceAttaque(CompXML.CompLance attaque, byte bonus) {
         super(attaque);
+        this.caract = attaque.caract;
         this.multiAttaque = bonus;
     }
 
@@ -34,7 +35,7 @@ public class CompetenceAttaque extends CompetenceActive {
                 car = "Force";
                 break;
             case (Caract.AGILITE):
-                car = "Agilité";
+                car = "Agilitï¿½";
                 break;
             case (Caract.MAGIE):
                 car = "Magie";
@@ -48,5 +49,6 @@ public class CompetenceAttaque extends CompetenceActive {
         retour.addAll(super.toStrings());
         return retour;
     }
+
 
 }

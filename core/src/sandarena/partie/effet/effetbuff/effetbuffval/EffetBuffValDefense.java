@@ -3,15 +3,15 @@ package sandarena.partie.effet.effetbuff.effetbuffval;
 import java.util.ArrayList;
 
 import sandarena.partie.effet.CompetenceToEffet;
-import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.effet.EffetBufGroup;
 import sandarena.partie.effet.effetbuff.EffetBuffVal;
 
 /**
  * Created by Guillaume on 16/06/2015.
  */
 public class EffetBuffValDefense extends EffetBuffVal {
-    public EffetBuffValDefense(String nom, int val, EffetBuf chaine) {
-        super(nom, val, chaine);
+    public EffetBuffValDefense(String nom, int val, EffetBufGroup group) {
+        super(nom, val, group);
     }
     public ArrayList<String> toStrings(){
         ArrayList<String> retour = super.toStrings();

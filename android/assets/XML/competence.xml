@@ -272,13 +272,9 @@
         <compbuffactif>
             <complance caract="caractagilite" porte="2" portemin="1" recharge="2" utilisation="4"
                 zone="1" />
-            <compbuff type="buffvalattaque" valeur="-2">
+            <compbuff type="buffval" valeur="-2">
                 <condduree>2</condduree>
                 <condtype>caractforce</condtype>
-                <compbuff type="buffvaldefense" valeur="-2">
-                    <condduree>2</condduree>
-                    <condtype>caractforce</condtype>
-                </compbuff>
             </compbuff>
         </compbuffactif>
         <affinite>
@@ -294,17 +290,77 @@
         <compbuffactif>
             <complance caract="caractagilite" porte="2" portemin="1" recharge="2" utilisation="4"
                 zone="1" />
-            <compbuff type="buffvalattaque" valeur="-2">
+            <compbuff type="buffval" valeur="-2">
                 <condduree>2</condduree>
                 <condtype>caractmagie</condtype>
-                <compbuff type="buffvaldefense" valeur="-2">
-                    <condduree>2</condduree>
-                    <condtype>caractmagie</condtype>
-                </compbuff>
             </compbuff>
         </compbuffactif>
         <affinite>
             <entreaffinite>affpoison</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <!-- MAGIE MAIN -->
+
+    <entrecomp id="2401">
+        <nom>Frappe Mentale</nom>
+        <description>Certains esprit plus puissant que d'autres sont capables de les soumettres</description>
+        <image>Image/Competence/FrappeMentale.png</image>
+        <compattaque bonus="0">
+            <complance recharge="1" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
+            <compbuff type="buffdot" valeur="1" >
+                <condduree>2</condduree>
+            </compbuff>
+        </compattaque>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2402">
+        <nom>Savant</nom>
+        <description>Si un homme passe sa vie a travailler son esprit plutôt que son corp, l'un se dévellopera au détriment de l'autre</description>
+        <image>Image/Competence/Savant.png</image>
+        <compbuff type="buffval" valeur="2">
+            <condtype>caractmagie</condtype>
+            <compbuff type="buffval" valeur="-1">
+                <condtype>caractagilite</condtype>
+                <compbuff type="buffval" valeur="-1">
+                    <condtype>caractforce</condtype>
+                </compbuff>
+            </compbuff>
+        </compbuff>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2403">
+        <nom>Feu Interieur</nom>
+        <description>Chaque corp possède une flamme de puissance qui n'attend que d'être réveillée</description>
+        <image>Image/Competence/FeuInterieur.png</image>
+        <compbuffactif>
+            <complance recharge="2" utilisation="0" porte="3" portemin="0" zone="0" caract="caractmagie" />
+            <compbuff type="buffval" valeur="3">
+                <condduree>1</condduree>
+                <condtype>caractforce</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2404">
+        <nom>Morsure de Glace</nom>
+        <description>Un froid intense peut empecher quiconque d'agir</description>
+        <image>Image/Competence/MorsureDeGlace.png</image>
+        <compbuffactif>
+            <complance recharge="4" utilisation="0" porte="3" portemin="1" zone="0" caract="caractmagie" />
+            <compbuff type="buffstun" valeur="2"></compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
         </affinite>
     </entrecomp>
 

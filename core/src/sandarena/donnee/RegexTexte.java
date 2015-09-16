@@ -9,8 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegexTexte {
-    public static int CHARACTERS_PER_FRAME = 35;
-    private static String regex_per_frame = ".{1," + CHARACTERS_PER_FRAME + "}[ ]+";
+    private static String regex_per_frame = ".{1," + 35 + "}[ ]+";
 
     public static String[] parse_string(String line) {
         line += " ";
@@ -24,8 +23,7 @@ public class RegexTexte {
     }
 
     public static void changeCharacter(int nombre){
-        CHARACTERS_PER_FRAME = nombre;
-        regex_per_frame = ".{1," + CHARACTERS_PER_FRAME + "}[ ]+";
+        regex_per_frame = ".{1," + nombre + "}[ ]+";
     }
 
 }

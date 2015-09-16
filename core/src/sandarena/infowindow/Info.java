@@ -3,22 +3,14 @@ package sandarena.infowindow;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import java.util.ArrayList;
-
-import sandarena.Resolution;
-import sandarena.donnee.Font;
-import sandarena.donnee.RegexTexte;
-import sandarena.donnee.Utili;
-import sandarena.partie.effet.EffetBuf;
-
 
 /**
  * Created by Guillaume on 12/06/2015.
  */
 public abstract class Info extends Actor {
     protected String[] texte = new String[0];
-    protected static final int PARLIGNECOMP = 35;
-    protected static final int PARLIGNEEFFET = 50;
+    protected static final byte PARLIGNECOMP = 35;
+    protected static final byte PARLIGNEEFFET = 50;
 
     public Info(InfoWindow container) {
         super();

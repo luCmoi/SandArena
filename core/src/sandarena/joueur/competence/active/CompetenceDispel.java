@@ -11,9 +11,9 @@ import sandarena.partie.effet.CompetenceToEffet;
  */
 public class CompetenceDispel extends CompetenceActive {
     private boolean cible;
-    private int nombre;
+    private byte nombre;
 
-    public CompetenceDispel(CompXML.CompLance attaque, boolean cible, int nombre) {
+    public CompetenceDispel(CompXML.CompLance attaque, boolean cible, byte nombre) {
         super(attaque);
         this.cible = cible;
         this.nombre = nombre;
@@ -24,17 +24,18 @@ public class CompetenceDispel extends CompetenceActive {
         ArrayList<String> retour = new ArrayList<String>();
         String tmp = null;
         if (isCible()) {
-            tmp = "bénéfique";
+            tmp = "bï¿½nï¿½fique";
         } else {
-            tmp = "maléfique";
+            tmp = "malï¿½fique";
         }
-        retour.add("Dissipie " + getNombre() + " état " + tmp);
+        retour.add("Dissipie " + getNombre() + " ï¿½tat " + tmp);
         if (succ != null) {
             retour.addAll(CompetenceToEffet.toStrings(succ));
         }
         retour.addAll(super.toStrings());
         return retour;
     }
+
 
     public boolean isCible() {
         return cible;

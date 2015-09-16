@@ -137,8 +137,8 @@ public class Partie extends Stage {
             perso.setAAgi(false);
             perso.tourBuff();
             perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
-            perso.modifVitesse();
             perso.infligeDot();
+            perso.modifCaract();
         }
         if (!commence) {
             for (PersonnageIG perso : joueurActif.getPersonnages()) {
@@ -164,9 +164,6 @@ public class Partie extends Stage {
         for (PersonnageIG perso : joueur.getPersonnages()) {
             if (!perso.isAAgi()) {
                 this.setPersonnageActif(perso);
-                if (!bloquand) {
-                    ConnexionMatch.partieEnvoiPersoActif(getJoueurActif().getPersonnages().indexOf(perso));
-                }
                 return;
             }
         }
@@ -180,7 +177,7 @@ public class Partie extends Stage {
             if (commence) {
                 tour();
             }else{
-                phase(getJoueurAutre());
+                phase(getJoueurActif());
             }
         }
     }
@@ -340,6 +337,7 @@ public class Partie extends Stage {
     }
 
     public void deplacement() {
+        getContainer().getStageInterface().recharge();
         if (!bloquand) {
             ConnexionMatch.partieEnvoiDeplacement(getJoueurActif().getPersonnages().indexOf(personnageActif), chemin.get(0).getPlaceX(), chemin.get(0).getPlaceY());
         }

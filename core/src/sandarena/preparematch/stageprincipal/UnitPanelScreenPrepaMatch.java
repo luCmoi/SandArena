@@ -2,12 +2,10 @@ package sandarena.preparematch.stageprincipal;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.Resolution;
 import sandarena.donnee.Utili;
 import sandarena.joueur.Personnage;
-import sandarena.preparematch.barre.EmplacementBarre;
 
 /**
  * Created by Guillaume on 23/07/2015.
@@ -15,20 +13,18 @@ import sandarena.preparematch.barre.EmplacementBarre;
 public class UnitPanelScreenPrepaMatch extends Actor {
     private PanelScreenPrepaMatch container;
     private boolean actif;
-    private int place;
+    private byte place;
     private Personnage perso;
 
     public UnitPanelScreenPrepaMatch(PanelScreenPrepaMatch container, boolean b, int i) {
         this.container = container;
         this.actif = b;
-        this.place = i;
+        this.place = (byte)i;
         if (actif) {
             this.setBounds(container.coteMoyen * (place % 2), Resolution.differenceBas + container.coteMoyen * (1 - (place / 2)), container.coteMoyen, container.coteMoyen);
         } else {
             this.setBounds(container.getWidth() - (container.coteMoyen * (2 - place % 2)), Resolution.differenceBas + container.coteMoyen * (1 - (place / 2)), container.coteMoyen, container.coteMoyen);
         }
-        this.setTouchable(Touchable.enabled);
-        this.addListener(new UnitPanelScreenPrepaMatchListener(this));
     }
 
     @Override

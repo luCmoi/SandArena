@@ -9,7 +9,6 @@ import sandarena.infowindow.windows.InfoWindowEffect;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.effet.EffetBuf;
 import sandarena.partie.gui.interfacep.StageInterface;
-import sandarena.infowindow.InfoWindow;
 
 /**
  * Created by Guillaume on 26/06/2015.
@@ -84,10 +83,12 @@ public class EmplacementEffet extends EmplacementInterface {
             switch (place % 8) {
                 case EFFETATTAQUE:
                     this.getEffets().addAll(perso.getChangeAtt());
+                    this.getEffets().addAll(perso.getChangeStat());
                     this.getEffets().addAll(perso.getChangeTypeAtt());
                     break;
                 case EFFETDEFENSE:
                     this.getEffets().addAll(perso.getChangeDef());
+                    this.getEffets().addAll(perso.getChangeStat());
                     this.getEffets().addAll(perso.getChangeTypeDef());
                     break;
                 case EFFETVIE:

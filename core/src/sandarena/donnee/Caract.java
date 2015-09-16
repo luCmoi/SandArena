@@ -6,8 +6,8 @@ package sandarena.donnee;
  * @author Guillaume
  */
 public class Caract {
-    public static final int FORCE = 0;
-    public static final int AGILITE = 1;
-    public static final int MAGIE = 2;
+    public static final byte FORCE = 0;
+    public static final byte AGILITE = 1;
+    public static final byte MAGIE = 2;
 
 }

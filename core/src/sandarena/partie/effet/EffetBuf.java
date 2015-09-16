@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 import sandarena.partie.compcase.PersonnageIG;
 
-//todo conditions
 public abstract class EffetBuf extends Effet {
+    private EffetBufGroup group;
     private PersonnageIG container;
-    private EffetBuf chaine;
-    private int duree = -1;
-    private String nom;
+    protected int duree = -1;
+    protected String nom;
 
-    public EffetBuf(String nom, EffetBuf chaine) {
+    public EffetBuf(String nom, EffetBufGroup group) {
         this.nom= nom;
-        this.setChaine(chaine);
+        this.setGroup(group);
     }
 
     public PersonnageIG getContainer() {
@@ -22,20 +21,10 @@ public abstract class EffetBuf extends Effet {
 
     public void setContainer(PersonnageIG container, boolean dispelable) {
         this.container = container;
-        if (chaine != null) {
-            container.addBuf(chaine, dispelable);
-        }
     }
 
     public abstract boolean isBenefique();
 
-    public EffetBuf getChaine() {
-        return chaine;
-    }
-
-    public void setChaine(EffetBuf chaine) {
-        this.chaine = chaine;
-    }
 
     public void setDuree(int d) {
         this.duree = d;
@@ -54,5 +43,13 @@ public abstract class EffetBuf extends Effet {
         ArrayList<String> retour = new ArrayList<String>();
         retour.add(nom);
         return retour;
+    }
+
+    public EffetBufGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(EffetBufGroup group) {
+        this.group = group;
     }
 }

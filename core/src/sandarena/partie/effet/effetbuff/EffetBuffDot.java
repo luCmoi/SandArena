@@ -2,8 +2,8 @@ package sandarena.partie.effet.effetbuff;
 
 import java.util.ArrayList;
 
-import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.effet.EffetBufGroup;
 
 /**
  * Created by Guillaume on 16/06/2015.
@@ -11,8 +11,8 @@ import sandarena.partie.effet.EffetBuf;
 public class EffetBuffDot extends EffetBuf {
     private int degat;
 
-    public EffetBuffDot(String nom,int degat, EffetBuf chaine) {
-        super(nom, chaine);
+    public EffetBuffDot(String nom,int degat, EffetBufGroup group) {
+        super(nom, group);
         this.degat = degat;
     }
 

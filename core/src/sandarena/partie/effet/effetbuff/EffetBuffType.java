@@ -3,6 +3,7 @@ package sandarena.partie.effet.effetbuff;
 import java.util.ArrayList;
 
 import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.effet.EffetBufGroup;
 
 /**
  * Created by Guillaume on 16/06/2015.
@@ -12,8 +13,8 @@ public class EffetBuffType extends EffetBuf {
     protected int typeCond = -1;
 
 
-    public EffetBuffType(String nom,int type, EffetBuf chaine) {
-        super(nom, chaine);
+    public EffetBuffType(String nom,int type, EffetBufGroup group) {
+        super(nom, group);
         this.type = type;
     }
 

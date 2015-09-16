@@ -7,8 +7,9 @@ package sandarena.donnee;
  * @author Guillaume
  */
 class Affinite {
-    public static int FORCE = 0;
-    public static int TRIBAL = 1;
-    public static final int AGILITE = 2;
-    public static final int POISON = 3;
+    public static final byte FORCE = 0;
+    public static final byte TRIBAL = 1;
+    public static final byte AGILITE = 2;
+    public static final byte POISON = 3;
+    public static final byte MAGIE =4;
 }

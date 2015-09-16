@@ -7,19 +7,18 @@ import sandarena.partie.effet.EffetBufGroup;
 import sandarena.partie.effet.effetbuff.EffetBuffVal;
 
 /**
- * Created by Guillaume on 16/06/2015.
+ * Created by lucmo on 16/09/2015.
  */
-public class EffetBuffValAttaque extends EffetBuffVal {
-    public EffetBuffValAttaque(String nom,int val, EffetBufGroup group) {
-        super(nom,val, group);
+public class EffetBuffValCaract extends EffetBuffVal{
+    public EffetBuffValCaract(String nom, int val, EffetBufGroup group) {
+        super(nom,val,group);
     }
-
 
     public ArrayList<String> toStrings(){
         ArrayList<String> retour = super.toStrings();
-        retour.add("Modifie l'attaque de  "+val);
+        retour.add("Modifie de  "+val);
         if (typeCond != -1){
-            retour.add("Sur les attaques de type "+ CompetenceToEffet.switchtype(typeCond));
+            retour.add("Sur la caracteristique "+ CompetenceToEffet.switchtype(typeCond));
         }
         if (getDuree()>0){
             retour.add("Dure "+getDuree()+" tours");

@@ -107,7 +107,7 @@ public class CompXML {
         if (comp.getElementsByTagName("condduree").getLength() != 0) {
             condduree = Integer.parseInt(comp.getElementsByTagName("condduree").item(0).getTextContent());
         }
-        return new CompetenceBuff(type, valeur, condtype, condduree);
+        return new CompetenceBuff((byte)type, (byte)valeur, (byte)condtype,(byte) condduree);
     }
 
     private static CompetenceDeclencheurEffet compDeclencheurEffet(Element comp) {
@@ -119,13 +119,13 @@ public class CompXML {
         } else {
             succ = compAttaque((Element) comp.getElementsByTagName("compattaque").item(0));
         }
-        return new CompetenceDeclencheurEffet(typeDeclencheur, cible, succ);
+        return new CompetenceDeclencheurEffet((byte)typeDeclencheur,(byte) cible, succ);
     }
 
     private static CompetenceAttaque compAttaque(Element comp) {
         CompLance attaque = compLance((Element) comp.getElementsByTagName("complance").item(0));
         int bonus = Integer.parseInt(comp.getAttribute("bonus"));
-        return new CompetenceAttaque(attaque, bonus);
+        return new CompetenceAttaque(attaque,(byte) bonus);
     }
 
     private static CompetenceBuffActif competenceBuffActif(Element comp) {
@@ -137,7 +137,7 @@ public class CompXML {
         CompLance attaque = compLance((Element) comp.getElementsByTagName("complance").item(0));
         boolean cible = Boolean.parseBoolean(comp.getAttribute("cible"));
         int nombre = Integer.parseInt(comp.getAttribute("nombre"));
-        return new CompetenceDispel(attaque, cible, nombre);
+        return new CompetenceDispel(attaque, cible, (byte)nombre);
     }
 
     private static CompLance compLance(Element lance) {
@@ -150,20 +150,20 @@ public class CompXML {
     }
 
     public static class CompLance {
-        public int recharge;
-        public int utilisation;
-        public int porte;
-        public int portemin;
-        public int zone;
-        public int caract;
+        public byte recharge;
+        public byte utilisation;
+        public byte porte;
+        public byte portemin;
+        public byte zone;
+        public byte caract;
 
         public CompLance(int recharge, int utilisation, int porte, int portemin, int zone, int caract) {
-            this.recharge = recharge;
-            this.utilisation = utilisation;
-            this.porte = porte;
-            this.portemin = portemin;
-            this.zone = zone;
-            this.caract = caract;
+            this.recharge = (byte)recharge;
+            this.utilisation = (byte)utilisation;
+            this.porte = (byte)porte;
+            this.portemin = (byte)portemin;
+            this.zone = (byte)zone;
+            this.caract = (byte)caract;
         }
     }
 
@@ -172,6 +172,7 @@ public class CompXML {
         else if (mess.equals("afftribal")) return 1;
         else if (mess.equals("affagilite")) return 2;
         else if (mess.equals("affpoison")) return 3;
+        else if (mess.equals("affmagie"))return 4;
 
         else if (mess.equals("bufftypeattaque")) return 0;
         else if (mess.equals("bufftypedefense")) return 1;
@@ -181,6 +182,7 @@ public class CompXML {
         else if (mess.equals("buffdegat")) return 7;
         else if (mess.equals("buffstun")) return 8;
         else if (mess.equals("buffvaldefense")) return 9;
+        else if (mess.equals("buffval")) return 10;
 
         else if (mess.equals("caractforce")) return 0;
         else if (mess.equals("caractagilite")) return 1;

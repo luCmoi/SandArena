@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import sandarena.ConnexionMatch;
 import sandarena.Resolution;
 import sandarena.donnee.Utili;
+import sandarena.infowindow.windows.InfoWindowCaseIG;
 import sandarena.partie.compcase.PersonnageIG;
 import sandarena.partie.compcase.Sol;
 
@@ -26,6 +27,7 @@ public class Case extends Actor {
     private boolean cible;
     private boolean competenceable;
     private boolean select;
+    private InfoWindowCaseIG info;
 
     public Case(int x, int y, Partie container) {
         placeX = x;
@@ -48,6 +50,7 @@ public class Case extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        ((CaseListener) getListeners().get(0)).update();
         getSol().render(batch);
         if (accessible) {
             batch.draw(Utili.accessible, getX(), getY(), getWidth(), getHeight());
@@ -150,6 +153,7 @@ public class Case extends Actor {
             } else if (this.competenceable) {
                 ConnexionMatch.partieEnvoiUtiliseCompetence(getContainer().getJoueurActif().getPersonnages().indexOf(getContainer().getPersonnageActif()), getContainer().getCompetenceActive().getPlace(),this.getPlaceX(),this.getPlaceY());
                 getContainer().getCompetenceActive().agit(this);
+                getContainer().getContainer().getStageInterface().recharge();
             }
         }
     }
@@ -171,4 +175,17 @@ public class Case extends Actor {
         this.select = select;
     }
 
+    public void pression() {
+        if (this.getPresence() != null && this.competenceable && !container.isBloquand()) {
+            this.info = new InfoWindowCaseIG(this.getPresence(),container.getPersonnageActif(), container.getCompetenceActive());
+            container.getContainer().getSurcouche().addActor(info);
+        }
+    }
+
+    public void finPression() {
+        if (info != null) {
+            this.info.dispose();
+            info = null;
+        }
+    }
 }

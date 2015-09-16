@@ -31,9 +31,9 @@ public class EffetDeclencheur extends Effet{
             }
         }else if (chaine instanceof EffetAttaque){
             if (cible == CompetenceToEffet.SOI) {
-                ((EffetAttaque) chaine).lance(container.getContainer(), container.getContainer());
+                ((EffetAttaque) chaine).lance(container.getContainer(), container.getContainer(), true);
             } else {
-                ((EffetAttaque) chaine).lance(container.getContainer(),personnage.getContainer());
+                ((EffetAttaque) chaine).lance(container.getContainer(),personnage.getContainer(),true);
             }
         }
     }

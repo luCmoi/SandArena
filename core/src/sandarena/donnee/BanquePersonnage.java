@@ -30,7 +30,7 @@ public class BanquePersonnage extends Banque {
         banque.add(new DonneePersonnage(1003,"Guetteur",
                 "Créature des profondeurs trouvées dans des cavernes abandonnées il faut de nombreux traqueur expérimentés pour en ramener un dans l'arène",
                 "Image/Personnage/Guetteur.png",
-                13, 4, 2, 2, 5, Affinite.POISON/*Affinite.MAGIE*/));
+                13, 4, 2, 2, 5, Affinite.POISON,Affinite.MAGIE));
     }
 
     /**
@@ -46,20 +46,20 @@ public class BanquePersonnage extends Banque {
 
     public static class DonneePersonnage extends Entree{
 
-        public int vie;
-        public int vitesse;
-        public int force;
-        public int magie;
-        public int agilite;
-        public int[] affinite;
+        public byte vie;
+        public byte vitesse;
+        public byte force;
+        public byte magie;
+        public byte agilite;
+        public byte[] affinite;
 
-        public DonneePersonnage(int id, String nom, String description, String chemin, int vie, int vitesse, int force, int magie, int agilite, int... affinite) {
+        public DonneePersonnage(int id, String nom, String description, String chemin, int vie, int vitesse, int force, int agilite, int magie, byte... affinite) {
             super(id, nom, description, chemin);
-            this.vie = vie;
-            this.vitesse = vitesse;
-            this.agilite = agilite;
-            this.magie = magie;
-            this.force = force;
+            this.vie = (byte)vie;
+            this.vitesse = (byte)vitesse;
+            this.agilite = (byte)agilite;
+            this.magie = (byte)magie;
+            this.force = (byte)force;
             this.affinite = affinite;
         }
     }

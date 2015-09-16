@@ -13,4 +13,7 @@ public abstract class CompetencePassive extends Competence {
     public ArrayList<String> toStrings() {
         return null;
     }
+
+
+
 }

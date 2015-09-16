@@ -22,4 +22,5 @@ public abstract class Competence{
     }
 
     public abstract ArrayList<String> toStrings();
+
 }

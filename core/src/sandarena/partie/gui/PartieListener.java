@@ -15,6 +15,7 @@ public class PartieListener extends InputListener {
     private Partie partie;
     private float anciennePositionX;
     private float anciennePositionY;
+    private boolean dragged = false;
 
     public PartieListener(Partie container) {
         super();
@@ -66,9 +67,10 @@ public class PartieListener extends InputListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        if (pointer == 0) {
+        if (pointer == 0 && !dragged) {
             anciennePositionX = x;
             anciennePositionY = y;
+            dragged = true;
         }
         return true;
     }
@@ -81,6 +83,7 @@ public class PartieListener extends InputListener {
     public synchronized void touchDragged(InputEvent event, float i, float i1, int i2) {
         if (i2 == 0) {
             this.partie.getCamera().dragged(anciennePositionX, anciennePositionY, i, i1);
+            dragged = false;
         }
     }
 

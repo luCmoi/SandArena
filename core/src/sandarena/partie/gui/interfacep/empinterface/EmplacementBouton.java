@@ -40,6 +40,7 @@ public class EmplacementBouton extends EmplacementInterface {
                 if (!container.getPartie().isBloquand()) {
                     ConnexionMatch.partieEnvoiFinPhase();
                     container.getPartie().finPhase();
+                    container.recharge();
                 }
                 break;
             case 1:
