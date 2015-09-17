@@ -7,13 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sandarena.donnee.BanquePersonnage;
 import sandarena.donnee.BanqueSol;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.partie.gui.ScreenPartie;
 
 import static sandarena.donnee.CompXML.parseCompXML;
+import static sandarena.donnee.PersoXML.parsePersoXML;
 
 /**
  * Class principale de l'application SandArena, un applicationAdapter
@@ -31,7 +31,6 @@ public class SandArena extends Game {
     @Override
     public void create() {
         BanqueSol.init();
-        BanquePersonnage.init();
         batch = new SpriteBatch();
         try {
             Resolution.calculResolution();
@@ -39,6 +38,7 @@ public class SandArena extends Game {
             System.err.println("error : File");
         }
         parseCompXML();
+        parsePersoXML();
         this.setScreen(new Screen() {
             @Override
             public void render(float delta) {

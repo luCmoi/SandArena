@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE listepersonnage SYSTEM "XML/personnage.dtd">
+<listepersonnage>
+
+    <entreperso id="1001">
+        <nom>Barbare des Sables</nom>
+        <description>Ces hommes vivaient dans le desert avant que les Arènes ne s'y établissent, certains racontent qu'ils sont à l'origine des premières arènes du désert</description>
+        <image>Image/Personnage/BarbareDesSables.png</image>
+        <caract vie="15" vitesse="3" force="5" agilite="2" magie="2" />
+        <surnom>Bob</surnom>
+        <affinite>affforce</affinite>
+        <affinite>afftribal</affinite>
+    </entreperso>
+
+    <entreperso id="1002">
+        <nom>Sauvageon des Sables</nom>
+        <description>Personne ne sait s'il sont de la même espèce que les barbares qu'ils semblent servire où s'ils sont entrés en symbiose avec leur communautée</description>
+        <image>Image/Personnage/SauvageonDesSables.png</image>
+        <caract vie="10" vitesse="4" force="1" agilite="6" magie="3" />
+        <surnom>Bob</surnom>
+        <affinite>affagilite</affinite>
+        <affinite>afftribal</affinite>
+        <affinite>affpoison</affinite>
+    </entreperso>
+
+    <entreperso id="1003">
+        <nom>Guetteur</nom>
+        <description>Créature des profondeurs trouvées dans des cavernes abandonnées il faut de nombreux traqueur expérimentés pour en ramener un dans l'arène</description>
+        <image>Image/Personnage/Guetteur.png</image>
+        <caract vie="13" vitesse="4" force="2" agilite="2" magie="5" />
+        <surnom>Bob</surnom>
+        <affinite>affmagie</affinite>
+        <affinite>affpoison</affinite>
+    </entreperso>
+
+</listepersonnage>
