@@ -19,7 +19,7 @@ public class BanqueSol extends Banque {
      * Initialise tous les sols du jeu
      */
     public static void init() {
-        banque.add(new EntreeSol(2001,"Sable",
+        banque.add(new EntreeSol(4001,"Sable",
                 "Le sol d'arène le plus classique possible.",
                 "Image/Sol/Sable.png"));
     }

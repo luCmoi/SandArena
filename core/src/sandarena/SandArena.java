@@ -12,6 +12,7 @@ import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.partie.gui.ScreenPartie;
 
+import static sandarena.donnee.CarteXML.parseCarteXML;
 import static sandarena.donnee.CompXML.parseCompXML;
 import static sandarena.donnee.PersoXML.parsePersoXML;
 
@@ -39,6 +40,7 @@ public class SandArena extends Game {
         }
         parseCompXML();
         parsePersoXML();
+        parseCarteXML();
         this.setScreen(new Screen() {
             @Override
             public void render(float delta) {
@@ -86,4 +88,5 @@ public class SandArena extends Game {
         this.screenPartie = new ScreenPartie(this,joueur,personnagesActif,personnagesAutre,commence);
         this.setScreen(screenPartie);
     }
+
 }

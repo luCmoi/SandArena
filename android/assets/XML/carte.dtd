@@ -1,0 +1,25 @@
+<!ELEMENT listecarte (entrecarte*)>
+    <!ELEMENT entrecarte (typestatic,
+        emplacement)>
+
+        <!ATTLIST entrecarte
+            id NMTOKEN #REQUIRED
+            type NMTOKEN #REQUIRED
+            taillex NMTOKEN #REQUIRED
+            tailley NMTOKEN #REQUIRED
+            nbperso NMTOKEN #REQUIRED>
+
+        <!ELEMENT typestatic (casestatic*)>
+
+            <!ELEMENT casestatic  EMPTY>
+                <!ATTLIST casestatic
+                    type NMTOKEN  #REQUIRED
+                    x NMTOKEN  #REQUIRED
+                    y NMTOKEN  #REQUIRED>
+
+        <!ELEMENT emplacement (caseemplacement+)>
+            <!ELEMENT caseemplacement EMPTY>
+                <!ATTLIST caseemplacement
+                    joueur NMTOKEN  #REQUIRED
+                    x NMTOKEN  #REQUIRED
+                    y NMTOKEN  #REQUIRED>
