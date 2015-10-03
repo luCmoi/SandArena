@@ -32,4 +32,13 @@
         <affinite>affpoison</affinite>
     </entreperso>
 
+    <entreperso id="1004">
+        <nom>Glouton Homme-Rat</nom>
+        <description>La gloutonnerie de ces répugnantes créatures n'a d'égale que leur odeur</description>
+        <image>Image/Personnage/GloutonHommeRat.png</image>
+        <caract vie="18" vitesse="4" force="4" agilite="2" magie="2" />
+        <surnom>Bob</surnom>
+        <affinite>affforce</affinite>
+    </entreperso>
+
 </listepersonnage>

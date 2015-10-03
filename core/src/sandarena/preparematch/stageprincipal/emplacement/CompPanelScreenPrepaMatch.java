@@ -1,0 +1,62 @@
+package sandarena.preparematch.stageprincipal.emplacement;
+
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import sandarena.donnee.competence.BanqueCompetence;
+import sandarena.donnee.donneestatic.Utili;
+import sandarena.infowindow.windows.InfoWindowComp;
+
+/**
+ * Created by Guillaume on 23/07/2015.
+ */
+public class CompPanelScreenPrepaMatch extends Actor {
+    private EmplacementPanelScreenPrepaMatch container;
+    private BanqueCompetence.EntreeCompetence comp;
+    private int place;
+    private InfoWindowComp info;
+
+
+    public CompPanelScreenPrepaMatch(EmplacementPanelScreenPrepaMatch container, int place) {
+        this.container = container;
+        this.place = place;
+        this.setBounds(container.getHeight() + (container.getHeight() / 2) * (place % 2), ((container.getHeight() / 2) * (1 - (place / 2))), container.getHeight() / 2, container.getHeight() / 2);
+        this.addListener(new CompPanelScreenPrepaListener(this));
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        if (comp != null && container.getContainer().getContainer().getContainer().getPrincipal().getContainer().getCheck()==null) {
+            batch.draw(comp.image, getX(), getY(), getWidth(), getHeight());
+            ((CompPanelScreenPrepaListener) (getListeners().get(0))).update();
+        }
+        batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
+    }
+
+    public BanqueCompetence.EntreeCompetence getComp() {
+        return comp;
+    }
+
+    public EmplacementPanelScreenPrepaMatch getContainer() {
+        return container;
+    }
+
+    public void setComp(BanqueCompetence.EntreeCompetence comp) {
+        this.comp = comp;
+    }
+
+    public void pression() {
+        if (comp != null) {
+            this.info = new InfoWindowComp(comp);
+            container.getContainer().getContainer().getContainer().getSurcouche().addActor(info);
+        }
+    }
+
+    public void finPression() {
+        if (info != null) {
+            this.info.dispose();
+            info = null;
+        }
+    }
+}

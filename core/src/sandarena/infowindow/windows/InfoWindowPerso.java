@@ -2,7 +2,7 @@ package sandarena.infowindow.windows;
 
 import com.badlogic.gdx.Gdx;
 
-import sandarena.Resolution;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.infowindow.Icone;
 import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.info.InfoPerso;

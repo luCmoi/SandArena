@@ -2,9 +2,9 @@ package sandarena.joueur.competence.active;
 
 import java.util.ArrayList;
 
-import sandarena.donnee.CompXML;
+import sandarena.donnee.competence.CompXML;
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.partie.effet.CompetenceToEffet;
+import sandarena.partie.jeu.compcase.effet.CompetenceToEffet;
 
 /**
  * Created by Guillaume on 18/06/2015.

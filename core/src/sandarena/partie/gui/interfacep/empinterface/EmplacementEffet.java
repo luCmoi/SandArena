@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.ArrayList;
 
-import sandarena.donnee.Utili;
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowEffect;
-import sandarena.partie.compcase.PersonnageIG;
-import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.jeu.compcase.PersonnageIG;
+import sandarena.partie.jeu.compcase.effet.EffetBuf;
 import sandarena.partie.gui.interfacep.StageInterface;
 
 /**
@@ -33,26 +33,26 @@ public class EmplacementEffet extends EmplacementInterface {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
-            switch (place % 8) {
-                case EFFETATTAQUE:
-                    batch.draw(Utili.attaque, getX(), getY(), getWidth(), getHeight());
-                    break;
-                case EFFETDEFENSE:
-                    batch.draw(Utili.defense, getX(), getY(), getWidth(), getHeight());
-                    break;
-                case EFFETVIE:
-                    batch.draw(Utili.vie, getX(), getY(), getWidth(), getHeight());
-                    break;
-                case EFFETVITESSE:
-                    batch.draw(Utili.vitesse, getX(), getY(), getWidth(), getHeight());
-                    break;
-                case EFFETDOT:
-                    batch.draw(Utili.dot, getX(), getY(), getWidth(), getHeight());
-                    break;
-                case EFFETSTUN:
-                    batch.draw(Utili.stun, getX(), getY(), getWidth(), getHeight());
-                    break;
-            }
+        switch (place % 8) {
+            case EFFETATTAQUE:
+                batch.draw(Utili.attaque, getX(), getY(), getWidth(), getHeight());
+                break;
+            case EFFETDEFENSE:
+                batch.draw(Utili.defense, getX(), getY(), getWidth(), getHeight());
+                break;
+            case EFFETVIE:
+                batch.draw(Utili.vie, getX(), getY(), getWidth(), getHeight());
+                break;
+            case EFFETVITESSE:
+                batch.draw(Utili.vitesse, getX(), getY(), getWidth(), getHeight());
+                break;
+            case EFFETDOT:
+                batch.draw(Utili.dot, getX(), getY(), getWidth(), getHeight());
+                break;
+            case EFFETSTUN:
+                batch.draw(Utili.stun, getX(), getY(), getWidth(), getHeight());
+                break;
+        }
         if (getEffets().isEmpty()){
             batch.draw(Utili.passive,getX(), getY(), getWidth(), getHeight());
         }

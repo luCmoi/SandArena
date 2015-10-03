@@ -4,7 +4,6 @@ package sandarena.joueur.competence.active;
 import java.util.ArrayList;
 
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.partie.compcase.PersonnageIG;
 
 public class CompetenceInvocation extends CompetenceActive {
 

@@ -2,11 +2,10 @@ package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import sandarena.donnee.Utili;
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowPersoIG;
-import sandarena.partie.compcase.PersonnageIG;
+import sandarena.partie.jeu.compcase.PersonnageIG;
 import sandarena.partie.gui.interfacep.StageInterface;
-import sandarena.infowindow.InfoWindow;
 
 /**
  * Created by Guillaume on 10/06/2015.

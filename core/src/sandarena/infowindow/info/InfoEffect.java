@@ -4,13 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.ArrayList;
 
-import sandarena.Resolution;
-import sandarena.donnee.Font;
-import sandarena.donnee.RegexTexte;
+import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Font;
+import sandarena.donnee.donneestatic.RegexTexte;
 import sandarena.infowindow.Info;
-import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.windows.InfoWindowEffect;
-import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.jeu.compcase.effet.EffetBuf;
 
 /**
  * Created by Guillaume on 13/08/2015.

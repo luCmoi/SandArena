@@ -2,8 +2,8 @@ package sandarena.partie.gui;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import sandarena.Resolution;
-import sandarena.partie.Partie;
+import sandarena.donnee.donneestatic.Resolution;
+import sandarena.partie.jeu.Partie;
 
 /**
  * Camera du ScreenPartie qui permet de parcourir le terrain de jeu

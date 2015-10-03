@@ -2,8 +2,8 @@ package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import sandarena.ConnexionMatch;
-import sandarena.donnee.Utili;
+import sandarena.connexion.ConnexionMatch;
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.partie.gui.interfacep.StageInterface;
 
 /**

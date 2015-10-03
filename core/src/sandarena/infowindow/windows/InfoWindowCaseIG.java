@@ -2,12 +2,12 @@ package sandarena.infowindow.windows;
 
 import com.badlogic.gdx.Gdx;
 
-import sandarena.Resolution;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.infowindow.Icone;
 import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.info.InfoCaseIG;
-import sandarena.partie.compcase.CompetenceIG;
-import sandarena.partie.compcase.PersonnageIG;
+import sandarena.partie.jeu.compcase.CompetenceIG;
+import sandarena.partie.jeu.compcase.PersonnageIG;
 
 /**
  * Created by lucmo on 14/09/2015.

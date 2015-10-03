@@ -5,7 +5,7 @@ package sandarena.joueur.competence.passive;
 import java.util.ArrayList;
 
 import sandarena.joueur.competence.CompetencePassive;
-import sandarena.partie.effet.CompetenceToEffet;
+import sandarena.partie.jeu.compcase.effet.CompetenceToEffet;
 
 public class CompetenceBuff extends CompetencePassive {
 

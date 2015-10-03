@@ -3,7 +3,7 @@ package sandarena.partie.gui.interfacep.empinterface;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import sandarena.donnee.Utili;
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.partie.gui.interfacep.StageInterface;
 
 /**

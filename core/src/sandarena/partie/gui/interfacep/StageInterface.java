@@ -1,6 +1,5 @@
 package sandarena.partie.gui.interfacep;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -8,10 +7,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
-import sandarena.donnee.Utili;
-import sandarena.partie.Case;
-import sandarena.partie.Partie;
-import sandarena.partie.compcase.PersonnageIG;
+import sandarena.partie.jeu.Case;
+import sandarena.partie.jeu.Partie;
+import sandarena.partie.jeu.compcase.PersonnageIG;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementBouton;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementComp;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementEffet;
@@ -145,7 +143,11 @@ public class StageInterface extends Stage {
     public void setPersonnageActif(PersonnageIG perso) {
         emplacementPersoActif.setPerso(perso);
         for (EmplacementComp emp : emplacementCompsActif) {
-            emp.setCompetenceIG(perso.getCompetence()[emp.getPlace()]);
+            if (perso != null) {
+                emp.setCompetenceIG(perso.getCompetence()[emp.getPlace()]);
+            }else{
+                emp.setCompetenceIG(null);
+            }
         }
         for (EmplacementEffet emp : emplacementEffetsActif) {
             emp.setEffet(perso);

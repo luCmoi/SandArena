@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.ArrayList;
 
-import sandarena.Resolution;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa;
@@ -22,7 +22,7 @@ public class StageBarre extends Stage {
     private final Joueur joueur;
     private CameraBarre camera;
     private float widthTailleTotale;
-    private ArrayList<EmplacementBarre> persos;
+    private ArrayList<sandarena.preparematch.barre.emplacement.EmplacementBarre> persos;
     private Fond fond;
 
 
@@ -36,9 +36,9 @@ public class StageBarre extends Stage {
         int x = 0;
         fond = new Fond(this);
         this.addActor(fond);
-        persos = new ArrayList<EmplacementBarre>();
+        persos = new ArrayList<sandarena.preparematch.barre.emplacement.EmplacementBarre>();
         for (Personnage perso : joueur.getPersonnages()) {
-            persos.add(new EmplacementBarre(this, x, perso));
+            persos.add(new sandarena.preparematch.barre.emplacement.EmplacementBarre(this, x, perso));
             this.addActor(persos.get(x));
             x++;
         }
@@ -84,20 +84,21 @@ public class StageBarre extends Stage {
 
     @Override
     public Actor hit(float stageX, float stageY, boolean touchable) {
+        stageX = stageX + camera.getX();
         return super.hit(stageX, stageY, touchable);
     }
 
     public void ajoute(Personnage perso) {
-        persos.add(new EmplacementBarre(this, persos.size(), perso));
+        persos.add(new sandarena.preparematch.barre.emplacement.EmplacementBarre(this, persos.size(), perso));
         this.addActor(persos.get(persos.size() - 1));
         this.widthTailleTotale = this.widthTailleTotale + Resolution.differenceBas;
     }
 
-    public ArrayList<EmplacementBarre> getPersos() {
+    public ArrayList<sandarena.preparematch.barre.emplacement.EmplacementBarre> getPersos() {
         return persos;
     }
 
-    public void select(EmplacementBarre selected) {
+    public void select(sandarena.preparematch.barre.emplacement.EmplacementBarre selected) {
         if (!principal.getBloquand()) {
             Personnage tmp = selected.getPerso();
             this.diminueWidthTailleTotale(selected.getPlace(), true);

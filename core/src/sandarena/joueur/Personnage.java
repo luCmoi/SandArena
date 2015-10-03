@@ -1,9 +1,9 @@
 package sandarena.joueur;
 
-import sandarena.donnee.BanqueCompetence;
-import sandarena.donnee.BanqueCompetence.EntreeCompetence;
-import sandarena.donnee.BanquePersonnage;
-import sandarena.donnee.BanquePersonnage.DonneePersonnage;
+import sandarena.donnee.competence.BanqueCompetence;
+import sandarena.donnee.competence.BanqueCompetence.EntreeCompetence;
+import sandarena.donnee.personnage.BanquePersonnage;
+import sandarena.donnee.personnage.BanquePersonnage.DonneePersonnage;
 
 /**
  * Represente les donnee fixes d'un personnage
@@ -24,8 +24,18 @@ public class Personnage{
     public Personnage(String nom) {
         this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, nom);
         this.nom = BanquePersonnage.getNom(nom);
+        for (int i = 0; i < 4; i++) {
+            int tmp = (int)(Math.random()*commun.affinite.size());
+            this.competences[i] = BanqueCompetence.getCompetence(commun.affinite.get(tmp), competences);
+            if (this.competences[i]!=null) {
+                this.competences[i].incremente();
+            }
+        }
+    }
 
-        //Ligne qui changera les compétence n'étant pas init au pifometre
+    public Personnage() {
+        this.commun = BanquePersonnage.getPersonnage();
+        this.nom = BanquePersonnage.getNom(commun.nom);
         for (int i = 0; i < 4; i++) {
             int tmp = (int)(Math.random()*commun.affinite.size());
             this.competences[i] = BanqueCompetence.getCompetence(commun.affinite.get(tmp), competences);

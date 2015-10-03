@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class AlgorithmePathfinding {
     private static Graph graph;
 
-    public static void calculCaseAccessible(int vitesseRestante, Case caseDepart, Case[][] plateau) {
+    public static void calculCaseAccessible(int vitesseRestante, sandarena.partie.jeu.Case caseDepart, sandarena.partie.jeu.Case[][] plateau) {
         Sommet s = tabToGraph(caseDepart, plateau);
         ArrayList<Sommet> liste = s.parcourLargeur(vitesseRestante);
         for (Sommet som : liste) {
@@ -21,7 +21,7 @@ public class AlgorithmePathfinding {
         graph = null;
     }
 
-    public static void calculCaseTouchable(int portemin, int porte, Case caseDepart, Case[][] plateau) {
+    public static void calculCaseTouchable(int portemin, int porte, sandarena.partie.jeu.Case caseDepart, sandarena.partie.jeu.Case[][] plateau) {
         Sommet s = tabToGraph2(caseDepart, plateau);
         ArrayList<Sommet> liste = s.parcourLargeur(porte);
         for (Sommet som : liste) {
@@ -32,7 +32,7 @@ public class AlgorithmePathfinding {
         liste.clear();
     }
 
-    private static Sommet tabToGraph(Case depart, Case[][] plateau) {
+    private static Sommet tabToGraph(sandarena.partie.jeu.Case depart, sandarena.partie.jeu.Case[][] plateau) {
         graph = new Graph(plateau.length, plateau[0].length);
         Sommet joueur = null;
         for (int i = 0; i < plateau.length; i++) {
@@ -57,7 +57,7 @@ public class AlgorithmePathfinding {
         return joueur;
     }
 
-    private static Sommet tabToGraph2(Case depart, Case[][] plateau) {
+    private static Sommet tabToGraph2(sandarena.partie.jeu.Case depart, sandarena.partie.jeu.Case[][] plateau) {
         Graph graph = new Graph(plateau.length, plateau[0].length);
         Sommet joueur = null;
         for (int i = 0; i < plateau.length; i++) {

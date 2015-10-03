@@ -2,9 +2,9 @@ package sandarena.infowindow.info;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import sandarena.Resolution;
-import sandarena.donnee.Font;
-import sandarena.donnee.RegexTexte;
+import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Font;
+import sandarena.donnee.donneestatic.RegexTexte;
 import sandarena.infowindow.Info;
 import sandarena.infowindow.windows.InfoWindowComp;
 

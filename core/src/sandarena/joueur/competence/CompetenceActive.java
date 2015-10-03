@@ -2,7 +2,7 @@ package sandarena.joueur.competence;
 
 import java.util.ArrayList;
 
-import sandarena.donnee.CompXML;
+import sandarena.donnee.competence.CompXML;
 
 public abstract class CompetenceActive extends Competence {
     protected byte rechargement;

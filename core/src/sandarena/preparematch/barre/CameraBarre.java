@@ -2,7 +2,7 @@ package sandarena.preparematch.barre;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import sandarena.Resolution;
+import sandarena.donnee.donneestatic.Resolution;
 
 /**
  * Created by Guillaume on 25/07/2015.
@@ -12,6 +12,7 @@ public class CameraBarre extends OrthographicCamera {
     private static final int VITESSECAM = 10;
     private boolean gauche;
     private boolean droite;
+    private float x;
 
     public CameraBarre(sandarena.preparematch.barre.StageBarre stageBarre) {
         super();
@@ -53,5 +54,9 @@ public class CameraBarre extends OrthographicCamera {
     public void stop() {
         gauche= false;
         droite = false;
+    }
+
+    public float getX() {
+        return position.x-(container.getWidth()/2);
     }
 }

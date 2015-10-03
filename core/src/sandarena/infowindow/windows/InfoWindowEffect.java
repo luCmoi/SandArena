@@ -4,11 +4,10 @@ import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
 
-import sandarena.Resolution;
-import sandarena.infowindow.Info;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.info.InfoEffect;
-import sandarena.partie.effet.EffetBuf;
+import sandarena.partie.jeu.compcase.effet.EffetBuf;
 import sandarena.partie.gui.interfacep.empinterface.EmplacementEffet;
 
 /**

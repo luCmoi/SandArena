@@ -13,9 +13,9 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.ArrayList;
 
-import sandarena.ConnexionMatch;
-import sandarena.Resolution;
 import sandarena.SandArena;
+import sandarena.connexion.ConnexionMatch;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.preparematch.barre.StageBarre;
@@ -33,19 +33,26 @@ public class ScreenPrepaMatch implements Screen {
     private Stage surcouche;
     private Joueur joueur;
     private Personnage check = null;
+    private int map;
 
-
-    public ScreenPrepaMatch(SandArena conteneur) {
+    public ScreenPrepaMatch(SandArena conteneur, int map) {
         this.container = conteneur;
+        this.map = map;
         this.batch = conteneur.getBatch();
         //Temp joueur
         joueur = new Joueur();
-        joueur.getPersonnages().add(new Personnage("Barbare des Sables"));
-        joueur.getPersonnages().add(new Personnage("Sauvageon des Sables"));
-        joueur.getPersonnages().add(new Personnage("Guetteur"));
-        joueur.getPersonnages().add(new Personnage("Barbare des Sables"));
-        joueur.getPersonnages().add(new Personnage("Sauvageon des Sables"));
-        joueur.getPersonnages().add(new Personnage("Guetteur"));
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
+        joueur.getPersonnages().add(new Personnage());
     }
 
     @Override
@@ -53,7 +60,7 @@ public class ScreenPrepaMatch implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(Resolution.differenceBas / 2, 0, Resolution.width - Resolution.differenceBas, Resolution.differenceBas);
-        if (check != null){
+        if (check != null) {
             check.commun.incremente();
             check.getCompetences()[0].incremente();
             check.getCompetences()[1].incremente();
@@ -78,7 +85,7 @@ public class ScreenPrepaMatch implements Screen {
     @Override
     public void show() {
         boolean alea = (ConnexionMatch.first);
-        this.setPrincipal(new StagePrincipalScreenPrepa(this,joueur,alea, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
+        this.setPrincipal(new StagePrincipalScreenPrepa(this, joueur, alea, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
         this.setBarre(new StageBarre(this.getPrincipal(), joueur, new ExtendViewport(Resolution.width - Resolution.differenceBas, Resolution.differenceBas, Resolution.width - Resolution.differenceBas, Resolution.differenceBas), batch));
         setSurcouche(new Stage(new FillViewport(Resolution.width, Resolution.height), batch));
         getPrincipal().setBarre(this.getBarre());
@@ -129,17 +136,21 @@ public class ScreenPrepaMatch implements Screen {
         this.surcouche = surcouche;
     }
 
-    public Joueur getJoueur(){
+    public Joueur getJoueur() {
         return joueur;
     }
 
     public void finPrepare() {
         ArrayList<Personnage> personnagesActif = principal.getPersonnagesActif();
         ArrayList<Personnage> personnagesAutre = principal.getPersonnagesAutre();
-        container.lancePartie(joueur, personnagesActif, personnagesAutre, !(principal.getCommence()));
+        container.lancePartie(joueur, personnagesActif, personnagesAutre, !(principal.getCommence()), map);
     }
 
     public void setCheck(Personnage check) {
         this.check = check;
+    }
+
+    public Personnage getCheck() {
+        return check;
     }
 }

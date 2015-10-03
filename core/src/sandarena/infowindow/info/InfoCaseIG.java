@@ -2,13 +2,13 @@ package sandarena.infowindow.info;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import sandarena.Resolution;
-import sandarena.donnee.Font;
-import sandarena.donnee.RegexTexte;
-import sandarena.donnee.Utili;
+import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Font;
+import sandarena.donnee.donneestatic.RegexTexte;
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.Info;
 import sandarena.infowindow.windows.InfoWindowCaseIG;
-import sandarena.partie.effet.CompetenceToEffet;
+import sandarena.partie.jeu.compcase.effet.CompetenceToEffet;
 
 /**
  * Created by lucmo on 14/09/2015.

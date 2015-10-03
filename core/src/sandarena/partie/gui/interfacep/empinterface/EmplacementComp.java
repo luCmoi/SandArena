@@ -2,12 +2,12 @@ package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import sandarena.ConnexionMatch;
-import sandarena.donnee.Utili;
+import sandarena.connexion.ConnexionMatch;
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowCompIG;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.joueur.competence.CompetencePassive;
-import sandarena.partie.compcase.CompetenceIG;
+import sandarena.partie.jeu.compcase.CompetenceIG;
 import sandarena.partie.gui.interfacep.StageInterface;
 
 /**
@@ -37,7 +37,6 @@ public class EmplacementComp extends EmplacementInterface {
             if (getCompetenceIG().info.competence instanceof CompetencePassive || getCompetenceIG().getUtilisationRestante() == 0) {
                 batch.draw(Utili.passive, getX(), getY(), getWidth(), getHeight());
             }
-        } else {
         }
     }
 
@@ -53,15 +52,15 @@ public class EmplacementComp extends EmplacementInterface {
 
     public void clique() {
         if (actif && !container.getPartie().isBloquand()) {
-            if (getCompetenceIG().isActive()) {
-                if (container.getPartie().getCompetenceActive() != null && container.getPartie().getCompetenceActive().equals(this.getCompetenceIG())) {
-                    ConnexionMatch.partieEnvoiCompetence(container.getPartie().getJoueurActif().getPersonnages().indexOf(container.getPartie().getPersonnageActif()), -1);
-                    container.getPartie().setCompetenceActive(null);
-                } else if (getCompetenceIG() != null) {
-                    //if (CompetenceActive.class.isAssignableFrom(getCompetenceIG().info.competence.getClass())) {
+            if (getCompetenceIG() != null) {
+                if (getCompetenceIG().isActive()) {
+                    if (container.getPartie().getCompetenceActive() != null && container.getPartie().getCompetenceActive().equals(this.getCompetenceIG())) {
+                        ConnexionMatch.partieEnvoiCompetence(container.getPartie().getJoueurActif().getPersonnages().indexOf(container.getPartie().getPersonnageActif()), -1);
+                        container.getPartie().setCompetenceActive(null);
+                    } else if (getCompetenceIG() != null) {
                         container.getPartie().setCompetenceActive(getCompetenceIG());
                         ConnexionMatch.partieEnvoiCompetence(container.getPartie().getJoueurActif().getPersonnages().indexOf(container.getPartie().getPersonnageActif()), competenceIG.getPlace());
-                    //}
+                    }
                 }
             }
         }

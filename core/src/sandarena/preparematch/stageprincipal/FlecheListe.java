@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
-import sandarena.Resolution;
-import sandarena.donnee.Utili;
+import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Utili;
 
 /**
  * Created by Guillaume on 25/07/2015.

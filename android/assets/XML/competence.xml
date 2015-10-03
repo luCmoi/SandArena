@@ -15,6 +15,7 @@
         </compattaque>
         <affinite>
             <entreaffinite>affforce</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
         </affinite>
     </entrecomp>
 
@@ -61,14 +62,226 @@
         <description>Des muscles puissants suffisent à arreter un coup mortel</description>
         <image>Image/Competence/ContractionMusculaire.png</image>
         <compbuffactif>
-            <complance caract="caractforce" porte="0" portemin="0" recharge="3" utilisation="0"
+            <complance caract="caractforce" porte="0" portemin="0" recharge="2" utilisation="0"
                 zone="1" />
-            <compbuff type="buffvaldefense" valeur="2">
+            <compbuff type="buffvaldefense" valeur="3">
                 <condduree>2</condduree>
+                <condtype>caractforce</condtype>
             </compbuff>
         </compbuffactif>
         <affinite>
             <entreaffinite>affforce</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id ="2006">
+        <nom>Coup Magistral</nom>
+        <description>Un coup si puissant qu'il peux tuer sur le coup</description>
+        <image>Image/Competence/CoupMagistral.png</image>
+        <compattaque bonus="3">
+            <complance caract="caractforce" porte="1" portemin="1" recharge="3" utilisation="0"
+                zone="1" />
+        </compattaque>
+        <affinite>
+            <entreaffinite>affforce</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <!-- AGILITE MAIN -->
+
+    <entrecomp id ="2201">
+        <nom>Frappe chirurgicale</nom>
+        <description>Certains points sensibles du corps suffisent a entrainer la mort</description>
+        <image>Image/Competence/FrappeChirurgicale.png</image>
+        <compattaque bonus="0">
+            <complance caract="caractagilite" porte="1" portemin="1" recharge="4" utilisation="0"
+                zone="1" />
+            <compbuff type="buffval" valeur="-1">
+                <condtype>caractforce</condtype>
+                <condduree>2</condduree>
+                <compbuff type="buffval" valeur="-1">
+                    <condtype>caractagilite</condtype>
+                    <condduree>2</condduree>
+                </compbuff>
+
+            </compbuff>
+        </compattaque>
+        <affinite>
+            <entreaffinite>affagilite</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id ="2202">
+        <nom>Esquive naturelle</nom>
+        <description>Certaines personnes sont plus capable que d'autre d'esquiver une lame
+            mortelle
+        </description>
+        <image>Image/Competence/EsquiveNaturelle.png</image>
+        <compbuff type="buffvaldefense" valeur="2">
+            <condtype>caractagilite</condtype>
+        </compbuff>
+        <affinite>
+            <entreaffinite>affagilite</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id ="2203">
+        <nom>Jet De Sable</nom>
+        <description>Un ennemi aveuglé deviens moins dangeureux</description>
+        <image>Image/Competence/JetDeSable.png</image>
+        <compbuffactif>
+            <complance caract="caractagilite" porte="2" portemin="1" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffvalattaque" valeur="-2">
+                <condduree>2</condduree>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affagilite</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id ="2204">
+        <nom>Coupure des Tendons</nom>
+        <description>Un combattant précis peu infliger d'important dégats en frappant les points vitaux</description>
+        <image>Image/Competence/CoupureDesTendons.png</image>
+        <compattaque bonus="0">
+            <complance caract="caractagilite" porte="1" portemin="1" recharge="1" utilisation="0"
+                zone="1" />
+            <compbuff type="buffdot" valeur="1">
+                <condduree>2</condduree>
+            </compbuff>
+        </compattaque>
+        <affinite>
+            <entreaffinite>affagilite</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id ="2205">
+        <nom>Acrobaties</nom>
+        <description>Un acrobate agile peut éviter de nombreux dangés</description>
+        <image>Image/Competence/Acrobaties.png</image>
+        <compbuffactif>
+            <complance caract="caractagilite" porte="0" portemin="0" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffval" valeur="2">
+                <condtype>caractagilite</condtype>
+                <condduree>2</condduree>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affagilite</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2206">
+        <nom>Lancer de Lame</nom>
+        <description>Lancer une lame de sorte a ce qu'elle transperce un ennemi éloigné n'est pas chose facile</description>
+        <image>Image/Competence/LancerDeLame.png</image>
+        <compattaque bonus="-1">
+            <complance recharge="0" utilisation="0" porte="3" portemin="1" zone="1" caract="caractagilite" />
+            <compbuff type="buffvalvitesse" valeur="-1">
+                <condduree>2</condduree>
+            </compbuff>
+        </compattaque>
+        <affinite>
+            <entreaffinite>affagilite</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+
+    <!-- MAGIE MAIN -->
+
+    <entrecomp id="2401">
+        <nom>Frappe Mentale</nom>
+        <description>Certains esprit plus puissant que d'autres sont capables de les soumettres</description>
+        <image>Image/Competence/FrappeMentale.png</image>
+        <compattaque bonus="0">
+            <complance recharge="1" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
+            <compbuff type="buffdot" valeur="1" >
+                <condduree>2</condduree>
+            </compbuff>
+        </compattaque>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2402">
+        <nom>Savant</nom>
+        <description>Si un homme passe sa vie a travailler son esprit plutôt que son corp, l'un se dévellopera au détriment de l'autre</description>
+        <image>Image/Competence/Savant.png</image>
+        <compbuff type="buffval" valeur="2">
+            <condtype>caractmagie</condtype>
+            <compbuff type="buffval" valeur="-1">
+                <condtype>caractagilite</condtype>
+                <compbuff type="buffval" valeur="-1">
+                    <condtype>caractforce</condtype>
+                </compbuff>
+            </compbuff>
+        </compbuff>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2403">
+        <nom>Feu Interieur</nom>
+        <description>Chaque corp possède une flamme de puissance qui n'attend que d'être réveillée</description>
+        <image>Image/Competence/FeuInterieur.png</image>
+        <compbuffactif>
+            <complance recharge="3" utilisation="0" porte="3" portemin="0" zone="0" caract="caractmagie" />
+            <compbuff type="buffval" valeur="3">
+                <condduree>1</condduree>
+                <condtype>caractforce</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2404">
+        <nom>Morsure de Glace</nom>
+        <description>Un froid intense peut empecher quiconque d'agir</description>
+        <image>Image/Competence/MorsureDeGlace.png</image>
+        <compbuffactif>
+            <complance recharge="4" utilisation="0" porte="3" portemin="1" zone="0" caract="caractmagie" />
+            <compbuff type="buffstun" valeur="2"></compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2405">
+        <nom>Fouet Magique</nom>
+        <description>Peux sont capables de maitriser les énergie mystiques du monde mais ceux qui y parviennent en prennent le contrôle</description>
+        <image>Image/Competence/FouetMagique.png</image>
+        <compattaque bonus="0">
+            <complance recharge="0" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
+        </compattaque>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2406">
+        <nom>Faiblesse Psychique</nom>
+        <description>Assujetir l'esprit d'un ennemi est chose faisable pour ceux qui maitrisent la magie</description>
+        <image>Image/Competence/FaiblessePsychique.png</image>
+        <compbuffactif>
+            <complance recharge="3" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
+            <compbuff type="buffval" valeur="-1">
+                <condduree>3</condduree>
+                <condtype>caractmagie</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmagie</entreaffinite>
         </affinite>
     </entrecomp>
 
@@ -96,7 +309,7 @@
         <description>Purifie le corps de ses afflictions</description>
         <image>Image/Competence/PerleDePurification.png</image>
         <compdispel cible="0" nombre="1">
-            <complance caract="caractmagie" porte="4" portemin="0" recharge="4" utilisation="4"
+            <complance caract="caractmagie" porte="4" portemin="0" recharge="3" utilisation="4"
                 zone="1" />
         </compdispel>
         <affinite>
@@ -159,62 +372,24 @@
         </affinite>
     </entrecomp>
 
-    <!-- AGILITE MAIN -->
-
-    <entrecomp id ="2201">
-        <nom>Frappe chirurgicale</nom>
-        <description>Certains points sensibles du corps suffisent a entrainer la mort</description>
-        <image>Image/Competence/FrappeChirurgicale.png</image>
-        <compattaque bonus="2">
-            <complance caract="caractagilite" porte="1" portemin="1" recharge="3" utilisation="0"
+    <entrecomp id ="2107">
+        <nom>Dague Rituelle</nom>
+        <description>Cette lame porte la souffrance de tous ceux qu'elle à servit a sacrifier</description>
+        <image>Image/Competence/DagueRituelle.png</image>
+        <compattaque bonus="0">
+            <complance caract="caractagilite" porte="1" portemin="1" recharge="1" utilisation="0"
                 zone="1" />
+            <compbuff type="buffdot" valeur="2">
+                <condduree>1</condduree>
+            </compbuff>
         </compattaque>
         <affinite>
-            <entreaffinite>affagilite</entreaffinite>
+            <entreaffinite>afftribal</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2202">
-        <nom>Esquive naturelle</nom>
-        <description>Certaines personnes sont plus capable que d'autre d'esquiver une lame
-            mortelle
-        </description>
-        <image>Image/Competence/EsquiveNaturelle.png</image>
-        <compbuff type="buffvaldefense" valeur="2">
-            <condtype>caractagilite</condtype>
-        </compbuff>
-        <affinite>
-            <entreaffinite>affagilite</entreaffinite>
-        </affinite>
-    </entrecomp>
 
-    <entrecomp id ="2203">
-        <nom>Jet De Sable</nom>
-        <description>Un ennemi aveuglé deviens moins dangeureux</description>
-        <image>Image/Competence/JetDeSable.png</image>
-        <compbuffactif>
-            <complance caract="caractagilite" porte="2" portemin="1" recharge="1" utilisation="0"
-                zone="1" />
-            <compbuff type="buffvalattaque" valeur="-2">
-                <condduree>2</condduree>
-            </compbuff>
-        </compbuffactif>
-        <affinite>
-            <entreaffinite>affagilite</entreaffinite>
-        </affinite>
-    </entrecomp>
-
-    <entrecomp id ="2204">
-        <nom>Riposte éclaire</nom>
-        <description>Des reflexes tels qu'aucun coup reçus n'a été rendu</description>
-        <image>Image/Competence/RiposteEclaire.png</image>
-        <compdeclencheureffet cible="cibledeclenche" typedeclencheur="declenchedegatrecu">
-            <compbuff type="buffdegat" valeur="2"></compbuff>
-        </compdeclencheureffet>
-        <affinite>
-            <entreaffinite>affagilite</entreaffinite>
-        </affinite>
-    </entrecomp>
 
     <!-- POISON MAIN -->
 
@@ -262,6 +437,7 @@
         </compattaque>
         <affinite>
             <entreaffinite>affpoison</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
         </affinite>
     </entrecomp>
 
@@ -297,70 +473,6 @@
         </compbuffactif>
         <affinite>
             <entreaffinite>affpoison</entreaffinite>
-        </affinite>
-    </entrecomp>
-
-    <!-- MAGIE MAIN -->
-
-    <entrecomp id="2401">
-        <nom>Frappe Mentale</nom>
-        <description>Certains esprit plus puissant que d'autres sont capables de les soumettres</description>
-        <image>Image/Competence/FrappeMentale.png</image>
-        <compattaque bonus="0">
-            <complance recharge="1" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
-            <compbuff type="buffdot" valeur="1" >
-                <condduree>2</condduree>
-            </compbuff>
-        </compattaque>
-        <affinite>
-            <entreaffinite>affmagie</entreaffinite>
-        </affinite>
-    </entrecomp>
-
-    <entrecomp id="2402">
-        <nom>Savant</nom>
-        <description>Si un homme passe sa vie a travailler son esprit plutôt que son corp, l'un se dévellopera au détriment de l'autre</description>
-        <image>Image/Competence/Savant.png</image>
-        <compbuff type="buffval" valeur="2">
-            <condtype>caractmagie</condtype>
-            <compbuff type="buffval" valeur="-1">
-                <condtype>caractagilite</condtype>
-                <compbuff type="buffval" valeur="-1">
-                    <condtype>caractforce</condtype>
-                </compbuff>
-            </compbuff>
-        </compbuff>
-        <affinite>
-            <entreaffinite>affmagie</entreaffinite>
-        </affinite>
-    </entrecomp>
-
-    <entrecomp id="2403">
-        <nom>Feu Interieur</nom>
-        <description>Chaque corp possède une flamme de puissance qui n'attend que d'être réveillée</description>
-        <image>Image/Competence/FeuInterieur.png</image>
-        <compbuffactif>
-            <complance recharge="2" utilisation="0" porte="3" portemin="0" zone="0" caract="caractmagie" />
-            <compbuff type="buffval" valeur="3">
-                <condduree>1</condduree>
-                <condtype>caractforce</condtype>
-            </compbuff>
-        </compbuffactif>
-        <affinite>
-            <entreaffinite>affmagie</entreaffinite>
-        </affinite>
-    </entrecomp>
-
-    <entrecomp id="2404">
-        <nom>Morsure de Glace</nom>
-        <description>Un froid intense peut empecher quiconque d'agir</description>
-        <image>Image/Competence/MorsureDeGlace.png</image>
-        <compbuffactif>
-            <complance recharge="4" utilisation="0" porte="3" portemin="1" zone="0" caract="caractmagie" />
-            <compbuff type="buffstun" valeur="2"></compbuff>
-        </compbuffactif>
-        <affinite>
-            <entreaffinite>affmagie</entreaffinite>
         </affinite>
     </entrecomp>
 

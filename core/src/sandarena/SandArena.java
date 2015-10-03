@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sandarena.donnee.BanqueSol;
+import sandarena.donnee.sol.BanqueSol;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.partie.gui.ScreenPartie;
+import sandarena.partie.ScreenPartie;
 
-import static sandarena.donnee.CarteXML.parseCarteXML;
-import static sandarena.donnee.CompXML.parseCompXML;
-import static sandarena.donnee.PersoXML.parsePersoXML;
+import static sandarena.donnee.carte.CarteXML.parseCarteXML;
+import static sandarena.donnee.competence.CompXML.parseCompXML;
+import static sandarena.donnee.personnage.PersoXML.parsePersoXML;
 
 /**
  * Class principale de l'application SandArena, un applicationAdapter
@@ -34,7 +34,7 @@ public class SandArena extends Game {
         BanqueSol.init();
         batch = new SpriteBatch();
         try {
-            Resolution.calculResolution();
+            sandarena.donnee.donneestatic.Resolution.calculResolution();
         } catch (IOException ex) {
             System.err.println("error : File");
         }
@@ -77,15 +77,15 @@ public class SandArena extends Game {
 
             }
         });
-        new ConnexionServeur(this);
+        new sandarena.connexion.ConnexionServeur(this);
     }
 
     public SpriteBatch getBatch() {
         return this.batch;
     }
 
-    public void lancePartie(Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence){
-        this.screenPartie = new ScreenPartie(this,joueur,personnagesActif,personnagesAutre,commence);
+    public void lancePartie(Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence, int map){
+        this.screenPartie = new ScreenPartie(this,joueur,personnagesActif,personnagesAutre,commence, map);
         this.setScreen(screenPartie);
     }
 

@@ -2,10 +2,10 @@ package sandarena.joueur.competence.active;
 
 import java.util.ArrayList;
 
-import sandarena.donnee.Caract;
-import sandarena.donnee.CompXML;
+import sandarena.donnee.donneestatic.Caract;
+import sandarena.donnee.competence.CompXML;
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.partie.effet.CompetenceToEffet;
+import sandarena.partie.jeu.compcase.effet.CompetenceToEffet;
 
 public class CompetenceAttaque extends CompetenceActive {
 

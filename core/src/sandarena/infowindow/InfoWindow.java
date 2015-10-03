@@ -3,8 +3,8 @@ package sandarena.infowindow;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
-import sandarena.Resolution;
-import sandarena.donnee.Utili;
+import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Utili;
 
 
 /**

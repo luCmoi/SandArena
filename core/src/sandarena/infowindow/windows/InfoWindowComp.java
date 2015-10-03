@@ -2,8 +2,8 @@ package sandarena.infowindow.windows;
 
 import com.badlogic.gdx.Gdx;
 
-import sandarena.Resolution;
-import sandarena.donnee.BanqueCompetence;
+import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.infowindow.Icone;
 import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.info.InfoComp;
