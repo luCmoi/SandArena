@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import sandarena.donnee.sol.BanqueSol;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
+import sandarena.lancement.ScreenLancement;
 import sandarena.partie.ScreenPartie;
-import sandarena.selectionequipe.ScreenSelectionEquipe;
 
 import static sandarena.donnee.carte.CarteXML.parseCarteXML;
 import static sandarena.donnee.competence.CompXML.parseCompXML;
@@ -47,8 +47,7 @@ public class SandArena extends Game {
         parseCompXML();
         parsePersoXML();
         parseCarteXML();
-        this.setScreen(new ScreenSelectionEquipe(this));
-        //new sandarena.connexion.ConnexionServeur(this);
+        this.setScreen(new ScreenLancement(this));
     }
 
     public SpriteBatch getBatch() {

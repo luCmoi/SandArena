@@ -9,6 +9,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 import sandarena.*;
+import sandarena.joueur.Joueur;
 import sandarena.preparematch.ScreenPrepaMatch;
 
 /**
@@ -33,7 +34,7 @@ public class ConnexionServeur {
 
 
 
-    public ConnexionServeur(SandArena container) {
+    public ConnexionServeur(SandArena container, Joueur equipe) {
         this.container = container;
         try {
             InetAddress serverAddr = InetAddress.getByName(SERVERIP);
@@ -64,7 +65,7 @@ public class ConnexionServeur {
                     pw.flush();
                     dispose();
                     //ici changera
-                    container.setScreen(new ScreenPrepaMatch(container,3001));
+                    container.setScreen(new ScreenPrepaMatch(container,3001,equipe));
                 } else {
                     dispose();
                 }

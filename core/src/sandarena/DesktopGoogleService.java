@@ -43,6 +43,23 @@ public class DesktopGoogleService implements IGoogleService
     }
 
     @Override
-    public void savedGame() {
+    public void savedGamesLoad(String snapshotName, int place) {
+
     }
+
+    @Override
+    public void savedGamesSelect() {
+
+    }
+
+    @Override
+    public void savedGamesUpdate(String snapshotName, String dataStr) {
+
+    }
+
+    @Override
+    public void savedGamesLoadAll() {
+
+    }
+
 }

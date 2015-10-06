@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.joueur.Joueur;
 
 /**
  * Created by lucmo on 05/10/2015.
@@ -15,11 +16,13 @@ public class ScreenSelectionEquipe implements Screen {
     private Batch batch;
     private SandArena container;
     private StageSelectionEquipe stage;
+    private Joueur[] equipe;
 
-    public ScreenSelectionEquipe (SandArena container){
+    public ScreenSelectionEquipe(SandArena container, Joueur[] equipe){
         this.container = container;
+        this.equipe = equipe;
         this.batch = container.getBatch();
-        setStage(new StageSelectionEquipe(this,batch));
+        setStage(new StageSelectionEquipe(this,batch,equipe));
         Gdx.input.setInputProcessor(this.getStage());
     }
 
@@ -67,5 +70,9 @@ public class ScreenSelectionEquipe implements Screen {
 
     public void setStage(StageSelectionEquipe stage) {
         this.stage = stage;
+    }
+
+    public SandArena getContainer() {
+        return container;
     }
 }

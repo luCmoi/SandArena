@@ -35,24 +35,28 @@ public class ScreenPrepaMatch implements Screen {
     private Personnage check = null;
     private int map;
 
-    public ScreenPrepaMatch(SandArena conteneur, int map) {
+    public ScreenPrepaMatch(SandArena conteneur, int map, Joueur equipe) {
         this.container = conteneur;
         this.map = map;
         this.batch = conteneur.getBatch();
         //Temp joueur
-        joueur = new Joueur();
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
-        joueur.getPersonnages().add(new Personnage());
+        if (equipe == null) {
+            joueur = new Joueur();
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+            joueur.getPersonnages().add(new Personnage());
+        }else{
+            joueur = equipe;
+        }
     }
 
     @Override
