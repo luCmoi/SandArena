@@ -12,6 +12,7 @@ import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.drive.Drive;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.google.android.gms.games.snapshot.Snapshot;
 import com.google.android.gms.games.snapshot.SnapshotMetadata;
 import com.google.android.gms.games.snapshot.SnapshotMetadataChange;
@@ -196,10 +197,14 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
                     }
                     String donnee = new String(data);
                     String metaDonnee = displaySnapshotMetadata(openSnapshotResult.getSnapshot().getMetadata());
-                    if (!donnee.startsWith("v001")){
+                    System.err.println(donnee);
+                    System.err.println(metaDonnee);
+                    if (!donnee.startsWith("v003")){
+                        System.err.println("Passe pas");
                         IGoogleService.data.save[place]=null;
                         IGoogleService.data.meta[place]=null;
                     }else{
+                        System.err.println("Passe");
                         IGoogleService.data.save[place]=donnee;
                         IGoogleService.data.meta[place]=metaDonnee;
                     }
@@ -271,7 +276,32 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
     public void savedGamesLoadAll() {
         SandArena.googleService.savedGamesLoad("snapSand-0",0);
         SandArena.googleService.savedGamesLoad("snapSand-1",1);
-        SandArena.googleService.savedGamesLoad("snapSand-2",2);
+        SandArena.googleService.savedGamesLoad("snapSand-2", 2);
     }
 
+    @Override
+    public void printError(String print) {
+        System.err.println(print);
+    }
+
+    @Override
+    public void startQuickGame() {
+        Bundle am = RoomConfig.createAutoMatchCriteria(1, 1, 0);
+        // build the room config:
+        RoomConfig.Builder roomConfigBuilder = RoomConfig.builder(new AndroidRoomUpdateListener(this))
+                .setRoomStatusUpdateListener(new AndroidRoomStatusUpdateListener(this))
+                .setMessageReceivedListener(new AndroidRealTimeMessageReceivedListener(this));
+        roomConfigBuilder.setAutoMatchCriteria(am);
+        RoomConfig roomConfig = roomConfigBuilder.build();
+        // create room:
+        Games.RealTimeMultiplayer.create(_gameHelper.getApiClient(), roomConfig);
+        // prevent screen from sleeping during handshake
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        // go to game screen
+
+    }
+
+    public GameHelper get_gameHelper() {
+        return _gameHelper;
+    }
 }

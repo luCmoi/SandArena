@@ -18,6 +18,7 @@ import sandarena.selectionequipe.ScreenSelectionEquipe;
 public class ScreenLancement implements Screen {
     private final SandArena container;
     private Joueur[] equipe = new Joueur[3];
+    private boolean loaded = false;
 
     public ScreenLancement(SandArena sandArena) {
         this.container = sandArena;
@@ -29,15 +30,20 @@ public class ScreenLancement implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
-        if (SandArena.googleService.isSignedIn()) {
+        if (SandArena.googleService.isSignedIn() && !loaded) {
+            loaded = true;
             SandArena.googleService.savedGamesLoadAll();
+            SandArena.googleService.printError("Load Finish");
         }
         if (IGoogleService.data.chargementSaveLoad == 3){
+            SandArena.googleService.printError("Decrypt");
             IGoogleService.data.chargementSaveLoad = -1;
             for (int i = 0; i < 3; i++) {
                 if (IGoogleService.data.save[i]!=null){
+                    SandArena.googleService.printError("Save");
                     equipe[i] = parseEquipe(IGoogleService.data.save[i]);
                 }else{
+                    SandArena.googleService.printError("No save");
                     equipe[i] = null;
                 }
             }
@@ -51,18 +57,20 @@ public class ScreenLancement implements Screen {
         for (int i = 0; i < data.length(); i = i+4) {
             String tmpStr = data.substring(i,i+4);
             if (tmpStr.startsWith("v")){
-                System.err.println("version : "+tmpStr);
+                SandArena.googleService.printError("version : " + tmpStr);
             }else if (tmpStr.startsWith("1")){
-                System.err.println("personnage : "+tmpStr);
+                SandArena.googleService.printError("personnage : " + tmpStr);
                 if (tmpPers != null){
                     retour.getPersonnages().add(tmpPers);
                 }
                 tmpPers = new Personnage(Integer.parseInt(tmpStr));
             }else if (tmpStr.startsWith("2")){
-                System.err.println("competence : " + tmpStr);
-                tmpPers.addCompetence((BanqueCompetence.EntreeCompetence)BanqueCompetence.getEntree(BanqueCompetence.banque,Integer.parseInt(tmpStr)));
+                SandArena.googleService.printError("competence : " + tmpStr);
+                BanqueCompetence.EntreeCompetence tmp = (BanqueCompetence.EntreeCompetence)BanqueCompetence.getEntree(BanqueCompetence.banque,Integer.parseInt(tmpStr));
+                tmp.incremente();
+                tmpPers.addCompetence(tmp);
             }else{
-                System.err.println(tmpStr);
+                SandArena.googleService.printError(tmpStr);
             }
         }
         if (tmpPers != null){

@@ -31,7 +31,6 @@ public abstract class Banque {
     public static Entree getEntree(ArrayList<Entree> banque, int id) {
         for (Entree e : banque) {
             if (e.getId() == id) {
-                e.incremente();
                 return e;
             }
         }

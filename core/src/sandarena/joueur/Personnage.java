@@ -18,6 +18,7 @@ public class Personnage{
 
     public Personnage(int id){
         this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, id);
+        commun.incremente();
         this.nom = BanquePersonnage.getNom(commun.nom);
     }
 

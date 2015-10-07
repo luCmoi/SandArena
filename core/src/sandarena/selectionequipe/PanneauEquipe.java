@@ -33,14 +33,15 @@ public class PanneauEquipe extends Actor {
         batch.draw(Utili.contour,getX(),getY(),getWidth(),getHeight());
         if (equipe != null){
             for (int i = 0; i < equipe.getPersonnages().size(); i++) {
-                batch.draw(equipe.getPersonnages().get(i).commun.image,(getWidth()/3)*(i%3),(getHeight()/4)*(i/3),getWidth()/3,getHeight()/3);
+                batch.draw(equipe.getPersonnages().get(i).commun.image,getX()+ (getWidth()/3)*(i%3),getHeight()-(getWidth()/3)*(1+(i/3)),getWidth()/3,getWidth()/3);
             }
         }
     }
 
     public void clique() {
         if (equipe != null){
-            System.err.println("Equipe Find");
+            SandArena.googleService.printError("Equipe Find");
+            //SandArena.googleService.startQuickGame();
             new sandarena.connexion.ConnexionServeur(container.getContainer().getContainer(),equipe);
         }else{
             equipe = new Joueur();

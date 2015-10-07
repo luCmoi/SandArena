@@ -39,7 +39,7 @@ public class DesktopGoogleService implements IGoogleService
     public boolean isSignedIn()
     {
         System.out.println("DesktopGoogleServies: isSignedIn()");
-        return false;
+        return true;
     }
 
     @Override
@@ -47,10 +47,6 @@ public class DesktopGoogleService implements IGoogleService
 
     }
 
-    @Override
-    public void savedGamesSelect() {
-
-    }
 
     @Override
     public void savedGamesUpdate(String snapshotName, String dataStr) {
@@ -59,6 +55,19 @@ public class DesktopGoogleService implements IGoogleService
 
     @Override
     public void savedGamesLoadAll() {
+        data.save[0] = null;
+        data.save[1] = null;
+        data.save[2] = null;
+        data.chargementSaveLoad=3;
+    }
+
+    @Override
+    public void printError(String print) {
+
+    }
+
+    @Override
+    public void startQuickGame() {
 
     }
 

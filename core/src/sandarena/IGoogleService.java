@@ -17,9 +17,11 @@ public interface IGoogleService {
 
     public void savedGamesLoad(String snapshotName, int place);
 
-    public void savedGamesSelect();
-
     public void savedGamesUpdate(final String snapshotName, String dataStr);
 
     public void savedGamesLoadAll();
+
+    public void printError(String print);
+
+    public void startQuickGame();
 }

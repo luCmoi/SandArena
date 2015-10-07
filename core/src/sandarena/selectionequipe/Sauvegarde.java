@@ -1,5 +1,6 @@
 package sandarena.selectionequipe;
 
+import sandarena.SandArena;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 
@@ -11,8 +12,8 @@ public class Sauvegarde {
         switch (i){
             case 0:
                 return "snapSand-0";
-            case 3:
-                return "snapSand-3";
+            case 1:
+                return "snapSand-1";
             case 2:
                 return "snapSand-2";
         }
@@ -20,12 +21,13 @@ public class Sauvegarde {
     }
 
     public static String toData(Joueur equipe) {
-        String retour = "v0001";
+        String retour = "v003";
         for (Personnage perso : equipe.getPersonnages()){
-            retour.concat(String.valueOf(perso.getId()));
+            retour = retour.concat(String.valueOf(perso.getId()));
             for (int i = 0; i < 4; i++) {
-                retour.concat(String.valueOf(perso.getCompetences()[i].getId()));
+                retour = retour.concat(String.valueOf(perso.getCompetences()[i].getId()));
             }
+            SandArena.googleService.printError(retour);
         }
         return retour;
     }
