@@ -1,4 +1,4 @@
-package sandarena;
+package sandarena.googleservice;
 
 /**
  * Created by lucmo on 04/10/2015.
@@ -68,6 +68,11 @@ public class DesktopGoogleService implements IGoogleService
 
     @Override
     public void startQuickGame() {
+
+    }
+
+    @Override
+    public void sendOtherPlayer(String mess) {
 
     }
 

@@ -25,9 +25,9 @@ public class SandArena extends Game {
 
     private SpriteBatch batch;
     private ScreenPartie screenPartie;
-    public static IGoogleService googleService;
+    public static sandarena.googleservice.IGoogleService googleService;
 
-    public SandArena(IGoogleService googleService)
+    public SandArena(sandarena.googleservice.IGoogleService googleService)
     {
         super();
         this.googleService = googleService;

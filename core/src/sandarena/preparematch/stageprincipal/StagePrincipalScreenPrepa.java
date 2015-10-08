@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.ArrayList;
 
+import sandarena.SandArena;
 import sandarena.connexion.ConnexionMatch;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Joueur;
@@ -72,6 +73,7 @@ public class StagePrincipalScreenPrepa extends Stage {
     }
 
     public void ajoutGauche(final Personnage tmp) {
+        SandArena.googleService.printError("Envoi mess");
         new Thread() {
             @Override
             public void run() {
@@ -87,6 +89,7 @@ public class StagePrincipalScreenPrepa extends Stage {
     }
 
     public void recoitPersonnageAutre() {
+        SandArena.googleService.printError("Recoi mess");
         bloquand = true;
         new Thread() {
             @Override

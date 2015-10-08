@@ -1,4 +1,4 @@
-package sandarena;
+package sandarena.googleservice;
 
 public interface IGoogleService {
     public GoogleData data = new GoogleData();
@@ -24,4 +24,6 @@ public interface IGoogleService {
     public void printError(String print);
 
     public void startQuickGame();
+
+    public void sendOtherPlayer(String mess);
 }

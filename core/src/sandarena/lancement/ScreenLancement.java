@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-import sandarena.IGoogleService;
+import sandarena.googleservice.IGoogleService;
 import sandarena.SandArena;
 import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.donnee.donneestatic.Resolution;

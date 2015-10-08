@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import sandarena.SandArena;
 import sandarena.donnee.competence.BanqueCompetence;
+import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Personnage;
 import sandarena.partie.jeu.Partie;
+
 /**
  * Created by lucmo on 23/08/2015.
  */
@@ -24,32 +27,35 @@ public class ConnexionMatch {
     public static boolean first;
 
     public static Personnage prepareMatchRecoitPerso() {
-        try {
-            Personnage retour = null;
-            while (retour == null) {
-                retour = new Personnage(Integer.parseInt(br.readLine()));
+        Personnage retour = null;
+        String mess = null;
+        SandArena.googleService.printError("En attente");
+        while (mess == null) {
+            if (IGoogleService.data.mess != null) {
+                mess = new String(IGoogleService.data.mess);
+                IGoogleService.data.mess = null;
             }
-            for (int i = 0; i < 4; i++) {
-                BanqueCompetence.EntreeCompetence compTmp = null;
-                while (compTmp == null) {
-                    compTmp = (BanqueCompetence.EntreeCompetence) BanqueCompetence.getEntree(BanqueCompetence.getBanque(), Integer.parseInt(br.readLine()));
-                    retour.addCompetence(compTmp);
-                }
-            }
-            return retour;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
+        SandArena.googleService.printError("mess Recu : " + mess);
+        retour = new Personnage(Integer.parseInt(mess.substring(0, 4)));
+        for (int i = 0; i < 4; i++) {
+            BanqueCompetence.EntreeCompetence compTmp = null;
+            while (compTmp == null) {
+                compTmp = (BanqueCompetence.EntreeCompetence) BanqueCompetence.getEntree(BanqueCompetence.getBanque(), Integer.parseInt(mess.substring(4 * (i + 1), 4 * (i + 2))));
+                retour.addCompetence(compTmp);
+            }
+        }
+        return retour;
     }
 
     public static void prepareMatchEnvoiPerso(Personnage tmp) {
-        pw.println(tmp.getId());
-        pw.println(tmp.getCompetences()[0].getId());
-        pw.println(tmp.getCompetences()[1].getId());
-        pw.println(tmp.getCompetences()[2].getId());
-        pw.println(tmp.getCompetences()[3].getId());
-        pw.flush();
+        String mess = String.valueOf(tmp.getId());
+        mess = mess.concat(String.valueOf(tmp.getCompetences()[0].getId()));
+        mess = mess.concat(String.valueOf(tmp.getCompetences()[1].getId()));
+        mess = mess.concat(String.valueOf(tmp.getCompetences()[2].getId()));
+        mess = mess.concat(String.valueOf(tmp.getCompetences()[3].getId()));
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
     }
 
     public static void ecouteMatch(final Partie partie) {
@@ -70,9 +76,9 @@ public class ConnexionMatch {
                             partieRecoitCompetence(partie);
                         } else if (mess.equals(UTILISECOMPETENCE)) {
                             partieRecoitUtiliseCompetence(partie);
-                        }else if (mess.equals(FINPHASE)){
+                        } else if (mess.equals(FINPHASE)) {
                             partieRecoitFinPhase(partie);
-                        }else if (mess.equals(ECHANGE)){
+                        } else if (mess.equals(ECHANGE)) {
                             partieRecoitEchange(partie);
                         }
                     }
@@ -115,7 +121,7 @@ public class ConnexionMatch {
         int i = Integer.parseInt(br.readLine());
         if (i != -1) {
             partie.setCompetenceActive(partie.getPersonnageActif().getCompetence()[i]);
-        }else {
+        } else {
             partie.setCompetenceActive(null);
         }
     }
@@ -144,7 +150,7 @@ public class ConnexionMatch {
         pw.flush();
     }
 
-    public static void partieRecoitFinPhase(Partie partie){
+    public static void partieRecoitFinPhase(Partie partie) {
         partie.finPhase();
         partie.getContainer().getStageInterface().recharge();
     }
@@ -162,7 +168,7 @@ public class ConnexionMatch {
         pw.flush();
     }
 
-    public static void partieRecoitEchange(Partie partie)throws IOException{
+    public static void partieRecoitEchange(Partie partie) throws IOException {
         partieRecoitPersoActif(partie);
         int x = Integer.parseInt(br.readLine());
         int y = Integer.parseInt(br.readLine());

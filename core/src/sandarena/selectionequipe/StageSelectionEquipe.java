@@ -5,8 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
+import sandarena.googleservice.IGoogleService;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Joueur;
+import sandarena.preparematch.ScreenPrepaMatch;
 
 /**
  * Created by lucmo on 05/10/2015.
@@ -15,6 +17,7 @@ public class StageSelectionEquipe extends Stage{
     private final ScreenSelectionEquipe container;
     private final FondSelection fond;
     private final Joueur[] equipe;
+    private int equipeSelect;
 
     public StageSelectionEquipe(ScreenSelectionEquipe container, Batch batch, Joueur[] equipe) {
         super(new FillViewport(Resolution.width,Resolution.height), batch);
@@ -32,7 +35,19 @@ public class StageSelectionEquipe extends Stage{
         return super.hit(stageX, stageY, touchable);
     }
 
+    @Override
+    public void draw() {
+        super.draw();
+        if (IGoogleService.data.lancePartie){
+            container.getContainer().setScreen(new ScreenPrepaMatch(container.getContainer(), 3001, equipe[equipeSelect]));
+        }
+    }
+
     public ScreenSelectionEquipe getContainer() {
         return container;
+    }
+
+    public void setEquipe(int equipe) {
+        this.equipeSelect = equipe;
     }
 }

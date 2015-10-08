@@ -21,7 +21,10 @@ import com.google.android.gms.plus.Plus;
 
 import java.io.IOException;
 
-import sandarena.IGoogleService;
+import sandarena.android.roomlistener.AndroidRealTimeMessageReceivedListener;
+import sandarena.android.roomlistener.AndroidRoomStatusUpdateListener;
+import sandarena.android.roomlistener.AndroidRoomUpdateListener;
+import sandarena.googleservice.IGoogleService;
 import sandarena.SandArena;
 
 public class AndroidLauncher extends AndroidApplication implements IGoogleService {
@@ -29,6 +32,9 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
     private GameHelper _gameHelper;
     // Request code used to invoke Snapshot selection UI.
     private static final int RC_SELECT_SNAPSHOT = 9002;
+    private String roomId;
+    private String myId;
+    private String ennemyId;
 
 
     @Override
@@ -85,43 +91,6 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
 
     @Override
     public void rateGame() {
-
-    }
-
-    public void savedGame() {
-        /*int maxNumberOfSavedGamesToShow = 5;
-        Intent savedGamesIntent = Games.Snapshots.getSelectSnapshotIntent(_gameHelper.getApiClient(), "See My Saves", true, true, maxNumberOfSavedGamesToShow);
-        startActivityForResult(savedGamesIntent, RC_SAVED_GAMES);*/
-        AsyncTask<Void, Void, Integer> task = new AsyncTask<Void, Void, Integer>() {
-            @Override
-            protected Integer doInBackground(Void... params) {
-                // Open the saved game using its name.
-                Snapshots.OpenSnapshotResult result = Games.Snapshots.open(_gameHelper.getApiClient(),
-                        "Premier", true).await();
-                // Check the result of the open operation
-                if (result.getStatus().isSuccess()) {
-                    Snapshot snapshot = result.getSnapshot();
-                    // Read the byte content of the saved game.
-                    try {
-                        byte[] mSaveGameData = snapshot.getSnapshotContents().readFully();
-                    } catch (IOException e) {
-                        Log.e(TAG, "Error while reading Snapshot.", e);
-                    }
-                } else {
-                    Log.e(TAG, "Error while loading: " + result.getStatus().getStatusCode());
-                }
-
-                return result.getStatus().getStatusCode();
-            }
-
-            @Override
-            protected void onPostExecute(Integer status) {
-                // Dismiss progress dialog and reflect the changes in the UI.
-                // ...
-            }
-        };
-
-        task.execute();
 
     }
 
@@ -199,19 +168,19 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
                     String metaDonnee = displaySnapshotMetadata(openSnapshotResult.getSnapshot().getMetadata());
                     System.err.println(donnee);
                     System.err.println(metaDonnee);
-                    if (!donnee.startsWith("v003")){
+                    if (!donnee.startsWith("v003")) {
                         System.err.println("Passe pas");
-                        IGoogleService.data.save[place]=null;
-                        IGoogleService.data.meta[place]=null;
-                    }else{
+                        IGoogleService.data.save[place] = null;
+                        IGoogleService.data.meta[place] = null;
+                    } else {
                         System.err.println("Passe");
-                        IGoogleService.data.save[place]=donnee;
-                        IGoogleService.data.meta[place]=metaDonnee;
+                        IGoogleService.data.save[place] = donnee;
+                        IGoogleService.data.meta[place] = metaDonnee;
                     }
                 } else {
                     System.err.println("Saved game load failure");
-                    IGoogleService.data.save[place]=null;
-                    IGoogleService.data.meta[place]=null;
+                    IGoogleService.data.save[place] = null;
+                    IGoogleService.data.meta[place] = null;
                 }
                 IGoogleService.data.chargementSaveLoad++;
             }
@@ -269,13 +238,14 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
                     System.err.println("Saved game update failure");
                 }
             }
-        }; updateTask.execute();
+        };
+        updateTask.execute();
     }
 
     @Override
     public void savedGamesLoadAll() {
-        SandArena.googleService.savedGamesLoad("snapSand-0",0);
-        SandArena.googleService.savedGamesLoad("snapSand-1",1);
+        SandArena.googleService.savedGamesLoad("snapSand-0", 0);
+        SandArena.googleService.savedGamesLoad("snapSand-1", 1);
         SandArena.googleService.savedGamesLoad("snapSand-2", 2);
     }
 
@@ -287,21 +257,41 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
     @Override
     public void startQuickGame() {
         Bundle am = RoomConfig.createAutoMatchCriteria(1, 1, 0);
-        // build the room config:
         RoomConfig.Builder roomConfigBuilder = RoomConfig.builder(new AndroidRoomUpdateListener(this))
                 .setRoomStatusUpdateListener(new AndroidRoomStatusUpdateListener(this))
                 .setMessageReceivedListener(new AndroidRealTimeMessageReceivedListener(this));
         roomConfigBuilder.setAutoMatchCriteria(am);
         RoomConfig roomConfig = roomConfigBuilder.build();
-        // create room:
         Games.RealTimeMultiplayer.create(_gameHelper.getApiClient(), roomConfig);
-        // prevent screen from sleeping during handshake
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         // go to game screen
 
     }
 
     public GameHelper get_gameHelper() {
         return _gameHelper;
+    }
+
+    public void sendOtherPlayer(String mess) {
+        printError("Send : "+mess);
+        byte[] message = mess.getBytes();
+        printError("Send : " + message);
+        printError("From : "+myId+" To :"+ennemyId+" In : "+roomId);
+        Games.RealTimeMultiplayer.sendReliableMessage(_gameHelper.getApiClient(), null, message, roomId, ennemyId);
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
+
+    public void setMyId(String myId) {
+        this.myId = myId;
+    }
+
+    public String getMyId() {
+        return myId;
+    }
+
+    public void setEnnemyId(String ennemyId) {
+        this.ennemyId = ennemyId;
     }
 }

@@ -1,6 +1,4 @@
-package sandarena.android;
-
-import android.view.WindowManager;
+package sandarena.android.roomlistener;
 
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.multiplayer.Participant;
@@ -8,6 +6,9 @@ import com.google.android.gms.games.multiplayer.realtime.Room;
 import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListener;
 
 import java.util.List;
+
+import sandarena.android.AndroidLauncher;
+import sandarena.googleservice.IGoogleService;
 
 /**
  * Created by lucmo on 07/10/2015.
@@ -34,7 +35,17 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
         if (playing) {
             System.err.println("Game allready launched");
         } else if (shouldStartGame(room)) {
-            System.err.println("Game Start here");
+            container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
+            for (String id : room.getParticipantIds()){
+                if (id != container.getMyId()){
+                    container.setEnnemyId(id);
+                }
+            }
+            if (room.getParticipantIds().get(0)==container.getMyId()){
+                IGoogleService.data.commence = true;
+            }
+            container.setRoomId(room.getRoomId());
+            IGoogleService.data.lancePartie = true;
         }
     }
 
@@ -87,7 +98,6 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
         // peer left -- see if game should be canceled
         if (playing) {
             Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), null, room.getCreatorId());
-            container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 

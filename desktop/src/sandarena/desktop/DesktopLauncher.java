@@ -3,7 +3,7 @@ package sandarena.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import sandarena.DesktopGoogleService;
+import sandarena.googleservice.DesktopGoogleService;
 import sandarena.SandArena;
 
 public class DesktopLauncher {

@@ -41,8 +41,9 @@ public class PanneauEquipe extends Actor {
     public void clique() {
         if (equipe != null){
             SandArena.googleService.printError("Equipe Find");
-            //SandArena.googleService.startQuickGame();
-            new sandarena.connexion.ConnexionServeur(container.getContainer().getContainer(),equipe);
+            SandArena.googleService.startQuickGame();
+            container.setEquipe(place);
+            //new sandarena.connexion.ConnexionServeur(container.getContainer().getContainer(),equipe);
         }else{
             equipe = new Joueur();
             equipe.getPersonnages().add(new Personnage());

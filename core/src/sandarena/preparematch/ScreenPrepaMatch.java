@@ -14,8 +14,8 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import java.util.ArrayList;
 
 import sandarena.SandArena;
-import sandarena.connexion.ConnexionMatch;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.preparematch.barre.StageBarre;
@@ -88,8 +88,8 @@ public class ScreenPrepaMatch implements Screen {
 
     @Override
     public void show() {
-        boolean alea = (ConnexionMatch.first);
-        this.setPrincipal(new StagePrincipalScreenPrepa(this, joueur, alea, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
+        boolean commence = IGoogleService.data.commence;
+        this.setPrincipal(new StagePrincipalScreenPrepa(this, joueur, commence, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
         this.setBarre(new StageBarre(this.getPrincipal(), joueur, new ExtendViewport(Resolution.width - Resolution.differenceBas, Resolution.differenceBas, Resolution.width - Resolution.differenceBas, Resolution.differenceBas), batch));
         setSurcouche(new Stage(new FillViewport(Resolution.width, Resolution.height), batch));
         getPrincipal().setBarre(this.getBarre());

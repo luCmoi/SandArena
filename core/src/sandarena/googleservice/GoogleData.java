@@ -1,4 +1,4 @@
-package sandarena;
+package sandarena.googleservice;
 
 /**
  * Created by lucmo on 06/10/2015.
@@ -8,4 +8,7 @@ public class GoogleData {
     public String[] save = new String[3];
     public String[] meta = new String[3];
     public byte chargementSaveLoad = 0;
+    public boolean lancePartie = false;
+    public byte[] mess = null;
+    public boolean commence = false;
 }
