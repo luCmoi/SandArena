@@ -63,24 +63,30 @@ public class ConnexionMatch {
             @Override
             public void run() {
                 try {
+                    String mess = null;
+                    SandArena.googleService.printError("En attente");
                     while (true) {
-                        String mess = null;
                         while (mess == null) {
-                            mess = br.readLine();
+                            if (IGoogleService.data.mess != null) {
+                                mess = new String(IGoogleService.data.mess);
+                                IGoogleService.data.mess = null;
+                            }
                         }
-                        if (mess.equals(PERSOACTIF)) {
-                            partieRecoitPersoActif(partie);
-                        } else if (mess.equals(DEPLACEMENT)) {
-                            partieRecoitDeplacement(partie);
-                        } else if (mess.equals(COMPETENCE)) {
-                            partieRecoitCompetence(partie);
-                        } else if (mess.equals(UTILISECOMPETENCE)) {
-                            partieRecoitUtiliseCompetence(partie);
-                        } else if (mess.equals(FINPHASE)) {
+                        SandArena.googleService.printError("Message reçus : " + mess);
+                        if (mess.startsWith(PERSOACTIF)) {
+                            partieRecoitPersoActif(partie,mess.substring(4));
+                        } else if (mess.startsWith(DEPLACEMENT)) {
+                            partieRecoitDeplacement(partie,mess.substring(4));
+                        } else if (mess.startsWith(COMPETENCE)) {
+                            partieRecoitCompetence(partie,mess.substring(4));
+                        } else if (mess.startsWith(UTILISECOMPETENCE)) {
+                            partieRecoitUtiliseCompetence(partie,mess.substring(4));
+                        } else if (mess.startsWith(FINPHASE)) {
                             partieRecoitFinPhase(partie);
-                        } else if (mess.equals(ECHANGE)) {
-                            partieRecoitEchange(partie);
+                        } else if (mess.startsWith(ECHANGE)) {
+                            partieRecoitEchange(partie,mess.substring(4));
                         }
+                        mess = null;
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -89,36 +95,38 @@ public class ConnexionMatch {
         }.start();
     }
 
-    public static void partieRecoitPersoActif(Partie partie) throws IOException {
-        int perso = Integer.parseInt(br.readLine());
+    public static void partieRecoitPersoActif(Partie partie, String mess) throws IOException {
+        int perso = Integer.parseInt(mess.substring(0, 4));
         partie.setPersonnageActif(perso);
     }
 
     public static void partieEnvoiPersoActif(int persoActif) {
-        pw.println(PERSOACTIF);
-        pw.println(persoActif);
-        pw.flush();
+        String mess = PERSOACTIF;
+        mess = mess.concat(string4(persoActif));
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitDeplacement(Partie partie) throws IOException {
-        partieRecoitPersoActif(partie);
-        int x = Integer.parseInt(br.readLine());
-        int y = Integer.parseInt(br.readLine());
+    public static void partieRecoitDeplacement(Partie partie, String mess) throws IOException {
+        partieRecoitPersoActif(partie, mess);
+        int x = Integer.parseInt(mess.substring(4, 8));
+        int y = Integer.parseInt(mess.substring(8, 12));
         partie.selectChemin(partie.getPlateau()[x][y]);
         partie.deplacement();
     }
 
     public static void partieEnvoiDeplacement(int perso, int coordX, int coordY) {
-        pw.println(DEPLACEMENT);
-        pw.println(perso);
-        pw.println(coordX);
-        pw.println(coordY);
-        pw.flush();
+        String mess = DEPLACEMENT;
+        mess = mess.concat(string4(perso));
+        mess = mess.concat(string4(coordX));
+        mess = mess.concat(string4(coordY));
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitCompetence(Partie partie) throws IOException {
-        partieRecoitPersoActif(partie);
-        int i = Integer.parseInt(br.readLine());
+    public static void partieRecoitCompetence(Partie partie, String mess) throws IOException {
+        partieRecoitPersoActif(partie, mess);
+        int i = Integer.parseInt(mess.substring(4,8));
         if (i != -1) {
             partie.setCompetenceActive(partie.getPersonnageActif().getCompetence()[i]);
         } else {
@@ -127,27 +135,29 @@ public class ConnexionMatch {
     }
 
     public static void partieEnvoiCompetence(int perso, int comp) {
-        pw.println(COMPETENCE);
-        pw.println(perso);
-        pw.println(comp);
-        pw.flush();
+        String mess = COMPETENCE;
+        mess = mess.concat(string4(perso));
+        mess = mess.concat(string4(comp));
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitUtiliseCompetence(Partie partie) throws IOException {
-        partieRecoitCompetence(partie);
-        int x = Integer.parseInt(br.readLine());
-        int y = Integer.parseInt(br.readLine());
+    public static void partieRecoitUtiliseCompetence(Partie partie, String mess) throws IOException {
+        partieRecoitCompetence(partie, mess);
+        int x = Integer.parseInt(mess.substring(4, 8));
+        int y = Integer.parseInt(mess.substring(8, 12));
         partie.getCompetenceActive().agit(partie.getPlateau()[x][y]);
         partie.getContainer().getStageInterface().recharge();
     }
 
     public static void partieEnvoiUtiliseCompetence(int perso, int comp, int coordX, int coordY) {
-        pw.println(UTILISECOMPETENCE);
-        pw.println(perso);
-        pw.println(comp);
-        pw.println(coordX);
-        pw.println(coordY);
-        pw.flush();
+        String mess = UTILISECOMPETENCE;
+        mess = mess.concat(string4(perso));
+        mess = mess.concat(string4(comp));
+        mess = mess.concat(string4(coordX));
+        mess = mess.concat(string4(coordY));
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
     }
 
     public static void partieRecoitFinPhase(Partie partie) {
@@ -156,22 +166,32 @@ public class ConnexionMatch {
     }
 
     public static void partieEnvoiFinPhase() {
-        pw.println(FINPHASE);
-        pw.flush();
+        String mess = FINPHASE;
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
     }
 
     public static void partieEnvoiEchange(int perso, int coordX, int coordY) {
-        pw.println(ECHANGE);
-        pw.println(perso);
-        pw.println(coordX);
-        pw.println(coordY);
-        pw.flush();
+        String mess = ECHANGE;
+        mess = mess.concat(string4(perso));
+        mess = mess.concat(string4(coordX));
+        mess = mess.concat(string4(coordY));
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitEchange(Partie partie) throws IOException {
-        partieRecoitPersoActif(partie);
-        int x = Integer.parseInt(br.readLine());
-        int y = Integer.parseInt(br.readLine());
+    public static void partieRecoitEchange(Partie partie, String mess) throws IOException {
+        partieRecoitPersoActif(partie, mess);
+        int x = Integer.parseInt(mess.substring(4, 8));
+        int y = Integer.parseInt(mess.substring(8, 12));
         partie.getPlateau()[x][y].echange();
+    }
+
+    public static String string4(int entre){
+        String retour = String.valueOf(entre);
+        while (retour.length()<4){
+            retour = "0".concat(retour);
+        }
+        return retour;
     }
 }

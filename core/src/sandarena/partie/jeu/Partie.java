@@ -9,20 +9,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import sandarena.SandArena;
 import sandarena.connexion.ConnexionMatch;
-import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.carte.BanqueCarte;
 import sandarena.donnee.carte.CaseSpeciale;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.partie.*;
-import sandarena.partie.jeu.compcase.CompetenceIG;
-import sandarena.partie.jeu.compcase.JoueurIG;
-import sandarena.partie.jeu.compcase.PersonnageIG;
+import sandarena.partie.AlgorithmePathfinding;
+import sandarena.partie.ScreenPartie;
 import sandarena.partie.gui.Camera;
 import sandarena.partie.gui.PartieListener;
 import sandarena.partie.gui.interfacep.StageInterface;
+import sandarena.partie.jeu.compcase.CompetenceIG;
+import sandarena.partie.jeu.compcase.JoueurIG;
+import sandarena.partie.jeu.compcase.PersonnageIG;
 
 /**
  * Stock toutes les donnees relatives à une instance de partie
@@ -63,6 +65,7 @@ public class Partie extends Stage {
      */
     public Partie(ScreenPartie container, Joueur joueur1, ArrayList<Personnage> personnagesActif, Joueur joueur2, ArrayList<Personnage> personnagesAutre, boolean commence, Viewport viewport, Batch batch) {
         super(viewport, batch);
+        SandArena.googleService.printError(String.valueOf(commence));
         this.container = container;
         this.stageInterface = this.container.getStageInterface();
         this.getViewport().setCamera(new Camera(this));
@@ -181,6 +184,7 @@ public class Partie extends Stage {
                 return;
             }
         }
+        SandArena.googleService.printError("Fin tour");
         if (joueur.equals(getJoueurActif())) {
             if (commence) {
                 phase(getJoueurAutre());
@@ -188,6 +192,7 @@ public class Partie extends Stage {
                 tour();
             }
         } else {
+            SandArena.googleService.printError("tour autre");
             if (commence) {
                 tour();
             } else {
