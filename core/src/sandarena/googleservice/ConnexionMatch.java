@@ -1,13 +1,9 @@
-package sandarena.connexion;
+package sandarena.googleservice;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 import sandarena.SandArena;
 import sandarena.donnee.competence.BanqueCompetence;
-import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Personnage;
 import sandarena.partie.jeu.Partie;
 
@@ -21,13 +17,8 @@ public class ConnexionMatch {
     private static final String UTILISECOMPETENCE = "SETH";
     private static final String FINPHASE = "LETO";
     private static final String ECHANGE = "RHEA";
-    public static Socket socketLien;
-    public static PrintWriter pw;
-    public static BufferedReader br;
-    public static boolean first;
 
     public static Personnage prepareMatchRecoitPerso() {
-        Personnage retour = null;
         String mess = null;
         SandArena.googleService.printError("En attente");
         while (mess == null) {
@@ -37,7 +28,7 @@ public class ConnexionMatch {
             }
         }
         SandArena.googleService.printError("mess Recu : " + mess);
-        retour = new Personnage(Integer.parseInt(mess.substring(0, 4)));
+        Personnage retour = new Personnage(Integer.parseInt(mess.substring(0, 4)));
         for (int i = 0; i < 4; i++) {
             BanqueCompetence.EntreeCompetence compTmp = null;
             while (compTmp == null) {

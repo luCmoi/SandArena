@@ -16,11 +16,9 @@ public class ScreenSelectionEquipe implements Screen {
     private Batch batch;
     private SandArena container;
     private StageSelectionEquipe stage;
-    private Joueur[] equipe;
 
     public ScreenSelectionEquipe(SandArena container, Joueur[] equipe){
         this.container = container;
-        this.equipe = equipe;
         this.batch = container.getBatch();
         setStage(new StageSelectionEquipe(this,batch,equipe));
         Gdx.input.setInputProcessor(this.getStage());
@@ -74,5 +72,9 @@ public class ScreenSelectionEquipe implements Screen {
 
     public SandArena getContainer() {
         return container;
+    }
+
+    public void setTouchableDisabled() {
+        Gdx.input.setInputProcessor(null);
     }
 }

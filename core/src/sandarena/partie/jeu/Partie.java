@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
 
 import sandarena.SandArena;
-import sandarena.connexion.ConnexionMatch;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.donnee.carte.BanqueCarte;
 import sandarena.donnee.carte.CaseSpeciale;
 import sandarena.donnee.donneestatic.Resolution;

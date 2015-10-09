@@ -2,7 +2,7 @@ package sandarena.partie.gui.interfacep.empinterface;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import sandarena.connexion.ConnexionMatch;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowCompIG;
 import sandarena.joueur.competence.CompetenceActive;

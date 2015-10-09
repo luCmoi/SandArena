@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
-import sandarena.connexion.ConnexionMatch;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.carte.BanqueCarte;
 import sandarena.donnee.donneestatic.Utili;

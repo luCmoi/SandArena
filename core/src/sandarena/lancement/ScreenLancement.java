@@ -16,7 +16,7 @@ import sandarena.selectionequipe.ScreenSelectionEquipe;
  * Created by lucmo on 06/10/2015.
  */
 public class ScreenLancement implements Screen {
-    private final SandArena container;
+    private SandArena container;
     private Joueur[] equipe = new Joueur[3];
     private boolean loaded = false;
 
@@ -48,6 +48,7 @@ public class ScreenLancement implements Screen {
                 }
             }
             container.setScreen(new ScreenSelectionEquipe(container, equipe));
+            this.dispose();
         }
     }
 
@@ -106,6 +107,7 @@ public class ScreenLancement implements Screen {
 
     @Override
     public void dispose() {
-
+        container = null;
+        equipe = null;
     }
 }

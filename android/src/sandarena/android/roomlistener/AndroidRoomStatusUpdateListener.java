@@ -1,5 +1,7 @@
 package sandarena.android.roomlistener;
 
+import android.view.WindowManager;
+
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.Room;
@@ -54,8 +56,13 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
         if (playing) {
             System.err.println("Player left when in game");
         } else {
+            container.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            });
             Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), null, room.getCreatorId());
-            //container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
@@ -95,8 +102,13 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
 
     @Override
     public void onPeerLeft(Room room, List<String> peers) {
-        // peer left -- see if game should be canceled
         if (playing) {
+            container.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            });
             Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), null, room.getCreatorId());
         }
     }

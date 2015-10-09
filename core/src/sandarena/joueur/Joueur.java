@@ -14,6 +14,7 @@ public class Joueur {
             perso.dispose();
         }
         personnages.clear();
+        personnages = null;
     }
 
     public ArrayList<Personnage> getPersonnages() {

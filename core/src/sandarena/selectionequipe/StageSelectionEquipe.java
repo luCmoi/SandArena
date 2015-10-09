@@ -9,10 +9,8 @@ import sandarena.googleservice.IGoogleService;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.preparematch.ScreenPrepaMatch;
+import sandarena.selectionequipe.contenupanneau.PanneauEquipe;
 
-/**
- * Created by lucmo on 05/10/2015.
- */
 public class StageSelectionEquipe extends Stage{
     private final ScreenSelectionEquipe container;
     private final FondSelection fond;

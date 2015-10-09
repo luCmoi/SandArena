@@ -3,7 +3,7 @@ package sandarena.android;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.WindowManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -21,14 +21,13 @@ import com.google.android.gms.plus.Plus;
 
 import java.io.IOException;
 
+import sandarena.SandArena;
 import sandarena.android.roomlistener.AndroidRealTimeMessageReceivedListener;
 import sandarena.android.roomlistener.AndroidRoomStatusUpdateListener;
 import sandarena.android.roomlistener.AndroidRoomUpdateListener;
 import sandarena.googleservice.IGoogleService;
-import sandarena.SandArena;
 
 public class AndroidLauncher extends AndroidApplication implements IGoogleService {
-    private static final String TAG = "Err";
     private GameHelper _gameHelper;
     // Request code used to invoke Snapshot selection UI.
     private static final int RC_SELECT_SNAPSHOT = 9002;
@@ -40,7 +39,6 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Create the GameHelper.
         _gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
         _gameHelper.createApiClientBuilder().addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
@@ -126,11 +124,6 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
         _gameHelper.onActivityResult(requestCode, resultCode, data);
     }
 
-    /**
-     * Display metadata about Snapshot save data.
-     *
-     * @param metadata the SnapshotMetadata associated with the saved game.
-     */
     private String displaySnapshotMetadata(SnapshotMetadata metadata) {
         if (metadata == null) {
             return "";
@@ -144,13 +137,6 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
         return metadataStr;
     }
 
-    /**
-     * Load a Snapshot from the Saved Games service based on its unique name.  After load, the UI
-     * will update to display the Snapshot data and SnapshotMetadata.
-     *
-     * @param snapshotName the unique name of the Snapshot.
-     * @param place
-     */
     public void savedGamesLoad(String snapshotName, final int place) {
         PendingResult<Snapshots.OpenSnapshotResult> pendingResult = Games.Snapshots.open(_gameHelper.getApiClient(), snapshotName, false);
         ResultCallback<Snapshots.OpenSnapshotResult> callback = new ResultCallback<Snapshots.OpenSnapshotResult>() {
@@ -188,25 +174,6 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
         pendingResult.setResultCallback(callback);
     }
 
-
-    /**
-     * Launch the UI to select a Snapshot from the user's Saved Games.  The result of this
-     * selection will be returned to onActivityResult.
-     */
-    public void savedGamesSelect() {
-        final boolean allowAddButton = false;
-        final boolean allowDelete = false;
-        Intent intent = Games.Snapshots.getSelectSnapshotIntent(_gameHelper.getApiClient(), "Saved Games", allowAddButton, allowDelete, Snapshots.DISPLAY_LIMIT_NONE);
-        startActivityForResult(intent, RC_SELECT_SNAPSHOT);
-    }
-
-
-    /**
-     * Update the Snapshot in the Saved Games service with new data.  Metadata is not affected,
-     * however for your own application you will likely want to update metadata such as cover image,
-     * played time, and description with each Snapshot update.  After update, the UI will
-     * be cleared.
-     */
     public void savedGamesUpdate(final String snapshotName, String dataStr) {
         final boolean createIfMissing = true;
         final byte[] data = dataStr.getBytes();
@@ -216,7 +183,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
             protected Boolean doInBackground(Void... params) {
                 Snapshots.OpenSnapshotResult open = Games.Snapshots.open(_gameHelper.getApiClient(), snapshotName, createIfMissing).await();
                 if (!open.getStatus().isSuccess()) {
-                    Log.w(TAG, "Could not open Snapshot for update.");
+                    System.err.println("Could not open Snapshot for update.");
                     return false;
                 }
                 // Change data but leave existing metadata
@@ -224,7 +191,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
                 snapshot.getSnapshotContents().writeBytes(data);
                 Snapshots.CommitSnapshotResult commit = Games.Snapshots.commitAndClose(_gameHelper.getApiClient(), snapshot, SnapshotMetadataChange.EMPTY_CHANGE).await();
                 if (!commit.getStatus().isSuccess()) {
-                    Log.w(TAG, "Failed to commit Snapshot.");
+                    System.err.println("Failed to commit Snapshot.");
                     return false;
                 }
                 return true;
@@ -263,7 +230,12 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
         roomConfigBuilder.setAutoMatchCriteria(am);
         RoomConfig roomConfig = roomConfigBuilder.build();
         Games.RealTimeMultiplayer.create(_gameHelper.getApiClient(), roomConfig);
-        // go to game screen
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        });
 
     }
 
