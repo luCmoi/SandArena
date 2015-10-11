@@ -12,6 +12,10 @@ import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.selectionequipe.ScreenSelectionEquipe;
 
+import static sandarena.donnee.carte.CarteXML.parseCarteXML;
+import static sandarena.donnee.competence.CompXML.parseCompXML;
+import static sandarena.donnee.personnage.PersoXML.parsePersoXML;
+
 /**
  * Created by lucmo on 06/10/2015.
  */
@@ -19,10 +23,13 @@ public class ScreenLancement implements Screen {
     private SandArena container;
     private Joueur[] equipe = new Joueur[3];
     private boolean loaded = false;
+    private StageLancement stageLancement;
+    private boolean loadBase = false;
 
     public ScreenLancement(SandArena sandArena) {
         this.container = sandArena;
-
+        this.stageLancement = new StageLancement(this,container.getBatch());
+        stageLancement.setTexte("Chargement des ressources");
     }
 
     @Override
@@ -30,20 +37,26 @@ public class ScreenLancement implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
+        stageLancement.draw();
+        if (!loadBase) {
+            loadBase = true;
+            parseCompXML();
+            parsePersoXML();
+            parseCarteXML();
+            stageLancement.setTexte("Connexion");
+        }
         if (SandArena.googleService.isSignedIn() && !loaded) {
+            stageLancement.setTexte("Chargement des sauvegardes");
             loaded = true;
             SandArena.googleService.savedGamesLoadAll();
-            SandArena.googleService.printError("Load Finish");
         }
         if (IGoogleService.data.chargementSaveLoad == 3){
-            SandArena.googleService.printError("Decrypt");
+            stageLancement.setTexte("Lecture des sauvegardes");
             IGoogleService.data.chargementSaveLoad = -1;
             for (int i = 0; i < 3; i++) {
                 if (IGoogleService.data.save[i]!=null){
-                    SandArena.googleService.printError("Save");
                     equipe[i] = parseEquipe(IGoogleService.data.save[i]);
                 }else{
-                    SandArena.googleService.printError("No save");
                     equipe[i] = null;
                 }
             }
@@ -109,5 +122,6 @@ public class ScreenLancement implements Screen {
     public void dispose() {
         container = null;
         equipe = null;
+        stageLancement.dispose();
     }
 }

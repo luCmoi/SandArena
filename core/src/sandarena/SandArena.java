@@ -12,10 +12,6 @@ import sandarena.joueur.Personnage;
 import sandarena.lancement.ScreenLancement;
 import sandarena.partie.ScreenPartie;
 
-import static sandarena.donnee.carte.CarteXML.parseCarteXML;
-import static sandarena.donnee.competence.CompXML.parseCompXML;
-import static sandarena.donnee.personnage.PersoXML.parsePersoXML;
-
 /**
  * Class principale de l'application SandArena, un applicationAdapter
  *
@@ -44,9 +40,6 @@ public class SandArena extends Game {
         } catch (IOException ex) {
             System.err.println("error : File");
         }
-        parseCompXML();
-        parsePersoXML();
-        parseCarteXML();
         this.setScreen(new ScreenLancement(this));
     }
 

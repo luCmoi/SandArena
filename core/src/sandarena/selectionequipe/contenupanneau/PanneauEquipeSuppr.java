@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
+import sandarena.donnee.donneestatic.Font;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
 
 /**
@@ -23,6 +25,9 @@ public class PanneauEquipeSuppr extends Actor{
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(Utili.competenceable, getX(), getY(), getWidth(), getHeight());
+        batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
+        Font.font.setScale(Resolution.ratioWidth * 4, Resolution.ratioHeight * 4);
+        Font.font.draw(batch,"Supprimer",getWidth()/6,getHeight() -(getHeight()/10));
     }
 
     public void clique() {

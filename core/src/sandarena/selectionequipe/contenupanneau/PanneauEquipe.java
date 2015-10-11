@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.SandArena;
+import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.joueur.Joueur;
@@ -20,7 +21,6 @@ public class PanneauEquipe extends Group {
     private StageSelectionEquipe container;
     private Joueur equipe;
     private PanneauEquipeSuppr suppr;
-    private boolean suprimer = false;
     private boolean supprimer;
 
     public PanneauEquipe(StageSelectionEquipe stageSelectionEquipe, int place, Joueur equipe) {
@@ -44,6 +44,10 @@ public class PanneauEquipe extends Group {
             for (int i = 0; i < equipe.getPersonnages().size(); i++) {
                 batch.draw(equipe.getPersonnages().get(i).commun.image, getX() + (getWidth() / 3) * (i % 3), getHeight() - (getWidth() / 3) * (1 + (i / 3)), getWidth() / 3, getWidth() / 3);
             }
+        }else {
+            Font.font.setScale(Resolution.ratioWidth * 5, Resolution.ratioHeight * 5);
+            Font.font.draw(batch, "Nouvelle",getX() + getWidth() / 6, getHeight() - (getHeight() / 3));
+            Font.font.draw(batch,"Equipe",getX()+ getWidth()/5,getHeight() -(getHeight()/3)-Font.font.getLineHeight());
         }
     }
 
