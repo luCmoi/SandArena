@@ -34,10 +34,11 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
 
     @Override
     public void onPeersConnected(Room room, List<String> peers) {
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         if (playing) {
             System.err.println("Game allready launched");
         } else if (shouldStartGame(room)) {
-            container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
             for (String id : room.getParticipantIds()){
                 if (id != container.getMyId()){
                     container.setEnnemyId(id);
@@ -62,7 +63,8 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
                     container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
             });
-            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), null, room.getCreatorId());
+            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            IGoogleService.data.justLeft = true;
         }
     }
 
@@ -78,26 +80,32 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
 
     @Override
     public void onRoomConnecting(Room room) {
-
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
     }
 
     @Override
     public void onRoomAutoMatching(Room room) {
-
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
     }
 
     @Override
     public void onPeerInvitedToRoom(Room room, List<String> list) {
-
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
     }
 
     @Override
     public void onPeerDeclined(Room room, List<String> list) {
-
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
     }
 
     @Override
     public void onPeerJoined(Room room, List<String> list) {
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
     }
 
     @Override
@@ -109,16 +117,21 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
                     container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
             });
-            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), null, room.getCreatorId());
+            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            IGoogleService.data.justLeft = true;
         }
     }
 
     @Override
     public void onConnectedToRoom(Room room) {
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
     }
 
     @Override
     public void onDisconnectedFromRoom(Room room) {
+        container.setRoomId(room.getRoomId());
+        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
     }
 
 }

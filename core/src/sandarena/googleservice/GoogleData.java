@@ -11,4 +11,5 @@ public class GoogleData {
     public boolean lancePartie = false;
     public byte[] mess = null;
     public boolean commence = false;
+    public boolean justLeft = false;
 }

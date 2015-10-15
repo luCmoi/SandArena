@@ -26,4 +26,6 @@ public interface IGoogleService {
     public void startQuickGame();
 
     public void sendOtherPlayer(String mess);
+
+    public void quitQuickGame();
 }

@@ -76,4 +76,9 @@ public class DesktopGoogleService implements IGoogleService
 
     }
 
+    @Override
+    public void quitQuickGame() {
+
+    }
+
 }

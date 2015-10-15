@@ -1,5 +1,6 @@
 package sandarena.selectionequipe.contenupanneau;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -38,6 +39,7 @@ public class PanneauEquipe extends Group {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        batch.draw(Utili.fond, getX(), getY(), getWidth(), getHeight());
         super.draw(batch, parentAlpha);
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         if (equipe != null) {
@@ -45,17 +47,18 @@ public class PanneauEquipe extends Group {
                 batch.draw(equipe.getPersonnages().get(i).commun.image, getX() + (getWidth() / 3) * (i % 3), getHeight() - (getWidth() / 3) * (1 + (i / 3)), getWidth() / 3, getWidth() / 3);
             }
         }else {
+            Font.font.setColor(Color.BLACK);
             Font.font.setScale(Resolution.ratioWidth * 5, Resolution.ratioHeight * 5);
-            Font.font.draw(batch, "Nouvelle",getX() + getWidth() / 6, getHeight() - (getHeight() / 3));
-            Font.font.draw(batch,"Equipe",getX()+ getWidth()/5,getHeight() -(getHeight()/3)-Font.font.getLineHeight());
+            Font.font.draw(batch, "Nouvelle",getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 8 / 2), getHeight() - (getHeight() / 3));
+            Font.font.draw(batch, "Equipe", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 6 / 2), getHeight() - (getHeight() / 3) - Font.font.getLineHeight());
         }
+
+
     }
 
     public void clique() {
         if (equipe != null) {
-            SandArena.googleService.startQuickGame();
-            container.setEquipe(place);
-            container.getContainer().setTouchableDisabled();
+            container.getContainer().launch(this.place);
         } else {
             equipe = new Joueur();
             equipe.getPersonnages().add(new Personnage());
@@ -73,6 +76,7 @@ public class PanneauEquipe extends Group {
     }
 
     public void suppr() {
+        SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(place), Sauvegarde.toData(null));
         this.equipe.dispose();
         this.suppr.dispose();
         this.removeActor(suppr);
@@ -86,5 +90,13 @@ public class PanneauEquipe extends Group {
 
     public boolean getSupprimer() {
         return supprimer;
+    }
+
+    public StageSelectionEquipe getContainer() {
+        return container;
+    }
+
+    public int getPlace() {
+        return place;
     }
 }

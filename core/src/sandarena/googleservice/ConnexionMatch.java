@@ -118,7 +118,7 @@ public class ConnexionMatch {
     public static void partieRecoitCompetence(Partie partie, String mess) throws IOException {
         partieRecoitPersoActif(partie, mess);
         int i = Integer.parseInt(mess.substring(4,8));
-        if (i != -1) {
+        if (i != 9999) {
             partie.setCompetenceActive(partie.getPersonnageActif().getCompetence()[i]);
         } else {
             partie.setCompetenceActive(null);
@@ -135,8 +135,8 @@ public class ConnexionMatch {
 
     public static void partieRecoitUtiliseCompetence(Partie partie, String mess) throws IOException {
         partieRecoitCompetence(partie, mess);
-        int x = Integer.parseInt(mess.substring(4, 8));
-        int y = Integer.parseInt(mess.substring(8, 12));
+        int x = Integer.parseInt(mess.substring(8, 12));
+        int y = Integer.parseInt(mess.substring(12, 16));
         partie.getCompetenceActive().agit(partie.getPlateau()[x][y]);
         partie.getContainer().getStageInterface().recharge();
     }
@@ -179,10 +179,14 @@ public class ConnexionMatch {
     }
 
     public static String string4(int entre){
-        String retour = String.valueOf(entre);
-        while (retour.length()<4){
-            retour = "0".concat(retour);
+        if (entre != -1) {
+            String retour = String.valueOf(entre);
+            while (retour.length() < 4) {
+                retour = "0".concat(retour);
+            }
+            return retour;
+        }else{
+            return "9999";
         }
-        return retour;
     }
 }

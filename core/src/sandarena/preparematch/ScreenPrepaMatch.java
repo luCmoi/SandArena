@@ -18,6 +18,7 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
+import sandarena.lancement.ScreenLancement;
 import sandarena.preparematch.barre.StageBarre;
 import sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 
@@ -61,24 +62,28 @@ public class ScreenPrepaMatch implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glViewport(Resolution.differenceBas / 2, 0, Resolution.width - Resolution.differenceBas, Resolution.differenceBas);
-        if (check != null) {
-            check.commun.incremente();
-            check.getCompetences()[0].incremente();
-            check.getCompetences()[1].incremente();
-            check.getCompetences()[2].incremente();
-            check.getCompetences()[3].incremente();
-            setCheck(null);
-            if (principal.getCommence() && principal.testFin()) {
-                finPrepare();
+        if (!IGoogleService.data.justLeft) {
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            Gdx.gl.glViewport(Resolution.differenceBas / 2, 0, Resolution.width - Resolution.differenceBas, Resolution.differenceBas);
+            if (check != null) {
+                check.commun.incremente();
+                check.getCompetences()[0].incremente();
+                check.getCompetences()[1].incremente();
+                check.getCompetences()[2].incremente();
+                check.getCompetences()[3].incremente();
+                setCheck(null);
+                if (principal.getCommence() && principal.testFin()) {
+                    finPrepare();
+                }
             }
+            this.getBarre().draw();
+            Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
+            this.getPrincipal().draw();
+            this.getSurcouche().draw();
+        }else{
+            container.setScreen(new ScreenLancement(container));
         }
-        this.getBarre().draw();
-        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
-        this.getPrincipal().draw();
-        this.getSurcouche().draw();
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import sandarena.donnee.sol.BanqueSol;
+import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.lancement.ScreenLancement;
@@ -21,9 +22,9 @@ public class SandArena extends Game {
 
     private SpriteBatch batch;
     private ScreenPartie screenPartie;
-    public static sandarena.googleservice.IGoogleService googleService;
+    public static IGoogleService googleService;
 
-    public SandArena(sandarena.googleservice.IGoogleService googleService)
+    public SandArena(IGoogleService googleService)
     {
         super();
         this.googleService = googleService;

@@ -90,6 +90,9 @@ public class ScreenLancement implements Screen {
         if (tmpPers != null){
             retour.getPersonnages().add(tmpPers);
         }
+        if (retour.getPersonnages().isEmpty()){
+            return null;
+        }
         return retour;
     }
 

@@ -34,7 +34,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
     private String roomId;
     private String myId;
     private String ennemyId;
-
+    private AndroidRoomUpdateListener updateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,6 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
             @Override
             public void onSignInSucceeded() {
             }
-
             @Override
             public void onSignInFailed() {
             }
@@ -224,7 +223,8 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
     @Override
     public void startQuickGame() {
         Bundle am = RoomConfig.createAutoMatchCriteria(1, 1, 0);
-        RoomConfig.Builder roomConfigBuilder = RoomConfig.builder(new AndroidRoomUpdateListener(this))
+        updateListener = new AndroidRoomUpdateListener(this);
+        RoomConfig.Builder roomConfigBuilder = RoomConfig.builder(updateListener)
                 .setRoomStatusUpdateListener(new AndroidRoomStatusUpdateListener(this))
                 .setMessageReceivedListener(new AndroidRealTimeMessageReceivedListener(this));
         roomConfigBuilder.setAutoMatchCriteria(am);
@@ -251,6 +251,14 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
         Games.RealTimeMultiplayer.sendReliableMessage(_gameHelper.getApiClient(), null, message, roomId, ennemyId);
     }
 
+    @Override
+    public void quitQuickGame() {
+        if (roomId != null) {
+            Games.RealTimeMultiplayer.leave(_gameHelper.getApiClient(), updateListener, roomId);
+            roomId = null;
+        }
+    }
+
     public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
@@ -265,5 +273,9 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
 
     public void setEnnemyId(String ennemyId) {
         this.ennemyId = ennemyId;
+    }
+
+    public AndroidRoomUpdateListener getUpdateListener() {
+        return updateListener;
     }
 }

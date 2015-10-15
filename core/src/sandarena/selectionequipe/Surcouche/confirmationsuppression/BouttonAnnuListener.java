@@ -1,15 +1,15 @@
-package sandarena.selectionequipe.contenupanneau;
+package sandarena.selectionequipe.Surcouche.confirmationsuppression;
 
-        import com.badlogic.gdx.scenes.scene2d.InputEvent;
-        import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
- * Created by lucmo on 09/10/2015.
+ * Created by lucmo on 13/10/2015.
  */
-public class PanneauEquipeSupprListener extends InputListener {
-    private PanneauEquipeSuppr container;
+public class BouttonAnnuListener extends InputListener {
+    private BouttonAnnu container;
 
-    public PanneauEquipeSupprListener(PanneauEquipeSuppr container) {
+    public BouttonAnnuListener(BouttonAnnu container) {
         this.container = container;
     }
 

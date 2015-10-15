@@ -13,7 +13,6 @@ import sandarena.selectionequipe.contenupanneau.PanneauEquipe;
 
 public class StageSelectionEquipe extends Stage{
     private final ScreenSelectionEquipe container;
-    private final FondSelection fond;
     private final Joueur[] equipe;
     private int equipeSelect;
 
@@ -21,8 +20,6 @@ public class StageSelectionEquipe extends Stage{
         super(new FillViewport(Resolution.width,Resolution.height), batch);
         this.container = container;
         this.equipe=equipe;
-        fond = new FondSelection(this);
-        this.addActor(fond);
         this.addActor(new PanneauEquipe(this,0,equipe[0]));
         this.addActor(new PanneauEquipe(this,1,equipe[1]));
         this.addActor(new PanneauEquipe(this,2,equipe[2]));
@@ -47,5 +44,9 @@ public class StageSelectionEquipe extends Stage{
 
     public void setEquipe(int equipe) {
         this.equipeSelect = equipe;
+    }
+
+    public void suppr(int panel) {
+        ((PanneauEquipe)getActors().get(panel)).suppr();
     }
 }

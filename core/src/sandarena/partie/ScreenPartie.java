@@ -15,8 +15,10 @@ import java.util.ArrayList;
 
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
+import sandarena.lancement.ScreenLancement;
 import sandarena.partie.gui.interfacep.StageInterface;
 
 /**
@@ -26,7 +28,7 @@ import sandarena.partie.gui.interfacep.StageInterface;
 public class ScreenPartie implements Screen {
 
     private Batch batch;
-    private SandArena conteneur;
+    private SandArena container;
     private sandarena.partie.jeu.Partie partie;
     private StageInterface interfaceS;
     //Temporaire
@@ -35,10 +37,10 @@ public class ScreenPartie implements Screen {
     private Stage surcouche;
     private int map;
 
-    public ScreenPartie(SandArena conteneur, Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence,int map) {
-        this.conteneur = conteneur;
+    public ScreenPartie(SandArena container, Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence,int map) {
+        this.container = container;
         this.map = map;
-        this.batch = conteneur.getBatch();
+        this.batch = container.getBatch();
         //Temporaire
         joueurActif = joueur;
         joueurAutre = new Joueur();
@@ -51,6 +53,7 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void render(float f) {
+        if (!IGoogleService.data.justLeft){
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.partie.getViewport().update();
@@ -59,6 +62,9 @@ public class ScreenPartie implements Screen {
         this.interfaceS.draw();
         Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
         this.surcouche.draw();
+    }else{
+        container.setScreen(new ScreenLancement(container));
+    }
     }
 
     @Override
@@ -88,7 +94,7 @@ public class ScreenPartie implements Screen {
             getBatch().dispose();
             this.batch = null;
         }
-        conteneur = null;
+        container = null;
         partie.dispose();
         partie = null;
         interfaceS.dispose();
@@ -105,8 +111,8 @@ public class ScreenPartie implements Screen {
         this.batch = batch;
     }
 
-    public SandArena getConteneur() {
-        return conteneur;
+    public SandArena getContainer() {
+        return container;
     }
 
     public sandarena.partie.jeu.Partie getPartie() {
