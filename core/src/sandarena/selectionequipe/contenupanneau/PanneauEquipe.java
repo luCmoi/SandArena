@@ -9,6 +9,7 @@ import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
+import sandarena.gestionequipe.ScreenGestionEquipe;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.selectionequipe.Sauvegarde;
@@ -58,7 +59,8 @@ public class PanneauEquipe extends Group {
 
     public void clique() {
         if (equipe != null) {
-            container.getContainer().launch(this.place);
+            container.getContainer().getContainer().setScreen(new ScreenGestionEquipe(container.getContainer().getContainer(),equipe));
+            //container.getContainer().launch(this.place);
         } else {
             equipe = new Joueur();
             equipe.getPersonnages().add(new Personnage());

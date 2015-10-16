@@ -88,12 +88,6 @@ public class StageBarre extends Stage {
         return super.hit(stageX, stageY, touchable);
     }
 
-    public void ajoute(Personnage perso) {
-        persos.add(new sandarena.preparematch.barre.emplacement.EmplacementBarre(this, persos.size(), perso));
-        this.addActor(persos.get(persos.size() - 1));
-        this.widthTailleTotale = this.widthTailleTotale + Resolution.differenceBas;
-    }
-
     public ArrayList<sandarena.preparematch.barre.emplacement.EmplacementBarre> getPersos() {
         return persos;
     }

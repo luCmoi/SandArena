@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.joueur.Personnage;
 import sandarena.preparematch.stageprincipal.PanelScreenPrepaMatch;
 
@@ -47,6 +48,7 @@ public class EmplacementPanelScreenPrepaMatch extends Group{
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        batch.draw(Utili.fond,getX(),getY(),getWidth(),getHeight());
         super.draw(batch, parentAlpha);
     }
 

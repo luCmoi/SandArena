@@ -34,6 +34,11 @@ public class FlecheListe extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        if (gauche){
+            batch.draw(Utili.fleche, getX(), getY(), getWidth(), getHeight());
+        }else{
+            batch.draw(Utili.fleche, getX(), getY(), getWidth(), getHeight(), 0, 0, Utili.fleche.getWidth(), Utili.fleche.getHeight(), true, false);
+        }
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
     }
 
