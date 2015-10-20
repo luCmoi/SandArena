@@ -47,4 +47,8 @@ public class StagePersonnageGestionEquipe extends Stage {
     public ScreenGestionEquipe getContainer() {
         return container;
     }
+
+    public void add(Personnage tmp, byte place) {
+        ((EmplacementPersoGestion)this.getActors().get(place)).setPerso(tmp);
+    }
 }

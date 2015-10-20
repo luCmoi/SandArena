@@ -28,6 +28,8 @@ public class UnitPersoGestion extends Actor {
         if (perso != null) {
             batch.draw(perso.commun.image, getX(), getY(), getWidth(), getHeight());
             ((UnitPersoGestionListener) (getListeners().get(0))).update();
+        }else{
+            batch.draw(Utili.plus, getX(), getY(), getWidth(),getHeight());
         }
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
     }
@@ -55,6 +57,12 @@ public class UnitPersoGestion extends Actor {
         if (info != null) {
             this.info.dispose();
             info = null;
+        }
+    }
+
+    public void clique(){
+        if (perso == null){
+            container.getContainer().getContainer().getSurcouche().activateAchatPerso(container.getPlace());
         }
     }
 }

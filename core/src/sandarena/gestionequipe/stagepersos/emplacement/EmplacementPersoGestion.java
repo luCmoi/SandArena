@@ -49,4 +49,9 @@ public class EmplacementPersoGestion extends Group{
     public StagePersonnageGestionEquipe getContainer() {
         return container;
     }
+
+    public byte getPlace() {
+        return place;
+    }
+
 }

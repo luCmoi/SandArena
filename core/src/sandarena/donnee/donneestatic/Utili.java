@@ -31,4 +31,6 @@ public class Utili {
     public final static Texture desertChargement= new Texture(Gdx.files.internal("Image/Util/DesertV01.png"));
     public final static Texture fondTexte = new Texture(Gdx.files.internal("Image/Util/FondTexte.png"));
     public final static Texture fleche = new Texture(Gdx.files.internal("Image/Util/Fleche.png"));
+    public final static Texture plus = new Texture(Gdx.files.internal("Image/Util/Plus.png"));
+
 }

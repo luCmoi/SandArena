@@ -79,21 +79,11 @@ public class ScreenSelectionEquipe implements Screen {
         return container;
     }
 
-    public void setTouchableDisabled() {
-        Gdx.input.setInputProcessor(null);
-    }
-
     public void confirme(int panel) {
         stage.suppr(panel);
     }
 
     public void confSuppr(int panel) {
         surcouche.activateConfirmeSuppr(panel);
-    }
-
-    public void launch(int place) {
-        SandArena.googleService.startQuickGame();
-        stage.setEquipe(place);
-        surcouche.activateAttente(place);
     }
 }

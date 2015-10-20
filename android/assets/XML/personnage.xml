@@ -41,4 +41,24 @@
         <affinite>affforce</affinite>
     </entreperso>
 
+    <entreperso id="1005">
+        <nom>Chaman Cornu</nom>
+        <description>Ces êtres mystique sont un secret pour chacun, nul ne sait s'il sont le fruit de malédictions ou de leur propre volontée</description>
+        <image>Image/Personnage/ChamanCornu.png</image>
+        <caract vie="10" vitesse="4" force="1" agilite="4" magie="5" />
+        <surnom>Bob</surnom>
+        <affinite>affmagie</affinite>
+        <affinite>afftribal</affinite>
+    </entreperso>
+
+    <entreperso id="1006">
+        <nom>Siffleur Assassin</nom>
+        <description>Leurs victimes n'ont entendu qu'un faible sifflement avant que la vie ne leurs soie arrachée</description>
+        <image>Image/Personnage/SiffleurAssassin.png</image>
+        <caract vie="13" vitesse="5" force="2" agilite="5" magie="1" />
+        <surnom>Bob</surnom>
+        <affinite>affagilite</affinite>
+        <affinite>affpoison</affinite>
+    </entreperso>
+
 </listepersonnage>

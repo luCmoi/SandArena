@@ -42,10 +42,6 @@ public class StageSelectionEquipe extends Stage{
         return container;
     }
 
-    public void setEquipe(int equipe) {
-        this.equipeSelect = equipe;
-    }
-
     public void suppr(int panel) {
         ((PanneauEquipe)getActors().get(panel)).suppr();
     }

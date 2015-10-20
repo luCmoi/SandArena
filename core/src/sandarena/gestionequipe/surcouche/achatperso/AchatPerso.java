@@ -1,4 +1,4 @@
-package sandarena.gestionequipe.surcouche.attenteadversaire;
+package sandarena.gestionequipe.surcouche.achatperso;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,17 +10,25 @@ import sandarena.donnee.donneestatic.Utili;
 import sandarena.gestionequipe.surcouche.Surcouche;
 
 /**
- * Created by lucmo on 13/10/2015.
+ * Created by lucmo on 20/10/2015.
  */
-public class EnAttenteDadversaire extends Group {
+public class AchatPerso extends Group {
     private final Surcouche container;
+    private byte place;
 
-    public EnAttenteDadversaire(Surcouche surcouche) {
+    public AchatPerso(Surcouche surcouche) {
         super();
         container = surcouche;
-        setBounds(Resolution.width / 4, Resolution.height / 4, Resolution.width / 2, Resolution.height / 2);
-        this.addActor(new BouttonAnnu(this));
+        setBounds(Resolution.width / 4, Resolution.height / 8, Resolution.width / 2, Resolution.height - Resolution.height/4);
         setVisible(false);
+        addActor(new BoutonAchat(this, 0));
+        addActor(new BoutonAchat(this,1));
+        addActor(new BoutonAchat(this,2));
+    }
+
+    public void setVisible(byte place) {
+        this.place = place;
+        this.setVisible(true);
     }
 
     @Override
@@ -30,9 +38,8 @@ public class EnAttenteDadversaire extends Group {
             batch.draw(Utili.fond, getX(), getY(), getWidth(), getHeight());
             batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
             Font.font.setColor(Color.BLACK);
-            Font.font.setScale(Resolution.ratioWidth * 6, Resolution.ratioHeight * 6);
-            Font.font.draw(batch, "En attente", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 10 / 2), getY() + getHeight() - getHeight() / 8);
-            Font.font.draw(batch, "d'adversaire", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 12 / 2), getY() + getHeight() - getHeight() / 8 - Font.font.getLineHeight());
+            Font.font.setScale(Resolution.ratioWidth * 5, Resolution.ratioHeight * 5);
+            Font.font.draw(batch, "Nouveau Personnage", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 18 / 2), getY() + getHeight() - getHeight() / 20);
             super.draw(batch, parentAlpha);
         }
     }
@@ -41,4 +48,7 @@ public class EnAttenteDadversaire extends Group {
         return container;
     }
 
+    public byte getPlace() {
+        return place;
+    }
 }

@@ -14,7 +14,10 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.gestionequipe.surcouche.Surcouche;
 import sandarena.gestionequipe.barre.StageBarreGestionEquipe;
 import sandarena.gestionequipe.stagepersos.StagePersonnageGestionEquipe;
+import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
+import sandarena.joueur.Personnage;
+import sandarena.preparematch.ScreenPrepaMatch;
 
 /**
  * Created by lucmo on 16/10/2015.
@@ -42,6 +45,9 @@ public class ScreenGestionEquipe implements Screen {
             Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
             this.persos.draw();
             this.surcouche.draw();
+        if (IGoogleService.data.lancePartie){
+            container.setScreen(new ScreenPrepaMatch(container, 3001, equipe));
+        }
     }
 
     @Override
@@ -92,5 +98,11 @@ public class ScreenGestionEquipe implements Screen {
 
     public Surcouche getSurcouche() {
         return surcouche;
+    }
+
+    public void achatAleat(byte place) {
+        Personnage tmp = new Personnage();
+        equipe.getPersonnages().add(tmp);
+        persos.add(tmp,place);
     }
 }

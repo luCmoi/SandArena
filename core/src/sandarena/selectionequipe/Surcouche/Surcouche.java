@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import sandarena.selectionequipe.ScreenSelectionEquipe;
 import sandarena.selectionequipe.Surcouche.confirmationsuppression.ConfirmationSuppression;
-import sandarena.selectionequipe.Surcouche.enattenteadversaire.EnAttenteDadversaire;
 
 /**
  * Created by lucmo on 11/10/2015.
@@ -16,16 +15,13 @@ public class Surcouche extends Stage {
     private final ScreenSelectionEquipe container;
     private boolean visible;
     private ConfirmationSuppression confirme;
-    private EnAttenteDadversaire attente;
 
     public Surcouche(ScreenSelectionEquipe screenSelectionEquipe, FillViewport fillViewport, Batch batch) {
         super(fillViewport, batch);
         this.container = screenSelectionEquipe;
         this.visible = false;
         this.confirme = new ConfirmationSuppression(this);
-        this.attente = new EnAttenteDadversaire(this);
         this.addActor(confirme);
-        this.addActor(attente);
     }
 
     @Override
@@ -40,10 +36,6 @@ public class Surcouche extends Stage {
         this.setVisible(true);
     }
 
-    public void activateAttente(int panel) {
-        this.attente.setVisible(true, panel);
-        this.setVisible(true);
-    }
 
     public void setVisible(boolean visible) {
         if (visible) {
@@ -53,7 +45,6 @@ public class Surcouche extends Stage {
             Gdx.input.setInputProcessor(container.getStage());
             this.visible = visible;
             confirme.setVisible(false);
-            attente.setVisible(false);
         }
 
     }

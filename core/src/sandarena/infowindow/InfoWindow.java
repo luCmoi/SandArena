@@ -24,6 +24,9 @@ public abstract class InfoWindow extends Group {
         if (getX()+ getWidth() > Resolution.width){
             setX(Resolution.width-getWidth());
         }
+        if (getY()+getHeight() > Resolution.height){
+            setY(Resolution.height-getHeight());
+        }
     }
 
     @Override
