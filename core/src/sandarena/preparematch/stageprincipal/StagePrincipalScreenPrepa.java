@@ -10,8 +10,8 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import java.util.ArrayList;
 
 import sandarena.SandArena;
-import sandarena.googleservice.ConnexionMatch;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.preparematch.ScreenPrepaMatch;

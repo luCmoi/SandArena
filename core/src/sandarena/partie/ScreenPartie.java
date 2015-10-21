@@ -43,7 +43,7 @@ public class ScreenPartie implements Screen {
         this.batch = container.getBatch();
         //Temporaire
         joueurActif = joueur;
-        joueurAutre = new Joueur();
+        joueurAutre = new Joueur(0);
         this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
         this.partie = new sandarena.partie.jeu.Partie(this, joueurActif,personnagesActif, joueurAutre,personnagesAutre,commence, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
         surcouche = new Stage(new FillViewport(Resolution.width,Resolution.height),batch);

@@ -9,10 +9,9 @@ import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
-import sandarena.gestionequipe.ScreenGestionEquipe;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.selectionequipe.Sauvegarde;
+import sandarena.googleservice.Sauvegarde;
 import sandarena.selectionequipe.StageSelectionEquipe;
 
 /**
@@ -47,6 +46,10 @@ public class PanneauEquipe extends Group {
             for (int i = 0; i < equipe.getPersonnages().size(); i++) {
                 batch.draw(equipe.getPersonnages().get(i).commun.image, getX() + (getWidth() / 3) * (i % 3), getHeight() - (getWidth() / 3) * (1 + (i / 3)), getWidth() / 3, getWidth() / 3);
             }
+            Font.font.setColor(Color.YELLOW);
+            Font.font.setScale(Resolution.ratioWidth * 4, Resolution.ratioHeight * 4);
+            String strTmp = String.valueOf(equipe.getOr());
+            Font.font.draw(batch, strTmp , getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2), getHeight()/6);
         }else {
             Font.font.setColor(Color.BLACK);
             Font.font.setScale(Resolution.ratioWidth * 5, Resolution.ratioHeight * 5);
@@ -59,18 +62,16 @@ public class PanneauEquipe extends Group {
 
     public void clique() {
         if (equipe != null) {
-            container.getContainer().getContainer().setScreen(new ScreenGestionEquipe(container.getContainer().getContainer(),equipe));
-            //container.getContainer().launch(this.place);
+            container.getContainer().getContainer().lanceGestionEquipe(equipe);
         } else {
-            equipe = new Joueur();
+            equipe = new Joueur(place);
             equipe.getPersonnages().add(new Personnage());
             equipe.getPersonnages().add(new Personnage());
             equipe.getPersonnages().add(new Personnage());
             equipe.getPersonnages().add(new Personnage());
             equipe.getPersonnages().add(new Personnage());
             equipe.getPersonnages().add(new Personnage());
-            equipe.getPersonnages().add(new Personnage());
-            equipe.getPersonnages().add(new Personnage());
+            equipe.setOr(2000);
             SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(place), Sauvegarde.toData(equipe));
             suppr = new PanneauEquipeSuppr(this);
             this.addActor(suppr);
@@ -100,5 +101,9 @@ public class PanneauEquipe extends Group {
 
     public int getPlace() {
         return place;
+    }
+
+    public void setEquipe(Joueur equipe) {
+        this.equipe = equipe;
     }
 }

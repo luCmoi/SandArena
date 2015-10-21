@@ -35,12 +35,16 @@ public class BoutonAchat extends Actor {
             Font.font.draw(batch, "2000", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 4 / 2), getY() + getHeight() - getHeight() / 8 - Font.font.getLineHeight());
         } else if (place == 0) {
             Font.font.draw(batch, "Annuler", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 7 / 2), getY() + getHeight() - getHeight() / 4);
+        }if (container.getContainer().getContainer().getEquipe().getOr() < 1000 && place != 0){
+            batch.draw(Utili.passive, getX(), getY(), getWidth(), getHeight());
+        }else if (container.getContainer().getContainer().getEquipe().getOr() < 2000 && place ==1){
+            batch.draw(Utili.passive, getX(), getY(), getWidth(), getHeight());
         }
     }
 
     public void clique() {
         if (place == 1) {
-        } else if (place == 2) {
+        } else if (place == 2 && container.getContainer().getContainer().getEquipe().getOr() >= 1000) {
             container.getContainer().getContainer().achatAleat(container.getPlace());
         }
         container.getContainer().setVisible(false);

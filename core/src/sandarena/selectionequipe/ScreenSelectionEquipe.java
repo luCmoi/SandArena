@@ -86,4 +86,17 @@ public class ScreenSelectionEquipe implements Screen {
     public void confSuppr(int panel) {
         surcouche.activateConfirmeSuppr(panel);
     }
+
+    public void checkJoueur(Joueur equipe) {
+        Gdx.input.setInputProcessor(stage);
+        stage.checkJoueur(equipe);
+    }
+
+    public void backKeyPressed() {
+        if (surcouche.isVisible()){
+            surcouche.setVisible(false);
+        }else{
+            surcouche.activateConfirmeQuit();
+        }
+    }
 }

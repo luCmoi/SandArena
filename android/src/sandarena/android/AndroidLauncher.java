@@ -153,7 +153,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
                     String metaDonnee = displaySnapshotMetadata(openSnapshotResult.getSnapshot().getMetadata());
                     System.err.println(donnee);
                     System.err.println(metaDonnee);
-                    if (!donnee.startsWith("v003")) {
+                    if (!donnee.startsWith("v004")) {
                         System.err.println("Passe pas");
                         IGoogleService.data.save[place] = null;
                         IGoogleService.data.meta[place] = null;

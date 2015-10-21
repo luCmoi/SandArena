@@ -4,9 +4,16 @@ import java.util.ArrayList;
 
 public class Joueur {
     private ArrayList<Personnage> personnages = new ArrayList();
+    private int numero;
+    private int or;
 
-    public Joueur() {
+    public Joueur(int numero) {
+        this.numero = numero;
 
+    }
+
+    public int getNumero() {
+        return numero;
     }
 
     public void dispose() {
@@ -21,7 +28,11 @@ public class Joueur {
         return personnages;
     }
 
-    public void setPersonnages(ArrayList<Personnage> personnages) {
-        this.personnages = personnages;
+    public int getOr() {
+        return or;
+    }
+
+    public void setOr(int or) {
+        this.or = or;
     }
 }

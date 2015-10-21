@@ -40,24 +40,7 @@ public class ScreenPrepaMatch implements Screen {
         this.container = conteneur;
         this.map = map;
         this.batch = conteneur.getBatch();
-        //Temp joueur
-        if (equipe == null) {
-            joueur = new Joueur();
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-            joueur.getPersonnages().add(new Personnage());
-        }else{
-            joueur = equipe;
-        }
+        joueur = equipe;
     }
 
     @Override
@@ -81,7 +64,7 @@ public class ScreenPrepaMatch implements Screen {
             Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
             this.getPrincipal().draw();
             this.getSurcouche().draw();
-        }else{
+        } else {
             container.setScreen(new ScreenLancement(container));
         }
     }
@@ -161,5 +144,9 @@ public class ScreenPrepaMatch implements Screen {
 
     public Personnage getCheck() {
         return check;
+    }
+
+    public void backKeyPressed() {
+
     }
 }

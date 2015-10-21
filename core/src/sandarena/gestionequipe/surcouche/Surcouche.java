@@ -1,6 +1,7 @@
 package sandarena.gestionequipe.surcouche;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -57,7 +58,19 @@ public class Surcouche extends Stage {
         this.setVisible(true);
     }
 
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Input.Keys.BACK){
+            container.backKeyPressed();
+        }
+        return super.keyDown(keyCode);
+    }
+
     public ScreenGestionEquipe getContainer() {
         return container;
+    }
+
+    public boolean isVisible() {
+        return visible;
     }
 }

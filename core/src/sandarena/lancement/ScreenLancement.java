@@ -4,13 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-import sandarena.googleservice.IGoogleService;
 import sandarena.SandArena;
 import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.selectionequipe.ScreenSelectionEquipe;
 
 import static sandarena.donnee.carte.CarteXML.parseCarteXML;
 import static sandarena.donnee.competence.CompXML.parseCompXML;
@@ -55,18 +54,18 @@ public class ScreenLancement implements Screen {
             IGoogleService.data.chargementSaveLoad = -1;
             for (int i = 0; i < 3; i++) {
                 if (IGoogleService.data.save[i]!=null){
-                    equipe[i] = parseEquipe(IGoogleService.data.save[i]);
+                    equipe[i] = parseEquipe(IGoogleService.data.save[i],i);
                 }else{
                     equipe[i] = null;
                 }
             }
-            container.setScreen(new ScreenSelectionEquipe(container, equipe));
+            container.lanceSelect(equipe);
             this.dispose();
         }
     }
 
-    private Joueur parseEquipe(String data) {
-        Joueur retour = new Joueur();
+    private Joueur parseEquipe(String data,int num) {
+        Joueur retour = new Joueur(num);
         Personnage tmpPers = null;
         for (int i = 0; i < data.length(); i = i+4) {
             String tmpStr = data.substring(i,i+4);
@@ -83,6 +82,10 @@ public class ScreenLancement implements Screen {
                 BanqueCompetence.EntreeCompetence tmp = (BanqueCompetence.EntreeCompetence)BanqueCompetence.getEntree(BanqueCompetence.banque,Integer.parseInt(tmpStr));
                 tmp.incremente();
                 tmpPers.addCompetence(tmp);
+            }else if (tmpStr.startsWith("o")){
+                SandArena.googleService.printError("or : " + data.substring(i+1));
+                retour.setOr(Integer.parseInt(data.substring(i+1)));
+                i = data.length();
             }else{
                 SandArena.googleService.printError(tmpStr);
             }
@@ -118,7 +121,6 @@ public class ScreenLancement implements Screen {
 
     @Override
     public void resume() {
-
     }
 
     @Override

@@ -12,7 +12,7 @@ import sandarena.joueur.Joueur;
  */
 public class StageBarreGestionEquipe extends Stage {
     private final ScreenGestionEquipe container;
-    private final Joueur equipe;
+    private Joueur equipe;
     private final Fond fond;
     private QuickMatchButon boutonMatchRapide;
 
@@ -33,5 +33,9 @@ public class StageBarreGestionEquipe extends Stage {
 
     public ScreenGestionEquipe getContainer() {
         return container;
+    }
+
+    public void setEquipe(Joueur equipe) {
+        this.equipe = equipe;
     }
 }

@@ -11,42 +11,42 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
-import sandarena.gestionequipe.surcouche.Surcouche;
 import sandarena.gestionequipe.barre.StageBarreGestionEquipe;
 import sandarena.gestionequipe.stagepersos.StagePersonnageGestionEquipe;
+import sandarena.gestionequipe.surcouche.Surcouche;
 import sandarena.googleservice.IGoogleService;
+import sandarena.googleservice.Sauvegarde;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.preparematch.ScreenPrepaMatch;
 
 /**
  * Created by lucmo on 16/10/2015.
  */
 public class ScreenGestionEquipe implements Screen {
-    private final Joueur equipe;
+    private Joueur equipe;
     private final SandArena container;
     private final Batch batch;
     private StagePersonnageGestionEquipe persos;
     private StageBarreGestionEquipe barre;
     private Surcouche surcouche;
 
-    public ScreenGestionEquipe(SandArena container, Joueur equipe){
+    public ScreenGestionEquipe(SandArena container, Joueur equipe) {
         this.equipe = equipe;
-        this.container =container;
+        this.container = container;
         this.batch = container.getBatch();
     }
 
     @Override
     public void render(float delta) {
-            Gdx.gl.glClearColor(0, 0, 0, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.differenceBas);
-            this.barre.draw();
-            Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
-            this.persos.draw();
-            this.surcouche.draw();
-        if (IGoogleService.data.lancePartie){
-            container.setScreen(new ScreenPrepaMatch(container, 3001, equipe));
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.differenceBas);
+        this.barre.draw();
+        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
+        this.persos.draw();
+        this.surcouche.draw();
+        if (IGoogleService.data.lancePartie) {
+            container.lancePrepaMatch(3001, equipe);
         }
     }
 
@@ -103,6 +103,31 @@ public class ScreenGestionEquipe implements Screen {
     public void achatAleat(byte place) {
         Personnage tmp = new Personnage();
         equipe.getPersonnages().add(tmp);
-        persos.add(tmp,place);
+        equipe.setOr(equipe.getOr() - 1000);
+        persos.add(tmp, place);
+        SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(equipe.getNumero()), Sauvegarde.toData(equipe));
+    }
+
+    public SandArena getContainer() {
+        return container;
+    }
+
+    public void backKeyPressed() {
+        if (surcouche.isVisible()) {
+            surcouche.setVisible(false);
+        } else {
+            container.resumeSelect(equipe);
+        }
+    }
+
+    public void checkEquipe(Joueur equipe) {
+        this.equipe = equipe;
+        barre.setEquipe(equipe);
+        persos.setEquipe(equipe);
+        Gdx.input.setInputProcessor(persos);
+    }
+
+    public Joueur getEquipe() {
+        return equipe;
     }
 }

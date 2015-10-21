@@ -34,9 +34,16 @@ public class EmplacementPersoGestion extends Group{
     }
 
     public void setPerso(Personnage perso) {
-        unit.setPerso(perso);
-        for (int i = 0; i < 4; i++) {
-            comp[i].setComp(perso.getCompetences()[i]);
+        if (perso != null) {
+            unit.setPerso(perso);
+            for (int i = 0; i < 4; i++) {
+                comp[i].setComp(perso.getCompetences()[i]);
+            }
+        }else{
+            unit.setPerso(null);
+            for (int i = 0; i < 4; i++) {
+                comp[i].setComp(null);
+            }
         }
     }
 

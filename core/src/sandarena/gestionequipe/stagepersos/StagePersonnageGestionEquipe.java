@@ -1,5 +1,6 @@
 package sandarena.gestionequipe.stagepersos;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -17,7 +18,7 @@ import sandarena.joueur.Personnage;
  */
 public class StagePersonnageGestionEquipe extends Stage {
     private final ScreenGestionEquipe container;
-    private final Joueur equipe;
+    private Joueur equipe;
 
     public StagePersonnageGestionEquipe(ScreenGestionEquipe screenGestionEquipe, Joueur equipe, ScalingViewport scalingViewport, Batch batch) {
         super(scalingViewport,batch);
@@ -44,11 +45,30 @@ public class StagePersonnageGestionEquipe extends Stage {
         }
     }
 
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Input.Keys.BACK){
+            container.backKeyPressed();
+        }
+        return super.keyDown(keyCode);
+    }
+
     public ScreenGestionEquipe getContainer() {
         return container;
     }
 
     public void add(Personnage tmp, byte place) {
         ((EmplacementPersoGestion)this.getActors().get(place)).setPerso(tmp);
+    }
+
+    public void setEquipe(Joueur equipe) {
+        this.equipe = equipe;
+        for (int i = 0; i <12 ; i++) {
+            if (i < equipe.getPersonnages().size()) {
+                ((EmplacementPersoGestion) this.getActors().get(i)).setPerso(equipe.getPersonnages().get(i));
+            }else{
+                ((EmplacementPersoGestion) this.getActors().get(i)).setPerso(null);
+            }
+        }
     }
 }
