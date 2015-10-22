@@ -18,7 +18,6 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.lancement.ScreenLancement;
 import sandarena.preparematch.barre.StageBarre;
 import sandarena.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 
@@ -65,7 +64,7 @@ public class ScreenPrepaMatch implements Screen {
             this.getPrincipal().draw();
             this.getSurcouche().draw();
         } else {
-            container.setScreen(new ScreenLancement(container));
+            container.lanceGestionEquipe(this.getJoueur());
         }
     }
 
@@ -82,6 +81,7 @@ public class ScreenPrepaMatch implements Screen {
         setSurcouche(new Stage(new FillViewport(Resolution.width, Resolution.height), batch));
         getPrincipal().setBarre(this.getBarre());
         Gdx.input.setInputProcessor(this.getPrincipal());
+        IGoogleService.data.lancePartie = false;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class BoutonAchat extends Actor {
         place = i;
         this.addListener(new BoutonAchatListener(this));
         this.setTouchable(Touchable.enabled);
-        setBounds((container.getWidth() / 8), container.getHeight() / 4 * place, container.getWidth() - container.getWidth() / 4, container.getHeight() / 4);
+        setBounds((container.getWidth() / 8), container.getHeight() / 5 * place + container.getHeight() /16*(place+1), container.getWidth() - container.getWidth() / 4, container.getHeight() / 5);
     }
 
     @Override

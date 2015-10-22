@@ -49,7 +49,9 @@ public class PanneauEquipe extends Group {
             Font.font.setColor(Color.YELLOW);
             Font.font.setScale(Resolution.ratioWidth * 4, Resolution.ratioHeight * 4);
             String strTmp = String.valueOf(equipe.getOr());
-            Font.font.draw(batch, strTmp , getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2), getHeight()/6);
+            batch.draw(Utili.passive,getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2),getWidth()/6+Font.font.getLineHeight()/10,Font.font.getSpaceWidth()*strTmp.length()+Font.font.getLineHeight(),Font.font.getLineHeight());
+            Font.font.draw(batch, strTmp , getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2), getWidth()/6+Font.font.getLineHeight());
+            batch.draw(Utili.pieces,getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2)+Font.font.getSpaceWidth()*strTmp.length(), getWidth() /6+Font.font.getLineHeight()/10,Font.font.getLineHeight(),Font.font.getLineHeight());
         }else {
             Font.font.setColor(Color.BLACK);
             Font.font.setScale(Resolution.ratioWidth * 5, Resolution.ratioHeight * 5);

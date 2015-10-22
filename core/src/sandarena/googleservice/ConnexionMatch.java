@@ -21,22 +21,26 @@ public class ConnexionMatch {
     public static Personnage prepareMatchRecoitPerso() {
         String mess = null;
         SandArena.googleService.printError("En attente");
-        while (mess == null) {
+        while (mess == null && !IGoogleService.data.justLeft) {
             if (IGoogleService.data.mess != null) {
                 mess = new String(IGoogleService.data.mess);
                 IGoogleService.data.mess = null;
             }
         }
-        SandArena.googleService.printError("mess Recu : " + mess);
-        Personnage retour = new Personnage(Integer.parseInt(mess.substring(0, 4)));
-        for (int i = 0; i < 4; i++) {
-            BanqueCompetence.EntreeCompetence compTmp = null;
-            while (compTmp == null) {
-                compTmp = (BanqueCompetence.EntreeCompetence) BanqueCompetence.getEntree(BanqueCompetence.getBanque(), Integer.parseInt(mess.substring(4 * (i + 1), 4 * (i + 2))));
-                retour.addCompetence(compTmp);
+        if (!IGoogleService.data.justLeft) {
+            SandArena.googleService.printError("mess Recu : " + mess);
+            Personnage retour = new Personnage(Integer.parseInt(mess.substring(0, 4)), false);
+            for (int i = 0; i < 4; i++) {
+                BanqueCompetence.EntreeCompetence compTmp = null;
+                while (compTmp == null) {
+                    compTmp = (BanqueCompetence.EntreeCompetence) BanqueCompetence.getEntree(BanqueCompetence.getBanque(), Integer.parseInt(mess.substring(4 * (i + 1), 4 * (i + 2))));
+                    retour.addCompetence(compTmp);
+                }
             }
+            return retour;
+        }else {
+            return null;
         }
-        return retour;
     }
 
     public static void prepareMatchEnvoiPerso(Personnage tmp) {

@@ -76,7 +76,7 @@ public class ScreenLancement implements Screen {
                 if (tmpPers != null){
                     retour.getPersonnages().add(tmpPers);
                 }
-                tmpPers = new Personnage(Integer.parseInt(tmpStr));
+                tmpPers = new Personnage(Integer.parseInt(tmpStr),true);
             }else if (tmpStr.startsWith("2")){
                 SandArena.googleService.printError("competence : " + tmpStr);
                 BanqueCompetence.EntreeCompetence tmp = (BanqueCompetence.EntreeCompetence)BanqueCompetence.getEntree(BanqueCompetence.banque,Integer.parseInt(tmpStr));

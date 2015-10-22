@@ -18,7 +18,6 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.lancement.ScreenLancement;
 import sandarena.partie.gui.interfacep.StageInterface;
 
 /**
@@ -63,7 +62,7 @@ public class ScreenPartie implements Screen {
         Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
         this.surcouche.draw();
     }else{
-        container.setScreen(new ScreenLancement(container));
+        container.lanceGestionEquipe(joueurActif);
     }
     }
 

@@ -1,5 +1,6 @@
 package sandarena.gestionequipe.barre;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -25,6 +26,7 @@ public class QuickMatchButon extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
+        Font.font.setColor(Color.BLACK);
         Font.font.setScale(Resolution.ratioWidth * 4, Resolution.ratioHeight * 4);
         Font.font.draw(batch, "Match", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 5/2), getY() + getHeight() - getHeight() / 6);
         Font.font.draw(batch,"Rapide", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth()*6/2),getY()+getHeight()-getHeight()/6 - Font.font.getLineHeight());

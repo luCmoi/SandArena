@@ -34,6 +34,10 @@ public class ScreenGestionEquipe implements Screen {
         this.equipe = equipe;
         this.container = container;
         this.batch = container.getBatch();
+        this.persos = new StagePersonnageGestionEquipe(this, equipe, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
+        this.barre = new StageBarreGestionEquipe(this, equipe, new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
+        this.surcouche = new Surcouche(this, new FillViewport(Resolution.width, Resolution.height), batch);
+        Gdx.input.setInputProcessor(this.persos);
     }
 
     @Override
@@ -57,10 +61,7 @@ public class ScreenGestionEquipe implements Screen {
 
     @Override
     public void show() {
-        this.persos = new StagePersonnageGestionEquipe(this, equipe, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
-        this.barre = new StageBarreGestionEquipe(this, equipe, new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
-        this.surcouche = new Surcouche(this, new FillViewport(Resolution.width, Resolution.height), batch);
-        Gdx.input.setInputProcessor(this.persos);
+        IGoogleService.data.justLeft = false;
     }
 
     @Override
@@ -124,6 +125,7 @@ public class ScreenGestionEquipe implements Screen {
         this.equipe = equipe;
         barre.setEquipe(equipe);
         persos.setEquipe(equipe);
+        surcouche.setVisible(false);
         Gdx.input.setInputProcessor(persos);
     }
 

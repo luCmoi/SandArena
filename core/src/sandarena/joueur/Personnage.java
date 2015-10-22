@@ -16,9 +16,11 @@ public class Personnage{
     private EntreeCompetence[] competences = new EntreeCompetence[4];
 
 
-    public Personnage(int id){
+    public Personnage(int id, boolean incremente){
         this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, id);
-        commun.incremente();
+        if (incremente) {
+            commun.incremente();
+        }
         this.nom = BanquePersonnage.getNom(commun.nom);
     }
 

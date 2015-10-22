@@ -95,8 +95,10 @@ public class StagePrincipalScreenPrepa extends Stage {
             @Override
             public void run() {
                 Personnage recu = ConnexionMatch.prepareMatchRecoitPerso();
-                container.setCheck(recu);
-                panelDroit.ajout(recu);
+                if (recu != null) {
+                    container.setCheck(recu);
+                    panelDroit.ajout(recu);
+                }
                 bloquand = false;
             }
         }.start();

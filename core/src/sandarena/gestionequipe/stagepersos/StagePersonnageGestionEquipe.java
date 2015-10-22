@@ -18,6 +18,7 @@ import sandarena.joueur.Personnage;
  */
 public class StagePersonnageGestionEquipe extends Stage {
     private final ScreenGestionEquipe container;
+    private final Fond fond;
     private Joueur equipe;
 
     public StagePersonnageGestionEquipe(ScreenGestionEquipe screenGestionEquipe, Joueur equipe, ScalingViewport scalingViewport, Batch batch) {
@@ -33,6 +34,8 @@ public class StagePersonnageGestionEquipe extends Stage {
             ((EmplacementPersoGestion)this.getActors().get(i)).setPerso(perso);
             i++;
         }
+        this.fond = new Fond(this);
+        this.addActor(fond);
     }
 
     @Override
@@ -70,5 +73,9 @@ public class StagePersonnageGestionEquipe extends Stage {
                 ((EmplacementPersoGestion) this.getActors().get(i)).setPerso(null);
             }
         }
+    }
+
+    public Joueur getEquipe() {
+        return equipe;
     }
 }
