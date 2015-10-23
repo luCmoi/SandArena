@@ -1,7 +1,10 @@
 package sandarena.infowindow;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import sandarena.donnee.donneestatic.Font;
 
 
 /**
@@ -20,6 +23,7 @@ public abstract class Info extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        Font.font.setColor(Color.BLACK);
     }
 
     public void dispose() {

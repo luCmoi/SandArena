@@ -22,7 +22,7 @@ public class EmplacementBarre extends Group {
 
     public EmplacementBarre(StageBarre container, int place, Personnage perso) {
         this.container = container;
-        this.place = (byte)place;
+        this.place = (byte) place;
         this.perso = perso;
         this.setBounds(Resolution.differenceBas * place, 0, Resolution.differenceBas, Resolution.differenceBas);
         this.setTouchable(Touchable.enabled);
@@ -60,7 +60,7 @@ public class EmplacementBarre extends Group {
                     comp.setTouchable(Touchable.enabled);
                 }
             }
-            accepte.setTouchable(Touchable.enabled);
+                accepte.setTouchable(Touchable.enabled);
         } else {
             this.getContainer().diminueWidthTailleTotale(this.place, false);
             this.setWidth(getWidth() - Resolution.differenceBas);
@@ -115,7 +115,7 @@ public class EmplacementBarre extends Group {
     }
 
     public void setPlace(int place) {
-        this.place = (byte)place;
+        this.place = (byte) place;
     }
 
     public void fenetre() {

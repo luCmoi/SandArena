@@ -9,19 +9,20 @@ import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListene
 
 import java.util.List;
 
-import sandarena.android.AndroidLauncher;
+import sandarena.android.GameHelperFragment;
 import sandarena.googleservice.IGoogleService;
 
 /**
  * Created by lucmo on 07/10/2015.
  */
-public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener{
-    private final AndroidLauncher container;
+public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener {
+    private final GameHelperFragment container;
     boolean playing = false;
     final static int NB_PLAYER = 2;
 
-    public AndroidRoomStatusUpdateListener(AndroidLauncher androidLauncher) {
-        this.container =androidLauncher;
+
+    public AndroidRoomStatusUpdateListener(GameHelperFragment gameHelperFragment) {
+        this.container = gameHelperFragment;
     }
 
     boolean shouldStartGame(Room room) {
@@ -37,14 +38,21 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
         container.setRoomId(room.getRoomId());
         container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         if (playing) {
-            System.err.println("Game allready launched");
+            container.getmActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            });
+            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            IGoogleService.data.justLeft = true;
         } else if (shouldStartGame(room)) {
-            for (String id : room.getParticipantIds()){
-                if (id != container.getMyId()){
+            for (String id : room.getParticipantIds()) {
+                if (id != container.getMyId()) {
                     container.setEnnemyId(id);
                 }
             }
-            if (room.getParticipantIds().get(0)==container.getMyId()){
+            if (room.getParticipantIds().get(0) == container.getMyId()) {
                 IGoogleService.data.commence = true;
             }
             container.setRoomId(room.getRoomId());
@@ -54,18 +62,16 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
 
     @Override
     public void onPeersDisconnected(Room room, List<String> peers) {
-        if (playing) {
-            System.err.println("Player left when in game");
-        } else {
-            container.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                }
-            });
-            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
-            IGoogleService.data.justLeft = true;
-        }
+        Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+        IGoogleService.data.justLeft = true;
+        container.getmActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        });
+        Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+        IGoogleService.data.justLeft = true;
     }
 
     @Override
@@ -110,16 +116,14 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
 
     @Override
     public void onPeerLeft(Room room, List<String> peers) {
-        if (playing) {
-            container.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    container.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                }
-            });
-            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
-            IGoogleService.data.justLeft = true;
-        }
+        container.getmActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        });
+        Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+        IGoogleService.data.justLeft = true;
     }
 
     @Override
@@ -130,8 +134,14 @@ public class AndroidRoomStatusUpdateListener implements RoomStatusUpdateListener
 
     @Override
     public void onDisconnectedFromRoom(Room room) {
-        container.setRoomId(room.getRoomId());
-        container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
+        container.getmActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        });
+        Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+        IGoogleService.data.justLeft = true;
     }
 
 }

@@ -3,58 +3,47 @@ package sandarena.android;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.WindowManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.android.AndroidApplication;
-import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.drive.Drive;
 import com.google.android.gms.games.Games;
-import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.google.android.gms.games.snapshot.Snapshot;
 import com.google.android.gms.games.snapshot.SnapshotMetadata;
 import com.google.android.gms.games.snapshot.SnapshotMetadataChange;
 import com.google.android.gms.games.snapshot.Snapshots;
-import com.google.android.gms.plus.Plus;
 
 import java.io.IOException;
 
 import sandarena.SandArena;
-import sandarena.android.roomlistener.AndroidRealTimeMessageReceivedListener;
-import sandarena.android.roomlistener.AndroidRoomStatusUpdateListener;
-import sandarena.android.roomlistener.AndroidRoomUpdateListener;
 import sandarena.googleservice.IGoogleService;
 
-public class AndroidLauncher extends AndroidApplication implements IGoogleService {
-    private GameHelper _gameHelper;
-    // Request code used to invoke Snapshot selection UI.
+public class AndroidLauncher extends FragmentActivity implements IGoogleService, AndroidFragmentApplication.Callbacks {
+
+
     private static final int RC_SELECT_SNAPSHOT = 9002;
-    private String roomId;
-    private String myId;
-    private String ennemyId;
-    private AndroidRoomUpdateListener updateListener;
+    private GameFragment gameFragment;
+    private GameHelperFragment gameHelperFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
-        _gameHelper.createApiClientBuilder().addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                .addApi(Drive.API).addScope(Drive.SCOPE_APPFOLDER);
-        _gameHelper.enableDebugLog(false);
-        GameHelper.GameHelperListener gameHelperListener = new GameHelper.GameHelperListener() {
-            @Override
-            public void onSignInSucceeded() {
-            }
-            @Override
-            public void onSignInFailed() {
-            }
-        };
-        _gameHelper.setup(gameHelperListener);
-        AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        initialize(new SandArena(this), config);
+
+
+        gameFragment = new GameFragment();
+        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        trans.replace(android.R.id.content, gameFragment);
+        trans.commit();
+        SandArena.googleService = this;
+
+        gameHelperFragment = (GameHelperFragment) getSupportFragmentManager().findFragmentByTag("GameHelperFragment");
+        if (gameHelperFragment == null) {
+            gameHelperFragment = new GameHelperFragment();
+            getSupportFragmentManager().beginTransaction().add(gameHelperFragment, "GameHelperFragment").commit();
+        }
     }
 
     @Override
@@ -63,7 +52,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
             runOnUiThread(new Runnable() {
                 //@Override
                 public void run() {
-                    _gameHelper.beginUserInitiatedSignIn();
+                    gameHelperFragment.get_gameHelper().beginUserInitiatedSignIn();
                 }
             });
         } catch (Exception e) {
@@ -78,7 +67,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
             runOnUiThread(new Runnable() {
                 //@Override
                 public void run() {
-                    _gameHelper.signOut();
+                    gameHelperFragment.get_gameHelper().signOut();
                 }
             });
         } catch (Exception e) {
@@ -102,25 +91,25 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
 
     @Override
     public boolean isSignedIn() {
-        return _gameHelper.isSignedIn();
+        return gameHelperFragment.get_gameHelper().isSignedIn();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        _gameHelper.onStart(this);
+        gameHelperFragment.get_gameHelper().onStart(this);
     }
 
     @Override
     protected void onStop() {
-        _gameHelper.onStop();
+        //gameHelperFragment.get_gameHelper().onStop();
         super.onStop();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        _gameHelper.onActivityResult(requestCode, resultCode, data);
+        gameHelperFragment.get_gameHelper().onActivityResult(requestCode, resultCode, data);
     }
 
     private String displaySnapshotMetadata(SnapshotMetadata metadata) {
@@ -137,7 +126,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
     }
 
     public void savedGamesLoad(String snapshotName, final int place) {
-        PendingResult<Snapshots.OpenSnapshotResult> pendingResult = Games.Snapshots.open(_gameHelper.getApiClient(), snapshotName, false);
+        PendingResult<Snapshots.OpenSnapshotResult> pendingResult = Games.Snapshots.open(gameHelperFragment.get_gameHelper().getApiClient(), snapshotName, false);
         ResultCallback<Snapshots.OpenSnapshotResult> callback = new ResultCallback<Snapshots.OpenSnapshotResult>() {
             @Override
             public void onResult(Snapshots.OpenSnapshotResult openSnapshotResult) {
@@ -180,7 +169,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
 
             @Override
             protected Boolean doInBackground(Void... params) {
-                Snapshots.OpenSnapshotResult open = Games.Snapshots.open(_gameHelper.getApiClient(), snapshotName, createIfMissing).await();
+                Snapshots.OpenSnapshotResult open = Games.Snapshots.open(gameHelperFragment.get_gameHelper().getApiClient(), snapshotName, createIfMissing).await();
                 if (!open.getStatus().isSuccess()) {
                     System.err.println("Could not open Snapshot for update.");
                     return false;
@@ -188,7 +177,7 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
                 // Change data but leave existing metadata
                 Snapshot snapshot = open.getSnapshot();
                 snapshot.getSnapshotContents().writeBytes(data);
-                Snapshots.CommitSnapshotResult commit = Games.Snapshots.commitAndClose(_gameHelper.getApiClient(), snapshot, SnapshotMetadataChange.EMPTY_CHANGE).await();
+                Snapshots.CommitSnapshotResult commit = Games.Snapshots.commitAndClose(gameHelperFragment.get_gameHelper().getApiClient(), snapshot, SnapshotMetadataChange.EMPTY_CHANGE).await();
                 if (!commit.getStatus().isSuccess()) {
                     System.err.println("Failed to commit Snapshot.");
                     return false;
@@ -222,60 +211,25 @@ public class AndroidLauncher extends AndroidApplication implements IGoogleServic
 
     @Override
     public void startQuickGame() {
-        Bundle am = RoomConfig.createAutoMatchCriteria(1, 1, 0);
-        updateListener = new AndroidRoomUpdateListener(this);
-        RoomConfig.Builder roomConfigBuilder = RoomConfig.builder(updateListener)
-                .setRoomStatusUpdateListener(new AndroidRoomStatusUpdateListener(this))
-                .setMessageReceivedListener(new AndroidRealTimeMessageReceivedListener(this));
-        roomConfigBuilder.setAutoMatchCriteria(am);
-        RoomConfig roomConfig = roomConfigBuilder.build();
-        Games.RealTimeMultiplayer.create(_gameHelper.getApiClient(), roomConfig);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-        });
-
+        gameHelperFragment.startQuickGame();
     }
 
     public GameHelper get_gameHelper() {
-        return _gameHelper;
+        return gameHelperFragment.get_gameHelper();
     }
 
     public void sendOtherPlayer(String mess) {
-        printError("Send : "+mess);
-        byte[] message = mess.getBytes();
-        printError("Send : " + message);
-        printError("From : "+myId+" To :"+ennemyId+" In : "+roomId);
-        Games.RealTimeMultiplayer.sendReliableMessage(_gameHelper.getApiClient(), null, message, roomId, ennemyId);
+        gameHelperFragment.sendOtherPlayer(mess);
+
     }
 
     @Override
     public void quitQuickGame() {
-        if (roomId != null) {
-            Games.RealTimeMultiplayer.leave(_gameHelper.getApiClient(), updateListener, roomId);
-            roomId = null;
-        }
+        gameHelperFragment.quitQuickGame();
     }
 
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
+    @Override
+    public void exit() {
 
-    public void setMyId(String myId) {
-        this.myId = myId;
-    }
-
-    public String getMyId() {
-        return myId;
-    }
-
-    public void setEnnemyId(String ennemyId) {
-        this.ennemyId = ennemyId;
-    }
-
-    public AndroidRoomUpdateListener getUpdateListener() {
-        return updateListener;
     }
 }

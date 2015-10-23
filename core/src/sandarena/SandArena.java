@@ -36,6 +36,11 @@ public class SandArena extends Game {
         super();
         this.googleService = googleService;
     }
+
+    public SandArena() {
+        super();
+    }
+
     /**
      * Lancement de l'application, calcul de résolution et des differents ecrans
      */

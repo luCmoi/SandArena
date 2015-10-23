@@ -1,9 +1,11 @@
 package sandarena.preparematch.barre.emplacement;
 
+        import com.badlogic.gdx.graphics.Color;
         import com.badlogic.gdx.graphics.g2d.Batch;
         import com.badlogic.gdx.scenes.scene2d.Actor;
         import com.badlogic.gdx.scenes.scene2d.Touchable;
 
+        import sandarena.donnee.donneestatic.Font;
         import sandarena.donnee.donneestatic.Resolution;
         import sandarena.donnee.donneestatic.Utili;
 
@@ -17,7 +19,7 @@ public class AccepteBarre extends Actor {
     public AccepteBarre(EmplacementBarre container) {
         super();
         this.container = container;
-        this.setBounds(0,0, Resolution.differenceBas,Resolution.differenceBas/4);
+        this.setBounds(0, 0, Resolution.differenceBas, Resolution.differenceBas / 4);
         this.addListener(new AccepteBarreListener(this));
         this.setTouchable(Touchable.disabled);
     }
@@ -34,6 +36,12 @@ public class AccepteBarre extends Actor {
         if (this.isTouchable()) {
             batch.draw(Utili.fond, getX(), getY(), getWidth(), getHeight());
             batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
+            Font.font.setColor(Color.BLACK);
+            Font.font.setScale(Resolution.ratioWidth * 3, Resolution.ratioHeight * 3);
+            Font.font.draw(batch, "Valider", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 7 / 2), getHeight() - (getHeight() / 10));
+            if (container.getContainer().getPrincipal().getBloquand()) {
+                batch.draw(Utili.passive,getX(),getY(),getWidth(),getHeight());
+            }
         }
     }
 }
