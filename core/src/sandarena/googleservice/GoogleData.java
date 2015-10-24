@@ -12,4 +12,6 @@ public class GoogleData {
     public byte[] mess = null;
     public boolean commence = false;
     public boolean justLeft = false;
+    public byte[] time;
+    public String versionName;
 }

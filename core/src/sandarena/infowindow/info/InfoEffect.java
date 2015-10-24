@@ -9,7 +9,7 @@ import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.RegexTexte;
 import sandarena.infowindow.Info;
 import sandarena.infowindow.windows.InfoWindowEffect;
-import sandarena.partie.jeu.compcase.effet.EffetBuf;
+import sandarena.match.partie.jeu.compcase.effet.EffetBuf;
 
 /**
  * Created by Guillaume on 13/08/2015.

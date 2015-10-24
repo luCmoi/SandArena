@@ -1,6 +1,7 @@
 package sandarena.android;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -43,6 +44,12 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
         if (gameHelperFragment == null) {
             gameHelperFragment = new GameHelperFragment();
             getSupportFragmentManager().beginTransaction().add(gameHelperFragment, "GameHelperFragment").commit();
+        }
+        try {
+            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            IGoogleService.data.versionName = versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

@@ -13,8 +13,8 @@ import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.lancement.ScreenLancement;
-import sandarena.partie.ScreenPartie;
-import sandarena.preparematch.ScreenPrepaMatch;
+import sandarena.match.partie.ScreenPartie;
+import sandarena.match.preparematch.ScreenPrepaMatch;
 import sandarena.selectionequipe.ScreenSelectionEquipe;
 
 /**

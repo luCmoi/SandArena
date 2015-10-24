@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.info.InfoEffect;
-import sandarena.partie.jeu.compcase.effet.EffetBuf;
-import sandarena.partie.gui.interfacep.empinterface.EmplacementEffet;
+import sandarena.match.partie.jeu.compcase.effet.EffetBuf;
+import sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet;
 
 /**
  * Created by Guillaume on 13/08/2015.

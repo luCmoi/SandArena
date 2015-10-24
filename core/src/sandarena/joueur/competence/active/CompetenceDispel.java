@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import sandarena.donnee.competence.CompXML;
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.partie.jeu.compcase.effet.CompetenceToEffet;
+import sandarena.match.partie.jeu.compcase.effet.CompetenceToEffet;
 
 /**
  * Created by Guillaume on 18/06/2015.

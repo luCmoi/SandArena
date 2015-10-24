@@ -5,7 +5,8 @@ import java.io.IOException;
 import sandarena.SandArena;
 import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.joueur.Personnage;
-import sandarena.partie.jeu.Partie;
+import sandarena.match.partie.jeu.Partie;
+import sandarena.match.commun.Timer;
 
 /**
  * Created by lucmo on 23/08/2015.
@@ -18,13 +19,39 @@ public class ConnexionMatch {
     private static final String FINPHASE = "LETO";
     private static final String ECHANGE = "RHEA";
 
+    public static void envoiTimer(int valeur) {
+        String mess = String.valueOf(valeur);
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
+    }
+
+    public static void recoiTimer(final Timer timer) {
+        new Thread() {
+            @Override
+            public void run() {
+                String mess = null;
+                SandArena.googleService.printError("En attente");
+                while (mess == null && !IGoogleService.data.justLeft) {
+                    if (IGoogleService.data.time != null) {
+                        mess = new String(IGoogleService.data.time);
+                        IGoogleService.data.time =null;
+                    }
+                }
+                if (!IGoogleService.data.justLeft) {
+                    SandArena.googleService.printError("mess Recu : " + mess);
+                    timer.newTime(Integer.parseInt(mess));
+                }
+            }
+        }.start();
+    }
+
     public static Personnage prepareMatchRecoitPerso() {
         String mess = null;
         SandArena.googleService.printError("En attente");
         while (mess == null && !IGoogleService.data.justLeft) {
             if (IGoogleService.data.mess != null) {
-                mess = new String(IGoogleService.data.mess);
-                IGoogleService.data.mess = null;
+                    mess = new String(IGoogleService.data.mess);
+                    IGoogleService.data.mess = null;
             }
         }
         if (!IGoogleService.data.justLeft) {
@@ -38,7 +65,7 @@ public class ConnexionMatch {
                 }
             }
             return retour;
-        }else {
+        } else {
             return null;
         }
     }
@@ -69,17 +96,17 @@ public class ConnexionMatch {
                         }
                         SandArena.googleService.printError("Message reçus : " + mess);
                         if (mess.startsWith(PERSOACTIF)) {
-                            partieRecoitPersoActif(partie,mess.substring(4));
+                            partieRecoitPersoActif(partie, mess.substring(4));
                         } else if (mess.startsWith(DEPLACEMENT)) {
-                            partieRecoitDeplacement(partie,mess.substring(4));
+                            partieRecoitDeplacement(partie, mess.substring(4));
                         } else if (mess.startsWith(COMPETENCE)) {
-                            partieRecoitCompetence(partie,mess.substring(4));
+                            partieRecoitCompetence(partie, mess.substring(4));
                         } else if (mess.startsWith(UTILISECOMPETENCE)) {
-                            partieRecoitUtiliseCompetence(partie,mess.substring(4));
+                            partieRecoitUtiliseCompetence(partie, mess.substring(4));
                         } else if (mess.startsWith(FINPHASE)) {
                             partieRecoitFinPhase(partie);
                         } else if (mess.startsWith(ECHANGE)) {
-                            partieRecoitEchange(partie,mess.substring(4));
+                            partieRecoitEchange(partie, mess.substring(4));
                         }
                         mess = null;
                     }
@@ -121,7 +148,7 @@ public class ConnexionMatch {
 
     public static void partieRecoitCompetence(Partie partie, String mess) throws IOException {
         partieRecoitPersoActif(partie, mess);
-        int i = Integer.parseInt(mess.substring(4,8));
+        int i = Integer.parseInt(mess.substring(4, 8));
         if (i != 9999) {
             partie.setCompetenceActive(partie.getPersonnageActif().getCompetence()[i]);
         } else {
@@ -182,15 +209,17 @@ public class ConnexionMatch {
         partie.getPlateau()[x][y].echange();
     }
 
-    public static String string4(int entre){
+    public static String string4(int entre) {
         if (entre != -1) {
             String retour = String.valueOf(entre);
             while (retour.length() < 4) {
                 retour = "0".concat(retour);
             }
             return retour;
-        }else{
+        } else {
             return "9999";
         }
     }
+
+
 }

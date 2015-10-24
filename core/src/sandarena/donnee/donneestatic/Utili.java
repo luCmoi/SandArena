@@ -33,5 +33,5 @@ public class Utili {
     public final static Texture fleche = new Texture(Gdx.files.internal("Image/Util/Fleche.png"));
     public final static Texture plus = new Texture(Gdx.files.internal("Image/Util/Plus.png"));
     public final static Texture pieces = new Texture(Gdx.files.internal("Image/Util/Pieces.png"));
-
+    public final static Texture timer = new Texture(Gdx.files.internal("Image/Util/Timer.png"));
 }

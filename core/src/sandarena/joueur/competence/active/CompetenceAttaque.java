@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import sandarena.donnee.donneestatic.Caract;
 import sandarena.donnee.competence.CompXML;
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.partie.jeu.compcase.effet.CompetenceToEffet;
+import sandarena.match.partie.jeu.compcase.effet.CompetenceToEffet;
 
 public class CompetenceAttaque extends CompetenceActive {
 

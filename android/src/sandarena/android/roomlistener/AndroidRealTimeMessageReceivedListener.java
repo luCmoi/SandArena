@@ -12,11 +12,7 @@ import sandarena.googleservice.IGoogleService;
  */
 public class AndroidRealTimeMessageReceivedListener implements RealTimeMessageReceivedListener {
     private final GameHelperFragment container;
-    /*private final AndroidLauncher container;
 
-    public AndroidRealTimeMessageReceivedListener(AndroidLauncher androidLauncher) {
-        this.container = androidLauncher;
-    }*/
 
     public AndroidRealTimeMessageReceivedListener(GameHelperFragment gameHelperFragment) {
         this.container = gameHelperFragment;
@@ -25,6 +21,10 @@ public class AndroidRealTimeMessageReceivedListener implements RealTimeMessageRe
     @Override
     public void onRealTimeMessageReceived(RealTimeMessage realTimeMessage) {
         SandArena.googleService.printError("Received : " + realTimeMessage.getSenderParticipantId() + " " + realTimeMessage.getMessageData());
-        IGoogleService.data.mess = realTimeMessage.getMessageData();
+        if (realTimeMessage.getMessageData().length < 4) {
+            IGoogleService.data.time = realTimeMessage.getMessageData();
+        } else {
+            IGoogleService.data.mess = realTimeMessage.getMessageData();
+        }
     }
 }

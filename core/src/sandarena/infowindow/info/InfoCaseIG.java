@@ -8,7 +8,7 @@ import sandarena.donnee.donneestatic.RegexTexte;
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.Info;
 import sandarena.infowindow.windows.InfoWindowCaseIG;
-import sandarena.partie.jeu.compcase.effet.CompetenceToEffet;
+import sandarena.match.partie.jeu.compcase.effet.CompetenceToEffet;
 
 /**
  * Created by lucmo on 14/09/2015.

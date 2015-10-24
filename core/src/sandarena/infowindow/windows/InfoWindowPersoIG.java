@@ -6,8 +6,8 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.infowindow.Icone;
 import sandarena.infowindow.InfoWindow;
 import sandarena.infowindow.info.InfoPersoIG;
-import sandarena.partie.jeu.compcase.PersonnageIG;
-import sandarena.partie.gui.interfacep.empinterface.EmplacementPerso;
+import sandarena.match.partie.jeu.compcase.PersonnageIG;
+import sandarena.match.partie.gui.interfacep.empinterface.EmplacementPerso;
 
 /**
  * Created by Guillaume on 13/08/2015.
