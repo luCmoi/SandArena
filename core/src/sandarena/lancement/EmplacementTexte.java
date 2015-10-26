@@ -11,7 +11,7 @@ import sandarena.donnee.donneestatic.Utili;
 /**
  * Created by lucmo on 11/10/2015.
  */
-public class EmplacementTexte extends Actor{
+class EmplacementTexte extends Actor{
     private StageLancement container;
     private String texte = "";
     private static  float ECARTFOND;

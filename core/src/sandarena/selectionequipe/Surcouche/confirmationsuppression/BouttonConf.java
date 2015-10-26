@@ -6,12 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 
 /**
  * Created by lucmo on 13/10/2015.
  */
-public class BouttonConf extends Actor {
+class BouttonConf extends Actor {
     private final ConfirmationSuppression container;
 
     public BouttonConf(ConfirmationSuppression confirmationSuppression) {
@@ -29,6 +30,7 @@ public class BouttonConf extends Actor {
     }
     public void clique() {
         if (container.isVisible()) {
+            Son.MenuSelect.play();
             container.getContainer().getContainer().confirme(container.getPanel());
             container.getContainer().setVisible(false);
         }

@@ -5,13 +5,13 @@ package sandarena.donnee.carte;
  */
 public class CaseSpeciale {
     private boolean depart;
-    private byte sol;
+    private int sol;
     private byte x;
     private byte y;
 
     public CaseSpeciale(boolean depart, int sol, int x,int y){
         this.depart = depart;
-        this.sol = (byte)sol;
+        this.sol = sol;
         this.x = (byte)x;
         this.y = (byte)y;
     }
@@ -20,7 +20,7 @@ public class CaseSpeciale {
         return depart;
     }
 
-    public byte getSol() {
+    public int getSol() {
         return sol;
     }
 

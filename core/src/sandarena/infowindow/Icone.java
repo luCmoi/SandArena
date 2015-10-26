@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import javax.xml.soap.Text;
-
 /**
  * Created by Guillaume on 12/06/2015.
  */

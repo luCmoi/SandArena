@@ -24,7 +24,7 @@ public class EmplacementEffet extends EmplacementInterface {
         super(place, container);
         int difX = 0;
         if (getPlace() % 8 >= 4) difX = 1;
-        this.setBounds((container.tailleCoteHeight * (8 + (difX) + (10 * (getPlace() / 8))) / 4), 0 + ((container.tailleCoteHeight * (getPlace() % 4) / 4)), container.tailleCoteHeight / 4, container.tailleCoteHeight / 4);
+        this.setBounds((container.tailleCoteHeight * (8 + (difX) + (10 * (getPlace() / 8))) / 4), ((container.tailleCoteHeight * (getPlace() % 4) / 4)), container.tailleCoteHeight / 4, container.tailleCoteHeight / 4);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class EmplacementEffet extends EmplacementInterface {
         return effets;
     }
 
-    public void setEffets(ArrayList<sandarena.match.partie.jeu.compcase.effet.EffetBuf> effets) {
+    private void setEffets(ArrayList<sandarena.match.partie.jeu.compcase.effet.EffetBuf> effets) {
         this.effets = effets;
     }
 }

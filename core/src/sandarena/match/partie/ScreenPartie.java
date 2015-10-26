@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -24,7 +25,6 @@ import sandarena.match.partie.gui.interfacep.StageInterface;
 
 /**
  * Screen permetant d'afficher la partie
- *
  */
 public class ScreenPartie implements Screen {
 
@@ -38,34 +38,42 @@ public class ScreenPartie implements Screen {
     private Surcouche surcouche;
     private int map;
 
-    public ScreenPartie(SandArena container, Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence,int map) {
+    public ScreenPartie(SandArena container, Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence, int map) {
         this.container = container;
         this.map = map;
         this.batch = container.getBatch();
         //Temporaire
         joueurActif = joueur;
         joueurAutre = new Joueur(0);
-        surcouche = new Surcouche(this, new FillViewport(Resolution.width,Resolution.height),batch);
+        surcouche = new Surcouche(this, new FillViewport(Resolution.width, Resolution.height), batch);
         this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
-        this.partie = new Partie(this, joueurActif,personnagesActif, joueurAutre,personnagesAutre,commence,surcouche, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
+        this.partie = new Partie(this, joueurActif, personnagesActif, joueurAutre, personnagesAutre, commence, surcouche, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
         interfaceS.setPartie(partie);
         Gdx.input.setInputProcessor(this.partie);
+        if (Son.actuelle != null){
+            Son.actuelle.stop();
+        }
+        Son.nomads.setLooping(true);
+        Son.nomads.setVolume(0.4f);
+        Son.nomads.play();
+        Son.actuelle = Son.nomads;
     }
 
     @Override
     public void render(float f) {
-        if (!IGoogleService.data.justLeft){
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        this.partie.getViewport().update();
-        this.partie.draw();
-        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.differenceBas);
-        this.interfaceS.draw();
-        Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
-        this.surcouche.draw();
-    }else{
-        container.lanceGestionEquipe(joueurActif);
-    }
+        if (!IGoogleService.data.justLeft) {
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            this.partie.getViewport().update();
+            this.partie.draw();
+            Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.differenceBas);
+            this.interfaceS.draw();
+            Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
+            this.surcouche.draw();
+        } else {
+            Son.nomads.stop();
+            container.lanceGestionEquipe(joueurActif);
+        }
     }
 
     @Override
@@ -74,7 +82,6 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -104,7 +111,7 @@ public class ScreenPartie implements Screen {
         surcouche = null;
     }
 
-    public Batch getBatch() {
+    private Batch getBatch() {
         return batch;
     }
 

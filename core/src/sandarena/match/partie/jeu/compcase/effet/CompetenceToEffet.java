@@ -20,17 +20,17 @@ import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuf
 public class CompetenceToEffet {
     //todo a complete fur et a mesure
 //Static type buff
-    public static final int TYPEATTAQUE = 0;
-    public static final int TYPEDEFENSE = 1;
-    public static final int DOT = 4;
-    public static final int VALVITESSE = 5;
-    public static final int VALATTAQUE = 6;
-    public static final int DEGAT = 7;
-    public static final int STUN = 8;
-    public static final int VALDEFENSE = 9;
-    public static final int VALCARACT = 10;
+    private static final int TYPEATTAQUE = 0;
+    private static final int TYPEDEFENSE = 1;
+    private static final int DOT = 4;
+    private static final int VALVITESSE = 5;
+    private static final int VALATTAQUE = 6;
+    private static final int DEGAT = 7;
+    private static final int STUN = 8;
+    private static final int VALDEFENSE = 9;
+    private static final int VALCARACT = 10;
     //static type declencheur
-    public static final int DEGATRECU = 0;
+    private static final int DEGATRECU = 0;
     //static cible declencheur
     public static final int SOI = 0;
 
@@ -81,7 +81,7 @@ public class CompetenceToEffet {
         return null;
     }
 
-    public static ArrayList<String> switchTypeBuff(CompetenceBuff comp,boolean afficheCond, int cond) {
+    private static ArrayList<String> switchTypeBuff(CompetenceBuff comp, boolean afficheCond, int cond) {
         ArrayList<String> retour = new ArrayList<String>();
         switch (comp.getTypeBuff()) {
             case (TYPEATTAQUE):

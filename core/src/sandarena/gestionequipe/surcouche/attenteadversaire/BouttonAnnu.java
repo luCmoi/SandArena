@@ -7,12 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 
 /**
  * Created by lucmo on 13/10/2015.
  */
-public class BouttonAnnu extends Actor {
+class BouttonAnnu extends Actor {
     private final EnAttenteDadversaire container;
 
     public BouttonAnnu(EnAttenteDadversaire container) {
@@ -31,6 +32,7 @@ public class BouttonAnnu extends Actor {
 
     public void clique() {
         if (container.isVisible()) {
+            Son.MenuSelect.play();
             container.getContainer().setVisible(false);
             SandArena.googleService.quitQuickGame();
         }

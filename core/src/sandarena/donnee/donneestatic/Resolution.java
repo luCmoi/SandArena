@@ -24,7 +24,7 @@ public class Resolution {
     public static int heightCase;
     public static float ratioWidth;
     public static float ratioHeight;
-    public static Boolean fullScreen;
+    private static Boolean fullScreen;
     public static int differenceBas;
 
 

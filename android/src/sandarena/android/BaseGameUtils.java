@@ -11,7 +11,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.GamesActivityResultCodes;
 
-public class BaseGameUtils {
+class BaseGameUtils {
 
     /**
      * Show an {@link android.app.AlertDialog} with an 'OK' button and a message.
@@ -19,7 +19,7 @@ public class BaseGameUtils {
      * @param activity the Activity in which the Dialog should be displayed.
      * @param message the message to display in the Dialog.
      */
-    public static void showAlert(Activity activity, String message) {
+    private static void showAlert(Activity activity, String message) {
         (new AlertDialog.Builder(activity)).setMessage(message)
                 .setNeutralButton(android.R.string.ok, null).create().show();
     }
@@ -154,7 +154,7 @@ public class BaseGameUtils {
      * @param text the message to display on the Dialog.
      * @return an instance of {@link android.app.AlertDialog}
      */
-    public static Dialog makeSimpleDialog(Activity activity, String text) {
+    private static Dialog makeSimpleDialog(Activity activity, String text) {
         return (new AlertDialog.Builder(activity)).setMessage(text)
                 .setNeutralButton(android.R.string.ok, null).create();
     }

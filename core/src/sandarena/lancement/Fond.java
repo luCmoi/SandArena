@@ -12,7 +12,7 @@ import sandarena.googleservice.IGoogleService;
 /**
  * Created by lucmo on 11/10/2015.
  */
-public class Fond extends Actor {
+class Fond extends Actor {
     private StageLancement container;
 
     public Fond(StageLancement stageLancement) {

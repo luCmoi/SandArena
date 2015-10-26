@@ -6,7 +6,7 @@ package sandarena.selectionequipe.contenupanneau;
 /**
  * Created by lucmo on 09/10/2015.
  */
-public class PanneauEquipeSupprListener extends InputListener {
+class PanneauEquipeSupprListener extends InputListener {
     private PanneauEquipeSuppr container;
 
     public PanneauEquipeSupprListener(PanneauEquipeSuppr container) {

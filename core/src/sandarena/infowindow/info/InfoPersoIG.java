@@ -24,7 +24,7 @@ public class InfoPersoIG extends Info {
         RegexTexte.changeCharacter(PARLIGNECOMP);
         Font.font.setScale((float) (Resolution.ratioWidth * 3.25), (float) (Resolution.ratioHeight * 3.25));
         Font.font.draw(batch, texte[0], getX() + getHeight(), getY() + getHeight());
-        Font.font.setScale((float) (Resolution.ratioWidth * 2), (float) (Resolution.ratioHeight * 2.5));
+        Font.font.setScale(Resolution.ratioWidth * 2, (float) (Resolution.ratioHeight * 2.5));
 
         batch.draw(Utili.vie, getX() + getHeight(),
                 getY() + getHeight() - (2 * Font.font.getLineHeight()) - (Resolution.ratioHeight * 5),

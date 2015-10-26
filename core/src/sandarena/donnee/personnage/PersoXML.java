@@ -72,7 +72,7 @@ public class PersoXML {
         sandarena.donnee.personnage.BanquePersonnage.banque.add(new sandarena.donnee.personnage.BanquePersonnage.DonneePersonnage(id, nom, description, chemin, vie,vitesse,force,agilite,magie, affinite));
     }
 
-    public static int parseIntStatic(String mess) {
+    private static int parseIntStatic(String mess) {
         if (mess.equals("affforce")) return 0;
         else if (mess.equals("afftribal")) return 1;
         else if (mess.equals("affagilite")) return 2;

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -63,6 +64,7 @@ public class PanneauEquipe extends Group {
     }
 
     public void clique() {
+        Son.MenuSelect.play();
         if (equipe != null) {
             container.getContainer().getContainer().lanceGestionEquipe(equipe);
         } else {

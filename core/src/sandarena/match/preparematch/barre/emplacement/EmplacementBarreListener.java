@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Guillaume on 26/07/2015.
  */
-public class EmplacementBarreListener extends InputListener {
-    EmplacementBarre container;
+class EmplacementBarreListener extends InputListener {
+    private EmplacementBarre container;
     private boolean fenetre = false;
 
 

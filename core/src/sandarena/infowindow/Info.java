@@ -15,7 +15,7 @@ public abstract class Info extends Actor {
     protected static final byte PARLIGNECOMP = 35;
     protected static final byte PARLIGNEEFFET = 50;
 
-    public Info(InfoWindow container) {
+    protected Info(InfoWindow container) {
         super();
         setBounds(0, 0, container.getHeight(), container.getHeight());
     }

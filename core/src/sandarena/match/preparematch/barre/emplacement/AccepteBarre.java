@@ -12,7 +12,7 @@ package sandarena.match.preparematch.barre.emplacement;
 /**
  * Created by Guillaume on 14/08/2015.
  */
-public class AccepteBarre extends Actor {
+class AccepteBarre extends Actor {
 
     private EmplacementBarre container;
 

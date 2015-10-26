@@ -1,31 +1,31 @@
 package sandarena.googleservice;
 
 public interface IGoogleService {
-    public GoogleData data = new GoogleData();
+     GoogleData data = new GoogleData();
 
-    public void signIn();
+     void signIn();
 
-    public void signOut();
+     void signOut();
 
-    public void rateGame();
+     void rateGame();
 
-    public void submitScore(long score);
+     void submitScore(long score);
 
-    public void showScores();
+     void showScores();
 
-    public boolean isSignedIn();
+     boolean isSignedIn();
 
-    public void savedGamesLoad(String snapshotName, int place);
+     void savedGamesLoad(String snapshotName, int place);
 
-    public void savedGamesUpdate(final String snapshotName, String dataStr);
+     void savedGamesUpdate(final String snapshotName, String dataStr);
 
-    public void savedGamesLoadAll();
+     void savedGamesLoadAll();
 
-    public void printError(String print);
+     void printError(String print);
 
-    public void startQuickGame();
+     void startQuickGame();
 
-    public void sendOtherPlayer(String mess);
+     void sendOtherPlayer(String mess);
 
-    public void quitQuickGame();
+     void quitQuickGame();
 }

@@ -6,9 +6,9 @@ import sandarena.joueur.competence.active.CompetenceDispel;
  * Created by Guillaume on 18/06/2015.
  */
 public class EffetDispel extends Effet {
-    protected boolean cible;
-    protected int nombre;
-    protected EffetBuf suite;
+    private boolean cible;
+    private int nombre;
+    private EffetBuf suite;
 
     public EffetDispel(CompetenceDispel competence, EffetBuf suite) {
         this.cible = competence.isCible();

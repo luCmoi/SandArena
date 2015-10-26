@@ -1,16 +1,91 @@
 <?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE listecarte SYSTEM "XML/carte.dtd">
 <listecarte>
     <entrecarte id ="3001" type="sable" taillex="10" tailley="8" nbperso="4">
-        <typestatic></typestatic>
+        <typestatic>
+            <casestatic type="lave" x="3" y="0"/>
+            <casestatic type="lave" x="5" y="1"/>
+            <casestatic type="lave" x="0" y="2"/>
+            <casestatic type="lave" x="1" y="2"/>
+            <casestatic type="lave" x="2" y="2"/>
+            <casestatic type="lave" x="3" y="2"/>
+            <casestatic type="lave" x="5" y="2"/>
+            <casestatic type="lave" x="6" y="2"/>
+            <casestatic type="lave" x="7" y="2"/>
+            <casestatic type="lave" x="8" y="2"/>
+            <casestatic type="lave" x="9" y="2"/>
+            <casestatic type="lave" x="3" y="3"/>
+            <casestatic type="lave" x="6" y="4"/>
+            <casestatic type="lave" x="0" y="5"/>
+            <casestatic type="lave" x="1" y="5"/>
+            <casestatic type="lave" x="2" y="5"/>
+            <casestatic type="lave" x="3" y="5"/>
+            <casestatic type="lave" x="4" y="5"/>
+            <casestatic type="lave" x="6" y="5"/>
+            <casestatic type="lave" x="7" y="5"/>
+            <casestatic type="lave" x="8" y="5"/>
+            <casestatic type="lave" x="9" y="5"/>
+            <casestatic type="lave" x="4" y="6"/>
+            <casestatic type="lave" x="6" y="7"/>
+        </typestatic>
         <emplacement>
-            <caseemplacement joueur="0" x="0" y="0" />
+            <caseemplacement joueur="0" x="1" y="0" />
             <caseemplacement joueur="0" x="0" y="1"/>
-            <caseemplacement joueur="0" x="0" y="2"/>
             <caseemplacement joueur="0" x="0" y="3"/>
-            <caseemplacement joueur="1" x="5" y="0"/>
-            <caseemplacement joueur="1" x="5" y="1"/>
-            <caseemplacement joueur="1" x="5" y="2"/>
-            <caseemplacement joueur="1" x="5" y="3"/>
+            <caseemplacement joueur="0" x="0" y="4"/>
+            <caseemplacement joueur="0" x="0" y="6"/>
+            <caseemplacement joueur="0" x="1" y="7"/>
+            <caseemplacement joueur="1" x="8" y="0"/>
+            <caseemplacement joueur="1" x="9" y="1"/>
+            <caseemplacement joueur="1" x="9" y="3"/>
+            <caseemplacement joueur="1" x="9" y="4"/>
+            <caseemplacement joueur="1" x="9" y="6"/>
+            <caseemplacement joueur="1" x="8" y="7"/>
+        </emplacement>
+    </entrecarte>
+    <entrecarte id ="3002" type="sable" taillex="10" tailley="10" nbperso="4">
+        <typestatic>
+            <casestatic type="lave" x="1" y="1"/>
+            <casestatic type="lave" x="3" y="1"/>
+            <casestatic type="lave" x="4" y="1"/>
+            <casestatic type="lave" x="5" y="1"/>
+            <casestatic type="lave" x="6" y="1"/>
+            <casestatic type="lave" x="7" y="1"/>
+            <casestatic type="lave" x="8" y="1"/>
+            <casestatic type="lave" x="1" y="2"/>
+            <casestatic type="lave" x="1" y="3"/>
+            <casestatic type="lave" x="8" y="3"/>
+            <casestatic type="lave" x="1" y="4"/>
+            <casestatic type="lave" x="4" y="4"/>
+            <casestatic type="lave" x="5" y="4"/>
+            <casestatic type="lave" x="8" y="4"/>
+            <casestatic type="lave" x="1" y="5"/>
+            <casestatic type="lave" x="4" y="5"/>
+            <casestatic type="lave" x="5" y="5"/>
+            <casestatic type="lave" x="8" y="5"/>
+            <casestatic type="lave" x="1" y="6"/>
+            <casestatic type="lave" x="8" y="6"/>
+            <casestatic type="lave" x="7" y="8"/>
+            <casestatic type="lave" x="1" y="8"/>
+            <casestatic type="lave" x="2" y="8"/>
+            <casestatic type="lave" x="3" y="8"/>
+            <casestatic type="lave" x="4" y="8"/>
+            <casestatic type="lave" x="5" y="8"/>
+            <casestatic type="lave" x="6" y="8"/>
+            <casestatic type="lave" x="8" y="8"/>
+        </typestatic>
+        <emplacement>
+            <caseemplacement joueur="0" x="1" y="0" />
+            <caseemplacement joueur="0" x="0" y="1"/>
+            <caseemplacement joueur="0" x="2" y="1"/>
+            <caseemplacement joueur="0" x="8" y="9"/>
+            <caseemplacement joueur="0" x="9" y="8"/>
+            <caseemplacement joueur="0" x="8" y="7"/>
+            <caseemplacement joueur="1" x="0" y="8"/>
+            <caseemplacement joueur="1" x="1" y="9"/>
+            <caseemplacement joueur="1" x="1" y="7"/>
+            <caseemplacement joueur="1" x="8" y="2"/>
+            <caseemplacement joueur="1" x="8" y="0"/>
+            <caseemplacement joueur="1" x="9" y="1"/>
         </emplacement>
     </entrecarte>
 </listecarte>

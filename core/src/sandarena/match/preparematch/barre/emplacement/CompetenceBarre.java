@@ -12,7 +12,7 @@ import sandarena.infowindow.windows.InfoWindowComp;
 /**
  * Created by Guillaume on 13/08/2015.
  */
-public class CompetenceBarre extends Actor {
+class CompetenceBarre extends Actor {
     private BanqueCompetence.EntreeCompetence comp;
     private InfoWindowComp info;
     private EmplacementBarre container;
@@ -21,7 +21,7 @@ public class CompetenceBarre extends Actor {
         super();
         this.container = container;
         this.comp = comp;
-        this.setBounds((Resolution.differenceBas / 2) * (2 + (place % 2)), 0 + ((Resolution.differenceBas / 2) * (1 - (place / 2))), Resolution.differenceBas / 2, Resolution.differenceBas / 2);
+        this.setBounds((Resolution.differenceBas / 2) * (2 + (place % 2)), ((Resolution.differenceBas / 2) * (1 - (place / 2))), Resolution.differenceBas / 2, Resolution.differenceBas / 2);
         this.addListener(new CompBarreListener(this));
         this.setTouchable(Touchable.disabled);
     }

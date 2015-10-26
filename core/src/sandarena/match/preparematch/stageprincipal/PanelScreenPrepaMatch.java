@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import java.util.ArrayList;
 
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.joueur.Personnage;
 
 /**
@@ -14,7 +15,7 @@ import sandarena.joueur.Personnage;
 public class PanelScreenPrepaMatch extends Group {
     private final StagePrincipalScreenPrepa container;
     private ArrayList<sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch> places;
-    public float coteMoyen;
+    private float coteMoyen;
 
     public PanelScreenPrepaMatch(boolean position, StagePrincipalScreenPrepa container) {
         this.container = container;
@@ -56,6 +57,7 @@ public class PanelScreenPrepaMatch extends Group {
         for (sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch place : places){
             if (place.getPerso() == null){
                 place.setPerso(tmp);
+                Son.PersoSelect.play();
                 break;
             }
         }

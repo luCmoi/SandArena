@@ -11,7 +11,7 @@ import sandarena.donnee.donneestatic.Utili;
 /**
  * Created by lucmo on 22/10/2015.
  */
-public class Fond extends Actor {
+class Fond extends Actor {
     private final StagePersonnageGestionEquipe container;
 
     public Fond(StagePersonnageGestionEquipe container) {

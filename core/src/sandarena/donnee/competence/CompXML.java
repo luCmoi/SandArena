@@ -167,7 +167,7 @@ public class CompXML {
         }
     }
 
-    public static int parseIntStatic(String mess) {
+    private static int parseIntStatic(String mess) {
         if (mess.equals("affforce")) return 0;
         else if (mess.equals("afftribal")) return 1;
         else if (mess.equals("affagilite")) return 2;

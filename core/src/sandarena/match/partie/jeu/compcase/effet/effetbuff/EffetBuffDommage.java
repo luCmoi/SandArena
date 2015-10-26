@@ -7,7 +7,7 @@ import sandarena.match.partie.jeu.compcase.effet.EffetBufGroup;
  * Created by Guillaume on 16/06/2015.
  */
 public class EffetBuffDommage extends EffetBuf {
-    int val;
+    private int val;
 
     public EffetBuffDommage(String nom,int val, EffetBufGroup group) {
         super(nom, group);

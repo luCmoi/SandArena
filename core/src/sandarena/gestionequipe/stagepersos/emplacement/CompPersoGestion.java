@@ -10,7 +10,7 @@ import sandarena.infowindow.windows.InfoWindowComp;
 /**
  * Created by Guillaume on 23/07/2015.
  */
-public class CompPersoGestion extends Actor {
+class CompPersoGestion extends Actor {
     private EmplacementPersoGestion container;
     private BanqueCompetence.EntreeCompetence comp;
     private int place;

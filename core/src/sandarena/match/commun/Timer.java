@@ -13,10 +13,10 @@ import sandarena.googleservice.ConnexionMatch;
  * Created by lucmo on 24/10/2015.
  */
 public class Timer extends Actor {
-    int valeur;
-    long dernierTemp;
-    public static int TEMPSPREPAS = 40;
-    public static int TEMPSTOUR = 180;
+    private int valeur;
+    private long dernierTemp;
+    private static int TEMPSPREPAS = 40;
+    private static int TEMPSTOUR = 180;
     private boolean prepa;
 
     public Timer(boolean prepa) {

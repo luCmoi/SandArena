@@ -50,7 +50,7 @@ public class EffetAttaque extends Effet {
         return 0;
     }
 
-    public int degat(int caractA, int caractD) {
+    private int degat(int caractA, int caractD) {
         return caractA + (caractA - caractD);
     }
 }

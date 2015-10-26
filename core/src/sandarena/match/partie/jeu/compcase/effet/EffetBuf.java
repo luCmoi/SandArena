@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public abstract class EffetBuf extends Effet {
     private EffetBufGroup group;
     private sandarena.match.partie.jeu.compcase.PersonnageIG container;
-    protected int duree = -1;
-    protected String nom;
+    private int duree = -1;
+    private String nom;
 
-    public EffetBuf(String nom, EffetBufGroup group) {
+    protected EffetBuf(String nom, EffetBufGroup group) {
         this.nom= nom;
         this.setGroup(group);
     }
 
-    public sandarena.match.partie.jeu.compcase.PersonnageIG getContainer() {
+    protected sandarena.match.partie.jeu.compcase.PersonnageIG getContainer() {
         return container;
     }
 
@@ -33,7 +33,7 @@ public abstract class EffetBuf extends Effet {
         return this.duree == 0;
     }
 
-    public int getDuree(){
+    protected int getDuree(){
         return duree;
     }
 
@@ -47,7 +47,7 @@ public abstract class EffetBuf extends Effet {
         return group;
     }
 
-    public void setGroup(EffetBufGroup group) {
+    private void setGroup(EffetBufGroup group) {
         this.group = group;
     }
 }

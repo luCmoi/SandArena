@@ -7,11 +7,11 @@ import sandarena.match.partie.jeu.compcase.PersonnageIG;
  * Created by Guillaume on 09/06/2015.
  */
 public class EffetDeclencheur extends Effet {
-    protected int cible;
+    private int cible;
     private Effet chaine;
-    protected PersonnageIG container;
+    private PersonnageIG container;
 
-    public EffetDeclencheur(int cible, Effet chaine) {
+    protected EffetDeclencheur(int cible, Effet chaine) {
         this.cible = cible;
         this.chaine = chaine;
     }
@@ -20,7 +20,7 @@ public class EffetDeclencheur extends Effet {
         this.container = container;
     }
 
-    public void launch(PersonnageIG personnage) {
+    protected void launch(PersonnageIG personnage) {
         System.out.println(chaine.getClass());
         if (chaine instanceof sandarena.match.partie.jeu.compcase.effet.EffetBuf){
             if (cible == sandarena.match.partie.jeu.compcase.effet.CompetenceToEffet.SOI) {

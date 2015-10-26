@@ -88,7 +88,7 @@ public class StagePrincipalScreenPrepa extends Stage {
         }
     }
 
-    public void recoitPersonnageAutre() {
+    private void recoitPersonnageAutre() {
         SandArena.googleService.printError("Recoi mess");
         bloquand = true;
         ConnexionMatch.recoiTimer(container.getSurcouche().getTimer());
@@ -107,10 +107,7 @@ public class StagePrincipalScreenPrepa extends Stage {
     }
 
     public boolean testFin() {
-        if (panelGauche.testFin() && panelDroit.testFin()) {
-            return true;
-        }
-        return false;
+        return panelGauche.testFin() && panelDroit.testFin();
     }
 
     public ArrayList<Personnage> getPersonnagesActif() {

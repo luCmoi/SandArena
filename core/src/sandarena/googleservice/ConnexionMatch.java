@@ -117,7 +117,7 @@ public class ConnexionMatch {
         }.start();
     }
 
-    public static void partieRecoitPersoActif(Partie partie, String mess) throws IOException {
+    private static void partieRecoitPersoActif(Partie partie, String mess) {
         int perso = Integer.parseInt(mess.substring(0, 4));
         partie.setPersonnageActif(perso);
     }
@@ -129,7 +129,7 @@ public class ConnexionMatch {
         SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitDeplacement(Partie partie, String mess) throws IOException {
+    private static void partieRecoitDeplacement(Partie partie, String mess) throws IOException {
         partieRecoitPersoActif(partie, mess);
         int x = Integer.parseInt(mess.substring(4, 8));
         int y = Integer.parseInt(mess.substring(8, 12));
@@ -146,7 +146,7 @@ public class ConnexionMatch {
         SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitCompetence(Partie partie, String mess) throws IOException {
+    private static void partieRecoitCompetence(Partie partie, String mess) throws IOException {
         partieRecoitPersoActif(partie, mess);
         int i = Integer.parseInt(mess.substring(4, 8));
         if (i != 9999) {
@@ -164,7 +164,7 @@ public class ConnexionMatch {
         SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitUtiliseCompetence(Partie partie, String mess) throws IOException {
+    private static void partieRecoitUtiliseCompetence(Partie partie, String mess) throws IOException {
         partieRecoitCompetence(partie, mess);
         int x = Integer.parseInt(mess.substring(8, 12));
         int y = Integer.parseInt(mess.substring(12, 16));
@@ -182,7 +182,7 @@ public class ConnexionMatch {
         SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitFinPhase(Partie partie) {
+    private static void partieRecoitFinPhase(Partie partie) {
         partie.finPhase();
         partie.getContainer().getStageInterface().recharge();
     }
@@ -202,14 +202,14 @@ public class ConnexionMatch {
         SandArena.googleService.sendOtherPlayer(mess);
     }
 
-    public static void partieRecoitEchange(Partie partie, String mess) throws IOException {
+    private static void partieRecoitEchange(Partie partie, String mess) throws IOException {
         partieRecoitPersoActif(partie, mess);
         int x = Integer.parseInt(mess.substring(4, 8));
         int y = Integer.parseInt(mess.substring(8, 12));
         partie.getPlateau()[x][y].echange();
     }
 
-    public static String string4(int entre) {
+    private static String string4(int entre) {
         if (entre != -1) {
             String retour = String.valueOf(entre);
             while (retour.length() < 4) {

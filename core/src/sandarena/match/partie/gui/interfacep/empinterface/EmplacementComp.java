@@ -18,7 +18,7 @@ public class EmplacementComp extends EmplacementInterface {
 
     public EmplacementComp(int place, StageInterface container) {
         super(place, container);
-        this.setBounds((container.tailleCoteHeight / 2 * (2 + (getPlace() / 2) + (3 * (getPlace() / 4)))), 0 + ((container.tailleCoteHeight / 2) * (getPlace() % 2)), container.tailleCoteHeight / 2, container.tailleCoteHeight / 2);
+        this.setBounds((container.tailleCoteHeight / 2 * (2 + (getPlace() / 2) + (3 * (getPlace() / 4)))), ((container.tailleCoteHeight / 2) * (getPlace() % 2)), container.tailleCoteHeight / 2, container.tailleCoteHeight / 2);
         actif = place < 4;
 
     }

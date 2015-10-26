@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by lucmo on 23/09/2015.
  */
-public class UnitPersoGestionListener extends InputListener {
-    UnitPersoGestion container;
+class UnitPersoGestionListener extends InputListener {
+    private UnitPersoGestion container;
     private boolean pression;
     private long time;
 

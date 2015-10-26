@@ -9,7 +9,7 @@ import sandarena.donnee.donneestatic.Resolution;
 /**
  * Created by lucmo on 11/10/2015.
  */
-public class StageLancement extends Stage {
+class StageLancement extends Stage {
     private ScreenLancement container;
     private EmplacementTexte texte;
     private Fond fond;

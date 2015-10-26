@@ -6,12 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 
 /**
  * Created by lucmo on 20/10/2015.
  */
-public class BoutonAchat extends Actor {
+class BoutonAchat extends Actor {
     private final AchatPerso container;
     private final int place;
 
@@ -42,7 +43,9 @@ public class BoutonAchat extends Actor {
         }
     }
 
-    public void clique() {
+    public void clique()
+    {
+        Son.MenuSelect.play();
         if (place == 1) {
         } else if (place == 2 && container.getContainer().getContainer().getEquipe().getOr() >= 1000) {
             container.getContainer().getContainer().achatAleat(container.getPlace());

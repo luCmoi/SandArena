@@ -10,7 +10,7 @@ import sandarena.infowindow.windows.InfoWindowComp;
 /**
  * Created by Guillaume on 23/07/2015.
  */
-public class CompPanelScreenPrepaMatch extends Actor {
+class CompPanelScreenPrepaMatch extends Actor {
     private EmplacementPanelScreenPrepaMatch container;
     private BanqueCompetence.EntreeCompetence comp;
     private int place;

@@ -7,12 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 
 /**
  * Created by lucmo on 09/10/2015.
  */
-public class PanneauEquipeSuppr extends Actor{
+class PanneauEquipeSuppr extends Actor{
     private PanneauEquipe container;
 
     public PanneauEquipeSuppr(PanneauEquipe panneauEquipe) {
@@ -33,6 +34,7 @@ public class PanneauEquipeSuppr extends Actor{
     }
 
     public void clique() {
+        Son.MenuSelect.play();
         container.setSupprimer(true);
         container.getContainer().getContainer().confSuppr(container.getPlace());
     }

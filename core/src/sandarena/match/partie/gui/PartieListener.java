@@ -97,7 +97,7 @@ public class PartieListener extends InputListener {
         return false;
     }
 
-    public Partie getPartie() {
+    private Partie getPartie() {
         return partie;
     }
 

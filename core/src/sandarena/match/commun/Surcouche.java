@@ -39,7 +39,7 @@ public class Surcouche extends Stage {
         super.draw();
     }
 
-    public void setVisible(boolean visible) {
+    private void setVisible(boolean visible) {
         if (visible) {
             Gdx.input.setInputProcessor(this);
             this.visible = visible;

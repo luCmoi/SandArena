@@ -14,10 +14,12 @@ import java.util.ArrayList;
 
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.match.commun.Surcouche;
+import sandarena.match.preparematch.barre.StageBarre;
 import sandarena.match.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 
 
@@ -27,7 +29,7 @@ import sandarena.match.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 public class ScreenPrepaMatch implements Screen {
     private Batch batch;
     private SandArena container;
-    private sandarena.match.preparematch.barre.StageBarre barre;
+    private StageBarre barre;
     private StagePrincipalScreenPrepa principal;
     private Surcouche surcouche;
     private Joueur joueur;
@@ -39,6 +41,13 @@ public class ScreenPrepaMatch implements Screen {
         this.map = map;
         this.batch = conteneur.getBatch();
         joueur = equipe;
+        if (Son.actuelle != null){
+            Son.actuelle.stop();
+        }
+        Son.ambiancePrepare.setLooping(true);
+        Son.ambiancePrepare.setVolume(0.4f);
+        Son.ambiancePrepare.play();
+        Son.actuelle = Son.ambiancePrepare;
     }
 
     @Override
@@ -103,11 +112,11 @@ public class ScreenPrepaMatch implements Screen {
 
     }
 
-    public sandarena.match.preparematch.barre.StageBarre getBarre() {
+    private sandarena.match.preparematch.barre.StageBarre getBarre() {
         return barre;
     }
 
-    public void setBarre(sandarena.match.preparematch.barre.StageBarre barre) {
+    private void setBarre(sandarena.match.preparematch.barre.StageBarre barre) {
         this.barre = barre;
     }
 
@@ -115,7 +124,7 @@ public class ScreenPrepaMatch implements Screen {
         return principal;
     }
 
-    public void setPrincipal(StagePrincipalScreenPrepa principal) {
+    private void setPrincipal(StagePrincipalScreenPrepa principal) {
         this.principal = principal;
     }
 
@@ -123,11 +132,11 @@ public class ScreenPrepaMatch implements Screen {
         return surcouche;
     }
 
-    public void setSurcouche(Surcouche surcouche) {
+    private void setSurcouche(Surcouche surcouche) {
         this.surcouche = surcouche;
     }
 
-    public Joueur getJoueur() {
+    private Joueur getJoueur() {
         return joueur;
     }
 

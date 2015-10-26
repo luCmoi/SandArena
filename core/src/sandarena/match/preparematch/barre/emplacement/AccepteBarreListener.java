@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Guillaume on 14/08/2015.
  */
-public class AccepteBarreListener extends InputListener {
+class AccepteBarreListener extends InputListener {
 
     private AccepteBarre container;
     private boolean presse;

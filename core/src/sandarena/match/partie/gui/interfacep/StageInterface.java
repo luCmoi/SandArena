@@ -7,6 +7,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import sandarena.match.partie.gui.interfacep.empinterface.EmplacementComp;
+import sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet;
+import sandarena.match.partie.jeu.Case;
+import sandarena.match.partie.jeu.Partie;
+
 public class StageInterface extends Stage {
     private sandarena.match.partie.jeu.Partie partie;
     private ArrayList<sandarena.match.partie.gui.interfacep.empinterface.EmplacementComp> emplacementCompsActif;
@@ -17,7 +22,7 @@ public class StageInterface extends Stage {
     private sandarena.match.partie.gui.interfacep.empinterface.EmplacementPerso emplacementPersoActif;
     private sandarena.match.partie.gui.interfacep.empinterface.EmplacementPerso emplacementPersoSelect;
     public int tailleCoteHeight;
-    public int tailleCoteWidth;
+    private int tailleCoteWidth;
 
     public StageInterface(Viewport viewport, Batch batch) {
         super(viewport, batch);
@@ -133,19 +138,19 @@ public class StageInterface extends Stage {
 
     public void setPersonnageActif(sandarena.match.partie.jeu.compcase.PersonnageIG perso) {
         emplacementPersoActif.setPerso(perso);
-        for (sandarena.match.partie.gui.interfacep.empinterface.EmplacementComp emp : emplacementCompsActif) {
+        for (EmplacementComp emp : emplacementCompsActif) {
             if (perso != null) {
                 emp.setCompetenceIG(perso.getCompetence()[emp.getPlace()]);
-            }else{
+            } else {
                 emp.setCompetenceIG(null);
             }
         }
-        for (sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet emp : emplacementEffetsActif) {
+        for (EmplacementEffet emp : emplacementEffetsActif) {
             emp.setEffet(perso);
         }
     }
 
-    public sandarena.match.partie.jeu.Partie getPartie() {
+    public Partie getPartie() {
         return this.partie;
     }
 
@@ -158,24 +163,26 @@ public class StageInterface extends Stage {
         return super.hit(stageX, stageY, touchable);
     }
 
-    public void setCaseSelect(sandarena.match.partie.jeu.Case caseSelect) {
-        if (caseSelect.getPresence() != null) {
-            emplacementPersoSelect.setPerso(caseSelect.getPresence());
-        } else {
-            emplacementPersoSelect.setPerso(null);
-        }
-        for (sandarena.match.partie.gui.interfacep.empinterface.EmplacementComp emp : emplacementCompsSelect) {
+    public void setCaseSelect(Case caseSelect) {
+        if (caseSelect != null) {
             if (caseSelect.getPresence() != null) {
-                emp.setCompetenceIG(caseSelect.getPresence().getCompetence()[emp.getPlace() - 4]);
+                emplacementPersoSelect.setPerso(caseSelect.getPresence());
             } else {
-                emp.setCompetenceIG(null);
+                emplacementPersoSelect.setPerso(null);
             }
-        }
-        for (sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet emp : emplacementEffetsSelect) {
-            if (caseSelect.getPresence() != null) {
-                emp.setEffet(caseSelect.getPresence());
-            } else {
-                emp.setEffet(null);
+            for (EmplacementComp emp : emplacementCompsSelect) {
+                if (caseSelect.getPresence() != null) {
+                    emp.setCompetenceIG(caseSelect.getPresence().getCompetence()[emp.getPlace() - 4]);
+                } else {
+                    emp.setCompetenceIG(null);
+                }
+            }
+            for (EmplacementEffet emp : emplacementEffetsSelect) {
+                if (caseSelect.getPresence() != null) {
+                    emp.setEffet(caseSelect.getPresence());
+                } else {
+                    emp.setEffet(null);
+                }
             }
         }
     }

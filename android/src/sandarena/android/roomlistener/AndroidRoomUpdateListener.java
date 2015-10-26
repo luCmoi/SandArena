@@ -1,13 +1,12 @@
 package sandarena.android.roomlistener;
 
-import android.view.WindowManager;
-
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesStatusCodes;
 import com.google.android.gms.games.multiplayer.realtime.Room;
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 
 import sandarena.android.GameHelperFragment;
+import sandarena.googleservice.IGoogleService;
 
 /**
  * Created by lucmo on 07/10/2015.
@@ -21,55 +20,43 @@ public class AndroidRoomUpdateListener implements RoomUpdateListener {
 
     @Override
     public void onRoomCreated(int statusCode, Room room) {
+        System.err.println("onRoomCreated");
         container.setRoomId(room.getRoomId());
         container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         if (statusCode != GamesStatusCodes.STATUS_OK) {
-            container.getmActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                }
-            });
+            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            container.setRoomId(null);
+            IGoogleService.data.justLeft = true;
             System.err.println("Error when creating the room");
         }
     }
 
     @Override
     public void onJoinedRoom(int statusCode, Room room) {
+        System.err.println("onJoinedRoom");
         container.setRoomId(room.getRoomId());
         container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         if (statusCode != GamesStatusCodes.STATUS_OK) {
-            container.getmActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                }
-            });
+            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            container.setRoomId(null);
+            IGoogleService.data.justLeft = true;
             System.err.println("Error when Joining the room");
         }
     }
 
     @Override
     public void onLeftRoom(int i, String s) {
-        container.getmActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-        });
     }
 
     @Override
     public void onRoomConnected(int statusCode, Room room) {
+        System.err.println("onRoomConnected");
         container.setRoomId(room.getRoomId());
         container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         if (statusCode != GamesStatusCodes.STATUS_OK) {
-            container.getmActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    container.getmActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                }
-            });
+            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            container.setRoomId(null);
+            IGoogleService.data.justLeft = true;
             System.err.println("Error when Connecting the room");
         }
     }

@@ -19,7 +19,7 @@ import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuf
  */
 public class EffetBufGroup {
     private String nom;
-    protected ArrayList<EffetBuf> chaine = new ArrayList<EffetBuf>();
+    private ArrayList<EffetBuf> chaine = new ArrayList<EffetBuf>();
     private int typeCond = -1;
     private int duree;
     private boolean benefique;

@@ -13,7 +13,7 @@ public class EffetBuffType extends EffetBuf {
     protected int typeCond = -1;
 
 
-    public EffetBuffType(String nom,int type, EffetBufGroup group) {
+    protected EffetBuffType(String nom, int type, EffetBufGroup group) {
         super(nom, group);
         this.type = type;
     }
@@ -28,7 +28,7 @@ public class EffetBuffType extends EffetBuf {
         }
     }
 
-    public int getTypeCond() {
+    private int getTypeCond() {
         return typeCond;
     }
 

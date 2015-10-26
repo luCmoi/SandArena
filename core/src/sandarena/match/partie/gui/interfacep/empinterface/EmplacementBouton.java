@@ -13,7 +13,7 @@ public class EmplacementBouton extends EmplacementInterface {
 
     public EmplacementBouton(int place, StageInterface container) {
         super(place, container);
-        this.setBounds(container.getWidth() - ((container.tailleCoteHeight / 2) * (1 + (getPlace() / 2))), 0 + ((container.tailleCoteHeight / 2) * (getPlace() % 2)), container.tailleCoteHeight / 2, container.tailleCoteHeight / 2);
+        this.setBounds(container.getWidth() - ((container.tailleCoteHeight / 2) * (1 + (getPlace() / 2))), ((container.tailleCoteHeight / 2) * (getPlace() % 2)), container.tailleCoteHeight / 2, container.tailleCoteHeight / 2);
     }
 
     @Override

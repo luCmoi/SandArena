@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Guillaume on 15/06/2015.
  */
-public class EmplacementInterfaceListener extends InputListener {
+class EmplacementInterfaceListener extends InputListener {
     private boolean pression;
     private EmplacementInterface emplacementEcoute;
     private long time;

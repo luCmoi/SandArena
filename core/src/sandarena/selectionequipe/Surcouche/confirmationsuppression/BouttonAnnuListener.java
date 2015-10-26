@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by lucmo on 13/10/2015.
  */
-public class BouttonAnnuListener extends InputListener {
+class BouttonAnnuListener extends InputListener {
     private BouttonAnnu container;
 
     public BouttonAnnuListener(BouttonAnnu container) {

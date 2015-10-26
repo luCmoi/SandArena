@@ -102,7 +102,7 @@ public class PersonnageIG {
         return vieActuelle;
     }
 
-    public void setVieActuelle(int vieActuelle) {
+    private void setVieActuelle(int vieActuelle) {
         this.vieActuelle = vieActuelle;
         if (this.vieActuelle <= 0) {
         }
@@ -208,7 +208,7 @@ public class PersonnageIG {
         return val;
     }
 
-    public void modifVitesse() {
+    private void modifVitesse() {
         int tmp = this.donnee.commun.vitesse;
         for (sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse effet : getChangeVitesse()) {
             tmp = effet.modif(tmp);
@@ -216,7 +216,7 @@ public class PersonnageIG {
         vitesseRestante = tmp;
     }
 
-    public void declencheRecoitDegat(int val) {
+    private void declencheRecoitDegat(int val) {
         for (EffetDeclencheurDegatRecu effet : recoiDegat) {
             effet.check(val);
         }
@@ -236,7 +236,7 @@ public class PersonnageIG {
         }
     }
 
-    public void meurt() {
+    private void meurt() {
         this.mort = true;
         this.getContainer().getContainer().testfin();
         this.getContainer().setPresence(null);
@@ -334,7 +334,7 @@ public class PersonnageIG {
         modifVitesse();
     }
 
-    public void removeBuff(EffetBuf effet) {
+    private void removeBuff(EffetBuf effet) {
         buffBenefique.remove(effet);
         buffMauvais.remove(effet);
         if (effet instanceof EffetBuffValCaract) {
@@ -392,7 +392,6 @@ public class PersonnageIG {
         Collections.shuffle(buffMauvais);
         if (buffMauvais.size() > 0) {
             buffMauvais.get(0).remove(this);
-            ;
             buffMauvais.remove(0);
         }
     }

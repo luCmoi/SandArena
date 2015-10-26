@@ -8,7 +8,7 @@ import sandarena.donnee.donneestatic.Utili;
 /**
  * Created by Guillaume on 16/07/2015.
  */
-public class Fond extends Actor {
+class Fond extends Actor {
     private final StageBarre container;
 
     public Fond(StageBarre stageBarre) {

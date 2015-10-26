@@ -10,7 +10,7 @@ import sandarena.joueur.Personnage;
 /**
  * Created by Guillaume on 23/07/2015.
  */
-public class UnitPanelScreenPrepaMatch extends Actor {
+class UnitPanelScreenPrepaMatch extends Actor {
     private EmplacementPanelScreenPrepaMatch container;
     private Personnage perso;
     private InfoWindowPerso info;

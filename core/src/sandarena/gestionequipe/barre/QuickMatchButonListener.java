@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by lucmo on 16/10/2015.
  */
-public class QuickMatchButonListener extends InputListener {
+class QuickMatchButonListener extends InputListener {
     private QuickMatchButon container;
 
     public QuickMatchButonListener(QuickMatchButon quickMatchButon) {

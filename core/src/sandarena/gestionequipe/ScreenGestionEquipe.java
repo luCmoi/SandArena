@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.gestionequipe.barre.StageBarreGestionEquipe;
 import sandarena.gestionequipe.stagepersos.StagePersonnageGestionEquipe;
 import sandarena.gestionequipe.surcouche.Surcouche;
@@ -50,7 +51,9 @@ public class ScreenGestionEquipe implements Screen {
         this.persos.draw();
         this.surcouche.draw();
         if (IGoogleService.data.lancePartie) {
-            container.lancePrepaMatch(3001, equipe);
+            Son.adversaireTrouve.play();
+            //TODO lance aléa
+            container.lancePrepaMatch(3002, equipe);
         }
     }
 
@@ -114,6 +117,7 @@ public class ScreenGestionEquipe implements Screen {
     }
 
     public void backKeyPressed() {
+        Son.MenuSelect.play();
         if (surcouche.isVisible()) {
             surcouche.setVisible(false);
         } else {
@@ -127,6 +131,15 @@ public class ScreenGestionEquipe implements Screen {
         persos.setEquipe(equipe);
         surcouche.setVisible(false);
         Gdx.input.setInputProcessor(persos);
+        if (Son.actuelle != null && Son.actuelle != Son.sadStrings){
+            Son.actuelle.stop();
+        }
+        if (Son.actuelle != Son.sadStrings) {
+            Son.sadStrings.setLooping(true);
+            Son.sadStrings.setVolume(0.5f);
+            Son.sadStrings.play();
+            Son.actuelle = Son.sadStrings;
+        }
     }
 
     public Joueur getEquipe() {

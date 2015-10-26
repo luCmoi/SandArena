@@ -117,7 +117,7 @@ class GameHelperUtils {
         Log.w("GameHelper", "****   http://developers.google.com/games/services/android/troubleshooting");
     }
 
-    static String getAppIdFromResource(Context ctx) {
+    private static String getAppIdFromResource(Context ctx) {
         try {
             Resources res = ctx.getResources();
             String pkgName = ctx.getPackageName();
@@ -129,7 +129,7 @@ class GameHelperUtils {
         }
     }
 
-    static String getSHA1CertFingerprint(Context ctx) {
+    private static String getSHA1CertFingerprint(Context ctx) {
         try {
             Signature[] sigs = ctx.getPackageManager().getPackageInfo(
                     ctx.getPackageName(), PackageManager.GET_SIGNATURES).signatures;
@@ -157,7 +157,7 @@ class GameHelperUtils {
         }
     }
 
-    static void byteToString(StringBuilder sb, byte b) {
+    private static void byteToString(StringBuilder sb, byte b) {
         int unsigned_byte = b < 0 ? b + 256 : b;
         int hi = unsigned_byte / 16;
         int lo = unsigned_byte % 16;

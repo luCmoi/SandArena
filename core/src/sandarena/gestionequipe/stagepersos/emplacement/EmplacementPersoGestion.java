@@ -14,8 +14,8 @@ import sandarena.joueur.Personnage;
 public class EmplacementPersoGestion extends Group{
     private StagePersonnageGestionEquipe container;
     private byte place;
-    UnitPersoGestion unit;
-    CompPersoGestion[] comp = new CompPersoGestion[4];
+    private UnitPersoGestion unit;
+    private CompPersoGestion[] comp = new CompPersoGestion[4];
 
     public EmplacementPersoGestion(StagePersonnageGestionEquipe container, int place) {
         this.container = container;

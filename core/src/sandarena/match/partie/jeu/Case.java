@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
-import sandarena.googleservice.ConnexionMatch;
-import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.carte.BanqueCarte;
+import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.infowindow.windows.InfoWindowCaseIG;
+import sandarena.match.partie.jeu.compcase.PersonnageIG;
+import sandarena.match.partie.jeu.compcase.Sol;
 
 /**
  * @author Guillaume
@@ -18,8 +20,8 @@ public class Case extends Actor {
     private Partie container;
     private int placeX;
     private int placeY;
-    private sandarena.match.partie.jeu.compcase.Sol sol;
-    private sandarena.match.partie.jeu.compcase.PersonnageIG presence;
+    private Sol sol;
+    private PersonnageIG presence;
     private boolean accessible;
     private Case predecesseur;
     private boolean chemin;
@@ -47,7 +49,7 @@ public class Case extends Actor {
     }
 
     public boolean isTraversable() {
-        return (this.presence == null);
+        return (this.presence == null && this.sol.isTraversable());
     }
 
     @Override
@@ -94,11 +96,11 @@ public class Case extends Actor {
         clear();
     }
 
-    public sandarena.match.partie.jeu.compcase.Sol getSol() {
+    private sandarena.match.partie.jeu.compcase.Sol getSol() {
         return sol;
     }
 
-    public void setSol(sandarena.match.partie.jeu.compcase.Sol sol) {
+    private void setSol(sandarena.match.partie.jeu.compcase.Sol sol) {
         this.sol = sol;
     }
 
@@ -124,7 +126,7 @@ public class Case extends Actor {
     }
 
 
-    public boolean isAccessible() {
+    private boolean isAccessible() {
         return accessible;
     }
 
@@ -178,11 +180,13 @@ public class Case extends Actor {
     }
 
     public void echange() {
-        sandarena.match.partie.jeu.compcase.PersonnageIG tmp = this.getPresence();
+        PersonnageIG tmp = this.getPresence();
         this.presence = container.getPersonnageActif();
         if (tmp != null) {
             container.getPersonnageActif().getContainer().setPresence(tmp);
             tmp.setContainer(container.getPersonnageActif().getContainer());
+        }else{
+            container.getPersonnageActif().getContainer().setPresence(null);
         }
         this.presence.setContainer(this);
         container.setPersonnageActif(null);
@@ -225,5 +229,10 @@ public class Case extends Actor {
 
     public void setSpawnable(int spawnable) {
         this.spawnable = spawnable;
+    }
+
+    public void setSol(int sol) {
+        this.sol.dispose();
+        this.sol = new Sol(sol,this);
     }
 }

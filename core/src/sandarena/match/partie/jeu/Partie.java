@@ -79,6 +79,9 @@ public class Partie extends Stage {
             }
         }
         this.addActor(groupeCase);
+        for (CaseSpeciale cs:carte.special) {
+            plateau[cs.getX()][cs.getY()].setSol(cs.getSol());
+        }
         widthTailleTotale = this.plateau.length * Resolution.widthCase;
         heightTailleTotale = this.plateau[0].length * Resolution.heightCase;
         this.addCaptureListener(new sandarena.match.partie.gui.PartieListener(this));
@@ -206,6 +209,7 @@ public class Partie extends Stage {
                 if (!isBloquand()) {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     setBloquand(true);
+                    setPersonnageActif(null);
                 } else {
                     surcouche.reset();
                     spawn = false;
@@ -215,6 +219,7 @@ public class Partie extends Stage {
                 if (isBloquand()) {
                     surcouche.reset();
                     setBloquand(false);
+                    setPersonnageActif(null);
                 } else {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     spawn = false;
@@ -293,7 +298,7 @@ public class Partie extends Stage {
         return plateau;
     }
 
-    public void setPlateau(Case[][] plateau) {
+    private void setPlateau(Case[][] plateau) {
         this.plateau = plateau;
     }
 
@@ -301,7 +306,7 @@ public class Partie extends Stage {
         return container;
     }
 
-    public void setContainer(sandarena.match.partie.ScreenPartie container) {
+    private void setContainer(sandarena.match.partie.ScreenPartie container) {
         this.container = container;
     }
 
@@ -314,7 +319,7 @@ public class Partie extends Stage {
         return joueurActif;
     }
 
-    public sandarena.match.partie.jeu.compcase.JoueurIG getJoueurAutre() {
+    private sandarena.match.partie.jeu.compcase.JoueurIG getJoueurAutre() {
         return joueurAutre;
     }
 
@@ -370,7 +375,7 @@ public class Partie extends Stage {
         }
     }
 
-    public void videChemin() {
+    private void videChemin() {
         for (Case c : chemin) {
             c.setCible(false);
             c.setChemin(false);
@@ -444,7 +449,7 @@ public class Partie extends Stage {
         return bloquand;
     }
 
-    public void setBloquand(boolean bloquand) {
+    private void setBloquand(boolean bloquand) {
         this.bloquand = bloquand;
     }
 

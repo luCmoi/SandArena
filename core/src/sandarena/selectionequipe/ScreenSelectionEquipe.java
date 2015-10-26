@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.joueur.Joueur;
 import sandarena.selectionequipe.Surcouche.Surcouche;
 
@@ -71,7 +72,7 @@ public class ScreenSelectionEquipe implements Screen {
         return stage;
     }
 
-    public void setStage(StageSelectionEquipe stage) {
+    private void setStage(StageSelectionEquipe stage) {
         this.stage = stage;
     }
 
@@ -93,6 +94,7 @@ public class ScreenSelectionEquipe implements Screen {
     }
 
     public void backKeyPressed() {
+        Son.MenuSelect.play();
         if (surcouche.isVisible()){
             surcouche.setVisible(false);
         }else{

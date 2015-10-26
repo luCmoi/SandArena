@@ -3,6 +3,7 @@ package sandarena.gestionequipe.stagepersos.emplacement;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowPerso;
 import sandarena.joueur.Personnage;
@@ -10,7 +11,7 @@ import sandarena.joueur.Personnage;
 /**
  * Created by Guillaume on 23/07/2015.
  */
-public class UnitPersoGestion extends Actor {
+class UnitPersoGestion extends Actor {
     private EmplacementPersoGestion container;
     private Personnage perso;
     private InfoWindowPerso info;
@@ -61,6 +62,7 @@ public class UnitPersoGestion extends Actor {
     }
 
     public void clique(){
+        Son.MenuSelect.play();
         if (perso == null){
             container.getContainer().getContainer().getSurcouche().activateAchatPerso(container.getPlace());
         }

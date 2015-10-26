@@ -22,8 +22,8 @@ import sandarena.android.roomlistener.AndroidRoomUpdateListener;
  * Created by lucmo on 23/10/2015.
  */
 public class GameHelperFragment extends Fragment {
-    GameHelper _gameHelper;
-    protected AndroidLauncher mActivity = null;
+    private GameHelper _gameHelper;
+    private AndroidLauncher mActivity = null;
     private AndroidRoomUpdateListener updateListener;
     private String roomId;
     private String myId;
@@ -88,7 +88,19 @@ public class GameHelperFragment extends Fragment {
 
 
     public void quitQuickGame() {
+        System.err.println("Trying on quit");
         if (roomId != null) {
+            System.err.println("on quit");
+            Games.RealTimeMultiplayer.leave(get_gameHelper().getApiClient(), updateListener, roomId);
+            roomId = null;
+        }else{
+            long time = System.currentTimeMillis();
+            while(roomId == null){
+                if (System.currentTimeMillis() - time> 100){
+                    time = System.currentTimeMillis();
+                }
+            }
+            System.err.println("on quit");
             Games.RealTimeMultiplayer.leave(get_gameHelper().getApiClient(), updateListener, roomId);
             roomId = null;
         }
@@ -123,10 +135,12 @@ public class GameHelperFragment extends Fragment {
     }
 
     public void sendOtherPlayer(String mess) {
-        SandArena.googleService.printError("Send : " + mess);
-        byte[] message = mess.getBytes();
-        SandArena.googleService.printError("Send : " + message);
-        SandArena.googleService.printError("From : " + myId + " To :" + ennemyId + " In : " + roomId);
-        Games.RealTimeMultiplayer.sendReliableMessage(get_gameHelper().getApiClient(), null, message, roomId, ennemyId);
+        if (roomId != null) {
+            SandArena.googleService.printError("Send : " + mess);
+            byte[] message = mess.getBytes();
+            SandArena.googleService.printError("Send : " + message);
+            SandArena.googleService.printError("From : " + myId + " To :" + ennemyId + " In : " + roomId);
+            Games.RealTimeMultiplayer.sendReliableMessage(get_gameHelper().getApiClient(), null, message, roomId, ennemyId);
+        }
     }
 }

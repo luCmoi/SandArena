@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Guillaume on 13/08/2015.
  */
-public class CompBarreListener extends InputListener {
-    CompetenceBarre container;
+class CompBarreListener extends InputListener {
+    private CompetenceBarre container;
     private boolean pression;
     private long time;
 

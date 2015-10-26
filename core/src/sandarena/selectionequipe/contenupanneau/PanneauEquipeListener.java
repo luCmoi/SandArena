@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by lucmo on 05/10/2015.
  */
-public class PanneauEquipeListener extends InputListener {
+class PanneauEquipeListener extends InputListener {
     private PanneauEquipe container;
 
     public PanneauEquipeListener(PanneauEquipe container) {

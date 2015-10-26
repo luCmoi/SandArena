@@ -12,7 +12,7 @@ public class EffetBuffVal extends EffetBuf {
     protected int val;
     protected int typeCond = -1;
 
-    public EffetBuffVal(String nom,int val, EffetBufGroup group) {
+    protected EffetBuffVal(String nom, int val, EffetBufGroup group) {
         super(nom,group);
         this.val = val;
     }
@@ -30,7 +30,7 @@ public class EffetBuffVal extends EffetBuf {
         return val + this.val;
     }
 
-    public int getTypeCond() {
+    private int getTypeCond() {
         return typeCond;
     }
 

@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import sandarena.donnee.competence.CompXML;
 
 public abstract class CompetenceActive extends Competence {
-    protected byte rechargement;
-    protected byte utilisation;
-    protected byte porte;
-    protected byte portemin;
+    private byte rechargement;
+    private byte utilisation;
+    private byte porte;
+    private byte portemin;
     private byte zone;
 
-    public CompetenceActive( byte recharge, byte utilisation, byte porte, byte portemin, byte zone) {
+    protected CompetenceActive(byte recharge, byte utilisation, byte porte, byte portemin, byte zone) {
         this.rechargement=recharge;
         this.utilisation=utilisation;
         this.porte=porte;
@@ -19,7 +19,7 @@ public abstract class CompetenceActive extends Competence {
         this.zone=zone;
     }
 
-    public CompetenceActive(CompXML.CompLance compLance){
+    protected CompetenceActive(CompXML.CompLance compLance){
         this.rechargement=compLance.recharge;
         this.utilisation=compLance.utilisation;
         this.porte=compLance.porte;

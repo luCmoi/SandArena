@@ -17,7 +17,7 @@ public abstract class InfoWindow extends Group {
     protected static final byte TAILLE_EFFET = 20;
     protected boolean affiche = false;
 
-    public InfoWindow(Object emplacement) {
+    protected InfoWindow(Object emplacement) {
     }
 
     protected void checkPlace(){

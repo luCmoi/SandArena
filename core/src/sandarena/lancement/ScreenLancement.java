@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import sandarena.SandArena;
 import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -29,6 +30,10 @@ public class ScreenLancement implements Screen {
         this.container = sandArena;
         this.stageLancement = new StageLancement(this,container.getBatch());
         stageLancement.setTexte("Chargement des ressources");
+        Son.sadStrings.setLooping(true);
+        Son.sadStrings.setVolume(0.5f);
+        Son.sadStrings.play();
+        Son.actuelle = Son.sadStrings;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class SandArena extends Game {
     public SandArena(IGoogleService googleService)
     {
         super();
-        this.googleService = googleService;
+        SandArena.googleService = googleService;
     }
 
     public SandArena() {

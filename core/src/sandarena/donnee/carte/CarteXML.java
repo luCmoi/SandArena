@@ -76,8 +76,9 @@ public class CarteXML {
         sandarena.donnee.carte.BanqueCarte.banque.add(new sandarena.donnee.carte.BanqueCarte.DonneCarte(id,null,null,null,type,taillex,tailley,nbperso,special,emplacementJoueurActif,emplacementJoueurAutre));
     }
 
-    public static int parseIntStatic(String mess) {
-        if (mess.equals("sable")) return 0;
+    private static int parseIntStatic(String mess) {
+        if (mess.equals("sable")) return 4001;
+        else if(mess.equals("lave"))return 4002;
         else {
             return Integer.parseInt(mess);
         }

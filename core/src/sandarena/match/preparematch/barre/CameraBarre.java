@@ -7,7 +7,7 @@ import sandarena.donnee.donneestatic.Resolution;
 /**
  * Created by Guillaume on 25/07/2015.
  */
-public class CameraBarre extends OrthographicCamera {
+class CameraBarre extends OrthographicCamera {
     private final StageBarre container;
     private static final int VITESSECAM = 10;
     private boolean gauche;

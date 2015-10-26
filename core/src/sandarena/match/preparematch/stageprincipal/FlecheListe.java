@@ -10,7 +10,7 @@ import sandarena.donnee.donneestatic.Utili;
 /**
  * Created by Guillaume on 25/07/2015.
  */
-public class FlecheListe extends Actor {
+class FlecheListe extends Actor {
 
     private final StagePrincipalScreenPrepa container;
     private final boolean gauche;

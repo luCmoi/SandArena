@@ -12,9 +12,9 @@ public abstract class Entree {
 
     private int id;
     public String nom;
-    public String description;
-    public int instance = 0;
-    public String cheminImage;
+    private String description;
+    protected int instance = 0;
+    protected String cheminImage;
     public Texture image;
 
     public Entree(int id, String nom, String description, String chemin) {
@@ -29,7 +29,7 @@ public abstract class Entree {
      */
     public void incremente() {
         if (instance == 0) {
-            image = new Texture(Gdx.files.internal(cheminImage));
+            this.image = new Texture(Gdx.files.internal(cheminImage));
         }
         instance++;
     }

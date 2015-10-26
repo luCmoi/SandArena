@@ -104,7 +104,7 @@ public class CompetenceIG {
         return active;
     }
 
-    public PersonnageIG getContainer() {
+    private PersonnageIG getContainer() {
         return container;
     }
 

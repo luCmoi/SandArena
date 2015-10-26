@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Guillaume on 25/07/2015.
  */
-public class FlecheListeListener extends InputListener {
+class FlecheListeListener extends InputListener {
     private FlecheListe flecheListe;
 
     public FlecheListeListener(FlecheListe flecheListe) {

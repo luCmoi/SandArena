@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by lucmo on 20/10/2015.
  */
-public class BoutonAchatListener extends InputListener {
+class BoutonAchatListener extends InputListener {
     private BoutonAchat container;
 
     public BoutonAchatListener(BoutonAchat container) {

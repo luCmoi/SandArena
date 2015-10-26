@@ -17,7 +17,7 @@ import sandarena.donnee.donneestatic.Resolution;
  *
  * @author Guillaume
  */
-public class CaseListener extends InputListener {
+class CaseListener extends InputListener {
     private boolean presence = true;
     private Case caseEcoute;
     private Vector2 vec;

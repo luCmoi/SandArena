@@ -12,12 +12,12 @@ import sandarena.infowindow.InfoWindow;
  * Created by Guillaume on 10/06/2015.
  */
 public abstract class EmplacementInterface extends Actor {
-    protected StageInterface container;
-    protected int place;
-    protected boolean actif;
-    protected InfoWindow info;
+    StageInterface container;
+    int place;
+    boolean actif;
+    InfoWindow info;
 
-    public EmplacementInterface(int place, StageInterface container) {
+    EmplacementInterface(int place, StageInterface container) {
         this.place = place;
         this.container = container;
         this.setTouchable(Touchable.enabled);

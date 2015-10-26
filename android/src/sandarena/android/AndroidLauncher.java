@@ -46,8 +46,7 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
             getSupportFragmentManager().beginTransaction().add(gameHelperFragment, "GameHelperFragment").commit();
         }
         try {
-            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            IGoogleService.data.versionName = versionName;
+            IGoogleService.data.versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -123,13 +122,12 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
         if (metadata == null) {
             return "";
         }
-        String metadataStr = "Source: Saved Games" + '\n'
+        return "Source: Saved Games" + '\n'
                 + "Description: " + metadata.getDescription() + '\n'
                 + "Name: " + metadata.getUniqueName() + '\n'
                 + "Last Modified: " + String.valueOf(metadata.getLastModifiedTimestamp()) + '\n'
                 + "Played Time: " + String.valueOf(metadata.getPlayedTime()) + '\n'
                 + "Cover Image URL: " + metadata.getCoverImageUrl();
-        return metadataStr;
     }
 
     public void savedGamesLoad(String snapshotName, final int place) {

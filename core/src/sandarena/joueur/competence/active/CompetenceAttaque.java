@@ -9,8 +9,8 @@ import sandarena.match.partie.jeu.compcase.effet.CompetenceToEffet;
 
 public class CompetenceAttaque extends CompetenceActive {
 
-    protected byte caract;
-    protected byte multiAttaque;
+    private byte caract;
+    private byte multiAttaque;
 
     public CompetenceAttaque(CompXML.CompLance attaque, byte bonus) {
         super(attaque);

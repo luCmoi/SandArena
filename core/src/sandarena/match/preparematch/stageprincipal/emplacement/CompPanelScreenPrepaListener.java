@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by lucmo on 23/09/2015.
  */
-public class CompPanelScreenPrepaListener extends InputListener {
-    CompPanelScreenPrepaMatch container;
+class CompPanelScreenPrepaListener extends InputListener {
+    private CompPanelScreenPrepaMatch container;
     private boolean pression;
     private long time;
 

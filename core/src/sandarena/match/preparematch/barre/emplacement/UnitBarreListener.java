@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Guillaume on 13/08/2015.
  */
-public class UnitBarreListener extends InputListener {
-    UnitBarre container;
+class UnitBarreListener extends InputListener {
+    private UnitBarre container;
     private boolean pression;
     private long time;
 

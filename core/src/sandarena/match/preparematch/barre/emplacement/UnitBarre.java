@@ -12,7 +12,7 @@ import sandarena.joueur.Personnage;
 /**
  * Created by Guillaume on 13/08/2015.
  */
-public class UnitBarre extends Actor {
+class UnitBarre extends Actor {
     private Personnage perso;
     private InfoWindowPerso info;
     private EmplacementBarre container;

@@ -7,12 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 
 /**
  * Created by lucmo on 16/10/2015.
  */
-public class QuickMatchButon extends Actor {
+class QuickMatchButon extends Actor {
     private final StageBarreGestionEquipe container;
 
     public QuickMatchButon(StageBarreGestionEquipe stageBarreGestionEquipe) {
@@ -33,6 +34,7 @@ public class QuickMatchButon extends Actor {
     }
 
     public void clique(){
+        Son.MenuSelect.play();
         container.getContainer().launch();
     }
 }

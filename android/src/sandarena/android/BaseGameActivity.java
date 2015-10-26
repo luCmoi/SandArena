@@ -45,19 +45,19 @@ public abstract class BaseGameActivity extends FragmentActivity implements
         GameHelper.GameHelperListener {
 
     // The game helper object. This class is mainly a wrapper around this object.
-    protected GameHelper mHelper;
+    private GameHelper mHelper;
 
     // We expose these constants here because we don't want users of this class
     // to have to know about GameHelper at all.
-    public static final int CLIENT_GAMES = GameHelper.CLIENT_GAMES;
+    private static final int CLIENT_GAMES = GameHelper.CLIENT_GAMES;
     public static final int CLIENT_PLUS = GameHelper.CLIENT_PLUS;
     public static final int CLIENT_ALL = GameHelper.CLIENT_ALL;
 
     // Requested clients. By default, that's just the games client.
-    protected int mRequestedClients = CLIENT_GAMES;
+    private int mRequestedClients = CLIENT_GAMES;
 
     private final static String TAG = "BaseGameActivity";
-    protected boolean mDebugLog = false;
+    private boolean mDebugLog = false;
 
     /** Constructs a BaseGameActivity with default client (GamesClient). */
     protected BaseGameActivity() {
@@ -84,11 +84,11 @@ public abstract class BaseGameActivity extends FragmentActivity implements
      * @param requestedClients A combination of the flags CLIENT_GAMES, CLIENT_PLUS
      *         or CLIENT_ALL to request all available clients.
      */
-    protected void setRequestedClients(int requestedClients) {
+    private void setRequestedClients(int requestedClients) {
         mRequestedClients = requestedClients;
     }
 
-    public GameHelper getGameHelper() {
+    private GameHelper getGameHelper() {
         if (mHelper == null) {
             mHelper = new GameHelper(this, mRequestedClients);
             mHelper.enableDebugLog(mDebugLog);
@@ -147,7 +147,7 @@ public abstract class BaseGameActivity extends FragmentActivity implements
         mHelper.makeSimpleDialog(title, message).show();
     }
 
-    protected void enableDebugLog(boolean enabled) {
+    private void enableDebugLog(boolean enabled) {
         mDebugLog = true;
         if (mHelper != null) {
             mHelper.enableDebugLog(enabled);
