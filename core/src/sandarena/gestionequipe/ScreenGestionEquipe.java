@@ -52,8 +52,7 @@ public class ScreenGestionEquipe implements Screen {
         this.surcouche.draw();
         if (IGoogleService.data.lancePartie) {
             Son.adversaireTrouve.play();
-            //TODO lance aléa
-            container.lancePrepaMatch(3002, equipe);
+            container.lancePrepaMatch(equipe);
         }
     }
 

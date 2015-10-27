@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class BanqueSol extends sandarena.donnee.banque.Banque {
 
+    public static Texture bordSableBas = new Texture(Gdx.files.internal("Image/Sol/BordSableBas.png"));
+    public static Texture bordSableGauche = new Texture(Gdx.files.internal("Image/Sol/BordSableGauche.png"));
     public static ArrayList<sandarena.donnee.banque.Entree> banque = new ArrayList<sandarena.donnee.banque.Entree>();
 
     public static ArrayList<sandarena.donnee.banque.Entree> getBanque() {

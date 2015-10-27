@@ -9,6 +9,7 @@ import sandarena.joueur.competence.active.CompetenceBuffActif;
 import sandarena.joueur.competence.active.CompetenceDispel;
 import sandarena.joueur.competence.passive.CompetenceBuff;
 import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
+import sandarena.match.partie.jeu.compcase.PersonnageIG;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffStun;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffType;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse;
@@ -361,5 +362,9 @@ public class CompetenceToEffet {
             toStringsCase(comp.getSucc(), presence, lanceur, tabModif);
         }
         return tabModif;
+    }
+
+    public static int[] toStringsCase(PersonnageIG presence, int[] tabModif) {
+        return new int[0];
     }
 }

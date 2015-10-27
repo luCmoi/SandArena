@@ -21,7 +21,7 @@ public class InfoPerso extends Info {
         texte[2] = ""+container.getPerso().commun.vitesse;
         texte[3] = ""+ container.getPerso().commun.force;
         texte[4] = ""+ container.getPerso().commun.agilite;
-        texte[5] = ""+ container.getPerso().commun.vitesse;
+        texte[5] = ""+ container.getPerso().commun.magie;
     }
 
     @Override

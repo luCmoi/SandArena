@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import sandarena.donnee.carte.BanqueCarte;
 import sandarena.donnee.sol.BanqueSol;
 import sandarena.gestionequipe.ScreenGestionEquipe;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -84,7 +86,14 @@ public class SandArena extends Game {
         setScreen(screenGestionEquipe);
     }
 
-    public void lancePrepaMatch(int i, Joueur equipe) {
-        setScreen(new ScreenPrepaMatch(this,i,equipe));
+    public void lancePrepaMatch(Joueur equipe) {
+        int map = 0;
+        if (IGoogleService.data.commence){
+            map = BanqueCarte.getRandom();
+            ConnexionMatch.envoiMap(map);
+        }else{
+            map = ConnexionMatch.recoitMap();
+        }
+        setScreen(new ScreenPrepaMatch(this,map, equipe));
     }
 }

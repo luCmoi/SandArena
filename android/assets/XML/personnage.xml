@@ -61,4 +61,31 @@
         <affinite>affpoison</affinite>
     </entreperso>
 
+    <entreperso id="1007">
+        <nom>Treant</nom>
+        <description>Certains bois enmagasinent l'énergie et la magie qui les entoures jusqu'à prendre vie</description>
+        <image>Image/Personnage/Treant.png</image>
+        <caract vie="15" vitesse="3" force="5" agilite="1" magie="3" />
+        <surnom>Bob</surnom>
+        <affinite>affforce</affinite>
+    </entreperso>
+
+    <entreperso id="1008">
+        <nom>Mort Volant</nom>
+        <description>Les charognards du desert bravent parfois la mort pour continuer de se nourir</description>
+        <image>Image/Personnage/MortVolant.png</image>
+        <caract vie="13" vitesse="5" force="2" agilite="4" magie="2" />
+        <surnom>Bob</surnom>
+        <affinite>affagilite</affinite>
+    </entreperso>
+
+    <entreperso id="1009">
+        <nom>Sans Visage</nom>
+        <description>Des sorciers venus de contrées oubliées descendent dans l'arène pour montrer a tous l'étendue de leurs pouvoirs</description>
+        <image>Image/Personnage/SansVisage.png</image>
+        <caract vie="15" vitesse="3" force="1" agilite="2" magie="6" />
+        <surnom>Bob</surnom>
+        <affinite>affmagie</affinite>
+    </entreperso>
+
 </listepersonnage>

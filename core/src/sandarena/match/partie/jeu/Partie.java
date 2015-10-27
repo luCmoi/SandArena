@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
-import sandarena.SandArena;
 import sandarena.donnee.carte.BanqueCarte;
 import sandarena.donnee.carte.CaseSpeciale;
 import sandarena.donnee.donneestatic.Resolution;
@@ -18,6 +17,7 @@ import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.match.commun.Surcouche;
+import sandarena.match.partie.gui.PartieListener;
 import sandarena.match.partie.gui.interfacep.StageInterface;
 
 /**
@@ -61,7 +61,6 @@ public class Partie extends Stage {
      */
     public Partie(sandarena.match.partie.ScreenPartie container, Joueur joueur1, ArrayList<Personnage> personnagesActif, Joueur joueur2, ArrayList<Personnage> personnagesAutre, boolean commence, Surcouche surcouche, Viewport viewport, Batch batch) {
         super(viewport, batch);
-        SandArena.googleService.printError(String.valueOf(commence));
         this.container = container;
         this.stageInterface = this.container.getStageInterface();
         this.getViewport().setCamera(new sandarena.match.partie.gui.Camera(this));
@@ -79,12 +78,17 @@ public class Partie extends Stage {
             }
         }
         this.addActor(groupeCase);
-        for (CaseSpeciale cs:carte.special) {
+        for (CaseSpeciale cs : carte.special) {
             plateau[cs.getX()][cs.getY()].setSol(cs.getSol());
+        }
+        for (int x = 0; x < carte.x; x++) {
+            for (int y = 0; y < carte.y; y++) {
+                plateau[x][y].checkVoisin();
+            }
         }
         widthTailleTotale = this.plateau.length * Resolution.widthCase;
         heightTailleTotale = this.plateau[0].length * Resolution.heightCase;
-        this.addCaptureListener(new sandarena.match.partie.gui.PartieListener(this));
+        this.addCaptureListener(new PartieListener(this));
         chemin = new ArrayList<Case>();
         ConnexionMatch.ecouteMatch(this);
         this.surcouche = surcouche;
@@ -93,7 +97,6 @@ public class Partie extends Stage {
 
     @Override
     public void draw() {
-        ((sandarena.match.partie.gui.Camera) getViewport().getCamera()).updateExt();
         super.draw();
     }
 
@@ -184,7 +187,6 @@ public class Partie extends Stage {
                 return;
             }
         }
-        SandArena.googleService.printError("Fin tour");
         if (joueur.equals(getJoueurActif())) {
             ConnexionMatch.recoiTimer(surcouche.getTimer());
             if (commence) {
@@ -194,7 +196,6 @@ public class Partie extends Stage {
             }
         } else {
             surcouche.reset();
-            SandArena.googleService.printError("tour autre");
             if (commence) {
                 tour();
             } else {

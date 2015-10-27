@@ -66,7 +66,7 @@ public class Case extends Actor {
             batch.draw(Utili.competenceable, getX(), getY(), getWidth(), getHeight());
         }
         if (spawnable == 0 && container.isSpawn()) {
-            batch.draw(Utili.competenceable, getX(), getY(), getWidth(), getHeight());
+            batch.draw(Utili.accessible, getX(), getY(), getWidth(), getHeight());
         }
         if (spawnable == 1 && container.isSpawn()) {
             batch.draw(Utili.competenceable, getX(), getY(), getWidth(), getHeight());
@@ -96,7 +96,7 @@ public class Case extends Actor {
         clear();
     }
 
-    private sandarena.match.partie.jeu.compcase.Sol getSol() {
+    public sandarena.match.partie.jeu.compcase.Sol getSol() {
         return sol;
     }
 
@@ -210,9 +210,14 @@ public class Case extends Actor {
     }
 
     public void pression() {
-        if (this.getPresence() != null && this.competenceable && !container.isBloquand()) {
-            this.info = new InfoWindowCaseIG(this.getPresence(), container.getPersonnageActif(), container.getCompetenceActive());
-            container.getContainer().getSurcouche().addActor(info);
+        if (this.getPresence() != null) {
+            if (this.competenceable && !container.isBloquand()) {
+                this.info = new InfoWindowCaseIG(this.getPresence(), container.getPersonnageActif(), container.getCompetenceActive());
+                container.getContainer().getSurcouche().addActor(info);
+            }else{
+                this.info = new InfoWindowCaseIG(this.getPresence());
+                container.getContainer().getSurcouche().addActor(info);
+            }
         }
     }
 
@@ -234,5 +239,9 @@ public class Case extends Actor {
     public void setSol(int sol) {
         this.sol.dispose();
         this.sol = new Sol(sol,this);
+    }
+
+    public void checkVoisin() {
+        sol.checkVoisin();
     }
 }

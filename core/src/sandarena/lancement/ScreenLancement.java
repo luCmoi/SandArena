@@ -77,18 +77,15 @@ public class ScreenLancement implements Screen {
             if (tmpStr.startsWith("v")){
                 SandArena.googleService.printError("version : " + tmpStr);
             }else if (tmpStr.startsWith("1")){
-                SandArena.googleService.printError("personnage : " + tmpStr);
                 if (tmpPers != null){
                     retour.getPersonnages().add(tmpPers);
                 }
                 tmpPers = new Personnage(Integer.parseInt(tmpStr),true);
             }else if (tmpStr.startsWith("2")){
-                SandArena.googleService.printError("competence : " + tmpStr);
                 BanqueCompetence.EntreeCompetence tmp = (BanqueCompetence.EntreeCompetence)BanqueCompetence.getEntree(BanqueCompetence.banque,Integer.parseInt(tmpStr));
                 tmp.incremente();
                 tmpPers.addCompetence(tmp);
             }else if (tmpStr.startsWith("o")){
-                SandArena.googleService.printError("or : " + data.substring(i+1));
                 retour.setOr(Integer.parseInt(data.substring(i+1)));
                 i = data.length();
             }else{

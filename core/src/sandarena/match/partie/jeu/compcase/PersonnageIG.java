@@ -240,6 +240,7 @@ public class PersonnageIG {
         this.mort = true;
         this.getContainer().getContainer().testfin();
         this.getContainer().setPresence(null);
+        this.getContainer().getContainer().getContainer().getStageInterface().setPersonnageActif(null);
         this.setContainer(null);
     }
 

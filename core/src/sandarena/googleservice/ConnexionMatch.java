@@ -222,4 +222,25 @@ public class ConnexionMatch {
     }
 
 
+    public static void envoiMap(int map) {
+        String mess = String.valueOf(map);
+        SandArena.googleService.printError("Envoi mess : " + mess);
+        SandArena.googleService.sendOtherPlayer(mess);
+    }
+
+    public static int recoitMap() {
+        String mess = null;
+        SandArena.googleService.printError("En attente");
+        while (mess == null && !IGoogleService.data.justLeft) {
+            if (IGoogleService.data.mess != null) {
+                mess = new String(IGoogleService.data.mess);
+                IGoogleService.data.mess =null;
+            }
+        }
+        if (!IGoogleService.data.justLeft) {
+            SandArena.googleService.printError("mess Recu : " + mess);
+            return Integer.valueOf(mess);
+        }
+        return 0;
+    }
 }

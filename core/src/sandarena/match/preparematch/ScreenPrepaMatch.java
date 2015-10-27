@@ -36,16 +36,16 @@ public class ScreenPrepaMatch implements Screen {
     private Personnage check = null;
     private int map;
 
-    public ScreenPrepaMatch(SandArena conteneur, int map, Joueur equipe) {
+    public ScreenPrepaMatch(SandArena conteneur,int i, Joueur equipe) {
         this.container = conteneur;
-        this.map = map;
+        this.map = i;
         this.batch = conteneur.getBatch();
         joueur = equipe;
         if (Son.actuelle != null){
             Son.actuelle.stop();
         }
         Son.ambiancePrepare.setLooping(true);
-        Son.ambiancePrepare.setVolume(0.4f);
+        Son.ambiancePrepare.setVolume(0.8f);
         Son.ambiancePrepare.play();
         Son.actuelle = Son.ambiancePrepare;
     }

@@ -33,6 +33,20 @@ public class InfoWindowCaseIG extends InfoWindow {
         }
     }
 
+    public InfoWindowCaseIG(PersonnageIG presence) {
+        super(presence);
+        if (presence != null) {
+            this.presence = presence;
+            setBounds(Gdx.input.getX(), ((Resolution.height) - Gdx.input.getY()) + DIFF, (float) ((Resolution.height / 4) * 2.5), (float) ((Resolution.height / 4)));
+            icone = new Icone(this, presence.getDonnee().commun.image);
+            info = new InfoCaseIG(this);
+            this.addActor(icone);
+            this.addActor(info);
+            affiche = true;
+            checkPlace();
+        }
+    }
+
     public CompetenceIG getComp() {
         return comp;
     }

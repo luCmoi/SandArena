@@ -77,12 +77,17 @@ public class PartieListener extends InputListener {
 
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+        anciennePositionX = -1;
+        anciennePositionY = -1;
+        dragged = false;
     }
 
     @Override
     public synchronized void touchDragged(InputEvent event, float i, float i1, int i2) {
         if (i2 == 0) {
             this.partie.getCamera().dragged(anciennePositionX, anciennePositionY, i, i1);
+            //anciennePositionX = i;
+            //anciennePositionY = i1;
             dragged = false;
         }
     }

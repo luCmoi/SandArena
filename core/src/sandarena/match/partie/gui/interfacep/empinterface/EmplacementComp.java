@@ -51,7 +51,7 @@ public class EmplacementComp extends EmplacementInterface {
     }
 
     public void clique() {
-        if (actif && !container.getPartie().isBloquand()) {
+        if (!container.getPartie().isSpawn() && actif && !container.getPartie().isBloquand()) {
             if (getCompetenceIG() != null) {
                 if (getCompetenceIG().isActive()) {
                     if (container.getPartie().getCompetenceActive() != null && container.getPartie().getCompetenceActive().equals(this.getCompetenceIG())) {

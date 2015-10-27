@@ -13,25 +13,29 @@ public class AlgorithmePathfinding {
 
     public static void calculCaseAccessible(int vitesseRestante, Case caseDepart, Case[][] plateau) {
         Sommet s = tabToGraph(caseDepart, plateau);
-        ArrayList<Sommet> liste = s.parcourLargeur(vitesseRestante);
-        for (Sommet som : liste) {
-            plateau[som.x][som.y].setAccessible(true);
-            plateau[som.x][som.y].setPredecesseur(plateau[som.pere.x][som.pere.y]);
+        if (s !=null) {
+            ArrayList<Sommet> liste = s.parcourLargeur(vitesseRestante);
+            for (Sommet som : liste) {
+                plateau[som.x][som.y].setAccessible(true);
+                plateau[som.x][som.y].setPredecesseur(plateau[som.pere.x][som.pere.y]);
+            }
+            liste.clear();
         }
-        liste.clear();
         graph.dispose();
         graph = null;
     }
 
     public static void calculCaseTouchable(int portemin, int porte, Case caseDepart, Case[][] plateau) {
         Sommet s = tabToGraph2(caseDepart, plateau);
-        ArrayList<Sommet> liste = s.parcourLargeur(porte);
-        for (Sommet som : liste) {
-            if (som.distance >= portemin) {
-                plateau[som.x][som.y].setCompetenceable(true);
+        if (s != null) {
+            ArrayList<Sommet> liste = s.parcourLargeur(porte);
+            for (Sommet som : liste) {
+                if (som.distance >= portemin) {
+                    plateau[som.x][som.y].setCompetenceable(true);
+                }
             }
+            liste.clear();
         }
-        liste.clear();
     }
 
     private static Sommet tabToGraph(Case depart, Case[][] plateau) {

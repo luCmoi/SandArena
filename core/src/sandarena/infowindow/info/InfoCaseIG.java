@@ -23,7 +23,9 @@ public class InfoCaseIG extends Info {
         this.container = container;
         texte = container.getPresence().toStrings();
         tabModif = new int[8];
-        tabModif = CompetenceToEffet.toStringsCase(container.getComp().info.competence, container.getPresence(), container.getLanceur(), tabModif);
+        if (container.getComp() != null) {
+            tabModif = CompetenceToEffet.toStringsCase(container.getComp().info.competence, container.getPresence(), container.getLanceur(), tabModif);
+        }
     }
 
     @Override
@@ -37,31 +39,31 @@ public class InfoCaseIG extends Info {
         batch.draw(Utili.vie, getX() + getHeight(),
                 getY() + getHeight() - (2 * Font.font.getLineHeight()) - (Resolution.ratioHeight * 5),
                 Font.font.getLineHeight(), Font.font.getLineHeight());
-        Font.font.draw(batch, ajout(texte[1], stringFrom(tabModif[0]),true), getX() + getHeight() + Font.font.getLineHeight(),
+        Font.font.draw(batch, ajout(texte[1], stringFrom(tabModif[0]), true), getX() + getHeight() + Font.font.getLineHeight(),
                 getY() + getHeight() - Font.font.getLineHeight() - (Resolution.ratioHeight * 5));
 
         batch.draw(Utili.vitesse, getX() + getHeight() + (getHeight() / 2) + Font.font.getLineHeight(),
                 getY() + getHeight() - (2 * Font.font.getLineHeight()) - (Resolution.ratioHeight * 5),
                 Font.font.getLineHeight(), Font.font.getLineHeight());
-        Font.font.draw(batch, ajout(texte[2], stringFrom(tabModif[1]),true), getX() + getHeight() + (getHeight() / 2) + (Font.font.getLineHeight() * 2),
+        Font.font.draw(batch, ajout(texte[2], stringFrom(tabModif[1]), true), getX() + getHeight() + (getHeight() / 2) + (Font.font.getLineHeight() * 2),
                 getY() + getHeight() - Font.font.getLineHeight() - (Resolution.ratioHeight * 5));
 
         batch.draw(Utili.force, getX() + getHeight(),
                 getY() + getHeight() - (Font.font.getLineHeight() * 3) - (Resolution.ratioHeight * 10),
                 Font.font.getLineHeight(), Font.font.getLineHeight());
-        Font.font.draw(batch,  ajout(ajout(texte[3],stringFrom(tabModif[2]),true),stringFrom(tabModif[3]),false), getX() + getHeight() + Font.font.getLineHeight(),
+        Font.font.draw(batch, ajout(ajout(texte[3], stringFrom(tabModif[2]), true), stringFrom(tabModif[3]), false), getX() + getHeight() + Font.font.getLineHeight(),
                 getY() + getHeight() - (Font.font.getLineHeight() * 2) - (Resolution.ratioHeight * 10));
 
         batch.draw(Utili.agilite, getX() + getHeight() + (getHeight() / 2) + Font.font.getLineHeight(),
                 getY() + getHeight() - (Font.font.getLineHeight() * 3) - (Resolution.ratioHeight * 10),
                 Font.font.getLineHeight(), Font.font.getLineHeight());
-        Font.font.draw(batch,  ajout(ajout(texte[4],stringFrom(tabModif[4]),true),stringFrom(tabModif[5]),false), getX() + getHeight() + (getHeight() / 2) + (Font.font.getLineHeight() * 2),
+        Font.font.draw(batch, ajout(ajout(texte[4], stringFrom(tabModif[4]), true), stringFrom(tabModif[5]), false), getX() + getHeight() + (getHeight() / 2) + (Font.font.getLineHeight() * 2),
                 getY() + getHeight() - (Font.font.getLineHeight() * 2) - (Resolution.ratioHeight * 10));
 
         batch.draw(Utili.magie, getX() + getHeight(),
                 getY() + getHeight() - (Font.font.getLineHeight() * 4) - (Resolution.ratioHeight * 15),
                 Font.font.getLineHeight(), Font.font.getLineHeight());
-        Font.font.draw(batch, ajout(ajout(texte[5],stringFrom(tabModif[6]),true),stringFrom(tabModif[7]),false), getX() + getHeight() + Font.font.getLineHeight(),
+        Font.font.draw(batch, ajout(ajout(texte[5], stringFrom(tabModif[6]), true), stringFrom(tabModif[7]), false), getX() + getHeight() + Font.font.getLineHeight(),
                 getY() + getHeight() - (Font.font.getLineHeight() * 3) - (Resolution.ratioHeight * 15));
 
     }
@@ -70,7 +72,7 @@ public class InfoCaseIG extends Info {
         if (premier) {
             String[] tmp = s.split("/");
             return tmp[0].concat(s1).concat("/").concat(tmp[1]);
-        }else{
+        } else {
             return s.concat(s1);
         }
     }
@@ -82,7 +84,7 @@ public class InfoCaseIG extends Info {
                 a = "+".concat(a);
             }
             return a;
-        }else {
+        } else {
             return "";
         }
     }

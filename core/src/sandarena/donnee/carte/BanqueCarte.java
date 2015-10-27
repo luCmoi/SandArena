@@ -1,6 +1,7 @@
 package sandarena.donnee.carte;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import sandarena.donnee.banque.Banque;
 import sandarena.donnee.banque.Entree;
@@ -14,6 +15,15 @@ public class BanqueCarte extends Banque {
 
     public static ArrayList<Entree> getBanque() {
         return banque;
+    }
+
+    public static int getRandom() {
+        ArrayList<Entree> tmp = (ArrayList<Entree>)banque.clone();
+        Collections.shuffle(tmp);
+        int retour = ((DonneCarte)tmp.get(0)).getId();
+        tmp.clear();
+        tmp=null;
+        return retour;
     }
 
 
