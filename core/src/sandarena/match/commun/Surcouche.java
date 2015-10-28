@@ -15,6 +15,7 @@ import sandarena.match.preparematch.ScreenPrepaMatch;
  */
 public class Surcouche extends Stage {
     private final Screen container;
+    private final ChangeTour changeTour;
     private  Timer timer = null;
     private boolean visible;
 
@@ -26,11 +27,14 @@ public class Surcouche extends Stage {
         }else if(container instanceof ScreenPrepaMatch){
             this.timer = new Timer(true);
         }
+        this.changeTour = new ChangeTour(this);
         this.addActor(timer);
+        this.addActor(changeTour);
     }
 
-    public void activateAbandonner() {
+    public void activateChangeTour(boolean actif) {
         this.setVisible(true);
+        changeTour.setVisible(actif,true);
     }
 
 
@@ -39,7 +43,7 @@ public class Surcouche extends Stage {
         super.draw();
     }
 
-    private void setVisible(boolean visible) {
+    public void setVisible(boolean visible) {
         if (visible) {
             Gdx.input.setInputProcessor(this);
             this.visible = visible;
@@ -50,6 +54,7 @@ public class Surcouche extends Stage {
                 Gdx.input.setInputProcessor(((ScreenPrepaMatch)container).getPrincipal());
             }
             this.visible = visible;
+            changeTour.setVisible(false);
         }
 
     }

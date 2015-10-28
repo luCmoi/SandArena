@@ -33,8 +33,9 @@ public class ConnexionMatch {
                 SandArena.googleService.printError("En attente");
                 while (mess == null && !IGoogleService.data.justLeft) {
                     if (IGoogleService.data.time != null) {
-                        mess = new String(IGoogleService.data.time);
+                        byte[] tmp = IGoogleService.data.time;
                         IGoogleService.data.time =null;
+                        mess = new String(tmp);
                     }
                 }
                 if (!IGoogleService.data.justLeft) {

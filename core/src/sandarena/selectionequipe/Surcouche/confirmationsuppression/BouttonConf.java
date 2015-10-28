@@ -30,7 +30,7 @@ class BouttonConf extends Actor {
     }
     public void clique() {
         if (container.isVisible()) {
-            Son.MenuSelect.play();
+            Son.menuSelect.play();
             container.getContainer().getContainer().confirme(container.getPanel());
             container.getContainer().setVisible(false);
         }

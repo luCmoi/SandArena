@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import sandarena.donnee.carte.BanqueCarte;
 import sandarena.donnee.carte.CaseSpeciale;
 import sandarena.donnee.donneestatic.Resolution;
+import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.ConnexionMatch;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -19,6 +20,7 @@ import sandarena.joueur.competence.CompetenceActive;
 import sandarena.match.commun.Surcouche;
 import sandarena.match.partie.gui.PartieListener;
 import sandarena.match.partie.gui.interfacep.StageInterface;
+import sandarena.match.partie.jeu.compcase.PersonnageIG;
 
 /**
  * Stock toutes les donnees relatives à une instance de partie
@@ -130,22 +132,29 @@ public class Partie extends Stage {
         }
         spawn = true;
         if (commence) {
+            container.getSurcouche().activateChangeTour(true);
             setBloquand(false);
             surcouche.reset();
         } else {
+            container.getSurcouche().activateChangeTour(false);
             setBloquand(true);
             ConnexionMatch.recoiTimer(surcouche.getTimer());
         }
         setPersonnageActif(null);
     }
 
-    private boolean victoire() {
+    public boolean victoire() {
+        Son.victoire.play();
         return false;
+    }
+
+    private void defaite() {
+        Son.defaite.play();
     }
 
     private void tour() {
         if (commence) {
-            for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : joueurActif.getPersonnages()) {
+            for (PersonnageIG perso : joueurActif.getPersonnages()) {
                 perso.setAAgi(false);
                 perso.tourBuff();
                 perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
@@ -168,8 +177,10 @@ public class Partie extends Stage {
                 perso.infligeDot();
                 perso.modifCaract();
             }
+            container.getSurcouche().activateChangeTour(false);
             phase(getJoueurAutre());
         } else {
+            container.getSurcouche().activateChangeTour(true);
             phase(getJoueurActif());
         }
     }
@@ -211,6 +222,7 @@ public class Partie extends Stage {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     setBloquand(true);
                     setPersonnageActif(null);
+                    container.getSurcouche().activateChangeTour(false);
                 } else {
                     surcouche.reset();
                     spawn = false;
@@ -221,6 +233,7 @@ public class Partie extends Stage {
                     surcouche.reset();
                     setBloquand(false);
                     setPersonnageActif(null);
+                    container.getSurcouche().activateChangeTour(true);
                 } else {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     spawn = false;
@@ -231,13 +244,13 @@ public class Partie extends Stage {
             if (personnageActif.getPossesseur().equals(getJoueurActif())) {
                 if (commence) {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
-                    for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : getJoueurActif().getPersonnages()) {
+                    for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
                         perso.setAAgi(true);
                     }
                     phase(getJoueurAutre());
                 } else {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
-                    for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : getJoueurActif().getPersonnages()) {
+                    for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
                         perso.setAAgi(true);
                     }
                     tour();
@@ -245,13 +258,13 @@ public class Partie extends Stage {
             } else {
                 if (commence) {
                     surcouche.reset();
-                    for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : getJoueurAutre().getPersonnages()) {
+                    for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
                         perso.setAAgi(true);
                     }
                     tour();
                 } else {
                     surcouche.reset();
-                    for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : getJoueurAutre().getPersonnages()) {
+                    for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
                         perso.setAAgi(true);
                     }
                     phase(getJoueurActif());
@@ -467,7 +480,7 @@ public class Partie extends Stage {
             }
         }
         if (victoire) {
-            //joueur actif win
+            victoire();
         } else {
             for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : joueurActif.getPersonnages()) {
                 if (!perso.isMort()) {
@@ -476,10 +489,11 @@ public class Partie extends Stage {
                 }
             }
             if (!victoire) {
-                //joueur autre win
+                defaite();
             }
         }
     }
+
 
     public void setSurcouche(Surcouche surcouche) {
         this.surcouche = surcouche;

@@ -62,7 +62,7 @@ class UnitPersoGestion extends Actor {
     }
 
     public void clique(){
-        Son.MenuSelect.play();
+        Son.menuSelect.play();
         if (perso == null){
             container.getContainer().getContainer().getSurcouche().activateAchatPerso(container.getPlace());
         }

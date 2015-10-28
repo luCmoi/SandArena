@@ -9,11 +9,13 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
 import java.util.ArrayList;
 
-import sandarena.*;
+import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.googleservice.ConnexionMatch;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
+import sandarena.match.preparematch.ScreenPrepaMatch;
+import sandarena.match.preparematch.barre.StageBarre;
 
 /**
  * Created by Guillaume on 23/07/2015.
@@ -44,8 +46,10 @@ public class StagePrincipalScreenPrepa extends Stage {
         this.addActor(gauche);
         this.addActor(droite);
         if (!commence) {
+            container.getSurcouche().activateChangeTour(false);
             recoitPersonnageAutre();
         }else{
+            container.getSurcouche().activateChangeTour(true);
             container.getSurcouche().reset();
         }
     }
@@ -64,11 +68,11 @@ public class StagePrincipalScreenPrepa extends Stage {
         }
     }
 
-    public sandarena.match.preparematch.barre.StageBarre getBarre() {
+    public StageBarre getBarre() {
         return barre;
     }
 
-    public sandarena.match.preparematch.ScreenPrepaMatch getContainer() {
+    public ScreenPrepaMatch getContainer() {
         return container;
     }
 
@@ -84,6 +88,7 @@ public class StagePrincipalScreenPrepa extends Stage {
         if (!commence && testFin()) {
             container.finPrepare();
         } else {
+            //container.getSurcouche().activateChangeTour(false);
             recoitPersonnageAutre();
         }
     }
@@ -100,8 +105,11 @@ public class StagePrincipalScreenPrepa extends Stage {
                     container.setCheck(recu);
                     panelDroit.ajout(recu);
                 }
-                bloquand = false;
-                container.getSurcouche().reset();
+                if (!testFin()) {
+                    //container.getSurcouche().activateChangeTour(true);
+                }
+                    bloquand = false;
+                    container.getSurcouche().reset();
             }
         }.start();
     }

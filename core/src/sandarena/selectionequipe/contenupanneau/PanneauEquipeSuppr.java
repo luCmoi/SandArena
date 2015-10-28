@@ -34,7 +34,7 @@ class PanneauEquipeSuppr extends Actor{
     }
 
     public void clique() {
-        Son.MenuSelect.play();
+        Son.menuSelect.play();
         container.setSupprimer(true);
         container.getContainer().getContainer().confSuppr(container.getPlace());
     }

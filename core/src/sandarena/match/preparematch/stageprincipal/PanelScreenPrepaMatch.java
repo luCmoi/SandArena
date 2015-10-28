@@ -57,7 +57,7 @@ public class PanelScreenPrepaMatch extends Group {
         for (sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch place : places){
             if (place.getPerso() == null){
                 place.setPerso(tmp);
-                Son.PersoSelect.play();
+                Son.persoSelect.play();
                 break;
             }
         }

@@ -32,7 +32,7 @@ class BouttonAnnu extends Actor {
 
     public void clique() {
         if (container.isVisible()) {
-            Son.MenuSelect.play();
+            Son.menuSelect.play();
             container.getContainer().setVisible(false);
             SandArena.googleService.quitQuickGame();
         }

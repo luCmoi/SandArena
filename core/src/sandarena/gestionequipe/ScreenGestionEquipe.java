@@ -51,7 +51,6 @@ public class ScreenGestionEquipe implements Screen {
         this.persos.draw();
         this.surcouche.draw();
         if (IGoogleService.data.lancePartie) {
-            Son.adversaireTrouve.play();
             container.lancePrepaMatch(equipe);
         }
     }
@@ -116,7 +115,7 @@ public class ScreenGestionEquipe implements Screen {
     }
 
     public void backKeyPressed() {
-        Son.MenuSelect.play();
+        Son.menuSelect.play();
         if (surcouche.isVisible()) {
             surcouche.setVisible(false);
         } else {

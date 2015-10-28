@@ -45,7 +45,7 @@ class BoutonAchat extends Actor {
 
     public void clique()
     {
-        Son.MenuSelect.play();
+        Son.menuSelect.play();
         if (place == 1) {
         } else if (place == 2 && container.getContainer().getContainer().getEquipe().getOr() >= 1000) {
             container.getContainer().getContainer().achatAleat(container.getPlace());

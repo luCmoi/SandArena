@@ -94,7 +94,7 @@ public class ScreenSelectionEquipe implements Screen {
     }
 
     public void backKeyPressed() {
-        Son.MenuSelect.play();
+        Son.menuSelect.play();
         if (surcouche.isVisible()){
             surcouche.setVisible(false);
         }else{

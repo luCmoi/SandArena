@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -20,8 +19,8 @@ import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.match.commun.Surcouche;
-import sandarena.match.partie.jeu.Partie;
 import sandarena.match.partie.gui.interfacep.StageInterface;
+import sandarena.match.partie.jeu.Partie;
 
 /**
  * Screen permetant d'afficher la partie
@@ -71,6 +70,7 @@ public class ScreenPartie implements Screen {
             Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
             this.surcouche.draw();
         } else {
+            partie.victoire();
             Son.nomads.stop();
             container.lanceGestionEquipe(joueurActif);
         }
@@ -131,7 +131,7 @@ public class ScreenPartie implements Screen {
         return this.interfaceS;
     }
 
-    public Stage getSurcouche() {
+    public Surcouche getSurcouche() {
         return surcouche;
     }
 

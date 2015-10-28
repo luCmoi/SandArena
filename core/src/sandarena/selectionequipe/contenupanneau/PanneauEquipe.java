@@ -64,7 +64,7 @@ public class PanneauEquipe extends Group {
     }
 
     public void clique() {
-        Son.MenuSelect.play();
+        Son.menuSelect.play();
         if (equipe != null) {
             container.getContainer().getContainer().lanceGestionEquipe(equipe);
         } else {

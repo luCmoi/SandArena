@@ -34,7 +34,7 @@ class QuickMatchButon extends Actor {
     }
 
     public void clique(){
-        Son.MenuSelect.play();
+        Son.menuSelect.play();
         container.getContainer().launch();
     }
 }
