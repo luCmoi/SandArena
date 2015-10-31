@@ -59,6 +59,11 @@ public class StagePrincipalScreenPrepa extends Stage {
     }
 
     @Override
+    public void draw() {
+        super.draw();
+    }
+
+    @Override
     public Actor hit(float stageX, float stageY, boolean touchable) {
         Vector2 vScreen = stageToScreenCoordinates(new Vector2(stageX, stageY));
         if (Resolution.height - vScreen.y < Resolution.differenceBas && Resolution.width - vScreen.x > Resolution.differenceBas / 2 && Resolution.width - vScreen.x < Resolution.width - (Resolution.differenceBas / 2)) {

@@ -24,7 +24,7 @@ public class StageBarre extends Stage {
     private CameraBarre camera;
     private float widthTailleTotale;
     private ArrayList<EmplacementBarre> persos;
-    private sandarena.match.preparematch.barre.Fond fond;
+    private Fond fond;
 
 
     public StageBarre(StagePrincipalScreenPrepa principal, Joueur joueur, ExtendViewport extendViewport, Batch batch) {
@@ -35,7 +35,7 @@ public class StageBarre extends Stage {
         this.camera = (CameraBarre) (this.getViewport().getCamera());
         this.widthTailleTotale = Resolution.differenceBas * joueur.getPersonnages().size();
         int x = 0;
-        fond = new sandarena.match.preparematch.barre.Fond(this);
+        fond = new Fond(this);
         this.addActor(fond);
         persos = new ArrayList<EmplacementBarre>();
         for (Personnage perso : joueur.getPersonnages()) {
@@ -105,5 +105,14 @@ public class StageBarre extends Stage {
     @Override
     public void draw() {
         super.draw();
+        if (principal.getContainer().getSurcouche().getTimer().getValeur()<= 0){
+            if (!principal.getBloquand()) {
+                EmplacementBarre tmp = persos.get((int)(Math.random()*this.getPersos().size()));
+                tmp.clique();
+                tmp.fenetre();
+                select(tmp);
+                tmp = null;
+            }
+        }
     }
 }

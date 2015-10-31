@@ -29,6 +29,7 @@
         <caract vie="13" vitesse="4" force="2" agilite="2" magie="5" />
         <surnom>Bob</surnom>
         <affinite>affmagie</affinite>
+        <affinite>affesprit</affinite>
         <affinite>affpoison</affinite>
     </entreperso>
 
@@ -68,6 +69,7 @@
         <caract vie="15" vitesse="3" force="5" agilite="1" magie="3" />
         <surnom>Bob</surnom>
         <affinite>affforce</affinite>
+        <affinite>affnature</affinite>
     </entreperso>
 
     <entreperso id="1008">
@@ -77,6 +79,7 @@
         <caract vie="13" vitesse="5" force="2" agilite="4" magie="2" />
         <surnom>Bob</surnom>
         <affinite>affagilite</affinite>
+        <affinite>affmort</affinite>
     </entreperso>
 
     <entreperso id="1009">
@@ -86,6 +89,7 @@
         <caract vie="15" vitesse="3" force="1" agilite="2" magie="6" />
         <surnom>Bob</surnom>
         <affinite>affmagie</affinite>
+        <affinite>affesprit</affinite>
     </entreperso>
 
 </listepersonnage>

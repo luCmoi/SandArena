@@ -5,7 +5,7 @@
 
     <!-- FORCE MAIN -->
 
-    <entrecomp id ="2001">
+    <entrecomp id="2001">
         <nom>Bourre-pif</nom>
         <description>Coup de poing puissant au visage, de préférence dans le nez</description>
         <image>Image/Competence/Bourrepif.png</image>
@@ -19,7 +19,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2002">
+    <entrecomp id="2002">
         <nom>Berzerk</nom>
         <description>Plus le personnage est blessé plus sa folie est grande</description>
         <image>Image/Competence/Berzerk.png</image>
@@ -33,7 +33,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2003">
+    <entrecomp id="2003">
         <nom>Leg Day</nom>
         <description>Le personnage à travaillé ses jambes tous les jours</description>
         <image>Image/Competence/LegDay.png</image>
@@ -43,7 +43,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2004">
+    <entrecomp id="2004">
         <nom>Ecrase-Face</nom>
         <description>Un tel coup peut ferait s'évanouir n'importe quel être vivant</description>
         <image>Image/Competence/EcraseFace.png</image>
@@ -57,7 +57,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2005">
+    <entrecomp id="2005">
         <nom>Contraction Musculaire</nom>
         <description>Des muscles puissants suffisent à arreter un coup mortel</description>
         <image>Image/Competence/ContractionMusculaire.png</image>
@@ -74,7 +74,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2006">
+    <entrecomp id="2006">
         <nom>Coup Magistral</nom>
         <description>Un coup si puissant qu'il peux tuer sur le coup</description>
         <image>Image/Competence/CoupMagistral.png</image>
@@ -89,7 +89,7 @@
 
     <!-- AGILITE MAIN -->
 
-    <entrecomp id ="2201">
+    <entrecomp id="2201">
         <nom>Frappe chirurgicale</nom>
         <description>Certains points sensibles du corps suffisent a entrainer la mort</description>
         <image>Image/Competence/FrappeChirurgicale.png</image>
@@ -103,7 +103,6 @@
                     <condtype>caractagilite</condtype>
                     <condduree>2</condduree>
                 </compbuff>
-
             </compbuff>
         </compattaque>
         <affinite>
@@ -111,7 +110,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2202">
+    <entrecomp id="2202">
         <nom>Esquive naturelle</nom>
         <description>Certaines personnes sont plus capable que d'autre d'esquiver une lame
             mortelle
@@ -125,7 +124,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2203">
+    <entrecomp id="2203">
         <nom>Jet De Sable</nom>
         <description>Un ennemi aveuglé deviens moins dangeureux</description>
         <image>Image/Competence/JetDeSable.png</image>
@@ -141,9 +140,11 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2204">
+    <entrecomp id="2204">
         <nom>Coupure des Tendons</nom>
-        <description>Un combattant précis peu infliger d'important dégats en frappant les points vitaux</description>
+        <description>Un combattant précis peu infliger d'important dégats en frappant les points
+            vitaux
+        </description>
         <image>Image/Competence/CoupureDesTendons.png</image>
         <compattaque bonus="0">
             <complance caract="caractagilite" porte="1" portemin="1" recharge="1" utilisation="0"
@@ -158,7 +159,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2205">
+    <entrecomp id="2205">
         <nom>Acrobaties</nom>
         <description>Un acrobate agile peut éviter de nombreux dangés</description>
         <image>Image/Competence/Acrobaties.png</image>
@@ -177,10 +178,13 @@
 
     <entrecomp id="2206">
         <nom>Lancer de Lame</nom>
-        <description>Lancer une lame de sorte a ce qu'elle transperce un ennemi éloigné n'est pas chose facile</description>
+        <description>Lancer une lame de sorte a ce qu'elle transperce un ennemi éloigné n'est pas
+            chose facile
+        </description>
         <image>Image/Competence/LancerDeLame.png</image>
         <compattaque bonus="-1">
-            <complance recharge="0" utilisation="0" porte="3" portemin="1" zone="1" caract="caractagilite" />
+            <complance caract="caractagilite" porte="3" portemin="1" recharge="0" utilisation="0"
+                zone="1" />
             <compbuff type="buffvalvitesse" valeur="-1">
                 <condduree>2</condduree>
             </compbuff>
@@ -195,12 +199,15 @@
     <!-- MAGIE MAIN -->
 
     <entrecomp id="2401">
-        <nom>Frappe Mentale</nom>
-        <description>Certains esprit plus puissant que d'autres sont capables de les soumettres</description>
-        <image>Image/Competence/FrappeMentale.png</image>
+        <nom>Brisure d'Ame</nom>
+        <description>Les mages sont capable de heurter l'ame contenu dans un corps et que cela se
+            répercute a l'exterieur
+        </description>
+        <image>Image/Competence/BrisureDAme.png</image>
         <compattaque bonus="0">
-            <complance recharge="1" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
-            <compbuff type="buffdot" valeur="1" >
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="1" utilisation="0"
+                zone="1" />
+            <compbuff type="buffdot" valeur="1">
                 <condduree>2</condduree>
             </compbuff>
         </compattaque>
@@ -211,7 +218,9 @@
 
     <entrecomp id="2402">
         <nom>Savant</nom>
-        <description>Si un homme passe sa vie a travailler son esprit plutôt que son corp, l'un se dévellopera au détriment de l'autre</description>
+        <description>Si un homme passe sa vie a travailler son esprit plutôt que son corp, l'un se
+            dévellopera au détriment de l'autre
+        </description>
         <image>Image/Competence/Savant.png</image>
         <compbuff type="buffval" valeur="2">
             <condtype>caractmagie</condtype>
@@ -229,10 +238,12 @@
 
     <entrecomp id="2403">
         <nom>Feu Interieur</nom>
-        <description>Chaque corp possède une flamme de puissance qui n'attend que d'être réveillée</description>
+        <description>Chaque corp possède une flamme de puissance qui n'attend que d'être réveillée
+        </description>
         <image>Image/Competence/FeuInterieur.png</image>
         <compbuffactif>
-            <complance recharge="3" utilisation="0" porte="3" portemin="0" zone="0" caract="caractmagie" />
+            <complance caract="caractmagie" porte="3" portemin="0" recharge="3" utilisation="0"
+                zone="0" />
             <compbuff type="buffval" valeur="3">
                 <condduree>1</condduree>
                 <condtype>caractforce</condtype>
@@ -248,7 +259,8 @@
         <description>Un froid intense peut empecher quiconque d'agir</description>
         <image>Image/Competence/MorsureDeGlace.png</image>
         <compbuffactif>
-            <complance recharge="4" utilisation="0" porte="3" portemin="1" zone="0" caract="caractmagie" />
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="6" utilisation="0"
+                zone="0" />
             <compbuff type="buffstun" valeur="2"></compbuff>
         </compbuffactif>
         <affinite>
@@ -258,10 +270,13 @@
 
     <entrecomp id="2405">
         <nom>Fouet Magique</nom>
-        <description>Peux sont capables de maitriser les énergie mystiques du monde mais ceux qui y parviennent en prennent le contrôle</description>
+        <description>Peux sont capables de maitriser les énergie mystiques du monde mais ceux qui y
+            parviennent en prennent le contrôle
+        </description>
         <image>Image/Competence/FouetMagique.png</image>
         <compattaque bonus="0">
-            <complance recharge="0" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="0" utilisation="0"
+                zone="1" />
         </compattaque>
         <affinite>
             <entreaffinite>affmagie</entreaffinite>
@@ -270,14 +285,15 @@
     </entrecomp>
 
     <entrecomp id="2406">
-        <nom>Faiblesse Psychique</nom>
-        <description>Assujetir l'esprit d'un ennemi est chose faisable pour ceux qui maitrisent la magie</description>
-        <image>Image/Competence/FaiblessePsychique.png</image>
+        <nom>Poid Arcanique</nom>
+        <description>Le corp subit soudainement le poid du monde sur ses épaules</description>
+        <image>Image/Competence/PoidArcanique.png</image>
         <compbuffactif>
-            <complance recharge="3" utilisation="0" porte="3" portemin="1" zone="1" caract="caractmagie" />
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="3" utilisation="0"
+                zone="1" />
             <compbuff type="buffval" valeur="-1">
                 <condduree>3</condduree>
-                <condtype>caractmagie</condtype>
+                <condtype>caractforce</condtype>
             </compbuff>
         </compbuffactif>
         <affinite>
@@ -285,9 +301,109 @@
         </affinite>
     </entrecomp>
 
+    <!-- ESPRIT MAIN -->
+
+    <entrecomp id="2501">
+        <nom>Faiblesse Psychique</nom>
+        <description>Assujetir l'esprit d'un ennemi est chose faisable pour ceux qui maitrisent la
+            magie
+        </description>
+        <image>Image/Competence/FaiblessePsychique.png</image>
+        <compbuffactif>
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffval" valeur="-1">
+                <condduree>3</condduree>
+                <condtype>caractmagie</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affesprit</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2502">
+        <nom>Frappe Mentale</nom>
+        <description>Certains esprit plus puissant que d'autres sont capables de les soumettres
+        </description>
+        <image>Image/Competence/FrappeMentale.png</image>
+        <compattaque bonus="0">
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="1" utilisation="0"
+                zone="1" />
+            <compbuff type="buffdot" valeur="1">
+                <condduree>2</condduree>
+            </compbuff>
+        </compattaque>
+        <affinite>
+            <entreaffinite>affesprit</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2503">
+        <nom>Cauchemars Tangibles</nom>
+        <description>Un puissant mage peut faire combatre a son adversaire ses pires craintes
+        </description>
+        <image>Image/Competence/CauchemardsTangibles.png</image>
+        <compattaque bonus="0">
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="0" utilisation="0"
+                zone="1" />
+        </compattaque>
+        <affinite>
+            <entreaffinite>affesprit</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2504">
+        <nom>Trou de Memoire</nom>
+        <description>Comment se concentrer lorsque la magie supprime vos pensées</description>
+        <image>Image/Competence/TrouDeMemoire.png</image>
+        <compbuffactif>
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffstun" valeur="1" />
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affesprit</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2505">
+        <nom>Bouclier de L'Esprit</nom>
+        <description>Les attaques portées contre des mages entrainés sont contrées par leur esprit
+            plutot que par leur corps
+        </description>
+        <image>Image/Competence/BouclieDeLEsprit.png</image>
+        <compbuff type="bufftypedefense" valeur="caractmagie">
+            <condtype>caractforce</condtype>
+        </compbuff>
+        <affinite>
+            <entreaffinite>affesprit</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2506">
+        <nom>Agilite Mentale</nom>
+        <description>Parfois les reflexes reposent plus sur la preparation mentale que sur le
+            physique
+        </description>
+        <image>Image/Competence/AgiliteMentale.png</image>
+        <compbuffactif>
+            <complance caract="caractmagie" porte="0" portemin="0" recharge="2" utilisation="0"
+                zone="1" />
+            <compbuff type="buffvaldefense" valeur="3">
+                <condduree>2</condduree>
+                <condtype>caractagilite</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affesprit</entreaffinite>
+        </affinite>
+    </entrecomp>
+
     <!-- TRIBAL MAIN -->
 
-    <entrecomp id ="2101">
+    <entrecomp id="2101">
         <nom>Rituel de sang</nom>
         <description>Parfoit il faut sacrifier une partie de soit pour en renforcer une autre
         </description>
@@ -304,7 +420,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2102">
+    <entrecomp id="2102">
         <nom>Perle de Purification</nom>
         <description>Purifie le corps de ses afflictions</description>
         <image>Image/Competence/PerleDePurification.png</image>
@@ -317,7 +433,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2103">
+    <entrecomp id="2103">
         <nom>Lance de Pai</nom>
         <description>On dit que l'originale lancée par Pai fendit une montagne</description>
         <image>Image/Competence/LanceDePai.png</image>
@@ -330,7 +446,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2104">
+    <entrecomp id="2104">
         <nom>Poupée Vaudou</nom>
         <description>L'ame d'un homme peut être lié a celui d'un objet afin que leurs souffrances
             soit communes
@@ -340,7 +456,7 @@
             <complance caract="caractmagie" porte="6" portemin="1" recharge="0" utilisation="1"
                 zone="1" />
             <compbuff type="buffdot" valeur="1">
-                <condduree>10</condduree>
+                <condduree>8</condduree>
             </compbuff>
         </compbuffactif>
         <affinite>
@@ -348,7 +464,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2105">
+    <entrecomp id="2105">
         <nom>Tiki de To´a-Hiti</nom>
         <description>Ce tiki puise dans la force pour defendre l'esprit</description>
         <image>Image/Competence/TikiDeToahiti.png</image>
@@ -360,7 +476,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2106">
+    <entrecomp id="2106">
         <nom>Tiki de Tu</nom>
         <description>Ce tiki donne a l'esprit la force des muscles</description>
         <image>Image/Competence/TikiDeTu.png</image>
@@ -372,9 +488,10 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2107">
+    <entrecomp id="2107">
         <nom>Dague Rituelle</nom>
-        <description>Cette lame porte la souffrance de tous ceux qu'elle à servit a sacrifier</description>
+        <description>Cette lame porte la souffrance de tous ceux qu'elle à servit a sacrifier
+        </description>
         <image>Image/Competence/DagueRituelle.png</image>
         <compattaque bonus="0">
             <complance caract="caractagilite" porte="1" portemin="1" recharge="1" utilisation="0"
@@ -390,10 +507,9 @@
     </entrecomp>
 
 
-
     <!-- POISON MAIN -->
 
-    <entrecomp id ="2301">
+    <entrecomp id="2301">
         <nom>Poison Corosif</nom>
         <description>Un tel poison ronge les chairs de l'interieur</description>
         <image>Image/Competence/PoisonCorosif.png</image>
@@ -409,7 +525,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2302">
+    <entrecomp id="2302">
         <nom>Poison Musculaire</nom>
         <description>Ce poison rend sa cible faible au point qu'il lui deviens difficile de se
             déplacer
@@ -427,7 +543,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2303">
+    <entrecomp id="2303">
         <nom>Jet d'acide</nom>
         <description>La peau se met à bouilloner et fondre a son contact</description>
         <image>Image/Competence/JetDacide.png</image>
@@ -441,7 +557,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2304">
+    <entrecomp id="2304">
         <nom>Coktail affaiblissant</nom>
         <description>Un assortiment de produit réduisant la puissance de la victime</description>
         <image>Image/Competence/CoktailAffaiblissant.png</image>
@@ -458,7 +574,7 @@
         </affinite>
     </entrecomp>
 
-    <entrecomp id ="2305">
+    <entrecomp id="2305">
         <nom>Poison Mental</nom>
         <description>Les sens et la capacitée a se concentrer de la cible sont affaiblis
         </description>
@@ -475,5 +591,205 @@
             <entreaffinite>affpoison</entreaffinite>
         </affinite>
     </entrecomp>
+
+    <!-- MORT MAIN -->
+
+    <entrecomp id="2601">
+        <nom>Toucher Corrupteur</nom>
+        <description>On raconte qu'être touché par un mort corrompt le corps
+        </description>
+        <image>Image/Competence/ToucherCorrupteur.png</image>
+        <compattaque bonus="0">
+            <complance caract="caractagilite" porte="1" portemin="1" recharge="0" utilisation="0"
+                zone="1" />
+            <compbuff type="buffdot" valeur="1">
+                <condduree>2</condduree>
+            </compbuff>
+        </compattaque>
+        <affinite>
+            <entreaffinite>affmort</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2602">
+        <nom>Appel De La Tombe</nom>
+        <description>Les morts réclament une nouvelle victime
+        </description>
+        <image>Image/Competence/AppelDeLaTombe.png</image>
+        <compbuffactif>
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="0" utilisation="1"
+                zone="1" />
+            <compbuff type="buffdegat" valeur="6"></compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmort</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2603">
+        <nom>Conviction Mortelle</nom>
+        <description>Blesser un mort-vivant ne faite que de renforcer sa conviction a rester parmis
+            les vivants
+        </description>
+        <image>Image/Competence/ConvictionMortelle.png</image>
+        <compdeclencheureffet cible="ciblesoi" typedeclencheur="declenchedegatrecu">
+            <compbuff type="buffvaldefense" valeur="1">
+                <condduree>3</condduree>
+            </compbuff>
+        </compdeclencheureffet>
+        <affinite>
+            <entreaffinite>affmort</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2604">
+        <nom>Chaire Putréfiée</nom>
+        <description>Il est plus dur de blesser un corp déjà décomposé
+        </description>
+        <image>Image/Competence/ChairePutrefiee.png</image>
+        <compbuff type="buffvaldefense" valeur="1">
+            <compbuff type="buffvalvitesse" valeur="-1"></compbuff>
+        </compbuff>
+        <affinite>
+            <entreaffinite>affmort</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2605">
+        <nom>Odeur Infecte</nom>
+        <description>L'odeur de la décomposition empecherait de se concentrer le plus ancien des
+            bibliothécaires
+        </description>
+        <image>Image/Competence/OdeurInfecte.png</image>
+        <compbuffactif>
+            <complance caract="caractagilite" porte="3" portemin="1" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffval" valeur="-2">
+                <condduree>2</condduree>
+                <condtype>caractmagie</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmort</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2606">
+        <nom>Sangsue Des Vivants</nom>
+        <description>Certains morts sont capables d'aspirer la force physique des vivants
+        </description>
+        <image>Image/Competence/SangsueDesVivants.png</image>
+        <compbuffactif>
+            <complance caract="caractmagie" porte="3" portemin="1" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffval" valeur="-2">
+                <condduree>2</condduree>
+                <condtype>caractforce</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affmort</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <!-- NATURE MAIN -->
+
+    <entrecomp id="2701">
+        <nom>Ronces</nom>
+        <description>Un lien avec la nature peut permettre de faire appel a son aide
+        </description>
+        <image>Image/Competence/Ronces.png</image>
+        <compattaque bonus="0">
+            <complance caract="caractagilite" porte="3" portemin="1" recharge="0" utilisation="0"
+                zone="1" />
+        </compattaque>
+        <affinite>
+            <entreaffinite>affnature</entreaffinite>
+            <entreaffinite>attaquebase</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2702">
+        <nom>Couverture d'écorce</nom>
+        <description>Le corp de certains être des bois se voit couvert d'écorce solide
+        </description>
+        <image>Image/Competence/CouvertureDEcorce.png</image>
+        <compbuff type="buffvaldefense" valeur="2">
+            <condtype>caractforce</condtype>
+        </compbuff>
+        <affinite>
+            <entreaffinite>affnature</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2703">
+        <nom>Calme Sauvage</nom>
+        <description>Le calme de la nature est capable d'appaiser les esprit qui savent puiser en
+            lui
+        </description>
+        <image>Image/Competence/CalmeSauvage.png</image>
+        <compbuffactif>
+            <complance caract="caractmagie" porte="5" portemin="2" recharge="0" utilisation="0"
+                zone="1" />
+            <compbuff type="buffval" valeur="1">
+                <condduree>2</condduree>
+                <condtype>caractmagie</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affnature</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2704">
+        <nom>Enchevêtrement</nom>
+        <description>Même le plus aguerris des soldat à du mal a traverser mur de racines
+        </description>
+        <image>Image/Competence/Enchevetrement.png</image>
+        <compbuffactif>
+            <complance caract="caractmagie" porte="5" portemin="2" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffvalvitesse" valeur="-2">
+                <condduree>2</condduree>
+                <condtype>caractmagie</condtype>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affnature</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2705">
+        <nom>Photosynthèse</nom>
+        <description>Certains savent puiser dans le soleil pour gagner en puissance
+        </description>
+        <image>Image/Competence/Photosynthese.png</image>
+        <compbuffactif>
+            <complance caract="caractforce" porte="0" portemin="0" recharge="3" utilisation="0"
+                zone="1" />
+            <compbuff type="buffval" valeur="1">
+                <condduree>2</condduree>
+            </compbuff>
+        </compbuffactif>
+        <affinite>
+            <entreaffinite>affnature</entreaffinite>
+        </affinite>
+    </entrecomp>
+
+    <entrecomp id="2706">
+        <nom>Frappe de Tronc</nom>
+        <description>Personne n'aime recevoir un arbre en pleine figure
+        </description>
+        <image>Image/Competence/FrappeDeTronc.png</image>
+        <compattaque bonus="4">
+            <complance caract="caractforce" porte="1" portemin="1" recharge="0" utilisation="1"
+                zone="1" />
+        </compattaque>
+        <affinite>
+            <entreaffinite>affnature</entreaffinite>
+        </affinite>
+    </entrecomp>
+
 
 </listecompetence>

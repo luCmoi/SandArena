@@ -72,7 +72,6 @@ public class ScreenPartie implements Screen {
         } else {
             partie.victoire();
             Son.nomads.stop();
-            container.lanceGestionEquipe(joueurActif);
         }
     }
 
@@ -137,6 +136,10 @@ public class ScreenPartie implements Screen {
 
     public int getMap() {
         return map;
+    }
+
+    public Joueur getJoueurActif() {
+        return joueurActif;
     }
 }
 

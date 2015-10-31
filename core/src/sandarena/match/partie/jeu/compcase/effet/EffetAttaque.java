@@ -53,6 +53,6 @@ public class EffetAttaque extends Effet {
     }
 
     private int degat(int caractA, int caractD) {
-        return Math.min(1,(caractA - caractD));
+        return Math.max(1,(caractA - caractD));
     }
 }

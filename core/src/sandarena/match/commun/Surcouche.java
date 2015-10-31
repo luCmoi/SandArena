@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
+import sandarena.SandArena;
 import sandarena.match.partie.ScreenPartie;
 import sandarena.match.preparematch.ScreenPrepaMatch;
 
@@ -33,6 +34,7 @@ public class Surcouche extends Stage {
     }
 
     public void activateChangeTour(boolean actif) {
+        SandArena.googleService.printError("Change tour : " + actif);
         this.setVisible(true);
         changeTour.setVisible(actif,true);
     }

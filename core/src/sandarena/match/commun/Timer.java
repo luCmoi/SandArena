@@ -15,7 +15,7 @@ import sandarena.googleservice.ConnexionMatch;
 public class Timer extends Actor {
     private int valeur;
     private long dernierTemp;
-    private static int TEMPSPREPAS = 40;
+    private static int TEMPSPREPAS = 60;
     private static int TEMPSTOUR = 180;
     private boolean prepa;
 
@@ -32,7 +32,6 @@ public class Timer extends Actor {
         if (tempTmp-dernierTemp > 1000){
             valeur = valeur - (int)((tempTmp - dernierTemp)/1000);
             dernierTemp = tempTmp - ((tempTmp-dernierTemp)%1000);
-
         }
         batch.draw(Utili.timer, getX(), getY(), getWidth(), getHeight());
         Font.font.setScale(Resolution.ratioWidth * 3, Resolution.ratioHeight * 3);
@@ -41,7 +40,7 @@ public class Timer extends Actor {
         }else{
             Font.font.setColor(Color.RED);
         }
-        Font.font.draw(batch,String.valueOf(valeur),getX()+(getWidth() / 2) - (Font.font.getSpaceWidth() * String.valueOf(valeur).length()/ 2),getY()+ getHeight() - (getHeight() / 4));
+        Font.font.draw(batch, String.valueOf(valeur), getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * String.valueOf(valeur).length() / 2), getY() + getHeight() - (getHeight() / 4));
     }
 
     public void reset(){
@@ -57,5 +56,9 @@ public class Timer extends Actor {
     public void newTime(int temps){
         dernierTemp = System.currentTimeMillis();
         valeur = temps;
+    }
+
+    public int getValeur() {
+        return valeur;
     }
 }

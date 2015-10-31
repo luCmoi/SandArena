@@ -18,8 +18,12 @@ import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.joueur.competence.CompetenceActive;
 import sandarena.match.commun.Surcouche;
+import sandarena.match.partie.ScreenPartie;
+import sandarena.match.partie.gui.Camera;
 import sandarena.match.partie.gui.PartieListener;
 import sandarena.match.partie.gui.interfacep.StageInterface;
+import sandarena.match.partie.jeu.compcase.CompetenceIG;
+import sandarena.match.partie.jeu.compcase.JoueurIG;
 import sandarena.match.partie.jeu.compcase.PersonnageIG;
 
 /**
@@ -33,15 +37,15 @@ public class Partie extends Stage {
     private final int heightTailleTotale;
     private final boolean commence;
     private Case[][] plateau;
-    private sandarena.match.partie.ScreenPartie container;
-    private sandarena.match.partie.jeu.compcase.JoueurIG joueurActif;
-    private sandarena.match.partie.jeu.compcase.JoueurIG joueurAutre;
-    private sandarena.match.partie.jeu.compcase.PersonnageIG personnageActif;
+    private ScreenPartie container;
+    private JoueurIG joueurActif;
+    private JoueurIG joueurAutre;
+    private PersonnageIG personnageActif;
     private Group groupeCase;
     private sandarena.match.partie.gui.Camera camera;
     private ArrayList<Case> chemin;
     private StageInterface stageInterface;
-    private sandarena.match.partie.jeu.compcase.CompetenceIG competenceActive;
+    private CompetenceIG competenceActive;
     private Case caseSelect = null;
     private boolean bloquand = false;
     private boolean spawn;
@@ -61,15 +65,15 @@ public class Partie extends Stage {
      * @param viewport
      * @param batch
      */
-    public Partie(sandarena.match.partie.ScreenPartie container, Joueur joueur1, ArrayList<Personnage> personnagesActif, Joueur joueur2, ArrayList<Personnage> personnagesAutre, boolean commence, Surcouche surcouche, Viewport viewport, Batch batch) {
+    public Partie(ScreenPartie container, Joueur joueur1, ArrayList<Personnage> personnagesActif, Joueur joueur2, ArrayList<Personnage> personnagesAutre, boolean commence, Surcouche surcouche, Viewport viewport, Batch batch) {
         super(viewport, batch);
         this.container = container;
         this.stageInterface = this.container.getStageInterface();
         this.getViewport().setCamera(new sandarena.match.partie.gui.Camera(this));
         this.commence = commence;
-        this.camera = (sandarena.match.partie.gui.Camera) (this.getViewport().getCamera());
-        this.joueurActif = new sandarena.match.partie.jeu.compcase.JoueurIG(joueur1, personnagesActif);
-        this.joueurAutre = new sandarena.match.partie.jeu.compcase.JoueurIG(joueur2, personnagesAutre);
+        this.camera = (Camera) (this.getViewport().getCamera());
+        this.joueurActif = new JoueurIG(joueur1, personnagesActif);
+        this.joueurAutre = new JoueurIG(joueur2, personnagesAutre);
         BanqueCarte.DonneCarte carte = (BanqueCarte.DonneCarte) BanqueCarte.getEntree(BanqueCarte.getBanque(), container.getMap());
         plateau = new Case[carte.x][carte.y];
         this.groupeCase = new Group();
@@ -100,6 +104,13 @@ public class Partie extends Stage {
     @Override
     public void draw() {
         super.draw();
+        if (container.getSurcouche().getTimer().getValeur()<= 0){
+            if (!isBloquand()) {
+                ConnexionMatch.partieEnvoiFinPhase();
+                finPhase();
+                container.getStageInterface().recharge();
+            }
+        }
     }
 
     private void lancement(byte nbPerso, ArrayList<CaseSpeciale> zoneDepartActif, ArrayList<CaseSpeciale> zoneDepartAutre) {
@@ -143,35 +154,36 @@ public class Partie extends Stage {
         setPersonnageActif(null);
     }
 
-    public boolean victoire() {
+    public void victoire() {
         Son.victoire.play();
-        return false;
+        container.getContainer().lanceGestionEquipe(container.getJoueurActif());
     }
 
     private void defaite() {
         Son.defaite.play();
+        container.getContainer().lanceGestionEquipe(container.getJoueurActif());
     }
 
     private void tour() {
         if (commence) {
             for (PersonnageIG perso : joueurActif.getPersonnages()) {
-                perso.setAAgi(false);
+                perso.setAAgi(false, false);
                 perso.tourBuff();
                 perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
                 perso.infligeDot();
                 perso.modifCaract();
             }
         }
-        for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : joueurAutre.getPersonnages()) {
-            perso.setAAgi(false);
+        for (PersonnageIG perso : joueurAutre.getPersonnages()) {
+            perso.setAAgi(false, false);
             perso.tourBuff();
             perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
             perso.infligeDot();
             perso.modifCaract();
         }
         if (!commence) {
-            for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : joueurActif.getPersonnages()) {
-                perso.setAAgi(false);
+            for (PersonnageIG perso : joueurActif.getPersonnages()) {
+                perso.setAAgi(false, false);
                 perso.tourBuff();
                 perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
                 perso.infligeDot();
@@ -186,33 +198,19 @@ public class Partie extends Stage {
     }
 
 
-    private void phase(sandarena.match.partie.jeu.compcase.JoueurIG joueur) {
+    private void phase(JoueurIG joueur) {
         if (joueur.equals(getJoueurAutre())) {
             setBloquand(true);
         } else {
             setBloquand(false);
         }
-        for (sandarena.match.partie.jeu.compcase.PersonnageIG perso : joueur.getPersonnages()) {
+        for (PersonnageIG perso : joueur.getPersonnages()) {
             if (!perso.isAAgi()) {
                 this.setPersonnageActif(perso);
                 return;
             }
         }
-        if (joueur.equals(getJoueurActif())) {
-            ConnexionMatch.recoiTimer(surcouche.getTimer());
-            if (commence) {
-                phase(getJoueurAutre());
-            } else {
-                tour();
-            }
-        } else {
-            surcouche.reset();
-            if (commence) {
-                tour();
-            } else {
-                phase(getJoueurActif());
-            }
-        }
+        finPhase();
     }
 
     public void finPhase() {
@@ -245,13 +243,14 @@ public class Partie extends Stage {
                 if (commence) {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
-                        perso.setAAgi(true);
+                        perso.setAAgi(true,true);
                     }
+                    container.getSurcouche().activateChangeTour(false);
                     phase(getJoueurAutre());
                 } else {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
-                        perso.setAAgi(true);
+                        perso.setAAgi(true,true);
                     }
                     tour();
                 }
@@ -259,14 +258,15 @@ public class Partie extends Stage {
                 if (commence) {
                     surcouche.reset();
                     for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
-                        perso.setAAgi(true);
+                        perso.setAAgi(true,true);
                     }
                     tour();
                 } else {
                     surcouche.reset();
                     for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
-                        perso.setAAgi(true);
+                        perso.setAAgi(true,true);
                     }
+                    container.getSurcouche().activateChangeTour(true);
                     phase(getJoueurActif());
                 }
             }
@@ -274,9 +274,11 @@ public class Partie extends Stage {
     }
 
 
-    public void finPerso() {
+    public void finPerso(boolean finPhase) {
         stageInterface.recharge();
-        phase(personnageActif.getPossesseur());
+        if (!finPhase) {
+            phase(personnageActif.getPossesseur());
+        }
     }
 
     /**

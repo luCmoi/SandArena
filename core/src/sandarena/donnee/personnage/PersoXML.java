@@ -69,7 +69,7 @@ public class PersoXML {
                 surnom.add((tmp.item(i).getTextContent()));
             }
         }
-        sandarena.donnee.personnage.BanquePersonnage.banque.add(new sandarena.donnee.personnage.BanquePersonnage.DonneePersonnage(id, nom, description, chemin, vie,vitesse,force,agilite,magie, affinite));
+        BanquePersonnage.banque.add(new BanquePersonnage.DonneePersonnage(id, nom, description, chemin, vie,vitesse,force,agilite,magie, affinite));
     }
 
     private static int parseIntStatic(String mess) {
@@ -78,6 +78,9 @@ public class PersoXML {
         else if (mess.equals("affagilite")) return 2;
         else if (mess.equals("affpoison")) return 3;
         else if (mess.equals("affmagie"))return 4;
+        else if (mess.equals("affesprit"))return 5;
+        else if (mess.equals("affmort"))return 6;
+        else if (mess.equals("affnature"))return 7;
         else {
             return Integer.parseInt(mess);
         }

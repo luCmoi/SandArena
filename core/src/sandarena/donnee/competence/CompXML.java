@@ -173,6 +173,9 @@ public class CompXML {
         else if (mess.equals("affagilite")) return 2;
         else if (mess.equals("affpoison")) return 3;
         else if (mess.equals("affmagie"))return 4;
+        else if (mess.equals("affesprit"))return 5;
+        else if (mess.equals("affmort"))return 6;
+        else if (mess.equals("affnature"))return 7;
         else if (mess.equals("attaquebase")) return -1;
 
         else if (mess.equals("bufftypeattaque")) return 0;

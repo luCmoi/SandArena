@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Personnage;
+import sandarena.match.preparematch.barre.StageBarre;
 
 /**
  * Created by Guillaume on 26/07/2015.
@@ -82,7 +83,7 @@ public class EmplacementBarre extends Group {
     }
 
 
-    public sandarena.match.preparematch.barre.StageBarre getContainer() {
+    public StageBarre getContainer() {
         return container;
     }
 
@@ -104,7 +105,7 @@ public class EmplacementBarre extends Group {
         unit.dispose();
         removeActor(unit);
         unit = null;
-        ((sandarena.match.preparematch.barre.emplacement.EmplacementBarreListener) (getListeners().get(0))).dispose();
+        ((EmplacementBarreListener) (getListeners().get(0))).dispose();
         getListeners().clear();
         remove();
     }
@@ -118,6 +119,6 @@ public class EmplacementBarre extends Group {
     }
 
     public void fenetre() {
-        ((sandarena.match.preparematch.barre.emplacement.EmplacementBarreListener) (getListeners().get(0))).fenetre();
+        ((EmplacementBarreListener) (getListeners().get(0))).fenetre();
     }
 }

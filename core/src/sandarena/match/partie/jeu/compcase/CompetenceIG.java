@@ -69,7 +69,7 @@ public class CompetenceIG {
                 this.recharge = ((CompetenceActive)info.competence).getRechargement();
                 active = false;
             }
-            this.getContainer().setAAgi(true);
+            this.getContainer().setAAgi(true, false);
         }
     }
 

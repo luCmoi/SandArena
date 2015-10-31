@@ -29,6 +29,9 @@ public class EmplacementComp extends EmplacementInterface {
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         if (getCompetenceIG() != null) {
             batch.draw(getCompetenceIG().info.image, getX(), getY(), getWidth(), getHeight());
+            if (container.getPartie().getCompetenceActive()== this.getCompetenceIG()){
+                batch.draw(Utili.accessible,getX(),getY(),getWidth(),getHeight());
+            }
             if (getCompetenceIG().getRecharge() != 0) {
                 batch.draw(Utili.recharge, getX(), getY(),
                         getWidth() / ((CompetenceActive) getCompetenceIG().info.competence).getRechargement() * getCompetenceIG().getRecharge(),

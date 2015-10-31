@@ -132,11 +132,11 @@ public class PersonnageIG {
         return aAgi;
     }
 
-    public void setAAgi(boolean b) {
-        this.aAgi = b;
-        if (b) {
+    public void setAAgi(boolean aAgi, boolean finPhase) {
+        this.aAgi = aAgi;
+        if (aAgi) {
             this.container.getContainer().setCompetenceActive(null);
-            this.container.getContainer().finPerso();
+            this.container.getContainer().finPerso(finPhase);
         } else {
             for (CompetenceIG c : competence) {
                 if (c != null) {
@@ -277,7 +277,7 @@ public class PersonnageIG {
             } else if (effetBuf instanceof EffetBuffDot) {
                 getDot().add((EffetBuffDot) effetBuf);
             } else if (effetBuf instanceof EffetBuffStun) {
-                this.setAAgi(true);
+                this.setAAgi(true, false);
                 getStun().add((EffetBuffStun) effetBuf);
             }
         }
