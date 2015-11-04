@@ -23,16 +23,16 @@ import sandarena.match.preparematch.barre.StageBarre;
 public class StagePrincipalScreenPrepa extends Stage {
 
     private final sandarena.match.preparematch.ScreenPrepaMatch container;
-    private final Joueur joueur;
-    private final FlecheListe gauche;
-    private final FlecheListe droite;
-    private sandarena.match.preparematch.barre.StageBarre barre;
+    private  Joueur joueur;
+    private  FlecheListe gauche;
+    private  FlecheListe droite;
+    private StageBarre barre;
     private PanelScreenPrepaMatch panelGauche;
     private PanelScreenPrepaMatch panelDroit;
     private boolean commence;
     private boolean bloquand = false;
 
-    public StagePrincipalScreenPrepa(sandarena.match.preparematch.ScreenPrepaMatch screenPrepaMatch, Joueur joueur, boolean commence, ScalingViewport scalingViewport, Batch batch) {
+    public StagePrincipalScreenPrepa(ScreenPrepaMatch screenPrepaMatch, Joueur joueur, boolean commence, ScalingViewport scalingViewport, Batch batch) {
         super(scalingViewport, batch);
         this.container = screenPrepaMatch;
         this.joueur = joueur;
@@ -54,7 +54,7 @@ public class StagePrincipalScreenPrepa extends Stage {
         }
     }
 
-    public void setBarre(sandarena.match.preparematch.barre.StageBarre barre) {
+    public void setBarre(StageBarre barre) {
         this.barre = barre;
     }
 
@@ -137,6 +137,16 @@ public class StagePrincipalScreenPrepa extends Stage {
 
     public boolean getBloquand() {
         return bloquand;
+    }
+
+    public void dispose(){
+        joueur = null;
+        gauche.dispose();
+        droite.dispose();
+        barre = null;
+        panelDroit.dispose();
+        panelGauche.dispose();
+        super.dispose();
     }
 
 

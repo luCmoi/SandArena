@@ -12,7 +12,7 @@ import sandarena.donnee.donneestatic.Utili;
  */
 class FlecheListe extends Actor {
 
-    private final StagePrincipalScreenPrepa container;
+    private  StagePrincipalScreenPrepa container;
     private final boolean gauche;
 
     public FlecheListe(StagePrincipalScreenPrepa container, boolean gauche) {
@@ -45,5 +45,11 @@ class FlecheListe extends Actor {
 
     public StagePrincipalScreenPrepa getContainer() {
         return container;
+    }
+
+    public void dispose() {
+
+        ((FlecheListeListener) (getListeners().get(0))).dispose();
+        getListeners().clear();this.container = null;
     }
 }

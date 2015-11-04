@@ -35,7 +35,10 @@ public abstract class EmplacementInterface extends Actor {
         clear();
         remove();
         container = null;
-        info = null;
+        if (info != null) {
+            info.dispose();
+            info = null;
+        }
     }
 
     public int getPlace() {

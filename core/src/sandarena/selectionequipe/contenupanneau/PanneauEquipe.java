@@ -10,9 +10,8 @@ import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
-import sandarena.joueur.Joueur;
-import sandarena.joueur.Personnage;
 import sandarena.googleservice.Sauvegarde;
+import sandarena.joueur.Joueur;
 import sandarena.selectionequipe.StageSelectionEquipe;
 
 /**
@@ -50,13 +49,13 @@ public class PanneauEquipe extends Group {
             Font.font.setColor(Color.YELLOW);
             Font.font.setScale(Resolution.ratioWidth * 4, Resolution.ratioHeight * 4);
             String strTmp = String.valueOf(equipe.getOr());
-            batch.draw(Utili.passive,getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2),getWidth()/6+Font.font.getLineHeight()/10,Font.font.getSpaceWidth()*strTmp.length()+Font.font.getLineHeight(),Font.font.getLineHeight());
-            Font.font.draw(batch, strTmp , getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2), getWidth()/6+Font.font.getLineHeight());
-            batch.draw(Utili.pieces,getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2)+Font.font.getSpaceWidth()*strTmp.length(), getWidth() /6+Font.font.getLineHeight()/10,Font.font.getLineHeight(),Font.font.getLineHeight());
-        }else {
+            batch.draw(Utili.passive, getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2), getWidth() / 6 + Font.font.getLineHeight() / 10, Font.font.getSpaceWidth() * strTmp.length() + Font.font.getLineHeight(), Font.font.getLineHeight());
+            Font.font.draw(batch, strTmp, getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2), getWidth() / 6 + Font.font.getLineHeight());
+            batch.draw(Utili.pieces, getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * strTmp.length() / 2) + Font.font.getSpaceWidth() * strTmp.length(), getWidth() / 6 + Font.font.getLineHeight() / 10, Font.font.getLineHeight(), Font.font.getLineHeight());
+        } else {
             Font.font.setColor(Color.BLACK);
             Font.font.setScale(Resolution.ratioWidth * 5, Resolution.ratioHeight * 5);
-            Font.font.draw(batch, "Nouvelle",getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 8 / 2), getHeight() - (getHeight() / 3));
+            Font.font.draw(batch, "Nouvelle", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 8 / 2), getHeight() - (getHeight() / 3));
             Font.font.draw(batch, "Equipe", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 6 / 2), getHeight() - (getHeight() / 3) - Font.font.getLineHeight());
         }
 
@@ -68,7 +67,7 @@ public class PanneauEquipe extends Group {
         if (equipe != null) {
             container.getContainer().getContainer().lanceGestionEquipe(equipe);
         } else {
-            equipe = new Joueur(place);
+            /*equipe = new Joueur(place);
             equipe.getPersonnages().add(new Personnage());
             equipe.getPersonnages().add(new Personnage());
             equipe.getPersonnages().add(new Personnage());
@@ -78,9 +77,11 @@ public class PanneauEquipe extends Group {
             equipe.setOr(2000);
             SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(place), Sauvegarde.toData(equipe));
             suppr = new PanneauEquipeSuppr(this);
-            this.addActor(suppr);
+            this.addActor(suppr);*/
+            container.getContainer().getSurcouche().activateNouvelleEquipe(place);
         }
     }
+
 
     public void suppr() {
         SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(place), Sauvegarde.toData(null));

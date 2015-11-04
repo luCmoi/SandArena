@@ -12,12 +12,10 @@ import java.util.ArrayList;
 import sandarena.donnee.carte.BanqueCarte;
 import sandarena.donnee.carte.CaseSpeciale;
 import sandarena.donnee.donneestatic.Resolution;
-import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.ConnexionMatch;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 import sandarena.joueur.competence.CompetenceActive;
-import sandarena.match.commun.Surcouche;
 import sandarena.match.partie.ScreenPartie;
 import sandarena.match.partie.gui.Camera;
 import sandarena.match.partie.gui.PartieListener;
@@ -25,6 +23,7 @@ import sandarena.match.partie.gui.interfacep.StageInterface;
 import sandarena.match.partie.jeu.compcase.CompetenceIG;
 import sandarena.match.partie.jeu.compcase.JoueurIG;
 import sandarena.match.partie.jeu.compcase.PersonnageIG;
+import sandarena.match.partie.surcouche.SurcouchePartie;
 
 /**
  * Stock toutes les donnees relatives à une instance de partie
@@ -49,7 +48,7 @@ public class Partie extends Stage {
     private Case caseSelect = null;
     private boolean bloquand = false;
     private boolean spawn;
-    private Surcouche surcouche;
+    private SurcouchePartie surcouche;
 
     /**
      * Permet de créer une nouvelle partie a partir de son conteneur, et plus
@@ -65,7 +64,7 @@ public class Partie extends Stage {
      * @param viewport
      * @param batch
      */
-    public Partie(ScreenPartie container, Joueur joueur1, ArrayList<Personnage> personnagesActif, Joueur joueur2, ArrayList<Personnage> personnagesAutre, boolean commence, Surcouche surcouche, Viewport viewport, Batch batch) {
+    public Partie(ScreenPartie container, Joueur joueur1, ArrayList<Personnage> personnagesActif, Joueur joueur2, ArrayList<Personnage> personnagesAutre, boolean commence, SurcouchePartie surcouche, Viewport viewport, Batch batch) {
         super(viewport, batch);
         this.container = container;
         this.stageInterface = this.container.getStageInterface();
@@ -155,13 +154,11 @@ public class Partie extends Stage {
     }
 
     public void victoire() {
-        Son.victoire.play();
-        container.getContainer().lanceGestionEquipe(container.getJoueurActif());
+        surcouche.victoire();
     }
 
     private void defaite() {
-        Son.defaite.play();
-        container.getContainer().lanceGestionEquipe(container.getJoueurActif());
+        surcouche.defaite();
     }
 
     private void tour() {
@@ -306,8 +303,9 @@ public class Partie extends Stage {
         stageInterface = null;
         chemin.clear();
         chemin = null;
-        joueurActif = null;
-        joueurAutre = null;
+        surcouche = null;
+        //joueurActif = null;
+        //joueurAutre = null;
     }
 
     public Case[][] getPlateau() {
@@ -497,7 +495,7 @@ public class Partie extends Stage {
     }
 
 
-    public void setSurcouche(Surcouche surcouche) {
+    public void setSurcouche(SurcouchePartie surcouche) {
         this.surcouche = surcouche;
     }
 }

@@ -8,7 +8,7 @@ import sandarena.donnee.donneestatic.Resolution;
  * Created by Guillaume on 25/07/2015.
  */
 class CameraBarre extends OrthographicCamera {
-    private final StageBarre container;
+    private StageBarre container;
     private static final int VITESSECAM = 10;
     private boolean gauche;
     private boolean droite;
@@ -58,5 +58,9 @@ class CameraBarre extends OrthographicCamera {
 
     public float getX() {
         return position.x-(container.getWidth()/2);
+    }
+
+    public void dispose() {
+        container = null;
     }
 }

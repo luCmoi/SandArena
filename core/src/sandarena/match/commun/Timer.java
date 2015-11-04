@@ -61,4 +61,8 @@ public class Timer extends Actor {
     public int getValeur() {
         return valeur;
     }
+
+    public void dispose() {
+        ConnexionMatch.finTimer = true;
+    }
 }

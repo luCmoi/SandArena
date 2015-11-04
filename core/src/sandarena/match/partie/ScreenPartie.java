@@ -21,6 +21,7 @@ import sandarena.joueur.Personnage;
 import sandarena.match.commun.Surcouche;
 import sandarena.match.partie.gui.interfacep.StageInterface;
 import sandarena.match.partie.jeu.Partie;
+import sandarena.match.partie.surcouche.SurcouchePartie;
 
 /**
  * Screen permetant d'afficher la partie
@@ -34,7 +35,7 @@ public class ScreenPartie implements Screen {
     //Temporaire
     private Joueur joueurActif;
     private Joueur joueurAutre;
-    private Surcouche surcouche;
+    private SurcouchePartie surcouche;
     private int map;
 
     public ScreenPartie(SandArena container, Joueur joueur, ArrayList<Personnage> personnagesActif, ArrayList<Personnage> personnagesAutre, boolean commence, int map) {
@@ -44,7 +45,7 @@ public class ScreenPartie implements Screen {
         //Temporaire
         joueurActif = joueur;
         joueurAutre = new Joueur(0);
-        surcouche = new Surcouche(this, new FillViewport(Resolution.width, Resolution.height), batch);
+        surcouche = new SurcouchePartie(this, new FillViewport(Resolution.width, Resolution.height), batch);
         this.interfaceS = new StageInterface(new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
         this.partie = new Partie(this, joueurActif, personnagesActif, joueurAutre, personnagesAutre, commence, surcouche, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
         interfaceS.setPartie(partie);
@@ -60,7 +61,6 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void render(float f) {
-        if (!IGoogleService.data.justLeft) {
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             this.partie.getViewport().update();
@@ -69,9 +69,11 @@ public class ScreenPartie implements Screen {
             this.interfaceS.draw();
             Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
             this.surcouche.draw();
-        } else {
+        if (IGoogleService.data.justLeft) {
+            IGoogleService.data.justLeft = false;
             partie.victoire();
             Son.nomads.stop();
+            this.dispose();
         }
     }
 
@@ -97,17 +99,19 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void dispose() {
-        if (getBatch() != null) {
-            getBatch().dispose();
-            this.batch = null;
-        }
+        this.batch = null;
         container = null;
         partie.dispose();
+        partie.clear();
         partie = null;
         interfaceS.dispose();
+        interfaceS.clear();
         interfaceS = null;
         surcouche.dispose();
+        surcouche.clear();
         surcouche = null;
+        joueurActif = null;
+        joueurAutre = null;
     }
 
     private Batch getBatch() {

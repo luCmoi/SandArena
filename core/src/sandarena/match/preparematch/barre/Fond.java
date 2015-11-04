@@ -9,7 +9,7 @@ import sandarena.donnee.donneestatic.Utili;
  * Created by Guillaume on 16/07/2015.
  */
 class Fond extends Actor {
-    private final StageBarre container;
+    private StageBarre container;
 
     public Fond(StageBarre stageBarre) {
         this.container = stageBarre;
@@ -19,6 +19,10 @@ class Fond extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(Utili.fond,((CameraBarre)container.getCamera()).getX(),getY(), getWidth(), getHeight());
+        batch.draw(Utili.fond, ((CameraBarre) container.getCamera()).getX(), getY(), getWidth(), getHeight());
+    }
+
+    public void dispose() {
+        container = null;
     }
 }

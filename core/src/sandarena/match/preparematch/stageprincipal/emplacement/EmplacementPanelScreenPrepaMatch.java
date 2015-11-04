@@ -16,7 +16,7 @@ public class EmplacementPanelScreenPrepaMatch extends Group{
     private boolean actif;
     private byte place;
     private UnitPanelScreenPrepaMatch unit;
-    private sandarena.match.preparematch.stageprincipal.emplacement.CompPanelScreenPrepaMatch[] comp = new sandarena.match.preparematch.stageprincipal.emplacement.CompPanelScreenPrepaMatch[4];
+    private CompPanelScreenPrepaMatch[] comp = new sandarena.match.preparematch.stageprincipal.emplacement.CompPanelScreenPrepaMatch[4];
 
     public EmplacementPanelScreenPrepaMatch(PanelScreenPrepaMatch container, boolean b, int place) {
         this.container = container;
@@ -54,5 +54,15 @@ public class EmplacementPanelScreenPrepaMatch extends Group{
 
     public PanelScreenPrepaMatch getContainer() {
         return container;
+    }
+
+    public void dispose() {
+        container = null;
+        unit.dispose();
+        unit = null;
+        for (CompPanelScreenPrepaMatch cmp:comp) {
+            cmp.dispose();
+        }
+        comp = null;
     }
 }

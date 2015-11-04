@@ -229,8 +229,8 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
     }
 
     @Override
-    public void quitQuickGame() {
-        gameHelperFragment.quitQuickGame();
+    public void quitQuickGame(boolean waitId) {
+        gameHelperFragment.quitQuickGame(waitId);
     }
 
     @Override

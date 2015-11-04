@@ -36,12 +36,12 @@ public class ScreenPrepaMatch implements Screen {
     private Personnage check = null;
     private int map;
 
-    public ScreenPrepaMatch(SandArena conteneur,int i, Joueur equipe) {
+    public ScreenPrepaMatch(SandArena conteneur, int i, Joueur equipe) {
         this.container = conteneur;
         this.map = i;
         this.batch = conteneur.getBatch();
         joueur = equipe;
-        if (Son.actuelle != null){
+        if (Son.actuelle != null) {
             Son.actuelle.stop();
         }
         Son.ambiancePrepare.setLooping(true);
@@ -72,7 +72,10 @@ public class ScreenPrepaMatch implements Screen {
             this.getPrincipal().draw();
             this.getSurcouche().draw();
         } else {
+            IGoogleService.data.justLeft = false;
+            Son.ambiancePrepare.stop();
             container.lanceGestionEquipe(this.getJoueur());
+            this.dispose();
         }
     }
 
@@ -84,7 +87,7 @@ public class ScreenPrepaMatch implements Screen {
     @Override
     public void show() {
         boolean commence = IGoogleService.data.commence;
-        setSurcouche(new Surcouche(this,new FillViewport(Resolution.width, Resolution.height), batch));
+        setSurcouche(new Surcouche(this, new FillViewport(Resolution.width, Resolution.height), batch));
         this.setPrincipal(new StagePrincipalScreenPrepa(this, joueur, commence, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
         this.setBarre(new sandarena.match.preparematch.barre.StageBarre(this.getPrincipal(), joueur, new ExtendViewport(Resolution.width - Resolution.differenceBas, Resolution.differenceBas, Resolution.width - Resolution.differenceBas, Resolution.differenceBas), batch));
         getPrincipal().setBarre(this.getBarre());
@@ -109,7 +112,15 @@ public class ScreenPrepaMatch implements Screen {
 
     @Override
     public void dispose() {
-
+        barre.dispose();
+        barre.clear();
+        principal.dispose();
+        principal.clear();
+        surcouche.dispose();
+        surcouche.clear();
+        check = null;
+        joueur = null;
+        batch = null;
     }
 
     private sandarena.match.preparematch.barre.StageBarre getBarre() {
@@ -156,6 +167,6 @@ public class ScreenPrepaMatch implements Screen {
     }
 
     public void backKeyPressed() {
-
     }
+
 }

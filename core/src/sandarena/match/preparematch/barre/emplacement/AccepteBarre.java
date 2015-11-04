@@ -44,4 +44,11 @@ class AccepteBarre extends Actor {
             }
         }
     }
+
+    public  void dispose(){
+        ((AccepteBarreListener) (getListeners().get(0))).dispose();
+        getListeners().clear();
+        container = null;
+        remove();
+    }
 }

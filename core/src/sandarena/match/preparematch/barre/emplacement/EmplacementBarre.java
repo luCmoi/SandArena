@@ -12,7 +12,7 @@ import sandarena.match.preparematch.barre.StageBarre;
  * Created by Guillaume on 26/07/2015.
  */
 public class EmplacementBarre extends Group {
-    private sandarena.match.preparematch.barre.StageBarre container;
+    private StageBarre container;
     private byte place;
     private Personnage perso;
     private boolean ouvert;
@@ -26,7 +26,7 @@ public class EmplacementBarre extends Group {
         this.perso = perso;
         this.setBounds(Resolution.differenceBas * place, 0, Resolution.differenceBas, Resolution.differenceBas);
         this.setTouchable(Touchable.enabled);
-        this.addListener(new sandarena.match.preparematch.barre.emplacement.EmplacementBarreListener(this));
+        this.addListener(new EmplacementBarreListener(this));
         ouvert = false;
         unit = new UnitBarre(this, perso);
         addActor(unit);
@@ -91,23 +91,25 @@ public class EmplacementBarre extends Group {
         return place;
     }
 
-    public void dispose() {
-        container.getPersos().remove(this);
-        container = null;
+    public void dispose(boolean disposeMain) {
+        ((EmplacementBarreListener) (getListeners().get(0))).dispose();
+        getListeners().clear();
+        if (!disposeMain) {
+            container.getPersos().remove(place);
+        }container = null;
         perso = null;
         for (CompetenceBarre comp : enfants) {
             if (comp != null) {
                 comp.dispose();
-                removeActor(comp);
-                comp = null;
             }
         }
+        enfants = null;
         unit.dispose();
-        removeActor(unit);
         unit = null;
-        ((EmplacementBarreListener) (getListeners().get(0))).dispose();
-        getListeners().clear();
+        accepte.dispose();
+        accepte =null;
         remove();
+        clear();
     }
 
     public Personnage getPerso() {

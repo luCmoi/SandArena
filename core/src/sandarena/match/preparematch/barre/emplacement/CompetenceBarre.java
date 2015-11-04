@@ -40,6 +40,11 @@ class CompetenceBarre extends Actor {
         ((CompBarreListener) (getListeners().get(0))).dispose();
         getListeners().clear();
         comp = null;
+        container = null;
+        if (info != null){
+            info.dispose();
+            info = null;
+        }
         remove();
     }
 

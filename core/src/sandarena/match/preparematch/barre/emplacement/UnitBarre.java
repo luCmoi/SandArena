@@ -35,10 +35,14 @@ class UnitBarre extends Actor {
     }
 
     public void dispose() {
-        ((sandarena.match.preparematch.barre.emplacement.UnitBarreListener) (getListeners().get(0))).dispose();
+        ((UnitBarreListener) (getListeners().get(0))).dispose();
         getListeners().clear();
         perso = null;
-        this.container = null;
+        container = null;
+        if (info != null){
+            info.dispose();
+            info = null;
+        }
         remove();
     }
 

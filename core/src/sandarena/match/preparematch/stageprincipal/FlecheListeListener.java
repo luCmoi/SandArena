@@ -28,4 +28,8 @@ class FlecheListeListener extends InputListener {
         this.flecheListe.getContainer().getBarre().stop();
         super.touchUp(event, x, y, pointer, button);
     }
+
+    public void dispose() {
+        flecheListe = null;
+    }
 }

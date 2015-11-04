@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowEffect;
 import sandarena.match.partie.gui.interfacep.StageInterface;
+import sandarena.match.partie.jeu.compcase.effet.EffetBuf;
 
 /**
  * Created by Guillaume on 26/06/2015.
  */
 public class EmplacementEffet extends EmplacementInterface {
-    private ArrayList<sandarena.match.partie.jeu.compcase.effet.EffetBuf> effets = new ArrayList<sandarena.match.partie.jeu.compcase.effet.EffetBuf>();
+    private ArrayList<EffetBuf> effets = new ArrayList<sandarena.match.partie.jeu.compcase.effet.EffetBuf>();
     private static final int EFFETATTAQUE = 3;
     private static final int EFFETDEFENSE = 7;
     private static final int EFFETVITESSE = 2;

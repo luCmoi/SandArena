@@ -19,8 +19,8 @@ import sandarena.match.preparematch.stageprincipal.StagePrincipalScreenPrepa;
  * Created by Guillaume on 23/07/2015.
  */
 public class StageBarre extends Stage {
-    private final StagePrincipalScreenPrepa principal;
-    private final Joueur joueur;
+    private StagePrincipalScreenPrepa principal;
+    private Joueur joueur;
     private CameraBarre camera;
     private float widthTailleTotale;
     private ArrayList<EmplacementBarre> persos;
@@ -97,7 +97,7 @@ public class StageBarre extends Stage {
         if (!principal.getBloquand()) {
             Personnage tmp = selected.getPerso();
             this.diminueWidthTailleTotale(selected.getPlace(), true);
-            selected.dispose();
+            selected.dispose(false);
             principal.ajoutGauche(tmp);
         }
     }
@@ -114,5 +114,20 @@ public class StageBarre extends Stage {
                 tmp = null;
             }
         }
+    }
+
+    public void dispose(){
+        principal = null;
+        joueur = null;
+        camera.dispose();
+        camera = null;
+        fond.dispose();
+        fond = null;
+        for (EmplacementBarre emp :persos) {
+            emp.dispose(true);
+        }
+        persos.clear();
+        persos =null;
+        super.dispose();
     }
 }

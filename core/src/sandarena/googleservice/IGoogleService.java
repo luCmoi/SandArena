@@ -27,5 +27,5 @@ public interface IGoogleService {
 
      void sendOtherPlayer(String mess);
 
-     void quitQuickGame();
+     void quitQuickGame(boolean waitId);
 }

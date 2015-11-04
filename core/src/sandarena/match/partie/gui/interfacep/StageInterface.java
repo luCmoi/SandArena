@@ -7,20 +7,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import sandarena.match.partie.gui.interfacep.empinterface.EmplacementBouton;
 import sandarena.match.partie.gui.interfacep.empinterface.EmplacementComp;
 import sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet;
+import sandarena.match.partie.gui.interfacep.empinterface.EmplacementPerso;
 import sandarena.match.partie.jeu.Case;
 import sandarena.match.partie.jeu.Partie;
 
 public class StageInterface extends Stage {
-    private sandarena.match.partie.jeu.Partie partie;
-    private ArrayList<sandarena.match.partie.gui.interfacep.empinterface.EmplacementComp> emplacementCompsActif;
-    private ArrayList<sandarena.match.partie.gui.interfacep.empinterface.EmplacementComp> emplacementCompsSelect;
-    private ArrayList<sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet> emplacementEffetsActif;
-    private ArrayList<sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet> emplacementEffetsSelect;
-    private ArrayList<sandarena.match.partie.gui.interfacep.empinterface.EmplacementBouton> emplacementBoutons;
-    private sandarena.match.partie.gui.interfacep.empinterface.EmplacementPerso emplacementPersoActif;
-    private sandarena.match.partie.gui.interfacep.empinterface.EmplacementPerso emplacementPersoSelect;
+    private Partie partie;
+    private ArrayList<EmplacementComp> emplacementCompsActif;
+    private ArrayList<EmplacementComp> emplacementCompsSelect;
+    private ArrayList<EmplacementEffet> emplacementEffetsActif;
+    private ArrayList<EmplacementEffet> emplacementEffetsSelect;
+    private ArrayList<EmplacementBouton> emplacementBoutons;
+    private EmplacementPerso emplacementPersoActif;
+    private EmplacementPerso emplacementPersoSelect;
     public int tailleCoteHeight;
     private int tailleCoteWidth;
 
@@ -74,7 +76,7 @@ public class StageInterface extends Stage {
         for (sandarena.match.partie.gui.interfacep.empinterface.EmplacementEffet emp : emplacementEffetsSelect) {
             this.addActor(emp);
         }
-        emplacementBoutons = new ArrayList<sandarena.match.partie.gui.interfacep.empinterface.EmplacementBouton>();
+        emplacementBoutons = new ArrayList<EmplacementBouton>();
         emplacementBoutons.add(new sandarena.match.partie.gui.interfacep.empinterface.EmplacementBouton(0, this));
         emplacementBoutons.add(new sandarena.match.partie.gui.interfacep.empinterface.EmplacementBouton(1, this));
         emplacementBoutons.add(new sandarena.match.partie.gui.interfacep.empinterface.EmplacementBouton(2, this));
@@ -133,7 +135,7 @@ public class StageInterface extends Stage {
         emplacementCompsSelect = null;
         emplacementBoutons.clear();
         emplacementBoutons = null;
-        clear();
+        partie =null;
     }
 
     public void setPersonnageActif(sandarena.match.partie.jeu.compcase.PersonnageIG perso) {

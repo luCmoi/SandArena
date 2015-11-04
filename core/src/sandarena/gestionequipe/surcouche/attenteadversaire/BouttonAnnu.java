@@ -34,7 +34,7 @@ class BouttonAnnu extends Actor {
         if (container.isVisible()) {
             Son.menuSelect.play();
             container.getContainer().setVisible(false);
-            SandArena.googleService.quitQuickGame();
+            SandArena.googleService.quitQuickGame(true);
         }
     }
 }

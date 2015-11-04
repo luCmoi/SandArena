@@ -87,13 +87,13 @@ public class GameHelperFragment extends Fragment {
     }
 
 
-    public void quitQuickGame() {
+    public void quitQuickGame(boolean waitId) {
         System.err.println("Trying on quit");
         if (roomId != null) {
             System.err.println("on quit");
             Games.RealTimeMultiplayer.leave(get_gameHelper().getApiClient(), updateListener, roomId);
             roomId = null;
-        }else{
+        }else if (waitId){
             long time = System.currentTimeMillis();
             while(roomId == null){
                 if (System.currentTimeMillis() - time> 100){

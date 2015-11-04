@@ -18,6 +18,7 @@ public class ConnexionMatch {
     private static final String UTILISECOMPETENCE = "SETH";
     private static final String FINPHASE = "LETO";
     private static final String ECHANGE = "RHEA";
+    public static boolean finTimer = false;
 
     public static void envoiTimer(int valeur) {
         String mess = String.valueOf(valeur);
@@ -29,9 +30,14 @@ public class ConnexionMatch {
         new Thread() {
             @Override
             public void run() {
+                finTimer = false;
                 String mess = null;
                 SandArena.googleService.printError("En attente");
                 while (mess == null && !IGoogleService.data.justLeft) {
+                    if (finTimer){
+                        finTimer = false;
+                        return;
+                    }
                     if (IGoogleService.data.time != null) {
                         byte[] tmp = IGoogleService.data.time;
                         IGoogleService.data.time =null;

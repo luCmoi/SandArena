@@ -12,9 +12,11 @@ import sandarena.match.partie.jeu.Case;
 import sandarena.match.partie.jeu.compcase.effet.EffetBuf;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffDot;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffStun;
+import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffVal;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbufftype.EffetBuffTypeAttaque;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValAttaque;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValCaract;
+import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValDefense;
 import sandarena.match.partie.jeu.compcase.effet.effetdeclencheur.EffetDeclencheurDegatRecu;
 
 /**
@@ -199,10 +201,10 @@ public class PersonnageIG {
                     break;
             }
         }
-        for (sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValDefense effet : getChangeDef()) {
+        for (EffetBuffValDefense effet : getChangeDef()) {
             val = effet.modif(val, type);
         }
-        for (sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffVal effet : getChangeStat()) {
+        for (EffetBuffVal effet : getChangeStat()) {
             val = effet.modif(val, type);
         }
         return val;

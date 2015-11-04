@@ -1,4 +1,4 @@
-package sandarena.match.preparematch.stageprincipal.emplacement;
+package sandarena.selectionequipe.Surcouche.nouvelleequipe.emplacement;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -8,29 +8,28 @@ import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowComp;
 
 /**
- * Created by Guillaume on 23/07/2015.
+ * Created by lucmo on 04/11/2015.
  */
-class CompPanelScreenPrepaMatch extends Actor {
-    private EmplacementPanelScreenPrepaMatch container;
+public class EmplacementComp extends Actor {
+    private Emplacement container;
     private BanqueCompetence.EntreeCompetence comp;
     private int place;
     private InfoWindowComp info;
 
 
-    public CompPanelScreenPrepaMatch(EmplacementPanelScreenPrepaMatch container, int place) {
+    public EmplacementComp(Emplacement container, int place, BanqueCompetence.EntreeCompetence comp) {
         this.container = container;
         this.place = place;
+        this.comp = comp;
         this.setBounds(container.getHeight() + (container.getHeight() / 2) * (place % 2), ((container.getHeight() / 2) * (1 - (place / 2))), container.getHeight() / 2, container.getHeight() / 2);
-        this.addListener(new CompPanelScreenPrepaListener(this));
+        this.addListener(new EmplacementCompListener(this));
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (comp != null && container.getContainer().getContainer().getContainer().getPrincipal().getContainer().getCheck()==null) {
-            batch.draw(comp.image, getX(), getY(), getWidth(), getHeight());
-            ((CompPanelScreenPrepaListener) (getListeners().get(0))).update();
-        }
+        batch.draw(comp.image, getX(), getY(), getWidth(), getHeight());
+        ((EmplacementCompListener) (getListeners().get(0))).update();
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
     }
 
@@ -38,7 +37,7 @@ class CompPanelScreenPrepaMatch extends Actor {
         return comp;
     }
 
-    public EmplacementPanelScreenPrepaMatch getContainer() {
+    public Emplacement getContainer() {
         return container;
     }
 
@@ -49,7 +48,7 @@ class CompPanelScreenPrepaMatch extends Actor {
     public void pression() {
         if (comp != null) {
             this.info = new InfoWindowComp(comp);
-            container.getContainer().getContainer().getContainer().getSurcouche().addActor(info);
+            container.getContainer().getContainer().addActor(info);
         }
     }
 
@@ -58,17 +57,5 @@ class CompPanelScreenPrepaMatch extends Actor {
             this.info.dispose();
             info = null;
         }
-    }
-
-    public void dispose() {
-        ((CompPanelScreenPrepaListener) (getListeners().get(0))).dispose();
-        getListeners().clear();
-        if (info != null){
-            info.dispose();
-            info = null;
-        }
-        container = null;
-        comp = null;
-        remove();
     }
 }

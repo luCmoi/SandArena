@@ -8,18 +8,19 @@ import java.util.ArrayList;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.joueur.Personnage;
+import sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch;
 
 /**
  * Created by Guillaume on 23/07/2015.
  */
 public class PanelScreenPrepaMatch extends Group {
-    private final StagePrincipalScreenPrepa container;
-    private ArrayList<sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch> places;
+    private  StagePrincipalScreenPrepa container;
+    private ArrayList<EmplacementPanelScreenPrepaMatch> places;
     private float coteMoyen;
 
     public PanelScreenPrepaMatch(boolean position, StagePrincipalScreenPrepa container) {
         this.container = container;
-        places = new ArrayList<sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch>();
+        places = new ArrayList<EmplacementPanelScreenPrepaMatch>();
         this.setBounds(0,0,Resolution.width / 2, Resolution.height - Resolution.differenceBas);
         if (this.getHeight() > this.getWidth()){
             coteMoyen = getWidth()/2;
@@ -27,10 +28,10 @@ public class PanelScreenPrepaMatch extends Group {
             coteMoyen = getHeight()/2;
         }
         if (position) {
-            places.add(new sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch(this, true, 0));
-            places.add(new sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch(this, true, 1));
-            places.add(new sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch(this, true, 2));
-            places.add(new sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch(this, true, 3));
+            places.add(new EmplacementPanelScreenPrepaMatch(this, true, 0));
+            places.add(new EmplacementPanelScreenPrepaMatch(this, true, 1));
+            places.add(new EmplacementPanelScreenPrepaMatch(this, true, 2));
+            places.add(new EmplacementPanelScreenPrepaMatch(this, true, 3));
         } else {
             this.setX(Resolution.width / 2);
             places.add(new sandarena.match.preparematch.stageprincipal.emplacement.EmplacementPanelScreenPrepaMatch(this, false, 0));
@@ -78,5 +79,14 @@ public class PanelScreenPrepaMatch extends Group {
             retour.add(perso.getPerso());
         }
         return retour;
+    }
+
+    public void dispose() {
+        container = null;
+        for (EmplacementPanelScreenPrepaMatch persos:places) {
+         persos.dispose();
+        }
+        places.clear();
+        places = null;
     }
 }

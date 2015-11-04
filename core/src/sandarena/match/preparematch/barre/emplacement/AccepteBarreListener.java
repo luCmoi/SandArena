@@ -30,4 +30,8 @@ class AccepteBarreListener extends InputListener {
         }
 
     }
+
+    public void dispose() {
+        container = null;
+    }
 }

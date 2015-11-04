@@ -13,7 +13,7 @@ import sandarena.donnee.donneestatic.Utili;
 /**
  * Created by lucmo on 09/10/2015.
  */
-class PanneauEquipeSuppr extends Actor{
+public class PanneauEquipeSuppr extends Actor{
     private PanneauEquipe container;
 
     public PanneauEquipeSuppr(PanneauEquipe panneauEquipe) {

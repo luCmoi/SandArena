@@ -17,7 +17,7 @@ class UnitPanelScreenPrepaMatch extends Actor {
 
     public UnitPanelScreenPrepaMatch(EmplacementPanelScreenPrepaMatch container) {
         this.container = container;
-        this.setBounds(0,0,container.getHeight(),container.getHeight());
+        this.setBounds(0, 0, container.getHeight(), container.getHeight());
         this.addListener(new UnitPanelScreenPrepaListener(this));
 
     }
@@ -25,7 +25,7 @@ class UnitPanelScreenPrepaMatch extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (perso != null && container.getContainer().getContainer().getContainer().getPrincipal().getContainer().getCheck()==null) {
+        if (perso != null && container.getContainer().getContainer().getContainer().getPrincipal().getContainer().getCheck() == null) {
             batch.draw(perso.commun.image, getX(), getY(), getWidth(), getHeight());
             ((UnitPanelScreenPrepaListener) (getListeners().get(0))).update();
         }
@@ -56,5 +56,17 @@ class UnitPanelScreenPrepaMatch extends Actor {
             this.info.dispose();
             info = null;
         }
+    }
+
+    public void dispose() {
+        ((UnitPanelScreenPrepaListener) (getListeners().get(0))).dispose();
+        getListeners().clear();
+        container = null;
+        perso = null;
+        if (info != null) {
+            info.dispose();
+            info = null;
+        }
+        remove();
     }
 }

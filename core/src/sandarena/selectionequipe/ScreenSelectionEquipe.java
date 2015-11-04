@@ -101,4 +101,8 @@ public class ScreenSelectionEquipe implements Screen {
             surcouche.activateConfirmeQuit();
         }
     }
+
+    public Surcouche getSurcouche() {
+        return surcouche;
+    }
 }

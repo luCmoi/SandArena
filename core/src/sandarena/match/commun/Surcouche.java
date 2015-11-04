@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
-import sandarena.SandArena;
 import sandarena.match.partie.ScreenPartie;
 import sandarena.match.preparematch.ScreenPrepaMatch;
 
@@ -15,10 +14,10 @@ import sandarena.match.preparematch.ScreenPrepaMatch;
  * Created by lucmo on 24/10/2015.
  */
 public class Surcouche extends Stage {
-    private final Screen container;
-    private final ChangeTour changeTour;
+    private  Screen container;
+    private  ChangeTour changeTour;
     private  Timer timer = null;
-    private boolean visible;
+    protected boolean visible;
 
     public Surcouche(Screen container, FillViewport fillViewport, Batch batch) {
         super(fillViewport,batch);
@@ -34,9 +33,8 @@ public class Surcouche extends Stage {
     }
 
     public void activateChangeTour(boolean actif) {
-        SandArena.googleService.printError("Change tour : " + actif);
         this.setVisible(true);
-        changeTour.setVisible(actif,true);
+        changeTour.setVisible(actif, true);
     }
 
 
@@ -58,7 +56,6 @@ public class Surcouche extends Stage {
             this.visible = visible;
             changeTour.setVisible(false);
         }
-
     }
 
     @Override
@@ -81,5 +78,15 @@ public class Surcouche extends Stage {
     public boolean isVisible() {
         return visible;
     }
+
+    public void dispose(){
+        container = null;
+        changeTour.dispose();
+        timer.dispose();
+        changeTour = null;
+        timer = null;
+        super.dispose();
+    }
+
 }
 
