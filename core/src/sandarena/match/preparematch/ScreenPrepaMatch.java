@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -118,6 +119,7 @@ public class ScreenPrepaMatch implements Screen {
         principal.clear();
         surcouche.dispose();
         surcouche.clear();
+        ConnexionMatch.finRecoit = true;
         check = null;
         joueur = null;
         batch = null;

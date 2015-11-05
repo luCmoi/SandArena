@@ -19,6 +19,7 @@ public class ConnexionMatch {
     private static final String FINPHASE = "LETO";
     private static final String ECHANGE = "RHEA";
     public static boolean finTimer = false;
+    public static boolean finRecoit = false;
 
     public static void envoiTimer(int valeur) {
         String mess = String.valueOf(valeur);
@@ -53,9 +54,14 @@ public class ConnexionMatch {
     }
 
     public static Personnage prepareMatchRecoitPerso() {
+        finRecoit = false;
         String mess = null;
         SandArena.googleService.printError("En attente");
         while (mess == null && !IGoogleService.data.justLeft) {
+            if (finRecoit){
+                finRecoit = false;
+                return null;
+            }
             if (IGoogleService.data.mess != null) {
                     mess = new String(IGoogleService.data.mess);
                     IGoogleService.data.mess = null;
@@ -92,9 +98,14 @@ public class ConnexionMatch {
             @Override
             public void run() {
                 try {
+                    finRecoit = false;
                     String mess = null;
                     SandArena.googleService.printError("En attente");
                     while (true) {
+                        if (finRecoit){
+                            finRecoit = false;
+                            return;
+                        }
                         while (mess == null) {
                             if (IGoogleService.data.mess != null) {
                                 mess = new String(IGoogleService.data.mess);

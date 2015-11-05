@@ -43,7 +43,7 @@ public abstract class Entree {
      */
     public void decremente() {
         instance--;
-        if (instance == 0) {
+        if (instance == 0 && image!=null) {
             image.dispose();
             image = null;
         }

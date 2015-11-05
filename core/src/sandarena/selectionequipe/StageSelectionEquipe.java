@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.joueur.Joueur;
 import sandarena.selectionequipe.contenupanneau.PanneauEquipe;
-import sandarena.selectionequipe.contenupanneau.PanneauEquipeSuppr;
 
 public class StageSelectionEquipe extends Stage{
     private final ScreenSelectionEquipe container;
@@ -54,6 +53,5 @@ public class StageSelectionEquipe extends Stage{
 
     public void addEquipe(int panel, Joueur equipe){
         ((PanneauEquipe)getActors().get(panel)).setEquipe(equipe);
-        ((PanneauEquipe)getActors().get(panel)).addActor(new PanneauEquipeSuppr((PanneauEquipe)getActors().get(panel)));
     }
 }

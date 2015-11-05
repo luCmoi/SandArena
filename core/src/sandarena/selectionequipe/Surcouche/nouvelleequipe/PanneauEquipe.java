@@ -25,7 +25,7 @@ public class PanneauEquipe extends Group {
     private  FlechePanneau flecheDroite;
     private final int place;
     private int panel;
-    private Emplacement[][] listePerso = new Emplacement[3][8];
+    private Emplacement[][] listePerso = new Emplacement[3][6];
 
     public PanneauEquipe(Surcouche container, int place) {
         this.setVisible(true);
@@ -37,7 +37,7 @@ public class PanneauEquipe extends Group {
         this.addActor(flecheDroite);
         this.addActor(flecheGauche);
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 8; j++) {
+            for (int j = 0; j < 6; j++) {
                 listePerso[i][j] = new Emplacement(this, j, new Personnage());
                 this.addActor(listePerso[i][j]);
                 if (i != 0) {
@@ -83,12 +83,12 @@ public class PanneauEquipe extends Group {
 
     public void select() {
         Joueur equipe = new Joueur(place);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 6; i++) {
             equipe.getPersonnages().add(listePerso[panel][i].getPerso());
         }
         equipe.setOr(2000);
         SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(place), Sauvegarde.toData(equipe));
-        container.getContainer().getStage().addEquipe(panel, equipe);
+        container.getContainer().getStage().addEquipe(place, equipe);
         container.setVisible(false);
     }
 

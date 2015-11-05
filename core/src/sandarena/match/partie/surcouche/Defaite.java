@@ -57,6 +57,7 @@ public class Defaite extends Group {
 
     public void clique() {
         ((ScreenPartie)container.getContainer()).getContainer().lanceGestionEquipe(((ScreenPartie)container.getContainer()).getJoueurActif());
+        container.getContainer().dispose();
     }
 
     public void dispose() {

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
+import sandarena.googleservice.ConnexionMatch;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
@@ -73,7 +74,7 @@ public class ScreenPartie implements Screen {
             IGoogleService.data.justLeft = false;
             partie.victoire();
             Son.nomads.stop();
-            this.dispose();
+            //this.dispose();
         }
     }
 
@@ -99,6 +100,7 @@ public class ScreenPartie implements Screen {
 
     @Override
     public void dispose() {
+        ConnexionMatch.finRecoit = true;
         this.batch = null;
         container = null;
         partie.dispose();

@@ -67,17 +67,6 @@ public class PanneauEquipe extends Group {
         if (equipe != null) {
             container.getContainer().getContainer().lanceGestionEquipe(equipe);
         } else {
-            /*equipe = new Joueur(place);
-            equipe.getPersonnages().add(new Personnage());
-            equipe.getPersonnages().add(new Personnage());
-            equipe.getPersonnages().add(new Personnage());
-            equipe.getPersonnages().add(new Personnage());
-            equipe.getPersonnages().add(new Personnage());
-            equipe.getPersonnages().add(new Personnage());
-            equipe.setOr(2000);
-            SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(place), Sauvegarde.toData(equipe));
-            suppr = new PanneauEquipeSuppr(this);
-            this.addActor(suppr);*/
             container.getContainer().getSurcouche().activateNouvelleEquipe(place);
         }
     }
@@ -110,5 +99,9 @@ public class PanneauEquipe extends Group {
 
     public void setEquipe(Joueur equipe) {
         this.equipe = equipe;
+        if (suppr == null){
+            suppr = new PanneauEquipeSuppr(this);
+            this.addActor(suppr);
+        }
     }
 }

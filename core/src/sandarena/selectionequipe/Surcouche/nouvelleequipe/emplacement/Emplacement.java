@@ -20,7 +20,7 @@ public class Emplacement extends Group {
     public Emplacement(PanneauEquipe container, int place, Personnage personnage) {
         this.container = container;
         this.place = (byte) place;
-        this.setBounds((container.getWidth() / 4) * (place % 4), container.getHeight() - (container.getWidth() / 8) * (2 + place / 4), container.getWidth() / 4, container.getWidth() / 8);
+        this.setBounds((container.getWidth() / 4) * (place % 3)+container.getWidth() / 8, container.getHeight() - (container.getWidth() / 8) * (2 + place / 3), container.getWidth() / 4, container.getWidth() / 8);
         this.unit = new EmplacementPerso(this, personnage);
         this.addActor(unit);
         for (int i = 0; i < 4; i++) {
