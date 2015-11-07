@@ -35,4 +35,5 @@ public class Utili {
     public final static Texture pieces = new Texture(Gdx.files.internal("Image/Util/Pieces.png"));
     public final static Texture timer = new Texture(Gdx.files.internal("Image/Util/Timer.png"));
     public final static Texture fleche2 = new Texture(Gdx.files.internal("Image/Util/Fleche2.png"));
+    public final static Texture de= new Texture(Gdx.files.internal("Image/Util/De.png"));;
 }

@@ -9,27 +9,37 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.match.partie.ScreenPartie;
+import sandarena.match.partie.surcouche.emplacementfinpartie.EmplacementFinPartie;
 
 /**
  * Created by lucmo on 02/11/2015.
  */
-public class Victoire extends Group {
-    private  SurcouchePartie container;
+public class Fin extends Group {
+    private SurcouchePartie container;
     private BouttonConfirme bouton;
+    private boolean victoire;
+    private EmplacementFinPartie[] emp = new EmplacementFinPartie[4];
 
-    public Victoire(SurcouchePartie surcouche) {
+    public Fin(SurcouchePartie surcouche, boolean victoire) {
         super();
+        this.victoire = victoire;
         container = surcouche;
-        setBounds(Resolution.width / 8, Resolution.height / 8, Resolution.width / 8 * 6, (Resolution.height / 8) * 5);
+        setBounds(Resolution.width / 8, Resolution.height / 32, Resolution.width / 8 * 6, (Resolution.height / 8) * 6);
         bouton = new BouttonConfirme(this);
         this.addActor(bouton);
         setVisible(false);
+        for (int i = 0; i < 4; i++) {
+            emp[i] = new EmplacementFinPartie(this,i,((ScreenPartie) container.getContainer()).getPartie().getJoueurActif().getPersonnages().get(i));
+            this.addActor(emp[i]);
+        }
     }
 
     public void setVisible(boolean visible) {
         super.setVisible(visible);
-        if (visible) {
+        if (visible && victoire) {
             Son.victoire.play();
+        } else if (visible && !victoire) {
+            Son.defaite.play();
         }
     }
 
@@ -41,11 +51,10 @@ public class Victoire extends Group {
             batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
             Font.font.setColor(Color.BLACK);
             Font.font.setScale(Resolution.ratioWidth * 5, Resolution.ratioHeight * 5);
-            Font.font.draw(batch, "Victoire !", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 8 / 2), getY() + getHeight() - getHeight() / 8);
-            int nb = ((ScreenPartie) container.getContainer()).getPartie().getJoueurActif().getPersonnages().size();
-            for (int i = 0; i < nb ; i++) {
-                batch.draw(((ScreenPartie) container.getContainer()).getPartie().getJoueurActif().getPersonnages().get(i).getDonnee().commun.image,
-                        getX() + (getHeight() / 3 * i)+ (((getWidth()-getHeight()/3* nb) / (nb+1)) * (i+1)), getY() + getHeight() / 3, getHeight() / 3, getHeight() / 3);
+            if (victoire) {
+                Font.font.draw(batch, "Victoire !", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 8 / 2), getY() + getHeight() - getHeight() / 16);
+            } else {
+                Font.font.draw(batch, "Defaite !", getX() + (getWidth() / 2) - (Font.font.getSpaceWidth() * 7 / 2), getY() + getHeight() - getHeight() / 16);
             }
             super.draw(batch, parentAlpha);
         }
@@ -64,5 +73,11 @@ public class Victoire extends Group {
         container = null;
         bouton.dispose();
         bouton = null;
+        for (int i = 0; i < 4; i++) {
+            emp[i].dispose();
+        }
+        emp =null;
+        clear();
+        remove();
     }
 }

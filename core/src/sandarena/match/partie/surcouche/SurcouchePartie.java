@@ -10,32 +10,31 @@ import sandarena.match.partie.ScreenPartie;
  * Created by lucmo on 02/11/2015.
  */
 public class SurcouchePartie extends Surcouche {
-    private Victoire victoire;
-    private Defaite defaite;
+    private Fin fin;
 
     public SurcouchePartie(ScreenPartie container, FillViewport fillViewport, Batch batch) {
         super(container, fillViewport, batch);
-        victoire = new Victoire(this);
-        defaite = new Defaite(this);
-        this.addActor(victoire);
-        this.addActor(defaite);
     }
 
     public void victoire() {
         this.setVisible(true);
-        victoire.setVisible(true);
+        fin = new Fin(this,true);
+        this.addActor(fin);
+        fin.setVisible(true);
     }
 
     public void defaite() {
         this.setVisible(true);
-        defaite.setVisible(true);
+        fin = new Fin(this,false);
+        this.addActor(fin);
+        fin.setVisible(true);
     }
 
     public void dispose(){
         super.dispose();
-        victoire.dispose();
-        defaite.dispose();
-        victoire = null;
-        defaite = null;
+        if (fin!= null) {
+            fin.dispose();
+            fin = null;
+        }
     }
 }

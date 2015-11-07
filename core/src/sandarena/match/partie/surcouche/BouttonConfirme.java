@@ -2,7 +2,6 @@ package sandarena.match.partie.surcouche;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import sandarena.SandArena;
@@ -14,13 +13,13 @@ import sandarena.donnee.donneestatic.Utili;
  * Created by lucmo on 13/10/2015.
  */
 class BouttonConfirme extends Actor {
-    private  Group container;
+    private  Fin container;
 
-    public BouttonConfirme(Group container) {
+    public BouttonConfirme(Fin container) {
         this.container = container;
         this.addListener(new BouttonConfirmeListener(this));
         this.setTouchable(Touchable.enabled);
-        setBounds(container.getWidth()/4 , container.getHeight()/12, container.getWidth()/2,container.getHeight()/4);
+        setBounds(container.getWidth()/4 , container.getHeight()/24, container.getWidth()/2,container.getHeight()/6);
     }
 
     @Override
@@ -32,11 +31,7 @@ class BouttonConfirme extends Actor {
 
     public void clique() {
         if (container.isVisible()) {
-            if (container instanceof Defaite){
-                ((Defaite)container).clique();
-            }else{
-                ((Victoire)container).clique();
-            }
+            container.clique();
             SandArena.googleService.quitQuickGame(false);
         }
     }
