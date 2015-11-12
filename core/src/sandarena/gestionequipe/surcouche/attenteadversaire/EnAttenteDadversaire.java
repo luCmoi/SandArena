@@ -7,17 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
-import sandarena.gestionequipe.surcouche.Surcouche;
+import sandarena.gestionequipe.surcouche.SurcoucheGestionEquipe;
 
 /**
  * Created by lucmo on 13/10/2015.
  */
 public class EnAttenteDadversaire extends Group {
-    private final Surcouche container;
+    private final SurcoucheGestionEquipe container;
 
-    public EnAttenteDadversaire(Surcouche surcouche) {
+    public EnAttenteDadversaire(SurcoucheGestionEquipe surcoucheGestionEquipe) {
         super();
-        container = surcouche;
+        container = surcoucheGestionEquipe;
         setBounds(Resolution.width / 4, Resolution.height / 4, Resolution.width / 2, Resolution.height / 2);
         this.addActor(new BouttonAnnu(this));
         setVisible(false);
@@ -37,7 +37,7 @@ public class EnAttenteDadversaire extends Group {
         }
     }
 
-    public Surcouche getContainer() {
+    public SurcoucheGestionEquipe getContainer() {
         return container;
     }
 

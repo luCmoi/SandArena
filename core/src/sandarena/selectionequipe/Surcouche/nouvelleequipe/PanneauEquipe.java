@@ -11,8 +11,7 @@ import sandarena.donnee.donneestatic.Utili;
 import sandarena.googleservice.Sauvegarde;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.selectionequipe.Surcouche.Surcouche;
-import sandarena.selectionequipe.Surcouche.nouvelleequipe.emplacement.Emplacement;
+import sandarena.selectionequipe.Surcouche.SurcoucheSelectionEquipe;
 
 
 /**
@@ -20,14 +19,14 @@ import sandarena.selectionequipe.Surcouche.nouvelleequipe.emplacement.Emplacemen
  */
 public class PanneauEquipe extends Group {
     private  BoutonAccepte boutonAccepte;
-    private  Surcouche container;
+    private SurcoucheSelectionEquipe container;
     private  FlechePanneau flecheGauche;
     private  FlechePanneau flecheDroite;
     private final int place;
     private int panel;
-    private Emplacement[][] listePerso = new Emplacement[3][6];
+    private EmplacementNouvelleEquipe[][] listePerso = new EmplacementNouvelleEquipe[3][6];
 
-    public PanneauEquipe(Surcouche container, int place) {
+    public PanneauEquipe(SurcoucheSelectionEquipe container, int place) {
         this.setVisible(true);
         this.container = container;
         this.place = place;
@@ -38,7 +37,7 @@ public class PanneauEquipe extends Group {
         this.addActor(flecheGauche);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 6; j++) {
-                listePerso[i][j] = new Emplacement(this, j, new Personnage());
+                listePerso[i][j] = new EmplacementNouvelleEquipe(this, j, new Personnage());
                 this.addActor(listePerso[i][j]);
                 if (i != 0) {
                     listePerso[i][j].setVisible(false);
@@ -61,12 +60,12 @@ public class PanneauEquipe extends Group {
         super.draw(batch, parentAlpha);
     }
 
-    public Surcouche getContainer() {
+    public SurcoucheSelectionEquipe getContainer() {
         return container;
     }
 
     public void changePanel(boolean gauche) {
-        for (Emplacement emp : listePerso[panel]) {
+        for (EmplacementNouvelleEquipe emp : listePerso[panel]) {
             emp.setVisible(false);
         }
         if (gauche) {
@@ -76,7 +75,7 @@ public class PanneauEquipe extends Group {
         }
         if (panel < 0) panel = 2;
         if (panel > 2) panel = 0;
-        for (Emplacement emp : listePerso[panel]) {
+        for (EmplacementNouvelleEquipe emp : listePerso[panel]) {
             emp.setVisible(true);
         }
     }
@@ -100,8 +99,8 @@ public class PanneauEquipe extends Group {
         flecheDroite = null;
         boutonAccepte.dispose();
         boutonAccepte = null;
-        for (Emplacement[] tab : listePerso) {
-            for (Emplacement emp:tab) {
+        for (EmplacementNouvelleEquipe[] tab : listePerso) {
+            for (EmplacementNouvelleEquipe emp:tab) {
                 emp.dispose();
             }
         }

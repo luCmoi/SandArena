@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import sandarena.Blessure;
 import sandarena.donnee.competence.BanqueCompetence.EntreeCompetence;
 import sandarena.donnee.donneestatic.Caract;
 import sandarena.joueur.Personnage;
@@ -56,6 +57,7 @@ public class PersonnageIG {
     private int magieAttaque;
     private int magieDefense;
     private boolean mort;
+    private Blessure blessure;
 
     public PersonnageIG(Personnage donnee, JoueurIG possesseur) {
         this.donnee = donnee;
@@ -437,5 +439,9 @@ public class PersonnageIG {
 
     public boolean isMort() {
         return mort;
+    }
+
+    public Blessure getBlessure() {
+        return blessure;
     }
 }

@@ -13,6 +13,7 @@ import sandarena.donnee.donneestatic.Utili;
 import sandarena.googleservice.Sauvegarde;
 import sandarena.joueur.Joueur;
 import sandarena.selectionequipe.StageSelectionEquipe;
+import sandarena.selectionequipe.Surcouche.SurcoucheSelectionEquipe;
 
 /**
  * Created by lucmo on 06/10/2015.
@@ -67,7 +68,7 @@ public class PanneauEquipe extends Group {
         if (equipe != null) {
             container.getContainer().getContainer().lanceGestionEquipe(equipe);
         } else {
-            container.getContainer().getSurcouche().activateNouvelleEquipe(place);
+            ((SurcoucheSelectionEquipe)container.getContainer().getSurcouche()).activateNouvelleEquipe(place);
         }
     }
 

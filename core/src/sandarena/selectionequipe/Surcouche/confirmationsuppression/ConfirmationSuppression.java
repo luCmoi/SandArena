@@ -7,25 +7,25 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
-import sandarena.selectionequipe.Surcouche.Surcouche;
+import sandarena.selectionequipe.Surcouche.SurcoucheSelectionEquipe;
 
 /**
  * Created by lucmo on 13/10/2015.
  */
 public class ConfirmationSuppression extends Group {
-    private final Surcouche container;
+    private final SurcoucheSelectionEquipe container;
     private int panel;
 
-    public ConfirmationSuppression(Surcouche surcouche) {
+    public ConfirmationSuppression(SurcoucheSelectionEquipe surcoucheSelectionEquipe) {
         super();
-        container = surcouche;
+        container = surcoucheSelectionEquipe;
         setBounds(Resolution.width/4,Resolution.height/4,Resolution.width/2,Resolution.height/2);
         this.addActor(new BouttonConf(this));
         this.addActor(new BouttonAnnu(this));
         setVisible(false);
     }
 
-    public Surcouche getContainer() {
+    public SurcoucheSelectionEquipe getContainer() {
         return container;
     }
 

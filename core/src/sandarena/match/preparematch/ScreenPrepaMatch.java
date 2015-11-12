@@ -2,7 +2,6 @@ package sandarena.match.preparematch;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Scaling;
@@ -17,9 +16,10 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.ConnexionMatch;
 import sandarena.googleservice.IGoogleService;
+import sandarena.interfaceutil.stage.ScreenSurcouche;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.match.commun.Surcouche;
+import sandarena.match.commun.SurcoucheMatchCommun;
 import sandarena.match.preparematch.barre.StageBarre;
 import sandarena.match.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 
@@ -27,12 +27,11 @@ import sandarena.match.preparematch.stageprincipal.StagePrincipalScreenPrepa;
 /**
  * Created by Guillaume on 20/07/2015.
  */
-public class ScreenPrepaMatch implements Screen {
+public class ScreenPrepaMatch extends ScreenSurcouche {
     private Batch batch;
     private SandArena container;
     private StageBarre barre;
     private StagePrincipalScreenPrepa principal;
-    private Surcouche surcouche;
     private Joueur joueur;
     private Personnage check = null;
     private int map;
@@ -71,7 +70,7 @@ public class ScreenPrepaMatch implements Screen {
             this.getBarre().draw();
             Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
             this.getPrincipal().draw();
-            this.getSurcouche().draw();
+            this.getSurcoucheMatchCommun().draw();
         } else {
             IGoogleService.data.justLeft = false;
             Son.ambiancePrepare.stop();
@@ -88,7 +87,7 @@ public class ScreenPrepaMatch implements Screen {
     @Override
     public void show() {
         boolean commence = IGoogleService.data.commence;
-        setSurcouche(new Surcouche(this, new FillViewport(Resolution.width, Resolution.height), batch));
+        setSurcoucheMatchCommun(new SurcoucheMatchCommun(this, new FillViewport(Resolution.width, Resolution.height), batch));
         this.setPrincipal(new StagePrincipalScreenPrepa(this, joueur, commence, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch));
         this.setBarre(new sandarena.match.preparematch.barre.StageBarre(this.getPrincipal(), joueur, new ExtendViewport(Resolution.width - Resolution.differenceBas, Resolution.differenceBas, Resolution.width - Resolution.differenceBas, Resolution.differenceBas), batch));
         getPrincipal().setBarre(this.getBarre());
@@ -125,6 +124,11 @@ public class ScreenPrepaMatch implements Screen {
         batch = null;
     }
 
+    @Override
+    public void finInputSurcouche() {
+        Gdx.input.setInputProcessor(principal);
+    }
+
     private sandarena.match.preparematch.barre.StageBarre getBarre() {
         return barre;
     }
@@ -141,12 +145,12 @@ public class ScreenPrepaMatch implements Screen {
         this.principal = principal;
     }
 
-    public Surcouche getSurcouche() {
-        return surcouche;
+    public SurcoucheMatchCommun getSurcoucheMatchCommun() {
+        return (SurcoucheMatchCommun)surcouche;
     }
 
-    private void setSurcouche(Surcouche surcouche) {
-        this.surcouche = surcouche;
+    private void setSurcoucheMatchCommun(SurcoucheMatchCommun surcoucheMatchCommun) {
+        this.surcouche = surcoucheMatchCommun;
     }
 
     private Joueur getJoueur() {

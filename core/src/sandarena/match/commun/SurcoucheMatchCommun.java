@@ -1,27 +1,22 @@
 package sandarena.match.commun;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
+import sandarena.interfaceutil.stage.ScreenSurcouche;
 import sandarena.match.partie.ScreenPartie;
 import sandarena.match.preparematch.ScreenPrepaMatch;
 
 /**
  * Created by lucmo on 24/10/2015.
  */
-public class Surcouche extends Stage {
-    private  Screen container;
+public class SurcoucheMatchCommun extends sandarena.interfaceutil.stage.Surcouche {
     private  ChangeTour changeTour;
     private  Timer timer = null;
-    protected boolean visible;
 
-    public Surcouche(Screen container, FillViewport fillViewport, Batch batch) {
-        super(fillViewport,batch);
-        this.container = container;
+    public SurcoucheMatchCommun(ScreenSurcouche container, FillViewport fillViewport, Batch batch) {
+        super(container,fillViewport,batch);
         if (container instanceof ScreenPartie) {
             this.timer = new Timer(false);
         }else if(container instanceof ScreenPrepaMatch){
@@ -38,16 +33,9 @@ public class Surcouche extends Stage {
     }
 
 
-    @Override
-    public void draw() {
-        super.draw();
-    }
-
     public void setVisible(boolean visible) {
-        if (visible) {
-            Gdx.input.setInputProcessor(this);
-            this.visible = visible;
-        } else {
+        super.setVisible(visible);
+        if (!visible) {
             if (container instanceof ScreenPartie) {
                 Gdx.input.setInputProcessor(((ScreenPartie) container).getPartie());
             }else if (container instanceof ScreenPrepaMatch){
@@ -58,25 +46,11 @@ public class Surcouche extends Stage {
         }
     }
 
-    @Override
-    public boolean keyDown(int keyCode) {
-        if (keyCode == Input.Keys.BACK){
-        }
-        return super.keyDown(keyCode);
-    }
-
-    public Screen getContainer() {
-        return container;
-    }
     public Timer getTimer(){
         return timer;
     }
     public void reset(){
         timer.reset();
-    }
-
-    public boolean isVisible() {
-        return visible;
     }
 
     public void dispose(){

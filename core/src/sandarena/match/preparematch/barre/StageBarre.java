@@ -58,7 +58,7 @@ public class StageBarre extends Stage {
         for (int i = place + 1; i < persos.size(); i++) {
             persos.get(i).decaleGauche();
             if (baisse) {
-                persos.get(i).setPlace(persos.get(i).getPlace() - 1);
+                ((EmplacementBarre)persos.get(i)).setPlace(persos.get(i).getPlace() - 1);
             }
         }
     }
@@ -105,7 +105,7 @@ public class StageBarre extends Stage {
     @Override
     public void draw() {
         super.draw();
-        if (principal.getContainer().getSurcouche().getTimer().getValeur()<= 0){
+        if (principal.getContainer().getSurcoucheMatchCommun().getTimer().getValeur()<= 0){
             if (!principal.getBloquand()) {
                 EmplacementBarre tmp = persos.get((int)(Math.random()*this.getPersos().size()));
                 tmp.clique();

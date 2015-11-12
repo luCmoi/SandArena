@@ -31,7 +31,7 @@ public class EmplacementFinPartie extends Group{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(perso.getDonnee().commun.image,getX(),getY()+getWidth()/3*2,getWidth(),getWidth());
-        batch.draw(Utili.contour,getX(),getY(),getWidth(),getHeight());
+        batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         super.draw(batch, parentAlpha);
     }
 
@@ -40,5 +40,13 @@ public class EmplacementFinPartie extends Group{
         perso = null;
         clear();
         remove();
+    }
+
+    public PersonnageIG getPerso() {
+        return perso;
+    }
+
+    public void relance() {
+        tirage.retire();
     }
 }

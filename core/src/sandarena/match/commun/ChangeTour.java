@@ -13,14 +13,14 @@ import sandarena.donnee.donneestatic.Utili;
  * Created by lucmo on 28/10/2015.
  */
 public class ChangeTour extends Group {
-    private Surcouche container;
+    private SurcoucheMatchCommun container;
     private boolean actif;
     private long timer;
     private long debut;
 
-    public ChangeTour(Surcouche surcouche) {
+    public ChangeTour(SurcoucheMatchCommun surcoucheMatchCommun) {
         super();
-        container = surcouche;
+        container = surcoucheMatchCommun;
         setBounds(Resolution.width / 2 - Resolution.height / 6, Resolution.height / 2, Resolution.height / 6 * 2, Resolution.height / 6);
         setVisible(false);
     }
@@ -70,7 +70,7 @@ public class ChangeTour extends Group {
         }
     }
 
-    public Surcouche getContainer() {
+    public SurcoucheMatchCommun getContainer() {
         return container;
     }
 

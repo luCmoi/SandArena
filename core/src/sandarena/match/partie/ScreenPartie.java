@@ -1,7 +1,6 @@
 package sandarena.match.partie;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,9 +16,10 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.ConnexionMatch;
 import sandarena.googleservice.IGoogleService;
+import sandarena.interfaceutil.stage.ScreenSurcouche;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
-import sandarena.match.commun.Surcouche;
+import sandarena.match.commun.SurcoucheMatchCommun;
 import sandarena.match.partie.gui.interfacep.StageInterface;
 import sandarena.match.partie.jeu.Partie;
 import sandarena.match.partie.surcouche.SurcouchePartie;
@@ -27,13 +27,12 @@ import sandarena.match.partie.surcouche.SurcouchePartie;
 /**
  * Screen permetant d'afficher la partie
  */
-public class ScreenPartie implements Screen {
+public class ScreenPartie extends ScreenSurcouche {
 
     private Batch batch;
     private SandArena container;
     private Partie partie;
     private StageInterface interfaceS;
-    //Temporaire
     private Joueur joueurActif;
     private Joueur joueurAutre;
     private SurcouchePartie surcouche;
@@ -43,7 +42,6 @@ public class ScreenPartie implements Screen {
         this.container = container;
         this.map = map;
         this.batch = container.getBatch();
-        //Temporaire
         joueurActif = joueur;
         joueurAutre = new Joueur(0);
         surcouche = new SurcouchePartie(this, new FillViewport(Resolution.width, Resolution.height), batch);
@@ -74,7 +72,6 @@ public class ScreenPartie implements Screen {
             IGoogleService.data.justLeft = false;
             partie.victoire();
             Son.nomads.stop();
-            //this.dispose();
         }
     }
 
@@ -136,8 +133,18 @@ public class ScreenPartie implements Screen {
         return this.interfaceS;
     }
 
-    public Surcouche getSurcouche() {
+    public SurcoucheMatchCommun getSurcouche() {
         return surcouche;
+    }
+
+    @Override
+    public void finInputSurcouche() {
+        Gdx.input.setInputProcessor(partie);
+    }
+
+    @Override
+    public void backKeyPressed() {
+
     }
 
     public int getMap() {

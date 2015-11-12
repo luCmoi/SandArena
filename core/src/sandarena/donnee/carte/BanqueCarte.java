@@ -12,7 +12,6 @@ import sandarena.donnee.banque.Entree;
 public class BanqueCarte extends Banque {
 
     public static ArrayList<Entree> banque = new ArrayList<Entree>();
-
     public static ArrayList<Entree> getBanque() {
         return banque;
     }

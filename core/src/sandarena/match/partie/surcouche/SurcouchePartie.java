@@ -3,13 +3,13 @@ package sandarena.match.partie.surcouche;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
-import sandarena.match.commun.Surcouche;
+import sandarena.match.commun.SurcoucheMatchCommun;
 import sandarena.match.partie.ScreenPartie;
 
 /**
  * Created by lucmo on 02/11/2015.
  */
-public class SurcouchePartie extends Surcouche {
+public class SurcouchePartie extends SurcoucheMatchCommun {
     private Fin fin;
 
     public SurcouchePartie(ScreenPartie container, FillViewport fillViewport, Batch batch) {

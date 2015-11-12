@@ -1,17 +1,17 @@
-package sandarena.selectionequipe.Surcouche.nouvelleequipe.emplacement;
+package sandarena.interfaceutil.emplacement;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
- * Created by lucmo on 04/11/2015.
+ * Created by lucmo on 12/11/2015.
  */
-public class EmplacementCompListener extends InputListener {
-    private EmplacementComp container;
+public class EmplacementCompetenceListener extends InputListener {
+    private EmplacementCompetence container;
     private boolean pression;
     private long time;
 
-    public EmplacementCompListener(EmplacementComp competence) {
+    public EmplacementCompetenceListener(EmplacementCompetence competence) {
         container = competence;
     }
 
@@ -37,6 +37,7 @@ public class EmplacementCompListener extends InputListener {
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
         if (pression) {
             pression = false;
+            container.clique();
         }
         container.finPression();
     }

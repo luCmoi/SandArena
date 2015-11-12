@@ -42,7 +42,7 @@ public class EmplacementPerso extends EmplacementInterface {
     @Override
     public void pression() {
         if (this.getPerso() != null) {
-            this.info = new InfoWindowPersoIG(this);
+            this.info = new InfoWindowPersoIG(this.getPerso());
             container.getPartie().getContainer().getSurcouche().addActor(info);
         }
     }

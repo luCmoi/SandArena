@@ -72,7 +72,7 @@ public class EmplacementComp extends EmplacementInterface {
     @Override
     public void pression() {
         if (this.getCompetenceIG() != null) {
-            this.info = new InfoWindowCompIG(this);
+            this.info = new InfoWindowCompIG(this.competenceIG);
             container.getPartie().getContainer().getSurcouche().addActor(info);
         }
     }

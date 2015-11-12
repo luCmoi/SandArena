@@ -46,11 +46,11 @@ public class StagePrincipalScreenPrepa extends Stage {
         this.addActor(gauche);
         this.addActor(droite);
         if (!commence) {
-            container.getSurcouche().activateChangeTour(false);
+            container.getSurcoucheMatchCommun().activateChangeTour(false);
             recoitPersonnageAutre();
         }else{
-            container.getSurcouche().activateChangeTour(true);
-            container.getSurcouche().reset();
+            container.getSurcoucheMatchCommun().activateChangeTour(true);
+            container.getSurcoucheMatchCommun().reset();
         }
     }
 
@@ -93,7 +93,7 @@ public class StagePrincipalScreenPrepa extends Stage {
         if (!commence && testFin()) {
             container.finPrepare();
         } else {
-            //container.getSurcouche().activateChangeTour(false);
+            //container.getSurcoucheMatchCommun().activateChangeTour(false);
             recoitPersonnageAutre();
         }
     }
@@ -101,7 +101,7 @@ public class StagePrincipalScreenPrepa extends Stage {
     private void recoitPersonnageAutre() {
         SandArena.googleService.printError("Recoi mess");
         bloquand = true;
-        ConnexionMatch.recoiTimer(container.getSurcouche().getTimer());
+        ConnexionMatch.recoiTimer(container.getSurcoucheMatchCommun().getTimer());
         new Thread() {
             @Override
             public void run() {
@@ -111,10 +111,10 @@ public class StagePrincipalScreenPrepa extends Stage {
                     panelDroit.ajout(recu);
                 }
                 if (!testFin()) {
-                    //container.getSurcouche().activateChangeTour(true);
+                    //container.getSurcoucheMatchCommun().activateChangeTour(true);
                 }
                     bloquand = false;
-                    container.getSurcouche().reset();
+                    container.getSurcoucheMatchCommun().reset();
             }
         }.start();
     }

@@ -1,7 +1,6 @@
 package sandarena.gestionequipe;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Scaling;
@@ -14,22 +13,22 @@ import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.gestionequipe.barre.StageBarreGestionEquipe;
 import sandarena.gestionequipe.stagepersos.StagePersonnageGestionEquipe;
-import sandarena.gestionequipe.surcouche.Surcouche;
+import sandarena.gestionequipe.surcouche.SurcoucheGestionEquipe;
 import sandarena.googleservice.IGoogleService;
 import sandarena.googleservice.Sauvegarde;
+import sandarena.interfaceutil.stage.ScreenSurcouche;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
 
 /**
  * Created by lucmo on 16/10/2015.
  */
-public class ScreenGestionEquipe implements Screen {
+public class ScreenGestionEquipe extends ScreenSurcouche {
     private Joueur equipe;
     private final SandArena container;
     private final Batch batch;
     private StagePersonnageGestionEquipe persos;
     private StageBarreGestionEquipe barre;
-    private Surcouche surcouche;
 
     public ScreenGestionEquipe(SandArena container, Joueur equipe) {
         this.equipe = equipe;
@@ -37,7 +36,7 @@ public class ScreenGestionEquipe implements Screen {
         this.batch = container.getBatch();
         this.persos = new StagePersonnageGestionEquipe(this, equipe, new ScalingViewport(Scaling.none, Resolution.width, Resolution.height), batch);
         this.barre = new StageBarreGestionEquipe(this, equipe, new ExtendViewport(Resolution.width, Resolution.differenceBas, Resolution.width, Resolution.differenceBas), batch);
-        this.surcouche = new Surcouche(this, new FillViewport(Resolution.width, Resolution.height), batch);
+        this.surcouche = new SurcoucheGestionEquipe(this, new FillViewport(Resolution.width, Resolution.height), batch);
         Gdx.input.setInputProcessor(this.persos);
     }
 
@@ -85,21 +84,18 @@ public class ScreenGestionEquipe implements Screen {
 
     }
 
+    @Override
+    public void finInputSurcouche() {
+        Gdx.input.setInputProcessor(persos);
+    }
+
     public StageBarreGestionEquipe getBarre() {
         return barre;
     }
 
     public void launch() {
         SandArena.googleService.startQuickGame();
-        surcouche.activateAttente();
-    }
-
-    public StagePersonnageGestionEquipe getPersos() {
-        return persos;
-    }
-
-    public Surcouche getSurcouche() {
-        return surcouche;
+        ((SurcoucheGestionEquipe)surcouche).activateAttente();
     }
 
     public void achatAleat(byte place) {

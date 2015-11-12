@@ -7,18 +7,18 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Utili;
-import sandarena.gestionequipe.surcouche.Surcouche;
+import sandarena.gestionequipe.surcouche.SurcoucheGestionEquipe;
 
 /**
  * Created by lucmo on 20/10/2015.
  */
 public class AchatPerso extends Group {
-    private final Surcouche container;
+    private final SurcoucheGestionEquipe container;
     private byte place;
 
-    public AchatPerso(Surcouche surcouche) {
+    public AchatPerso(SurcoucheGestionEquipe surcoucheGestionEquipe) {
         super();
-        container = surcouche;
+        container = surcoucheGestionEquipe;
         setBounds(Resolution.width / 4, Resolution.height / 8, Resolution.width / 2, Resolution.height - Resolution.height/4);
         setVisible(false);
         addActor(new BoutonAchat(this, 0));
@@ -44,7 +44,7 @@ public class AchatPerso extends Group {
         }
     }
 
-    public Surcouche getContainer() {
+    public SurcoucheGestionEquipe getContainer() {
         return container;
     }
 

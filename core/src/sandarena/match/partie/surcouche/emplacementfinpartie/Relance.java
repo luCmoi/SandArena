@@ -22,4 +22,8 @@ public class Relance extends Actor {
         batch.draw(Utili.contour,getX(),getY(),getWidth(),getHeight());
         super.draw(batch, parentAlpha);
     }
+
+    public void clique(){
+        container.relance();
+    }
 }

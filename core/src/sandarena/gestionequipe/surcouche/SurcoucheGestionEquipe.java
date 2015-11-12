@@ -1,28 +1,23 @@
 package sandarena.gestionequipe.surcouche;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import sandarena.gestionequipe.ScreenGestionEquipe;
 import sandarena.gestionequipe.surcouche.achatperso.AchatPerso;
 import sandarena.gestionequipe.surcouche.attenteadversaire.EnAttenteDadversaire;
+import sandarena.interfaceutil.stage.Surcouche;
 
 
 /**
  * Created by lucmo on 16/10/2015.
  */
-public class Surcouche extends Stage {
-    private final ScreenGestionEquipe container;
+public class SurcoucheGestionEquipe extends Surcouche {
     private final AchatPerso achat;
-    private boolean visible;
     private EnAttenteDadversaire attente;
 
-    public Surcouche(ScreenGestionEquipe container, FillViewport fillViewport, Batch batch) {
-        super(fillViewport,batch);
-        this.container = container;
+    public SurcoucheGestionEquipe(ScreenGestionEquipe container, FillViewport fillViewport, Batch batch) {
+        super(container, fillViewport,batch);
         this.attente = new EnAttenteDadversaire(this);
         this.achat = new AchatPerso(this);
         this.addActor(achat);
@@ -35,22 +30,12 @@ public class Surcouche extends Stage {
     }
 
 
-    @Override
-    public void draw() {
-        super.draw();
-    }
-
     public void setVisible(boolean visible) {
-        if (visible) {
-            Gdx.input.setInputProcessor(this);
-            this.visible = visible;
-        } else {
-            Gdx.input.setInputProcessor(container.getPersos());
-            this.visible = visible;
+        super.setVisible(visible);
+        if (!visible) {
             attente.setVisible(false);
             achat.setVisible(false);
         }
-
     }
 
     public void activateAchatPerso(byte place) {
@@ -58,19 +43,7 @@ public class Surcouche extends Stage {
         this.setVisible(true);
     }
 
-    @Override
-    public boolean keyDown(int keyCode) {
-        if (keyCode == Input.Keys.BACK){
-            container.backKeyPressed();
-        }
-        return super.keyDown(keyCode);
-    }
-
     public ScreenGestionEquipe getContainer() {
-        return container;
-    }
-
-    public boolean isVisible() {
-        return visible;
+        return (ScreenGestionEquipe)container;
     }
 }
