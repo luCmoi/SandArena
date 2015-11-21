@@ -1,0 +1,12 @@
+<!ELEMENT listeblessure (blessure*)>
+    <!ELEMENT blessure (nom,image)>
+        <!ATTLIST blessure
+            id NMTOKEN  #REQUIRED
+            force NMTOKEN #REQUIRED
+            agilite NMTOKEN #REQUIRED
+            magie NMTOKEN #REQUIRED
+            vitesse NMTOKEN #REQUIRED
+            vie NMTOKEN #REQUIRED
+            competence NMTOKEN #REQUIRED>
+        <!ELEMENT nom (#PCDATA)>
+        <!ELEMENT image (#PCDATA)>

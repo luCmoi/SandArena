@@ -103,7 +103,7 @@ public class Partie extends Stage {
     @Override
     public void draw() {
         super.draw();
-        if (container.getSurcouche().getTimer().getValeur()<= 0){
+        if (container.getSurcouche().getTimer().getValeur() <= 0) {
             if (!isBloquand()) {
                 ConnexionMatch.partieEnvoiFinPhase();
                 finPhase();
@@ -164,6 +164,17 @@ public class Partie extends Stage {
     private void tour() {
         if (commence) {
             for (PersonnageIG perso : joueurActif.getPersonnages()) {
+                if (!perso.isMort()) {
+                    perso.setAAgi(false, false);
+                    perso.tourBuff();
+                    perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
+                    perso.infligeDot();
+                    perso.modifCaract();
+                }
+            }
+        }
+        for (PersonnageIG perso : joueurAutre.getPersonnages()) {
+            if (!perso.isMort()) {
                 perso.setAAgi(false, false);
                 perso.tourBuff();
                 perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
@@ -171,20 +182,15 @@ public class Partie extends Stage {
                 perso.modifCaract();
             }
         }
-        for (PersonnageIG perso : joueurAutre.getPersonnages()) {
-            perso.setAAgi(false, false);
-            perso.tourBuff();
-            perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
-            perso.infligeDot();
-            perso.modifCaract();
-        }
         if (!commence) {
             for (PersonnageIG perso : joueurActif.getPersonnages()) {
-                perso.setAAgi(false, false);
-                perso.tourBuff();
-                perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
-                perso.infligeDot();
-                perso.modifCaract();
+                if (!perso.isMort()) {
+                    perso.setAAgi(false, false);
+                    perso.tourBuff();
+                    perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
+                    perso.infligeDot();
+                    perso.modifCaract();
+                }
             }
             container.getSurcouche().activateChangeTour(false);
             phase(getJoueurAutre());
@@ -202,7 +208,7 @@ public class Partie extends Stage {
             setBloquand(false);
         }
         for (PersonnageIG perso : joueur.getPersonnages()) {
-            if (!perso.isAAgi()) {
+            if (!perso.isAAgi() && !perso.isMort()) {
                 this.setPersonnageActif(perso);
                 return;
             }
@@ -240,14 +246,18 @@ public class Partie extends Stage {
                 if (commence) {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
-                        perso.setAAgi(true,true);
+                        if (!perso.isMort()) {
+                            perso.setAAgi(true, true);
+                        }
                     }
                     container.getSurcouche().activateChangeTour(false);
                     phase(getJoueurAutre());
                 } else {
                     ConnexionMatch.recoiTimer(surcouche.getTimer());
                     for (PersonnageIG perso : getJoueurActif().getPersonnages()) {
-                        perso.setAAgi(true,true);
+                        if (!perso.isMort()) {
+                            perso.setAAgi(true, true);
+                        }
                     }
                     tour();
                 }
@@ -255,13 +265,17 @@ public class Partie extends Stage {
                 if (commence) {
                     surcouche.reset();
                     for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
-                        perso.setAAgi(true,true);
+                        if (!perso.isMort()) {
+                            perso.setAAgi(true, true);
+                        }
                     }
                     tour();
                 } else {
                     surcouche.reset();
                     for (PersonnageIG perso : getJoueurAutre().getPersonnages()) {
-                        perso.setAAgi(true,true);
+                        if (!perso.isMort()) {
+                            perso.setAAgi(true, true);
+                        }
                     }
                     container.getSurcouche().activateChangeTour(true);
                     phase(getJoueurActif());

@@ -5,6 +5,10 @@ package sandarena.googleservice;
  */
 public class DesktopGoogleService implements IGoogleService
 {
+    public void initLayout() {
+
+    }
+
     @Override
     public void signIn()
     {
@@ -80,5 +84,16 @@ public class DesktopGoogleService implements IGoogleService
     public void quitQuickGame(boolean waitId) {
 
     }
+
+    @Override
+    public void bringAdFront() {
+
+    }
+
+    @Override
+    public void hideAd() {
+
+    }
+
 
 }

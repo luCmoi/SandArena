@@ -4,6 +4,7 @@ import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.donnee.competence.BanqueCompetence.EntreeCompetence;
 import sandarena.donnee.personnage.BanquePersonnage;
 import sandarena.donnee.personnage.BanquePersonnage.DonneePersonnage;
+import sandarena.joueur.blessure.Blessure;
 
 /**
  * Represente les donnee fixes d'un personnage
@@ -14,6 +15,7 @@ public class Personnage{
     public DonneePersonnage commun;
     private String nom;
     private EntreeCompetence[] competences = new EntreeCompetence[4];
+    private Blessure[] blessures = new Blessure[4];
 
 
     public Personnage(int id, boolean incremente){
@@ -74,10 +76,23 @@ public class Personnage{
         return competences;
     }
 
+    public Blessure[] getBlessures() {
+        return blessures;
+    }
+
     public void addCompetence(EntreeCompetence compTmp) {
         for (int i = 0; i < 4; i++) {
             if (competences[i]== null){
                 competences[i] = compTmp;
+                break;
+            }
+        }
+    }
+
+    public void addBlessure(Blessure blessTmp) {
+        for (int i = 0; i < 4; i++) {
+            if (blessures[i]== null){
+                blessures[i] = blessTmp;
                 break;
             }
         }

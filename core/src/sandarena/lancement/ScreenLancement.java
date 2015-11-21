@@ -5,13 +5,16 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
 import sandarena.SandArena;
+import sandarena.donnee.blessure.BanqueBlessure;
 import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.googleservice.IGoogleService;
 import sandarena.joueur.Joueur;
 import sandarena.joueur.Personnage;
+import sandarena.joueur.blessure.Blessure;
 
+import static sandarena.donnee.blessure.BlessureXML.parseBlessureXML;
 import static sandarena.donnee.carte.CarteXML.parseCarteXML;
 import static sandarena.donnee.competence.CompXML.parseCompXML;
 import static sandarena.donnee.personnage.PersoXML.parsePersoXML;
@@ -47,6 +50,7 @@ public class ScreenLancement implements Screen {
             parseCompXML();
             parsePersoXML();
             parseCarteXML();
+            parseBlessureXML();
             stageLancement.setTexte("Connexion");
         }
         if (SandArena.googleService.isSignedIn() && !loaded) {
@@ -85,6 +89,10 @@ public class ScreenLancement implements Screen {
                 BanqueCompetence.EntreeCompetence tmp = (BanqueCompetence.EntreeCompetence)BanqueCompetence.getEntree(BanqueCompetence.banque,Integer.parseInt(tmpStr));
                 tmp.incremente();
                 tmpPers.addCompetence(tmp);
+            }else if (tmpStr.startsWith("5")) {
+                BanqueBlessure.DonneeBlessure tmp =(BanqueBlessure.DonneeBlessure)BanqueBlessure.getEntree(BanqueBlessure.banque,Integer.parseInt(tmpStr));
+                tmp.incremente();
+                tmpPers.addBlessure(new Blessure(tmp));
             }else if (tmpStr.startsWith("o")){
                 retour.setOr(Integer.parseInt(data.substring(i+1)));
                 i = data.length();
@@ -103,7 +111,6 @@ public class ScreenLancement implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override

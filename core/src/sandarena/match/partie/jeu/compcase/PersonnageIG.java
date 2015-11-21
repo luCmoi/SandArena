@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import sandarena.Blessure;
+import sandarena.donnee.blessure.BanqueBlessure;
 import sandarena.donnee.competence.BanqueCompetence.EntreeCompetence;
 import sandarena.donnee.donneestatic.Caract;
 import sandarena.joueur.Personnage;
+import sandarena.joueur.blessure.Blessure;
 import sandarena.match.partie.jeu.Case;
 import sandarena.match.partie.jeu.compcase.effet.EffetBuf;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffDot;
@@ -241,11 +242,15 @@ public class PersonnageIG {
     }
 
     private void meurt() {
-        this.mort = true;
-        this.getContainer().getContainer().testfin();
-        this.getContainer().setPresence(null);
-        this.getContainer().getContainer().getContainer().getStageInterface().setPersonnageActif(null);
-        this.setContainer(null);
+        if (!isMort()) {
+            this.mort = true;
+            this.blessure = new Blessure(BanqueBlessure.getBlessure(donnee.getBlessures()));
+            this.getContainer().getContainer().testfin();
+            this.getContainer().setPresence(null);
+            this.getContainer().getContainer().getContainer().getStageInterface().setPersonnageActif(null);
+            this.setContainer(null);
+        }
+        //TODO save here
     }
 
     public void addBuf(EffetBuf effet, boolean dispelable) {

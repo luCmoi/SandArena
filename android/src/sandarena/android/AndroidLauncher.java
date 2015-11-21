@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
@@ -32,14 +34,11 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         gameFragment = new GameFragment();
         FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
         trans.replace(android.R.id.content, gameFragment);
         trans.commit();
         SandArena.googleService = this;
-
         gameHelperFragment = (GameHelperFragment) getSupportFragmentManager().findFragmentByTag("GameHelperFragment");
         if (gameHelperFragment == null) {
             gameHelperFragment = new GameHelperFragment();
@@ -147,7 +146,7 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
                     String metaDonnee = displaySnapshotMetadata(openSnapshotResult.getSnapshot().getMetadata());
                     System.err.println(donnee);
                     System.err.println(metaDonnee);
-                    if (!donnee.startsWith("v004")) {
+                    if (!donnee.startsWith("v005")) {
                         System.err.println("Passe pas");
                         IGoogleService.data.save[place] = null;
                         IGoogleService.data.meta[place] = null;
@@ -231,6 +230,28 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
     @Override
     public void quitQuickGame(boolean waitId) {
         gameHelperFragment.quitQuickGame(waitId);
+    }
+
+    @Override
+    public void bringAdFront() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ((ViewGroup) gameFragment.getView().getParent()).getChildAt(0).bringToFront();
+                ((ViewGroup) gameFragment.getView().getParent()).getChildAt(1).setVisibility(View.GONE);
+                ((ViewGroup) gameFragment.getView().getParent()).getChildAt(1).setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void hideAd(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ((ViewGroup) gameFragment.getView().getParent()).getChildAt(0).bringToFront();
+                ((ViewGroup) gameFragment.getView().getParent()).getChildAt(0).setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override

@@ -20,12 +20,17 @@ public class Sauvegarde {
     }
 
     public static String toData(Joueur equipe) {
-        String retour = "v004";
+        String retour = "v005";
         if (equipe != null) {
             for (Personnage perso : equipe.getPersonnages()) {
                 retour = retour.concat(String.valueOf(perso.getId()));
                 for (int i = 0; i < 4; i++) {
                     retour = retour.concat(String.valueOf(perso.getCompetences()[i].getId()));
+                }
+                for (int i = 0; i < 4; i++) {
+                    if (perso.getBlessures()[i]!=null){
+                        retour = retour.concat(String.valueOf(perso.getBlessures()[i].donnee.getId()));
+                    }
                 }
             }
             retour = retour.concat("o");

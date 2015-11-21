@@ -1,7 +1,7 @@
 package sandarena.interfaceutil.emplacement;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowPerso;
@@ -12,16 +12,21 @@ import sandarena.match.partie.jeu.compcase.PersonnageIG;
 /**
  * Created by lucmo on 12/11/2015.
  */
-public class EmplacementPerso extends Actor {
+public class EmplacementPerso extends Group {
     protected Emplacement container;
     protected Personnage perso;
     protected InfoWindowPerso info;
     protected PersonnageIG persoIG;
     protected InfoWindowPersoIG infoIG;
+    protected EmplacementBlessure[] blessures = new EmplacementBlessure[4];
 
     public EmplacementPerso(Emplacement container) {
         this.container = container;
         this.setBounds(0, 0, container.getHeight(), container.getHeight());
+        for (int i = 0; i < 4; i++) {
+            blessures[i] = new EmplacementBlessure(this,i);
+            this.addActor(blessures[i]);
+        }
     }
 
     public void addListenerBasique(){
@@ -59,10 +64,16 @@ public class EmplacementPerso extends Actor {
 
     public void setPerso(Personnage perso) {
         this.perso = perso;
+        for (EmplacementBlessure bless : blessures){
+            bless.setPerso(perso);
+        }
     }
 
     public void setPersoIG(PersonnageIG perso) {
         this.persoIG = perso;
+        for (EmplacementBlessure bless : blessures){
+            bless.setPerso(perso.getDonnee());
+        }
     }
 
     public void pression() {
@@ -100,6 +111,10 @@ public class EmplacementPerso extends Actor {
             infoIG.dispose();
             infoIG = null;
         }
+        for (EmplacementBlessure bless : blessures){
+            bless.dispose();
+        }
+        blessures = null;
         clear();
         remove();
     }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE listeblessure SYSTEM "XML/blessure.dtd">
+<listeblessure>
+    <blessure agilite="0" competence="0" force="0" id="5001" magie="0" vie="0" vitesse="-1">
+        <nom>Cheville cassée</nom>
+        <image>Image/Blessure/ChevilleCassee.png</image>
+    </blessure>
+    <blessure agilite="-1" competence="0" force="0" id="5002" magie="0" vie="0" vitesse="-1">
+        <nom>Fracture du Tibia</nom>
+        <image>Image/Blessure/FractureDuTibia.png</image>
+    </blessure>
+    <blessure id="5003" force="-1" agilite="0" magie="0" vitesse="0" vie="0" competence="0">
+        <nom>Bras brisé</nom>
+        <image>Image/Blessure/BrasBrise.png</image>
+    </blessure>
+    <blessure id="5004" force="0" agilite="0" magie="-1" vitesse="0" vie="0" competence="0">
+        <nom>Choc cérébral</nom>
+        <image>Image/Blessure/ChocCerebral.png</image>
+    </blessure>
+    <blessure id="5005" force="0" agilite="0" magie="0" vitesse="0" vie="-5" competence="0">
+        <nom>Torse lacéré</nom>
+        <image>Image/Blessure/TorseLacere.png</image>
+    </blessure>
+</listeblessure>
+

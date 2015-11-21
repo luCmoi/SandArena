@@ -4,10 +4,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
+import sandarena.SandArena;
 import sandarena.donnee.donneestatic.Font;
 import sandarena.donnee.donneestatic.Resolution;
 import sandarena.donnee.donneestatic.Son;
 import sandarena.donnee.donneestatic.Utili;
+import sandarena.googleservice.Sauvegarde;
 import sandarena.match.partie.ScreenPartie;
 import sandarena.match.partie.surcouche.emplacementfinpartie.EmplacementFinPartie;
 
@@ -22,6 +24,7 @@ public class Fin extends Group {
 
     public Fin(SurcouchePartie surcouche, boolean victoire) {
         super();
+        SandArena.googleService.bringAdFront();
         this.victoire = victoire;
         container = surcouche;
         setBounds(Resolution.width / 8, Resolution.height / 32, Resolution.width / 8 * 6, (Resolution.height / 8) * 6);
@@ -29,7 +32,7 @@ public class Fin extends Group {
         this.addActor(bouton);
         setVisible(false);
         for (int i = 0; i < 4; i++) {
-            emp[i] = new EmplacementFinPartie(this,i,((ScreenPartie) container.getContainer()).getPartie().getJoueurActif().getPersonnages().get(i));
+            emp[i] = new EmplacementFinPartie(this, i, ((ScreenPartie) container.getContainer()).getPartie().getJoueurActif().getPersonnages().get(i));
             this.addActor(emp[i]);
         }
     }
@@ -65,6 +68,15 @@ public class Fin extends Group {
     }
 
     public void clique() {
+        SandArena.googleService.hideAd();
+        leavePartie();
+    }
+
+    public void leavePartie(){
+        for (int i = 0; i < 4; i++) {
+           emp[i].leavePartie();
+        }
+        SandArena.googleService.savedGamesUpdate(Sauvegarde.toSnapshotName(((ScreenPartie) container.getContainer()).getJoueurActif().getNumero()), Sauvegarde.toData(((ScreenPartie) container.getContainer()).getJoueurActif()));
         ((ScreenPartie) container.getContainer()).getContainer().lanceGestionEquipe(((ScreenPartie) container.getContainer()).getJoueurActif());
         container.getContainer().dispose();
     }
@@ -76,7 +88,7 @@ public class Fin extends Group {
         for (int i = 0; i < 4; i++) {
             emp[i].dispose();
         }
-        emp =null;
+        emp = null;
         clear();
         remove();
     }

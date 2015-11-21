@@ -10,7 +10,7 @@ import sandarena.match.partie.surcouche.Fin;
 /**
  * Created by lucmo on 06/11/2015.
  */
-public class EmplacementFinPartie extends Group{
+public class EmplacementFinPartie extends Group {
     private final Relance relance;
     private final Tirage tirage;
     private Fin container;
@@ -21,7 +21,7 @@ public class EmplacementFinPartie extends Group{
         this.container = fin;
         this.place = i;
         this.perso = personnageIG;
-        setBounds((container.getHeight() / 3 * i) + (((container.getWidth() - container.getHeight() / 3 * 4) / (4 + 1)) * (i + 1)), container.getHeight() / 4, container.getHeight() / 3, container.getHeight() / 3+ (container.getHeight()/9*2));
+        setBounds((container.getHeight() / 3 * i) + (((container.getWidth() - container.getHeight() / 3 * 4) / (4 + 1)) * (i + 1)), container.getHeight() / 4, container.getHeight() / 3, container.getHeight() / 3 + (container.getHeight() / 9 * 2));
         this.relance = new Relance(this);
         this.tirage = new Tirage(this);
         this.addActor(relance);
@@ -30,7 +30,7 @@ public class EmplacementFinPartie extends Group{
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(perso.getDonnee().commun.image,getX(),getY()+getWidth()/3*2,getWidth(),getWidth());
+        batch.draw(perso.getDonnee().commun.image, getX(), getY() + getWidth() / 3 * 2, getWidth(), getWidth());
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         super.draw(batch, parentAlpha);
     }
@@ -48,5 +48,13 @@ public class EmplacementFinPartie extends Group{
 
     public void relance() {
         tirage.retire();
+    }
+
+    public void leavePartie() {
+        if (tirage.getBls() != null) {
+            perso.getDonnee().addBlessure(tirage.getBls());
+        }else if (tirage.getCmp()!= null && tirage.getReplace()!=-1){
+            perso.getDonnee().getCompetences()[tirage.getReplace()]=tirage.getCmp();
+        }
     }
 }
