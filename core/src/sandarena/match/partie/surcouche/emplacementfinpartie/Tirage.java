@@ -36,14 +36,8 @@ public class Tirage extends Actor {
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
         super.draw(batch, parentAlpha);
         if (cmp != null){
-            if (test){
-                cmp.incremente();
-            }
             batch.draw(cmp.image,getX(),getY(),getWidth(),getHeight());
         }else{
-            if (test){
-                bls.donnee.incremente();
-            }
             batch.draw(bls.donnee.image,getX(),getY(),getWidth(),getHeight());
         }
     }

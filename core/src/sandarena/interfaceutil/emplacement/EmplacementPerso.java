@@ -35,7 +35,6 @@ public class EmplacementPerso extends Group {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
         if (perso != null) {
             batch.draw(perso.commun.image, getX(), getY(), getWidth(), getHeight());
             if (getListeners().size > 0) {
@@ -47,6 +46,7 @@ public class EmplacementPerso extends Group {
                 ((EmplacementPersoListener) (getListeners().get(0))).update();
             }
         }
+        super.draw(batch, parentAlpha);
         batch.draw(Utili.contour, getX(), getY(), getWidth(), getHeight());
     }
 

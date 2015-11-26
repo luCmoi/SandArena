@@ -166,9 +166,9 @@ public class Partie extends Stage {
             for (PersonnageIG perso : joueurActif.getPersonnages()) {
                 if (!perso.isMort()) {
                     perso.setAAgi(false, false);
+                    perso.infligeDot();
                     perso.tourBuff();
                     perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
-                    perso.infligeDot();
                     perso.modifCaract();
                 }
             }
@@ -176,9 +176,9 @@ public class Partie extends Stage {
         for (PersonnageIG perso : joueurAutre.getPersonnages()) {
             if (!perso.isMort()) {
                 perso.setAAgi(false, false);
+                perso.infligeDot();
                 perso.tourBuff();
                 perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
-                perso.infligeDot();
                 perso.modifCaract();
             }
         }
@@ -186,9 +186,9 @@ public class Partie extends Stage {
             for (PersonnageIG perso : joueurActif.getPersonnages()) {
                 if (!perso.isMort()) {
                     perso.setAAgi(false, false);
+                    perso.infligeDot();
                     perso.tourBuff();
                     perso.setVitesseRestante(perso.getDonnee().commun.vitesse);
-                    perso.infligeDot();
                     perso.modifCaract();
                 }
             }

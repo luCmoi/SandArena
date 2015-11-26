@@ -22,11 +22,13 @@ public class AndroidRoomUpdateListener implements RoomUpdateListener {
     public void onRoomCreated(int statusCode, Room room) {
         System.err.println("onRoomCreated");
         if (statusCode != GamesStatusCodes.STATUS_OK) {
-            Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            if (room.getRoomId() != null) {
+                Games.RealTimeMultiplayer.leave(container.get_gameHelper().getApiClient(), container.getUpdateListener(), room.getRoomId());
+            }
             container.setRoomId(null);
             IGoogleService.data.justLeft = true;
             System.err.println("Error when creating the room");
-        }else{
+        } else {
             container.setRoomId(room.getRoomId());
             container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         }
@@ -40,7 +42,7 @@ public class AndroidRoomUpdateListener implements RoomUpdateListener {
             container.setRoomId(null);
             IGoogleService.data.justLeft = true;
             System.err.println("Error when Joining the room");
-        }else{
+        } else {
             container.setRoomId(room.getRoomId());
             container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         }
@@ -58,7 +60,7 @@ public class AndroidRoomUpdateListener implements RoomUpdateListener {
             container.setRoomId(null);
             IGoogleService.data.justLeft = true;
             System.err.println("Error when Connecting the room");
-        }else{
+        } else {
             container.setRoomId(room.getRoomId());
             container.setMyId(room.getParticipantId(Games.Players.getCurrentPlayerId(container.get_gameHelper().getApiClient())));
         }

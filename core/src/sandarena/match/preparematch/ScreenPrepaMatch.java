@@ -57,11 +57,6 @@ public class ScreenPrepaMatch extends ScreenSurcouche {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             Gdx.gl.glViewport(Resolution.differenceBas / 2, 0, Resolution.width - Resolution.differenceBas, Resolution.differenceBas);
             if (check != null) {
-                check.commun.incremente();
-                check.getCompetences()[0].incremente();
-                check.getCompetences()[1].incremente();
-                check.getCompetences()[2].incremente();
-                check.getCompetences()[3].incremente();
                 setCheck(null);
                 if (principal.getCommence() && principal.testFin()) {
                     finPrepare();

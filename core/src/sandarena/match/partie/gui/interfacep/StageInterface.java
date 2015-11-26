@@ -191,6 +191,9 @@ public class StageInterface extends Stage {
 
     public void recharge() {
         if (emplacementPersoSelect.getPerso() != null) {
+            if (emplacementPersoSelect.getPerso().isMort()){
+                setCaseSelect(null);
+            }
             setCaseSelect(emplacementPersoSelect.getPerso().getContainer());
         }
     }

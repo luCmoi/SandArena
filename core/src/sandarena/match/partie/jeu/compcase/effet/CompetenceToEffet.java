@@ -3,6 +3,7 @@ package sandarena.match.partie.jeu.compcase.effet;
 import java.util.ArrayList;
 
 import sandarena.donnee.donneestatic.Caract;
+import sandarena.joueur.blessure.Blessure;
 import sandarena.joueur.competence.Competence;
 import sandarena.joueur.competence.active.CompetenceAttaque;
 import sandarena.joueur.competence.active.CompetenceBuffActif;
@@ -12,6 +13,9 @@ import sandarena.joueur.competence.passive.CompetenceDeclencheurEffet;
 import sandarena.match.partie.jeu.compcase.PersonnageIG;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffStun;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffType;
+import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffVal;
+import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValCaract;
+import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVie;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse;
 
 /**
@@ -43,7 +47,7 @@ public class CompetenceToEffet {
             retour.addAll(switchTypeBuff(tmp, true, -1));
         } else if (comp instanceof CompetenceBuffActif) {
             CompetenceBuffActif tmp = (CompetenceBuffActif) comp;
-            retour.addAll(switchTypeBuff(tmp.getSucc(), true,-1));
+            retour.addAll(switchTypeBuff(tmp.getSucc(), true, -1));
         } else if (comp instanceof CompetenceDeclencheurEffet) {
             CompetenceDeclencheurEffet tmp = (CompetenceDeclencheurEffet) comp;
             retour.addAll(switchTypeDeclencheur(tmp.getTypedeclencheur(), tmp.getCible(), tmp.getEffet(), tmp.getSucc()));
@@ -123,7 +127,8 @@ public class CompetenceToEffet {
             if (comp.getCondtype() != -1) {
                 retour.add("Sur la caract�ristique " + switchtype(comp.getCondtype()));
             }
-        }if (afficheCond){
+        }
+        if (afficheCond) {
             if (comp.getCondduree() != -1) {
                 retour.add("Dure " + comp.getCondduree() + " tours");
             }
@@ -189,12 +194,13 @@ public class CompetenceToEffet {
             creerEffet(nom, comp.getSucc(), group);
         }
         if (comp.getCondtype() != -1) {
-            if (!group.setTypeCond(comp.getCondtype())){
+            if (!group.setTypeCond(comp.getCondtype())) {
                 if (retour instanceof EffetBuffType) {
                     ((EffetBuffType) retour).setTypeCond(comp.getCondtype());
                 } else if (retour instanceof sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffVal) {
                     ((sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffVal) retour).setTypeCond(comp.getCondtype());
-                }            }
+                }
+            }
         } else if (comp.getCondduree() != -1) {
             group.setDuree(comp.getCondduree());
         }
@@ -366,5 +372,33 @@ public class CompetenceToEffet {
 
     public static int[] toStringsCase(PersonnageIG presence, int[] tabModif) {
         return new int[0];
+    }
+
+    public static EffetBuf blessureToEffet(PersonnageIG personnageIG, Blessure bless, EffetBufGroup effetBufGroup) {
+        EffetBuf tmp = null;
+        if (bless.donnee.vie != 0) {
+             tmp = new EffetBuffValVie(bless.donnee.nom, bless.donnee.vie, effetBufGroup);
+            effetBufGroup.addBuff(tmp);
+        }
+        if (bless.donnee.vitesse != 0) {
+             tmp = new EffetBuffValVitesse(bless.donnee.nom, bless.donnee.vitesse, effetBufGroup);
+            effetBufGroup.addBuff(tmp);
+        }
+        if (bless.donnee.force != 0) {
+             tmp = new EffetBuffValCaract(bless.donnee.nom, bless.donnee.force, effetBufGroup);
+            ((EffetBuffVal)tmp).setTypeCond(Caract.FORCE);
+            effetBufGroup.addBuff(tmp);
+        }
+        if (bless.donnee.agilite != 0) {
+             tmp = new EffetBuffValCaract(bless.donnee.nom, bless.donnee.agilite, effetBufGroup);
+            ((EffetBuffVal)tmp).setTypeCond(Caract.AGILITE);
+            effetBufGroup.addBuff(tmp);
+        }
+        if (bless.donnee.magie != 0) {
+             tmp = new EffetBuffValCaract(bless.donnee.nom, bless.donnee.magie, effetBufGroup);
+            ((EffetBuffVal)tmp).setTypeCond(Caract.MAGIE);
+            effetBufGroup.addBuff(tmp);
+        }
+        return tmp;
     }
 }

@@ -87,11 +87,9 @@ public class ScreenLancement implements Screen {
                 tmpPers = new Personnage(Integer.parseInt(tmpStr),true);
             }else if (tmpStr.startsWith("2")){
                 BanqueCompetence.EntreeCompetence tmp = (BanqueCompetence.EntreeCompetence)BanqueCompetence.getEntree(BanqueCompetence.banque,Integer.parseInt(tmpStr));
-                tmp.incremente();
                 tmpPers.addCompetence(tmp);
             }else if (tmpStr.startsWith("5")) {
                 BanqueBlessure.DonneeBlessure tmp =(BanqueBlessure.DonneeBlessure)BanqueBlessure.getEntree(BanqueBlessure.banque,Integer.parseInt(tmpStr));
-                tmp.incremente();
                 tmpPers.addBlessure(new Blessure(tmp));
             }else if (tmpStr.startsWith("o")){
                 retour.setOr(Integer.parseInt(data.substring(i+1)));

@@ -34,7 +34,6 @@ public class BanquePersonnage extends Banque {
         ArrayList<Entree> tmp = (ArrayList<Entree>)banque.clone();
         Collections.shuffle(tmp);
         DonneePersonnage retour = (DonneePersonnage)tmp.get(0);
-        retour.incremente();
         tmp.clear();
         tmp=null;
         return retour;

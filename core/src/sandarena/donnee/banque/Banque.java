@@ -21,7 +21,6 @@ public abstract class Banque {
     public static Entree getEntree(ArrayList<Entree> banque, String nom) {
         for (Entree e : banque) {
             if (e.nom.equals(nom)) {
-                e.incremente();
                 return e;
             }
         }
@@ -35,20 +34,6 @@ public abstract class Banque {
             }
         }
         return null;
-    }
-
-    /**
-     * Previent l'entree qu'on lui retire une instance
-     *
-     * @param banque
-     * @param nom
-     */
-    public static void giveEntree(ArrayList<Entree> banque, String nom) {
-        for (Entree e : banque) {
-            if (e.nom.equals(nom)) {
-                e.decremente();
-            }
-        }
     }
 
     public static void dispose(ArrayList<Entree> banque) {

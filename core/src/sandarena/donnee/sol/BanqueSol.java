@@ -36,23 +36,14 @@ public class BanqueSol extends sandarena.donnee.banque.Banque {
         private Texture[] image;
 
         public EntreeSol(int id, String nom, String description, String chemin, boolean traversable, boolean anime) {
-            super(id, nom, description, chemin);
+            super(id, nom, description, anime?null:chemin);
             this.traversable = traversable;
             this.anime = anime;
-        }
-
-        @Override
-        public void incremente() {
-            if (anime) {
-                if (instance == 0) {
-                    image = new Texture[45];
-                    for (int i = 0; i < 45; i++) {
-                        image[i] = new Texture(Gdx.files.internal(cheminImage.concat(String.valueOf(i+1)).concat(".png")));
-                    }
+            if (anime){
+                image = new Texture[45];
+                for (int i = 0; i < 45; i++) {
+                    image[i] = new Texture(Gdx.files.internal(chemin.concat(String.valueOf(i+1)).concat(".png")));
                 }
-                instance++;
-            } else {
-                super.incremente();
             }
         }
 

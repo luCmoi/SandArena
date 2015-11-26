@@ -25,7 +25,6 @@ public class Sol {
     public Sol(int sol, Case container) {
         this.container = container;
         this.donnee = (EntreeSol) BanqueSol.getEntree(BanqueSol.banque, sol);
-        donnee.incremente();
         lastTimer = System.currentTimeMillis();
     }
 
@@ -54,7 +53,6 @@ public class Sol {
     }
 
     public void dispose() {
-        donnee.decremente();
         donnee = null;
         container = null;
     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.games.Games;
@@ -248,8 +249,13 @@ public class AndroidLauncher extends FragmentActivity implements IGoogleService,
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ((ViewGroup) gameFragment.getView().getParent()).getChildAt(0).bringToFront();
-                ((ViewGroup) gameFragment.getView().getParent()).getChildAt(0).setVisibility(View.GONE);
+                if (((ViewGroup) gameFragment.getView().getParent()).getChildAt(1) instanceof AdView) {
+                    ((ViewGroup) gameFragment.getView().getParent()).getChildAt(1).setVisibility(View.GONE);
+                    ((ViewGroup) gameFragment.getView().getParent()).getChildAt(0).bringToFront();
+                }else {
+                    ((ViewGroup) gameFragment.getView().getParent()).getChildAt(0).setVisibility(View.GONE);
+                    ((ViewGroup) gameFragment.getView().getParent()).getChildAt(1).bringToFront();
+                }
             }
         });
     }

@@ -11,7 +11,10 @@ import sandarena.donnee.donneestatic.Caract;
 import sandarena.joueur.Personnage;
 import sandarena.joueur.blessure.Blessure;
 import sandarena.match.partie.jeu.Case;
+import sandarena.match.partie.jeu.compcase.effet.CompetenceToEffet;
 import sandarena.match.partie.jeu.compcase.effet.EffetBuf;
+import sandarena.match.partie.jeu.compcase.effet.EffetBufGroup;
+import sandarena.match.partie.jeu.compcase.effet.EffetDeclencheur;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffDot;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffStun;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.EffetBuffVal;
@@ -19,6 +22,7 @@ import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbufftype.EffetBu
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValAttaque;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValCaract;
 import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValDefense;
+import sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVie;
 import sandarena.match.partie.jeu.compcase.effet.effetdeclencheur.EffetDeclencheurDegatRecu;
 
 /**
@@ -41,7 +45,7 @@ public class PersonnageIG {
     private ArrayList<EffetBuffTypeAttaque> changeTypeAtt = new ArrayList<EffetBuffTypeAttaque>();
     private ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbufftype.EffetBuffTypeDefense> changeTypeDef = new ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbufftype.EffetBuffTypeDefense>();
     private ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse> changeVitesse = new ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse>();
-    private ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse> changeVie = new ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse>();
+    private ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVie> changeVie = new ArrayList<EffetBuffValVie>();
     private ArrayList<EffetBuffDot> dot = new ArrayList<EffetBuffDot>();
     private ArrayList<EffetBuffStun> stun = new ArrayList<EffetBuffStun>();
     //Dispel
@@ -70,6 +74,12 @@ public class PersonnageIG {
             if (c != null) {
                 competence[i] = new CompetenceIG(this, c, i);
                 i++;
+            }
+        }
+        for (Blessure bless : donnee.getBlessures()) {
+            if (bless != null) {
+                EffetBuf group = CompetenceToEffet.blessureToEffet(this, bless, new EffetBufGroup(bless.donnee.nom));
+                this.addBuf(group, false);
             }
         }
         forceAttaque = donnee.commun.force;
@@ -221,6 +231,14 @@ public class PersonnageIG {
         vitesseRestante = tmp;
     }
 
+    private void modifVie() {
+        int tmp = this.donnee.commun.vie;
+        for (EffetBuffValVie effet : getChangeVie()) {
+            tmp = effet.modif(tmp);
+        }
+        vieActuelle = tmp;
+    }
+
     private void declencheRecoitDegat(int val) {
         for (EffetDeclencheurDegatRecu effet : recoiDegat) {
             effet.check(val);
@@ -271,6 +289,9 @@ public class PersonnageIG {
             } else if (effetBuf instanceof EffetBuffValAttaque) {
                 getChangeAtt().add((EffetBuffValAttaque) effetBuf);
                 modifCaract();
+            } else if (effetBuf instanceof EffetBuffValVie) {
+                getChangeVie().add((EffetBuffValVie) effetBuf);
+                modifVie();
             } else if (effetBuf instanceof sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValDefense) {
                 getChangeDef().add((sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValDefense) effetBuf);
                 modifCaract();
@@ -292,7 +313,7 @@ public class PersonnageIG {
         }
     }
 
-    public void addDeclencheur(sandarena.match.partie.jeu.compcase.effet.EffetDeclencheur effetDeclencheur) {
+    public void addDeclencheur(EffetDeclencheur effetDeclencheur) {
         effetDeclencheur.setContainer(this);
         if (effetDeclencheur instanceof EffetDeclencheurDegatRecu) {
             recoiDegat.add((EffetDeclencheurDegatRecu) effetDeclencheur);
@@ -383,11 +404,11 @@ public class PersonnageIG {
             for (EffetBuf effet : group.getChaine()) {
                 if (effet.tour()) toRemove.add(effet);
             }
-            for (EffetBuf effet : toRemove) {
-                removeBuff(effet);
-            }
-            toRemove.clear();
         }
+        for (EffetBuf effet : toRemove) {
+            removeBuff(effet);
+        }
+        toRemove.clear();
     }
 
     public void removeBuffBenefique() {
@@ -430,7 +451,7 @@ public class PersonnageIG {
         return changeVitesse;
     }
 
-    public ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVitesse> getChangeVie() {
+    public ArrayList<sandarena.match.partie.jeu.compcase.effet.effetbuff.effetbuffval.EffetBuffValVie> getChangeVie() {
         return changeVie;
     }
 

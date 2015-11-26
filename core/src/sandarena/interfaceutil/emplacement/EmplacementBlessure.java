@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 
+import sandarena.donnee.donneestatic.Utili;
 import sandarena.infowindow.windows.InfoWindowBlessure;
 import sandarena.joueur.Personnage;
 import sandarena.joueur.blessure.Blessure;
@@ -30,7 +31,13 @@ public class EmplacementBlessure extends Actor {
             if (perso.getBlessures()[place] != null) {
                 this.blessure = perso.getBlessures()[place];
                 setTouchable(Touchable.enabled);
+            }else{
+                this.blessure = null;
+                setTouchable(Touchable.disabled);
             }
+        }else{
+            this.blessure = null;
+            setTouchable(Touchable.disabled);
         }
     }
 
@@ -38,7 +45,11 @@ public class EmplacementBlessure extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         if (blessure != null) {
+            batch.draw(Utili.recharge,getX(),getY(),getWidth(),getHeight());
             batch.draw(blessure.donnee.image, getX(), getY(), getWidth(), getHeight());
+            if (getListeners().size > 0) {
+                ((EmplacementBlessureListener) (getListeners().get(0))).update();
+            }
         }
     }
 

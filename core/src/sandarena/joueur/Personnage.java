@@ -8,9 +8,8 @@ import sandarena.joueur.blessure.Blessure;
 
 /**
  * Represente les donnee fixes d'un personnage
- *
  */
-public class Personnage{
+public class Personnage {
 
     public DonneePersonnage commun;
     private String nom;
@@ -18,11 +17,8 @@ public class Personnage{
     private Blessure[] blessures = new Blessure[4];
 
 
-    public Personnage(int id, boolean incremente){
+    public Personnage(int id, boolean incremente) {
         this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, id);
-        if (incremente) {
-            commun.incremente();
-        }
         this.nom = BanquePersonnage.getNom(commun.nom);
     }
 
@@ -30,11 +26,8 @@ public class Personnage{
         this.commun = (DonneePersonnage) BanquePersonnage.getEntree(BanquePersonnage.banque, nom);
         this.nom = BanquePersonnage.getNom(nom);
         for (int i = 0; i < 4; i++) {
-            int tmp = (int)(Math.random()*commun.affinite.size());
+            int tmp = (int) (Math.random() * commun.affinite.size());
             this.competences[i] = BanqueCompetence.getCompetence(commun.affinite.get(tmp), competences);
-            if (this.competences[i]!=null) {
-                this.competences[i].incremente();
-            }
         }
     }
 
@@ -42,26 +35,19 @@ public class Personnage{
         this.commun = BanquePersonnage.getPersonnage();
         this.nom = BanquePersonnage.getNom(commun.nom);
         for (int i = 0; i < 4; i++) {
-            int tmp = (int)(Math.random()*commun.affinite.size());
+            int tmp = (int) (Math.random() * commun.affinite.size());
             this.competences[i] = BanqueCompetence.getCompetence(commun.affinite.get(tmp), competences);
-            if (this.competences[i]!=null) {
-                this.competences[i].incremente();
-            }
         }
     }
 
-    public int getId(){
+    public int getId() {
         return commun.getId();
     }
 
     public void dispose() {
-        commun.decremente();
         this.commun = null;
         for (EntreeCompetence c : getCompetences()) {
-            if (c != null) {
-                c.decremente();
                 c = null;
-            }
         }
         competences = null;
         nom = null;
@@ -82,7 +68,7 @@ public class Personnage{
 
     public void addCompetence(EntreeCompetence compTmp) {
         for (int i = 0; i < 4; i++) {
-            if (competences[i]== null){
+            if (competences[i] == null) {
                 competences[i] = compTmp;
                 break;
             }
@@ -91,9 +77,17 @@ public class Personnage{
 
     public void addBlessure(Blessure blessTmp) {
         for (int i = 0; i < 4; i++) {
-            if (blessures[i]== null){
+            if (blessures[i] == null) {
                 blessures[i] = blessTmp;
                 break;
+            }
+        }
+    }
+
+    public void checkBlessureString(String[] texte) {
+        for (Blessure bless : blessures) {
+            if (bless != null){
+            bless.checkString(texte);
             }
         }
     }

@@ -1,5 +1,6 @@
 package sandarena.match.partie.surcouche;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -35,6 +36,7 @@ public class Fin extends Group {
             emp[i] = new EmplacementFinPartie(this, i, ((ScreenPartie) container.getContainer()).getPartie().getJoueurActif().getPersonnages().get(i));
             this.addActor(emp[i]);
         }
+        Gdx.input.setInputProcessor(container);
     }
 
     public void setVisible(boolean visible) {
