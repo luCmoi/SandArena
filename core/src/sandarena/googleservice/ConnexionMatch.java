@@ -3,8 +3,10 @@ package sandarena.googleservice;
 import java.io.IOException;
 
 import sandarena.SandArena;
+import sandarena.donnee.blessure.BanqueBlessure;
 import sandarena.donnee.competence.BanqueCompetence;
 import sandarena.joueur.Personnage;
+import sandarena.joueur.blessure.Blessure;
 import sandarena.match.partie.jeu.Partie;
 import sandarena.match.commun.Timer;
 
@@ -35,13 +37,13 @@ public class ConnexionMatch {
                 String mess = null;
                 SandArena.googleService.printError("En attente");
                 while (mess == null && !IGoogleService.data.justLeft) {
-                    if (finTimer){
+                    if (finTimer) {
                         finTimer = false;
                         return;
                     }
                     if (IGoogleService.data.time != null) {
                         byte[] tmp = IGoogleService.data.time;
-                        IGoogleService.data.time =null;
+                        IGoogleService.data.time = null;
                         mess = new String(tmp);
                     }
                 }
@@ -58,13 +60,13 @@ public class ConnexionMatch {
         String mess = null;
         SandArena.googleService.printError("En attente");
         while (mess == null && !IGoogleService.data.justLeft) {
-            if (finRecoit){
+            if (finRecoit) {
                 finRecoit = false;
                 return null;
             }
             if (IGoogleService.data.mess != null) {
-                    mess = new String(IGoogleService.data.mess);
-                    IGoogleService.data.mess = null;
+                mess = new String(IGoogleService.data.mess);
+                IGoogleService.data.mess = null;
             }
         }
         if (!IGoogleService.data.justLeft) {
@@ -75,6 +77,19 @@ public class ConnexionMatch {
                 while (compTmp == null) {
                     compTmp = (BanqueCompetence.EntreeCompetence) BanqueCompetence.getEntree(BanqueCompetence.getBanque(), Integer.parseInt(mess.substring(4 * (i + 1), 4 * (i + 2))));
                     retour.addCompetence(compTmp);
+                }
+            }
+            for (int i = 0; i < 4; i++) {
+                Blessure blessureTmp = null;
+                String lecture = null;
+                while (lecture == null) {
+                    lecture = mess.substring(4 * (i + 5), 4 * (i + 6));
+                    SandArena.googleService.printError(lecture);
+                    if (!lecture.startsWith("0")) {
+                        SandArena.googleService.printError(lecture);
+                        blessureTmp = new Blessure((BanqueBlessure.DonneeBlessure) BanqueBlessure.getEntree(BanqueBlessure.getBanque(), Integer.parseInt(lecture)));
+                        retour.addBlessure(blessureTmp);
+                    }
                 }
             }
             return retour;
@@ -89,6 +104,10 @@ public class ConnexionMatch {
         mess = mess.concat(String.valueOf(tmp.getCompetences()[1].getId()));
         mess = mess.concat(String.valueOf(tmp.getCompetences()[2].getId()));
         mess = mess.concat(String.valueOf(tmp.getCompetences()[3].getId()));
+        mess = mess.concat(tmp.getBlessures()[0] != null ? String.valueOf(tmp.getBlessures()[0].donnee.getId()) : "0000");
+        mess = mess.concat(tmp.getBlessures()[1] != null ? String.valueOf(tmp.getBlessures()[1].donnee.getId()) : "0000");
+        mess = mess.concat(tmp.getBlessures()[2] != null ? String.valueOf(tmp.getBlessures()[2].donnee.getId()) : "0000");
+        mess = mess.concat(tmp.getBlessures()[3] != null ? String.valueOf(tmp.getBlessures()[3].donnee.getId()) : "0000");
         SandArena.googleService.printError("Envoi mess : " + mess);
         SandArena.googleService.sendOtherPlayer(mess);
     }
@@ -102,7 +121,7 @@ public class ConnexionMatch {
                     String mess = null;
                     SandArena.googleService.printError("En attente");
                     while (true) {
-                        if (finRecoit){
+                        if (finRecoit) {
                             finRecoit = false;
                             return;
                         }
@@ -252,7 +271,7 @@ public class ConnexionMatch {
         while (mess == null && !IGoogleService.data.justLeft) {
             if (IGoogleService.data.mess != null) {
                 mess = new String(IGoogleService.data.mess);
-                IGoogleService.data.mess =null;
+                IGoogleService.data.mess = null;
             }
         }
         if (!IGoogleService.data.justLeft) {

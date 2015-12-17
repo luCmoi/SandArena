@@ -47,7 +47,7 @@ public class Personnage {
     public void dispose() {
         this.commun = null;
         for (EntreeCompetence c : getCompetences()) {
-                c = null;
+            c = null;
         }
         competences = null;
         nom = null;
@@ -76,18 +76,20 @@ public class Personnage {
     }
 
     public void addBlessure(Blessure blessTmp) {
-        for (int i = 0; i < 4; i++) {
-            if (blessures[i] == null) {
-                blessures[i] = blessTmp;
-                break;
+        if (blessTmp != null) {
+            for (int i = 0; i < 4; i++) {
+                if (blessures[i] == null) {
+                    blessures[i] = blessTmp;
+                    break;
+                }
             }
         }
     }
 
     public void checkBlessureString(String[] texte) {
         for (Blessure bless : blessures) {
-            if (bless != null){
-            bless.checkString(texte);
+            if (bless != null) {
+                bless.checkString(texte);
             }
         }
     }

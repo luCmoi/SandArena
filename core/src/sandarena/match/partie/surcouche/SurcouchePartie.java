@@ -11,6 +11,7 @@ import sandarena.match.partie.ScreenPartie;
  */
 public class SurcouchePartie extends SurcoucheMatchCommun {
     private Fin fin;
+    private boolean finEnCour = false;
 
     public SurcouchePartie(ScreenPartie container, FillViewport fillViewport, Batch batch) {
         super(container, fillViewport, batch);
@@ -21,6 +22,7 @@ public class SurcouchePartie extends SurcoucheMatchCommun {
         fin = new Fin(this,true);
         this.addActor(fin);
         fin.setVisible(true);
+        finEnCour = true;
     }
 
     public void defaite() {
@@ -28,6 +30,7 @@ public class SurcouchePartie extends SurcoucheMatchCommun {
         fin = new Fin(this,false);
         this.addActor(fin);
         fin.setVisible(true);
+        finEnCour = true;
     }
 
     public void dispose(){
@@ -36,5 +39,9 @@ public class SurcouchePartie extends SurcoucheMatchCommun {
             fin.dispose();
             fin = null;
         }
+    }
+
+    public boolean isFin() {
+        return finEnCour;
     }
 }

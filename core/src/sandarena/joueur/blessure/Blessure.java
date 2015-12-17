@@ -55,4 +55,6 @@ public class Blessure {
             texte[5] = texte[5].concat(String.valueOf(donnee.magie));
         }
     }
+
+
 }

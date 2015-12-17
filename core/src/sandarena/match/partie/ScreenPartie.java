@@ -68,7 +68,7 @@ public class ScreenPartie extends ScreenSurcouche {
             this.interfaceS.draw();
             Gdx.gl.glViewport(0, 0, Resolution.width, Resolution.height);
             this.surcouche.draw();
-        if (IGoogleService.data.justLeft) {
+        if (IGoogleService.data.justLeft && !surcouche.isFin()) {
             IGoogleService.data.justLeft = false;
             partie.victoire();
             Son.nomads.stop();
